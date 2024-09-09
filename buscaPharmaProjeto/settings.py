@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'app_cad_usuario',
+    'appBusca',
 ]
 
 MIDDLEWARE = [
@@ -78,7 +79,7 @@ WSGI_APPLICATION = 'buscaPharmaProjeto.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'projeto_tcc',  # Database name as a string
+        'NAME': 'buscapharma',  # Database name as a string
         'USER': 'root',
         'PASSWORD': '1234',
         'HOST': 'localhost',
