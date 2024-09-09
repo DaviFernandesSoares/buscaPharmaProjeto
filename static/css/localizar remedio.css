@@ -1,0 +1,145 @@
+/* Reseta estilos básicos e define background */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #0A4973;
+}
+
+header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    padding: 10px 20px;
+    background: #0A4973;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    z-index: 99;
+}
+
+.logo a img {
+    height: 100px;
+    width: auto;
+    max-width: 100%;
+    margin-left: 40%;
+}
+
+/* Estilos apenas para links, excluindo aqueles que contêm botões */
+nav a:not(.botoes) {
+    position: relative;
+    font-size: 1.5em;
+    text-decoration: none;
+    color: white;
+    font-weight: 500;
+    margin-left: 40px;
+}
+
+nav a:not(.botoes)::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: -6px;
+    width: 100%;
+    height: 3px;
+    background: #fff;
+    border-radius: 5px;
+    transform-origin: right;
+    transform: scaleX(0);
+    transition: transform .5s;
+}
+
+nav a:not(.botoes):hover::after {
+    transform-origin: left;
+    transform: scaleX(1);
+}
+
+/* Estilos específicos para botões dentro de links */
+nav a.botoes button.btnRegister {
+    width: 150px;
+    height: 70px;
+    background: transparent;
+    border: 2px solid #fff;
+    outline: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 1.5em;
+    color: #fff;
+    font-weight: 500;
+    margin-left: 40px;
+    transition: .5s;
+}
+
+nav a.botoes button.btnRegister:hover {
+    border-color: #ff8800;
+    background: #ff8800;
+    color: black;
+}
+
+nav a.botoes button.btnLogin {
+    width: 150px;
+    height: 70px;
+    background: transparent;
+    border: 2px solid #fff;
+    outline: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 1.5em;
+    color: #fff;
+    font-weight: 500;
+    margin-left: 40px;
+    margin-right: 100px;
+    transition: .5s;
+}
+
+nav a.botoes button.btnLogin:hover {
+    border-color: #ff8800;
+    background: #ff8800;
+    color: black;
+}
+
+.imagemMapaIndaiatuba img {
+    margin-left: 30%;
+}
+
+/* Estiliza a seção das farmácias */
+.farmacias {
+    padding: 20px;
+    background-color: #f9f9f9;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    margin: 20px auto;
+    max-width: 800px;
+}
+
+.farmacias h2 {
+    font-size: 24px;
+    color: #333;
+    margin-bottom: 15px;
+    text-align: center;
+}
+
+.farmacias ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.farmacias ul li {
+    font-size: 18px;
+    color: #555;
+    margin-bottom: 10px;
+    padding: 5px;
+    border-bottom: 1px solid #ddd;
+}
+
+.farmacias ul li:last-child {
+    border-bottom: none;
+}

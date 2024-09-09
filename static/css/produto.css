@@ -1,0 +1,191 @@
+/* Reseta estilos básicos e define background */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #0A4973;
+}
+
+header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    padding: 10px 20px;
+    background: #0A4973;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    z-index: 99;
+}
+
+.logo a img {
+    height: 100px;
+    width: auto;
+    max-width: 100%;
+    margin-left: 40%;
+}
+
+/* Estilos apenas para links, excluindo aqueles que contêm botões */
+nav a:not(.botoes) {
+    position: relative;
+    font-size: 1.5em;
+    text-decoration: none;
+    color: white;
+    font-weight: 500;
+    margin-left: 40px;
+}
+
+nav a:not(.botoes)::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: -6px;
+    width: 100%;
+    height: 3px;
+    background: #fff;
+    border-radius: 5px;
+    transform-origin: right;
+    transform: scaleX(0);
+    transition: transform .5s;
+}
+
+nav a:not(.botoes):hover::after {
+    transform-origin: left;
+    transform: scaleX(1);
+}
+
+/* Estilos específicos para botões dentro de links */
+nav a.botoes button.btnRegister {
+    width: 150px;
+    height: 70px;
+    background: transparent;
+    border: 2px solid #fff;
+    outline: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 1.5em;
+    color: #fff;
+    font-weight: 500;
+    margin-left: 40px;
+    transition: .5s;
+}
+
+nav a.botoes button.btnRegister:hover {
+    border-color: #ff8800;
+    background: #ff8800;
+    color: black;
+}
+
+nav a.botoes button.btnLogin {
+    width: 150px;
+    height: 70px;
+    background: transparent;
+    border: 2px solid #fff;
+    outline: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 1.5em;
+    color: #fff;
+    font-weight: 500;
+    margin-left: 40px;
+    margin-right: 100px;
+    transition: .5s;
+}
+
+nav a.botoes button.btnLogin:hover {
+    border-color: #ff8800;
+    background: #ff8800;
+    color: black;
+}
+
+.product-gallery {
+    display: flex;
+    gap: 10px;
+    margin-right: 150px;
+    border-radius: 5px;
+    /* Ajuste este valor para aumentar ou diminuir o espaço */
+}
+
+.thumbnails {
+    left: 30%;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    border-radius: 5px;
+}
+
+.thumbnail {
+    width: 100px;
+    height: 100px;
+    cursor: pointer;
+    border: 2px solid transparent;
+    transition: border-color 0.3s;
+    border-radius: 8px;
+    /* Adicione esta linha para bordas arredondadas */
+    object-fit: cover;
+    /* Garante que a imagem se ajuste ao contêiner */
+}
+
+
+.thumbnail:hover {
+    border-color: #0A4973;
+}
+
+.main-image img {
+    width: 600px;
+    height: 600px;
+    object-fit: cover;
+    border-radius: 8px;
+    /* Adicione esta linha para bordas arredondadas */
+}
+
+
+.prodDesc p {
+    margin-top: 20px;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 5px;
+}
+
+.prodDesc h1 {
+    font-size: 2.5em;
+    color: #fff;
+}
+
+.prodDesc p {
+    font-size: 1.1em;
+}
+
+/* Estilos para a seção dos botões abaixo de prodDesc */
+.button-container {
+    display: flex;
+    gap: 20px;
+    margin-top: 20px;
+    /* Espaço entre a descrição do produto e os botões */
+}
+
+.button-container button {
+    margin-right: 20px;
+    padding: 10px 20px;
+    font-size: 1.1em;
+    cursor: pointer;
+    border: 2px solid #ff8800;
+    border-radius: 5px;
+    background-color: #ff8800;
+    color: #fff;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+.button-container button:hover {
+    border: 2px solid #ffffff;
+    background-color: #ffffff;
+    color: #000000;
+}
