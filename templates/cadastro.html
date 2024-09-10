@@ -19,15 +19,16 @@
     <h2>Cadastre-se</h2>
     <form action="{% url 'cadastro' %}" method="POST" id="form">{% csrf_token %}
       <div class="input-box">
-        <span class="icon"><ion-icon name="mail-outline"></ion-icon></span>
-        <input id="email" type="email" required name="email">
+        <span class="icon"><ion-icon name="email-outline"></ion-icon></span>
+        <input id="email" type="text" name="email">
         <label>Email</label>
+          <div id="email-error" class="error-tooltip"></div>
       </div>
-
       <div class="input-box">
         <span class="icon"><ion-icon name="person-outline"></ion-icon></span>
-        <input id="name" type="text" required name="username">
+        <input id="name" type="text" name="username">
         <label>Nome Completo</label>
+          <div id="nome-error" class="error-tooltip"></div>
       </div>
 
       <div class="input-box">
@@ -125,7 +126,6 @@
         <label>Senha</label>
         <div id="password-error" class="error-tooltip"></div> <!-- Div para exibir o erro -->
       </div>
-      <br>
       <div class="input-box">
         <span class="icon"><ion-icon name="lock-closed-outline"></ion-icon></span>
         <input type="password" id="confirm-password" name="password2">

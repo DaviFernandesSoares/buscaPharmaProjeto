@@ -7,48 +7,38 @@ from pyexpat.errors import messages
 from app_cad_usuario.models import Usuario
 
 # View de cadastro
+
+def verificar_existencia(request):
+    email = request.GET.get('email', None)
+    cpf = request.GET.get('cpf', None)
+
+    resposta = {'email_existe': False, 'cpf_existe': False}
+
+    if email and Usuario.objects.filter(email=email).exists():
+        resposta['email_existe'] = True
+
+    if cpf and Usuario.objects.filter(cpf=cpf).exists():
+        resposta['cpf_existe'] = True
+
+    return JsonResponse(resposta)
+
 def cadastro(request):
-    if request.method == 'GET':
-        return render(request, 'cadastro.html')
-    else:
+    if request.method == 'POST':
         nome = request.POST['username']
         email = request.POST['email']
         cpf = request.POST['cpf']
         senha = request.POST['password']
-        senha2 = request.POST['password2']
         ddd = request.POST['ddd']
         telefone = ddd + request.POST['telefone']
 
 
-        if Usuario.objects.filter(email=email).exists():
-            erro = "o email inserido ja foi registrado."
-            context = {
-                'erro': erro
-            }
-            return render(request, 'cadastroFalha.html', context)
+        user = Usuario(username=nome, cpf=cpf, email=email, telefone=telefone)
+        user.set_password(senha)
+        user.save()
 
+        return redirect('login')
+    return render(request, 'cadastro.html')
 
-        if Usuario.objects.filter(cpf=cpf).exists():
-            erro = "o cpf inserido ja foi registrado."
-            context = {
-                'erro': erro
-            }
-            return render(request, 'cadastroFalha.html', context)
-
-        if Usuario.objects.filter(telefone=telefone).exists():
-            erro = "o cpf inserido ja foi registrado."
-            context = {
-                'erro': erro
-            }
-            return render(request, 'cadastroFalha.html', context)
-
-        if senha == senha2:
-            user = Usuario.objects.create(username=nome, cpf=cpf, email=email, password = senha, telefone=telefone)
-            user.set_password(senha)
-            user.save()
-            return render(request, 'login.html')
-        else:
-            return HttpResponse(f"senhas não compativéis")
 
 
 # View de login
