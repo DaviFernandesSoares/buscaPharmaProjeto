@@ -70,7 +70,7 @@ document.querySelector('form').addEventListener('submit', function(event) {
             }
         }
 
-        const nomeInput = document.getElementById('nome');
+        const nomeInput = document.getElementById('nome').value;
         const erroNome = document.getElementById('nome-error');
         erroNome.textContent = '';
         erroNome.style.display = 'none';
@@ -154,6 +154,34 @@ document.querySelector('form').addEventListener('submit', function(event) {
         confirmPasswordError.style.display = 'block';
         isValid = false;
     }
+    if (emailInput) {
+        fetch(`/verificar_existencia/?email=${emailInput}`)
+            .then(response => response.json())
+            .then(data => {
+
+                if (data.email_existe) {
+                    emailErro.textContent = 'Este email já está cadastrado.';
+                    emailErro.style.display = 'block';  // Exibe o erro
+                    isValid =false;
+                }
+            })
+            .catch(error => console.error('Erro ao verificar o email:', error));
+    }
+const cpfFormatado = `${cpf.slice(0, 3)}.${cpf.slice(3, 6)}.${cpf.slice(6, 9)}-${cpf.slice(9)}`;
+    if (cpf) {
+        fetch(`/verificar_existencia/?cpf=${cpfFormatado}`)
+            .then(response => response.json())
+            .then(data => {
+
+                if (data.cpf_existe) {
+                    cpfErro.textContent = 'Este CPF já está cadastrado.';
+                    cpfErro.style.display = 'block';
+                    isValid =false
+                }
+            })
+            .catch(error => console.error('Erro ao verificar o CPF:', error));
+    }
+
 
     if (!isValid) {
         event.preventDefault();

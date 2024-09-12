@@ -11,7 +11,7 @@
 
 <body>
 <div class="logoFundo">
-  <img src="../Logo_Login_cadastro.png" alt="Logo">
+  <img src="{% static 'css/Logo_Login.png' %}" alt="Logo">
 </div>
 
 <div class="wrapper">
@@ -26,7 +26,7 @@
       </div>
       <div class="input-box">
         <span class="icon"><ion-icon name="person-outline"></ion-icon></span>
-        <input id="name" type="text" name="username">
+        <input id="nome" type="text" name="username">
         <label>Nome Completo</label>
           <div id="nome-error" class="error-tooltip"></div>
       </div>
@@ -144,7 +144,7 @@
       <button type="submit" class="btn">Registrar</button>
 
       <div class="login-register">
-        <p>Já possui uma conta? <a href="login.html" class="register-link">Login</a></p>
+        <p>Já possui uma conta? <a href={% url 'login' %} class="register-link">Login</a></p>
       </div>
     </form>
   </div>
