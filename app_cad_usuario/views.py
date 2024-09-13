@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from django.http import HttpResponse, JsonResponse
+from django.http import HttpResponse
 from django.contrib.auth import login as login_django, authenticate
 from django.contrib.auth.hashers import make_password, check_password
 from pyexpat.errors import messages

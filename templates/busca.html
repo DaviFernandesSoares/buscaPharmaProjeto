@@ -23,64 +23,30 @@
             </ul>
         </nav>
         <div class="auth-buttons">
-            <button class="register-btn"><a href="register.html">Cadastrar-se</a></button>
-            <button class="login-btn"><a href="login.html">Entrar</a></button>
+            <button class="register-btn"><a href="{% url 'cadastro' %}">Cadastrar-se</a></button>
+            <button class="login-btn"><a href="{% url 'login' %}">Entrar</a></button>
         </div>
     </header>
 
     <!-- Barra de Pesquisa -->
     <div class="search-container">
-        <input type="text" placeholder="Insira o nome do medicamento" class="search-input" id="search-bar">
+        <form method="get" action="{% url 'busca' %}">
+            {{ form.as_p }}
+            <input type="submit" value="Buscar">
+        </form>
     </div>
 
     <!-- Exibição de Produtos -->
     <section class="product-grid" id="product-grid">
+        {% for item in itens %}
         <div class="product-card">
-            <img src="produto1.png" alt="Tadalafila - 5 Mg">
-            <p class="product-name">Tadalafila - 5 Mg</p>
+            <img src="{% static item.imagem %}" alt="{{ item.nome_item }}">
+            <p class="product-name">{{ item.nome_item }}</p>
             <button class="product-btn">Ver Mais</button>
         </div>
-        <div class="product-card">
-            <img src="produto2.png" alt="Dipirona - 10 Mg">
-            <p class="product-name">Dipirona - 10 Mg</p>
-            <button class="product-btn">Ver Mais</button>
-        </div>
-        <div class="product-card">
-            <img src="produto3.png" alt="Omega 3 - 120 Cp">
-            <p class="product-name">Omega 3 - 120 Cp</p>
-            <button class="product-btn">Ver Mais</button>
-        </div>
-        <div class="product-card">
-            <img src="produto1.png" alt="Tanbdalafila - 5 Mg">
-            <p class="product-name">Tadalafila - 5 Mg</p>
-            <button class="product-btn">Ver Mais</button>
-        </div>
-        <div class="product-card">
-            <img src="produto2.png" alt="Direpirona - 10 Mg">
-            <p class="product-name">Dipirona - 10 Mg</p>
-            <button class="product-btn">Ver Mais</button>
-        </div>
-        <div class="product-card">
-            <img src="produto3.png" alt="Ojimega 3 - 120 Cp">
-            <p class="product-name">Omega 3 - 120 Cp</p>
-            <button class="product-btn">Ver Mais</button>
-        </div>
-        <div class="product-card">
-            <img src="produto1.png" alt="Tavewdalafila - 5 Mg">
-            <p class="product-name">Tadalafila - 5 Mg</p>
-            <button class="product-btn">Ver Mais</button>
-        </div>
-        <div class="product-card">
-            <img src="produto2.png" alt="Diptrjirona - 10 Mg">
-            <p class="product-name">Dipirona - 10 Mg</p>
-            <button class="product-btn">Ver Mais</button>
-        </div>
-        <div class="product-card">
-            <img src="produto3.png" alt="Omeghhfda 3 - 120 Cp">
-            <p class="product-name">Omega 3 - 120 Cp</p>
-            <button class="product-btn">Ver Mais</button>
-        </div>
-        <!-- Adicione mais produtos conforme necessário -->
+        {% empty %}
+        <p>Nenhum produto encontrado.</p>
+        {% endfor %}
     </section>
 
     <script src="{% static 'js/busca.js' %}"></script>
