@@ -8,7 +8,8 @@ def busca(request):
     itens = Item.objects.all()
     if form.is_valid():
         query = form.cleaned_data['query']
-        itens = itens.filter(nome_item__icontains=query)
+        itens = itens.filter(nome_item__istartswith=query)
+        itens = itens.filter(comp_ativ_itm__istartswith=query)
     context = {
         'form': form,
         'itens': itens,
