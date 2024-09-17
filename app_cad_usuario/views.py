@@ -1,5 +1,5 @@
 import json
-
+from urllib import request
 from django.shortcuts import render, redirect
 from django.http import HttpResponse, JsonResponse
 from django.contrib.auth import login as auth_login
@@ -32,12 +32,9 @@ def cadastro(request):
         senha = request.POST['password']
         ddd = request.POST['ddd']
         telefone = ddd + request.POST['telefone']
-
-
         user = Usuario(username=nome, cpf=cpf, email=email, telefone=telefone)
         user.set_password(senha)
         user.save()
-
         return redirect('login')
     return render(request, 'cadastro.html')
 

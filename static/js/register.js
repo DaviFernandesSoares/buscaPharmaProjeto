@@ -13,8 +13,10 @@ document.getElementById('show-password').addEventListener('change', function () 
 
 document.getElementById('cpf').addEventListener('input', function(event) {
     let input = event.target.value;
+    // Remove todos os caracteres não numéricos
     let cpfFormatado = input.replace(/\D/g, '');
 
+    // Adiciona o hífen quando o número tiver 9 dígitos
     if (cpfFormatado.length > 3) {
         cpfFormatado = cpfFormatado.slice(0, 3) + '.' + cpfFormatado.slice(3);
     }
@@ -25,17 +27,22 @@ document.getElementById('cpf').addEventListener('input', function(event) {
         cpfFormatado = cpfFormatado.slice(0, 11) + '-' + cpfFormatado.slice(11);
     }
 
+    // Atualiza o valor do input
     event.target.value = cpfFormatado;
 });
 
+// Formata o número de telefone ao digitar
 document.getElementById('phone').addEventListener('input', function(event) {
     let input = event.target.value;
+    // Remove todos os caracteres não numéricos
     let formattedNumber = input.replace(/\D/g, '');
 
+    // Adiciona o hífen quando o número tiver 9 dígitos
     if (formattedNumber.length > 5) {
         formattedNumber = formattedNumber.slice(0, 5) + '-' + formattedNumber.slice(5);
     }
 
+    // Atualiza o valor do input
     event.target.value = formattedNumber;
 });
 
@@ -45,22 +52,23 @@ document.getElementById('ddd-select').addEventListener('change', function() {
 });
 
 document.querySelector('form').addEventListener('submit', async function(event) {
+    event.preventDefault(); // Evita o envio padrão do formulário
     let isValid = true;
 
     const emailInput = document.getElementById('email').value;
     const emailErro = document.getElementById('email-error');
-    emailErro.textContent = '';
-    emailErro.style.display = 'none';
+    emailErro.textContent = ''; // Limpar mensagem de erro anterior
+    emailErro.style.display = 'none'; // Esconder mensagem de erro
 
     if (!emailInput) {
         emailErro.textContent = 'O email é obrigatório.';
-        emailErro.style.display = 'block';
+        emailErro.style.display = 'block'; // Exibir mensagem de erro
         isValid = false;
     } else {
         const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
         if (!emailRegex.test(emailInput)) {
             emailErro.textContent = 'Formato de Email Inválido.';
-            emailErro.style.display = 'block';
+            emailErro.style.display = 'block'; // Exibir mensagem de erro
             isValid = false;
         }
     }
@@ -78,16 +86,17 @@ document.querySelector('form').addEventListener('submit', async function(event) 
 
     const cpf = document.getElementById('cpf').value.replace(/\D/g, '');
     const cpfErro = document.getElementById('cpf-error');
-    cpfErro.textContent = '';
-    cpfErro.style.display = 'none';
+    cpfErro.textContent = '';  // Limpa qualquer erro anterior
+    cpfErro.style.display = 'none';  // Inicialmente, esconde o erro
 
+    // Verifica se o CPF contém 11 dígitos
     if (!cpf) {
         cpfErro.textContent = 'O CPF é obrigatório.';
-        cpfErro.style.display = 'block';
+        cpfErro.style.display = 'block';  // Exibe o erro
         isValid = false;
     } else if (cpf.length !== 11) {
         cpfErro.textContent = 'O campo CPF precisa conter 11 dígitos.';
-        cpfErro.style.display = 'block';
+        cpfErro.style.display = 'block';  // Exibe o erro
         isValid = false;
     }
 
@@ -101,7 +110,7 @@ document.querySelector('form').addEventListener('submit', async function(event) 
         phoneError.style.display = 'block';
         isValid = false;
     } else if (phone.length !== 10) {
-        phoneError.textContent = 'O campo telefone deve conter 9 dígitos.';
+        phoneError.textContent = 'O campo telefone deve conter 10 dígitos.';
         phoneError.style.display = 'block';
         isValid = false;
     }
@@ -116,11 +125,13 @@ document.querySelector('form').addEventListener('submit', async function(event) 
     const hasUpperCase = /[A-Z]/.test(password);
     const hasSpecialChar = /[!@#$%^&*(),.?":{}|<>]/.test(password);
 
+    // Limpar mensagens de erro
     passwordError.textContent = '';
     confirmPasswordError.textContent = '';
     passwordError.style.display = 'none';
     confirmPasswordError.style.display = 'none';
 
+    // Validar a senha
     if (!password) {
         passwordError.textContent = 'A senha é obrigatória.';
         passwordError.style.display = 'block';
@@ -139,50 +150,44 @@ document.querySelector('form').addEventListener('submit', async function(event) 
         isValid = false;
     }
 
+    // Validar senha e confirmação de senha
     if (password !== confirmPassword) {
         confirmPasswordError.textContent = 'As senhas não são iguais.';
         confirmPasswordError.style.display = 'block';
         isValid = false;
     }
 
-    // Função para verificar e-mail
-    async function checkEmail(email) {
+    if (isValid) {
         try {
-            const response = await fetch(`/verificar_existencia/?email=${email}`);
-            const data = await response.json();
-            if (data.email_existe) {
+            const emailResponse = await fetch(`/verificar_existencia/?email=${emailInput}`);
+            const emailData = await emailResponse.json();
+            if (emailData.email_existe) {
                 emailErro.textContent = 'Este email já está cadastrado.';
-                emailErro.style.display = 'block';
+                emailErro.style.display = 'block';  // Exibe o erro
                 isValid = false;
             }
         } catch (error) {
             console.error('Erro ao verificar o email:', error);
-            isValid = false;
         }
-    }
 
-    // Função para verificar CPF
-    async function checkCpf(cpf) {
-        try {
-            const response = await fetch(`/verificar_existencia/?cpf=${cpf}`);
-            const data = await response.json();
-            if (data.cpf_existe) {
-                cpfErro.textContent = 'Este CPF já está cadastrado.';
-                cpfErro.style.display = 'block';
-                isValid = false;
+        if (isValid) {
+            const cpfFormatado = `${cpf.slice(0, 3)}.${cpf.slice(3, 6)}.${cpf.slice(6, 9)}-${cpf.slice(9)}`;
+            try {
+                const cpfResponse = await fetch(`/verificar_existencia/?cpf=${cpfFormatado}`);
+                const cpfData = await cpfResponse.json();
+                if (cpfData.cpf_existe) {
+                    cpfErro.textContent = 'Este CPF já está cadastrado.';
+                    cpfErro.style.display = 'block';
+                    isValid = false;
+                }
+            } catch (error) {
+                console.error('Erro ao verificar o CPF:', error);
             }
-        } catch (error) {
-            console.error('Erro ao verificar o CPF:', error);
-            isValid = false;
         }
     }
 
-    // Verificar e-mail e CPF
-    if (emailInput) await checkEmail(emailInput);
-    if (cpf) await checkCpf(cpfFormatado);
-
-    // Prevenir o envio se não for válido
-    if (!isValid) {
-        event.preventDefault();
+    // Se tudo estiver válido, enviar o formulário
+    if (isValid) {
+        event.currentTarget.submit();
     }
 });
