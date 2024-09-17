@@ -4,7 +4,7 @@ from django.shortcuts import render, redirect
 from django.http import HttpResponse, JsonResponse
 from django.contrib.auth import login as auth_login
 from django.contrib.auth.hashers import make_password, check_password
-from pyexpat.errors import messages
+
 
 from app_cad_usuario.models import Usuario
 
@@ -40,12 +40,6 @@ def cadastro(request):
 
         return redirect('login')
     return render(request, 'cadastro.html')
-
-
-from django.http import JsonResponse
-from django.contrib.auth.hashers import check_password
-from django.shortcuts import redirect
-
 
 def login(request):
     if request.method == 'POST':
