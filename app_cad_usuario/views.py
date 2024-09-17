@@ -1,6 +1,8 @@
+import json
+
 from django.shortcuts import render, redirect
-from django.http import HttpResponse
-from django.contrib.auth import login as login_django, authenticate
+from django.http import HttpResponse, JsonResponse
+from django.contrib.auth import login as auth_login
 from django.contrib.auth.hashers import make_password, check_password
 from pyexpat.errors import messages
 
@@ -40,25 +42,45 @@ def cadastro(request):
     return render(request, 'cadastro.html')
 
 
+from django.http import JsonResponse
+from django.contrib.auth.hashers import check_password
+from django.shortcuts import redirect
 
-# View de login
+
 def login(request):
-    if request.method == 'GET':
-        return render(request, 'login.html')
-    else:
-        email = request.POST['email']
-        password = request.POST['password']
+    if request.method == 'POST':
+        email = request.POST.get('email')
+        senha = request.POST.get('senha')
+        resposta = {'success': False, 'email_existe': False, 'senha': False, 'mensagem': ''}
 
-        user = Usuario.objects.filter(email=email).first()
-        try:
-            if user.check_password(password):
-                login_django(request, user)
-                return redirect('home')
+        # Verificar se o email foi fornecido
+        if email:
+            usuarios = Usuario.objects.filter(email=email)
+
+            if usuarios.exists():
+                if usuarios.count() == 1:
+                    usuario = usuarios.first()  # Obter o primeiro (e único) usuário correspondente
+                    # Verificar se a senha fornecida corresponde à senha armazenada
+                    if check_password(senha, usuario.password):
+                        auth_login(request,usuario)
+                        resposta['success'] = True
+                        resposta['mensagem'] = 'Login bem-sucedido.'
+                        return JsonResponse(resposta)  # Retorna JSON indicando sucesso
+                    else:
+                        resposta['senha'] = True
+                        resposta['mensagem'] = 'Email ou senha incorretos.'
+                else:
+                    resposta['email_existe'] = True
+                    resposta['mensagem'] = 'Múltiplos usuários encontrados com o mesmo email.'
             else:
-                return render(request, 'login_falha.html')
-        except Exception as e:
-            return render(request, 'login_falha.html')
+                resposta['email_existe'] = True
+                resposta['mensagem'] = 'Email não encontrado.'
+        else:
+            resposta['email_existe'] = True
+            resposta['mensagem'] = 'O email é obrigatório.'
 
+        return JsonResponse(resposta)
+    return render(request, 'login.html')
 
 
 # View de home
@@ -66,4 +88,4 @@ def home(request):
     if request.user.is_authenticated:
         return render(request, 'home.html')
     else:
-        return HttpResponse("Não autorizado")
+        return render(request,'login.html')

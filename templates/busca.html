@@ -1,20 +1,19 @@
 {% load static %}
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-BR">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Medicamentos</title>
+    <title>Busca Pharma</title>
     <link rel="stylesheet" href="{% static 'css/busca.css' %}">
 </head>
 
 <body>
-
     <!-- Cabeçalho -->
     <header>
         <div class="logo">
-            <img src="{% static 'css/_Login.png' %}" alt="Busca Pharma">
+            <img src="{% static 'css/Logo_pequena.png' %}" alt="Busca Pharma">
         </div>
         <nav>
             <ul>
@@ -31,38 +30,58 @@
 
     <!-- Barra de Pesquisa -->
     <div class="search-container">
-        <form method="GET">
-            {{ form.as_p }} <!-- Aqui renderizamos o form -->
-            <input type="submit" value="Buscar" class="search-btn">
-        </form>
+        <input type="text" placeholder="Insira o nome do medicamento" class="search-input" id="search-bar">
     </div>
 
-    <div class="container">
-        <table class="responsive-table">
-            <thead>
-                <tr>
-                    <th>Nome</th>
-                    <th>Princípio Ativo</th>
-                    <th>Quantidade</th>
-                    <th>Tarja</th>
-                </tr>
-            </thead>
-            <tbody>
-                {% for item in itens %}
-                <tr>
-                    <td>{{ item.nome_item }}</td>
-                    <td>{{ item.principio_ativo }}</td>
-                    <td>{{ item.quantidade }}</td>
-                    <td>{{ item.tarja }}</td>
-                </tr>
-                {% empty %}
-                <tr>
-                    <td colspan="4">Nenhum medicamento encontrado.</td>
-                </tr>
-                {% endfor %}
-            </tbody>
-        </table>
-    </div>
+    <!-- Exibição de Produtos -->
+    <section class="product-grid" id="product-grid">
+        <div class="product-card">
+            <img src="produto1.png" alt="Tadalafila - 5 Mg">
+            <p class="product-name">Tadalafila - 5 Mg</p>
+            <button class="product-btn">Ver Mais</button>
+        </div>
+        <div class="product-card">
+            <img src="produto2.png" alt="Dipirona - 10 Mg">
+            <p class="product-name">Dipirona - 10 Mg</p>
+            <button class="product-btn">Ver Mais</button>
+        </div>
+        <div class="product-card">
+            <img src="produto3.png" alt="Omega 3 - 120 Cp">
+            <p class="product-name">Omega 3 - 120 Cp</p>
+            <button class="product-btn">Ver Mais</button>
+        </div>
+        <div class="product-card">
+            <img src="produto1.png" alt="Tanbdalafila - 5 Mg">
+            <p class="product-name">Tadalafila - 5 Mg</p>
+            <button class="product-btn">Ver Mais</button>
+        </div>
+        <div class="product-card">
+            <img src="produto2.png" alt="Direpirona - 10 Mg">
+            <p class="product-name">Dipirona - 10 Mg</p>
+            <button class="product-btn">Ver Mais</button>
+        </div>
+        <div class="product-card">
+            <img src="produto3.png" alt="Ojimega 3 - 120 Cp">
+            <p class="product-name">Omega 3 - 120 Cp</p>
+            <button class="product-btn">Ver Mais</button>
+        </div>
+        <div class="product-card">
+            <img src="produto1.png" alt="Tavewdalafila - 5 Mg">
+            <p class="product-name">Tadalafila - 5 Mg</p>
+            <button class="product-btn">Ver Mais</button>
+        </div>
+        <div class="product-card">
+            <img src="produto2.png" alt="Diptrjirona - 10 Mg">
+            <p class="product-name">Dipirona - 10 Mg</p>
+            <button class="product-btn">Ver Mais</button>
+        </div>
+        <div class="product-card">
+            <img src="produto3.png" alt="Omeghhfda 3 - 120 Cp">
+            <p class="product-name">Omega 3 - 120 Cp</p>
+            <button class="product-btn">Ver Mais</button>
+        </div>
+        <!-- Adicione mais produtos conforme necessário -->
+    </section>
 
     <script src="{% static 'js/busca.js' %}"></script>
 </body>
