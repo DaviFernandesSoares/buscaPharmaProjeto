@@ -1,0 +1,133 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f9f9f9;
+}
+header {
+    background-color: #003366;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+    color: white;
+}
+header .logo img {
+    background: white;
+    border-radius: 3%;
+    height: 60px;
+    width: 180px;
+    padding: 0 1rem;
+}
+header nav ul {
+    list-style: none;
+    display: flex;
+    margin: 0;
+    padding: 0;
+}
+header nav ul li {
+    margin-right: 20px;
+}
+header nav ul li a {
+    color: white;
+    text-decoration: none;
+}
+header .auth-buttons {
+    display: flex;
+    align-items: center;
+}
+header .auth-buttons button {
+    margin-left: 10px;
+    padding: 5px 15px;
+    background-color: #ffcc00;
+    border: none;
+    color: black;
+    cursor: pointer;
+}
+.search-container {
+    display: flex;
+    justify-content: center;
+    margin: 20px;
+}
+.search-input {
+    width: 60%;
+    padding: 10px;
+    font-size: 16px;
+    border-radius: 20px;
+    border: 1px solid #ccc;
+    text-indent: 30px;
+    background: url('search-icon.png') no-repeat 10px center;
+    background-size: 20px 20px;
+}
+.product-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 20px;
+    padding: 20px;
+}
+.product-card {
+    background-color: white;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    text-align: center;
+    padding: 20px;
+}
+.product-card img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 5px;
+}
+.product-name {
+    margin: 10px 0;
+    font-weight: bold;
+}
+.product-btn {
+    padding: 10px 20px;
+    background-color: #ffcc00;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    color: black;
+}
+.container {
+    width: 100%;
+    padding: 20px;
+}
+.responsive-table {
+    width: 60%;
+    margin: 0 auto;
+    border-collapse: collapse;
+    background-color: #fff;
+}
+th,
+td {
+    padding: 10px;
+    text-align: left;
+    border: 1px solid #ddd;
+}
+th {
+    background-color: #f1f1f1;
+}
+tbody tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+.tarja {
+    color: #fff;
+    padding: 5px;
+    text-align: center;
+    border-radius: 5px;
+}
+.tarja.vermelha {
+    background-color: red;
+}
+.tarja.amarela {
+    background-color: yellow;
+    color: black;
+}
+.tarja.verde {
+    background-color: green;
+}
