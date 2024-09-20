@@ -15,14 +15,14 @@
         </div>
         <nav>
             <ul>
-                <li><a href="#">Home</a></li>
+                <li><a href="{% url 'home' %}">Home</a></li>
                 <li><a href="#">Medicamentos</a></li>
                 <li><a href="#">Agendamentos</a></li>
             </ul>
         </nav>
         <div class="auth-buttons">
-            <button class="register-btn"><a href="register.html">Cadastrar-se</a></button>
-            <button class="login-btn"><a href="login.html">Entrar</a></button>
+            <button class="register-btn"><a href="{% url 'cadastro' %}">Cadastrar-se</a></button>
+            <button class="login-btn"><a href="{% url 'login' %}">Entrar</a></button>
         </div>
     </header>
     <!-- Barra de Pesquisa -->
@@ -50,7 +50,7 @@
         function createRow(rowData) {
             return `
                 <tr>
-                    <td><a href="medicamento/${rowData.id}">${rowData.nome_item}</a></td>
+                    <td><a href="medicamento/${rowData.cod_item}">${rowData.nome_item}</a></td>
                     <td>${rowData.comp_ativ_itm}</td>
                 </tr>
             `;

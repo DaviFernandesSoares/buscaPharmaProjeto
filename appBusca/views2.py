@@ -17,10 +17,10 @@ def busca(request):
     context = {
         'form': form,
         'itens': itens,
-        'itens_json': json.dumps(list(itens.values('id', 'nome_item', 'comp_ativ_itm')))
+        'itens_json': json.dumps(list(itens.values('cod_item', 'nome_item', 'comp_ativ_itm')))
     }
 
     return render(request, 'busca.html', context)
 
-def medicamento(request, id):
+def medicamento(request, cod_item):
     return
