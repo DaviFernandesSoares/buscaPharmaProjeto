@@ -5,6 +5,11 @@
     font-family: 'Poppins', sans-serif;
 }
 
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f9f9f9;
+}
+
 header {
     background-color: #003366;
     display: flex;
@@ -19,7 +24,7 @@ header .logo img {
     border-radius: 3%;
     height: 60px;
     width: 180px;
-    padding: 0 1rem 0 1rem;
+    padding: 0 1rem;
 }
 
 header nav ul {
@@ -102,4 +107,51 @@ header .auth-buttons button {
     border-radius: 5px;
     cursor: pointer;
     color: black;
+}
+
+.container {
+    width: 100%;
+    padding: 20px;
+}
+
+.responsive-table {
+    width: 60%;
+    margin: 0 auto;
+    border-collapse: collapse;
+    background-color: #fff;
+}
+
+th,
+td {
+    padding: 10px;
+    text-align: left;
+    border: 1px solid #ddd;
+}
+
+th {
+    background-color: #f1f1f1;
+}
+
+tbody tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+.tarja {
+    color: #fff;
+    padding: 5px;
+    text-align: center;
+    border-radius: 5px;
+}
+
+.tarja.vermelha {
+    background-color: red;
+}
+
+.tarja.amarela {
+    background-color: yellow;
+    color: black;
+}
+
+.tarja.verde {
+    background-color: green;
 }

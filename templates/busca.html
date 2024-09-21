@@ -26,9 +26,12 @@
         </div>
     </header>
     <!-- Barra de Pesquisa -->
+    <form action="{% url 'busca' %}" method="POST" id="form">{% csrf_token %}
     <div class="search-container">
-        <input type="text" placeholder="Insira o nome do medicamento" class="search-input" id="search-bar">
-    </div>
+        <input type="text" placeholder="Insira o nome do medicamento" class="search-input" id="search-bar" name="busca">
+         <button type="submit" class="btn">Registrar</button>
+         </div>
+        </form>
     <div class="container">
         <table class="responsive-table">
             <thead>
@@ -45,7 +48,6 @@
     <script>
         const tableData = {{ itens_json|safe }};
         const tableBody = document.getElementById('table-body');
-        const searchInput = document.getElementById('search-bar');
 
         function createRow(rowData) {
             return `
