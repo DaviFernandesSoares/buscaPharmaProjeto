@@ -12,23 +12,23 @@ def busca(request):
         context = {
             'form': form,
             'itens': itens,
-            'itens_json': json.dumps(list(itens.values('cod_item', 'nome_item', 'comp_ativ_itm')))
+            'itens_json': json.dumps(list(itens.values('id_item', 'nome_item', 'comp_ativ_itm')))
     }
 
         return render(request, 'busca.html', context)
     return  render(request, 'busca.html')
 
-def medicamento(request, cod_item):
-    cod_item = int(cod_item)
-    item = Item.objects.filter(cod_item=cod_item)
+def medicamento(request, id_item):
+    id_item = int(id_item)
+    item = Item.objects.filter(id_item=id_item)
     context = {
         'item': item,
-        'itens_json': json.dumps(list(item.values('cod_item', 'nome_item', 'comp_ativ_itm')))
+        'itens_json': json.dumps(list(item.values('id_item', 'nome_item', 'comp_ativ_itm')))
     }
     return render(request, 'produto.html', context)
 
-def localizarMedicamento(request,cod_item):
-    item = get_object_or_404(Item, cod_item=cod_item)
+def localizarMedicamento(request,id_item):
+    item = get_object_or_404(Item, id_item=id_item)
     unidades = Unidade.objects.all()  # Obtém todas as unidades
     unidades_com_quantidade = []
 
