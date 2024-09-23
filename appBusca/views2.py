@@ -1,19 +1,28 @@
 from django.shortcuts import render
-from .models import Item
 from .forms import BuscaForm
-
-
+from .models import Item
+import json
+from django.http import HttpResponse, JsonResponse
 def busca(request):
     form = BuscaForm(request.GET or None)
-    itens = Item.objects.all()
-    if form.is_valid():
-        query = form.cleaned_data['query']
-        itens = itens.filter(nome_item__istartswith=query)
-        itens = itens.filter(comp_ativ_itm__istartswith=query)
-    context = {
-        'form': form,
-        'itens': itens,
+
+    if request.method == 'POST':
+        nome = request.POST.get('busca')
+        itens = Item.objects.filter(nome_item__icontains=nome)
+        context = {
+            'form': form,
+            'itens': itens,
+            'itens_json': json.dumps(list(itens.values('cod_item', 'nome_item', 'comp_ativ_itm')))
     }
 
+        return render(request, 'busca.html', context)
+    return  render(request, 'busca.html')
 
-    return render(request, 'busca.html', context)
+def medicamento(request, cod_item):
+    cod_item = int(cod_item)
+    item = Item.objects.filter(cod_item=cod_item)
+    context = {
+        'item': item,
+        'itens_json': json.dumps(list(item.values('cod_item', 'nome_item', 'comp_ativ_itm')))
+    }
+    return render(request, 'produto.html', context)

@@ -8,7 +8,6 @@ from django.contrib.auth.hashers import make_password, check_password
 
 from app_cad_usuario.models import Usuario
 
-# View de cadastro
 
 def verificar_existencia(request):
     email = request.GET.get('email', None)
@@ -44,14 +43,12 @@ def login(request):
         senha = request.POST.get('senha')
         resposta = {'success': False, 'email_existe': False, 'senha': False, 'mensagem': ''}
 
-        # Verificar se o email foi fornecido
         if email:
             usuarios = Usuario.objects.filter(email=email)
 
             if usuarios.exists():
                 if usuarios.count() == 1:
-                    usuario = usuarios.first()  # Obter o primeiro (e único) usuário correspondente
-                    # Verificar se a senha fornecida corresponde à senha armazenada
+                    usuario = usuarios.first()
                     if check_password(senha, usuario.password):
                         auth_login(request,usuario)
                         resposta['success'] = True

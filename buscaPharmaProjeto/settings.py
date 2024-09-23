@@ -79,7 +79,7 @@ WSGI_APPLICATION = 'buscaPharmaProjeto.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'buscapharma',  # Database name as a string
+        'NAME': 'projeto_tcc',  # Database name as a string
         'USER': 'root',
         'PASSWORD': '1234',
         'HOST': 'localhost',
