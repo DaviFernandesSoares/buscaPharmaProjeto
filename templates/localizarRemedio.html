@@ -1,48 +1,46 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <link rel="stylesheet" href="css/localizar remedio.css">
+    <title>Localizar {{ item.nome_item }}</title>
+    <link rel="stylesheet" href="{% static 'css/localizar_remedio.css' %}">
 </head>
 
 <body>
+
     <header>
         <div class="logo">
-            <a href="index.html">
-                <img src="img/Logo_pequena.png" alt="BuscaPharma">
+            <a href="{% url 'home' %}">
+                <img src="{% static 'img/Logo_pequena.png' %}" alt="BuscaPharma">
             </a>
         </div>
 
         <nav>
-            <a class="linksExternos" href="index.html">Home</a>
+            <a class="linksExternos" href="{% url 'home' %}">Home</a>
             <a class="linksExternos" href="#">About</a>
             <a class="linksExternos" href="#">Agendamentos</a>
             <a class="linksExternos" href="#">Contact</a>
-            <a class="botoes" href="user_login.html"><button class="btnRegister">Cadastre-se</button></a>
-            <a class="botoes" href="user_register.html"><button class="btnLogin">Logar</button></a>
+            <a class="botoes" href="{% url 'login' %}"><button class="btnRegister">Cadastre-se</button></a>
+            <a class="botoes" href="{% url 'cadastro' %}"><button class="btnLogin">Logar</button></a>
         </nav>
     </header>
 
-    <div class="imagemMapaIndaiatuba">
-        <img src="img/mapaIndaiatuba.png" alt="imagemMapaIndaiatuba">
-    </div>
-
     <!-- Seção de farmácias -->
     <section class="farmacias">
-        <h2>Farmácias Populares em Indaiatuba</h2>
+        <h2>Disponibilidade de {{ item.nome_item }}</h2>
         <ul>
-            <li>Farmácia Popular Indaiatuba - Rua do Comércio, 123</li>
-            <li>Farmácia Central - Avenida dos Trabalhadores, 456</li>
-            <li>Farmácia São João - Rua das Flores, 789</li>
-            <li>Farmácia da Cidade - Rua Principal, 101</li>
-            <li>Farmácia Vida - Rua das Palmeiras, 202</li>
+            {% for unidade_info in unidades_com_quantidade %}
+                <li>{{ unidade_info.unidade.nome }} - Quantidade: {{ unidade_info.quantidade_atual }}</li>
+            {% empty %}
+                <li>Nenhuma unidade disponível para este item no momento.</li>
+            {% endfor %}
         </ul>
     </section>
 
-    <script src="javaScript/produto.js"></script>
+    <script src="{% static 'javaScript/produto.js' %}"></script>
 </body>
 
 </html>
