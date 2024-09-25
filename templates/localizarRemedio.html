@@ -32,8 +32,17 @@
     <section class="farmacias">
         <h2>Disponibilidade de {{ item.nome_item }}</h2>
         <ul>
-            {% for unidade_info in unidades_com_quantidade %}
-                <li>{{ unidade_info.unidade.nome }} - Quantidade: {{ unidade_info.quantidade_atual }}</li>
+             {% for unidade_info in unidades_com_quantidade %}
+                <li>
+                    <span
+                        class="
+                        {% if unidade_info.status == 'aberto' %}status-aberto
+                        {% elif unidade_info.status == 'fechado' %}status-fechado
+                        {% elif unidade_info.status == 'em manutenção' %}status-manutenção
+                        {% endif %}">
+                        {{ unidade_info.unidade.nome }} - Quantidade: {{ unidade_info.quantidade_atual }} - CEP: {{ unidade_info.cep }} - Status: {{ unidade_info.status }}
+                    </span>
+                </li>
             {% empty %}
                 <li>Nenhuma unidade disponível para este item no momento.</li>
             {% endfor %}

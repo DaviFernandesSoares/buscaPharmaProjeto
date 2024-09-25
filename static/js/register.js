@@ -187,7 +187,7 @@ document.querySelector('form').addEventListener('submit', async function(event) 
     }
 
     // Se tudo estiver válido, enviar o formulário
-    if (isValid) {
-        event.currentTarget.submit();
+    if (!isValid) {
+        event.preventDefault();
     }
 });

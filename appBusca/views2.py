@@ -38,7 +38,9 @@ def localizarMedicamento(request,id_item):
         quantidade_atual = estoque_item.qtde_atual if estoque_item else 0
         unidades_com_quantidade.append({
             'unidade': unidade,
-            'quantidade_atual': quantidade_atual
+            'quantidade_atual': quantidade_atual,
+            'cep': unidade.cep,
+            'status': unidade.status
         })
 
     context = {
