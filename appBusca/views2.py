@@ -1,6 +1,6 @@
 from django.shortcuts import render, get_object_or_404
 from .forms import BuscaForm
-from .models import Item, Unidade, Estoque
+from .models import Item, Unidade, Estoque, Indicacao, Protocolo
 import json
 from django.http import HttpResponse, JsonResponse
 def busca(request):
@@ -21,10 +21,20 @@ def busca(request):
 def medicamento(request, id_item):
     id_item = int(id_item)
     item = Item.objects.filter(id_item=id_item)
+    indicacao = Indicacao.objects.get(id_indicacao=id_item)
+
     context = {
         'item': item,
-        'itens_json': json.dumps(list(item.values('id_item', 'nome_item', 'comp_ativ_itm')))
+        'itens_json': json.dumps(list(item.values('id_item', 'nome_item', 'comp_ativ_itm'))),
+
+        'indicacao': indicacao,
+        'indicacao_json': json.dumps({
+            'categoria_remedio': indicacao.categoria_remedio,
+            'precaucao': indicacao.precaucao,
+            'contra_indicacao': indicacao.contra_indicacao
+        }),
     }
+
     return render(request, 'produto.html', context)
 
 def localizarMedicamento(request,id_item):

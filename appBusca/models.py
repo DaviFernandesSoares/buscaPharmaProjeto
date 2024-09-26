@@ -37,6 +37,15 @@ class Estoque(models.Model):
         return f"{self.id_item.nome_item} - {self.id_unidade.nome}"
 class Protocolo(models.Model):
     id_protocolo = models.AutoField(primary_key=True)
-
+    id_item = models.ForeignKey(Item, on_delete=models.CASCADE, db_column='id_item')
+    documento_necessarios = models.CharField(max_length=255)
+    exames = models.CharField(max_length=255)
     class Meta:
         db_table = 'protocolo'
+class Indicacao(models.Model):
+    id_indicacao = models.AutoField(primary_key=True)
+    categoria_remedio = models.CharField(max_length=255)
+    precaucao = models.CharField(max_length=255)
+    contra_indicacao = models.CharField(max_length=255)
+    class Meta:
+        db_table = 'indicacao'

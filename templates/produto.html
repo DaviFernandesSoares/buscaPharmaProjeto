@@ -5,7 +5,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{{ itens.0.nome_item }}</title>
+    <title>{{ item.0.nome_item }}</title>
     <link rel="stylesheet" href="{% static 'css/produto.css' %}">
 </head>
 
@@ -13,7 +13,7 @@
     <header>
         <div class="logo">
             <a href="{% url 'home' %}">
-                <img src="{% static 'img/Logo_pequena.png.pgn' %}" alt="BuscaPharma">
+                <img src="{% static 'img/Logo_pequena.png' %}" alt="BuscaPharma">
             </a>
         </div>
 
@@ -39,12 +39,17 @@
     <div class="prodDesc">
         <h1 class="titulo">{{ item.0.nome_item }}</h1>
         <br>
-        <p>{{ item.0.comp_ativ_itm }}</p>
+        <p>Componente Ativo: {{ item.0.comp_ativ_itm }}</p>
+        <p>Categoria: {{ indicacao.categoria_remedio }}</p>
+        <p>Precaução: {{ indicacao.precaucao }}</p>
+        <p>Contra Indicação: {{ indicacao.contra_indicacao }}</p>
         <div class="button-container">
             <a href="{% url 'localizar_remedio' item.0.id_item %}"><button>Localizar Medicamento</button></a>
             <a href="#"><button>Agendar horário</button></a>
         </div>
     </div>
+
+
 
     <script src="{% static 'javaScript/produto.js' %}"></script>
 </body>
