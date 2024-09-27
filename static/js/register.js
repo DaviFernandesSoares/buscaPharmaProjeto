@@ -186,8 +186,9 @@ document.querySelector('form').addEventListener('submit', async function(event) 
         }
     }
 
-    // Se tudo estiver válido, enviar o formulário
-    if (!isValid) {
-        event.preventDefault();
-    }
+    if (isValid) {
+    // O formulário é válido, agora o envio é permitido
+    event.target.submit();
+}
+
 });
