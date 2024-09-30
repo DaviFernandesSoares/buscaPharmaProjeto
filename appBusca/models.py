@@ -13,7 +13,6 @@ class Item(models.Model):
 class Unidade(models.Model):
     STATUS_CHOICES = (
         ('Aberto', 'aberto'),
-        ('Em manutenção', 'em manutenção'),
         ('Fechado', 'fechado'),
     )
 

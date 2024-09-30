@@ -1,0 +1,127 @@
+
+
+/* Reseta estilos básicos e define background */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+    text-align: center;
+    vertical-align: auto;
+}
+nav ul li a.active, /* Estilo para o item ativo */
+nav ul li a:hover {  /* Também aplicamos o hover para consistência */
+    color: #ff8800;  /* Destaque laranja */
+    font-weight: bold; /* Opcional: torna o item em negrito */
+}
+
+body {
+    margin-top: 15%;
+    background-color: #0A4973;
+    display: flex;
+    align-items: center;
+    height: fit-content;
+
+}
+
+header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    padding: 10px;
+    background-color: #0A4973;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+header .logo img {
+    background: white;
+    border-radius: 3%;
+    height: 60px;
+    width: 180px;
+    padding: 0 1rem 0 1rem;
+}
+header nav ul {
+    list-style: none;
+    display: flex;
+    margin: 0;
+    padding: 0;
+}
+
+header nav ul li {
+    margin-right: 20px;
+}
+
+header nav ul li a {
+    color: #fff;
+    text-decoration: none;
+}
+
+header .auth-buttons {
+    display: flex;
+    align-items: center;
+}
+.Mapa{
+    width: 50%;
+    height: fit-content;
+}
+iframe{
+    width: 80%;
+    height: 35rem;
+}
+
+header .auth-buttons button {
+    margin-left: 10px;
+    padding: 5px 15px;
+    background-color: #ffcc00;
+    border-radius: 10px;
+    border: none;
+    color: black;
+    cursor: pointer;
+
+}/* Estiliza a seção das farmácias */
+.farmacias {
+    padding: 20px;
+    background-color: #f9f9f9;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    margin: 20px auto;
+    max-width: 1000px;
+}
+
+.farmacias h2 {
+    font-size: 24px;
+    color: #333;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.farmacias ul li {
+    font-size: 18px;
+    text-align: justify;
+    margin: 20px 20px;
+}
+
+.farmacias ul li:last-child {
+    border-bottom: none;
+}
+/* Estilo para o status "Aberto" */
+.status-aberto {
+    color: green;
+}
+
+/* Estilo para o status "Fechado" */
+.status-fechado {
+    color: red;
+}
+a {
+    text-decoration: none; /* Remove o sublinhado */
+    color: #000; /* Ajuste a cor do link, se necessário */
+}
+
+a:hover {
+    text-decoration: underline; /* Adiciona o sublinhado apenas ao passar o mouse, se desejar */
+}
+

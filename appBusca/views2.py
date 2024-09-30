@@ -1,3 +1,4 @@
+import requests
 from django.shortcuts import render, get_object_or_404
 from .forms import BuscaForm
 from .models import Item, Unidade, Estoque, Indicacao, Protocolo
@@ -37,24 +38,46 @@ def medicamento(request, id_item):
 
     return render(request, 'produto.html', context)
 
-def localizarMedicamento(request,id_item):
+
+def localizarMedicamento(request, id_item):
     item = get_object_or_404(Item, id_item=id_item)
     unidades = Unidade.objects.all()  # Obtém todas as unidades
     unidades_com_quantidade = []
 
-    # Para cada unidade, obtenha a quantidade atual do item
     for unidade in unidades:
         estoque_item = Estoque.objects.filter(id_item=item, id_unidade=unidade).first()
         quantidade_atual = estoque_item.qtde_atual if estoque_item else 0
-        unidades_com_quantidade.append({
-            'unidade': unidade,
-            'quantidade_atual': quantidade_atual,
-            'cep': unidade.cep,
-            'status': unidade.status
-        })
+        cep = unidade.cep
+        latitude, longitude = pegar_coordenadas_pelo_cep(cep)
+
+        if quantidade_atual > 0:
+            unidades_com_quantidade.append({
+                'unidade': unidade,
+                'quantidade_atual': quantidade_atual,
+                'cep': unidade.cep,
+                'status': unidade.status,
+                'latitude': latitude,
+                'longitude': longitude,
+            })
+
+    # Adicione o print aqui para verificar
+    print(unidades_com_quantidade)  # Verifique o que está sendo retornado
 
     context = {
         'item': item,
-        'unidades_com_quantidade': unidades_com_quantidade  # Passa as unidades com suas quantidades
+        'unidades_com_quantidade': unidades_com_quantidade
     }
     return render(request, 'localizarRemedio.html', context)
+
+def pegar_coordenadas_pelo_cep(cep):
+    api_key = 'SUA_CHAVE_DE_API_AQUI'  # Substitua pela sua chave de API
+    url = f'https://maps.googleapis.com/maps/api/geocode/json?address={cep}&key={api_key}'
+    response = requests.get(url)
+
+    if response.status_code == 200:
+        data = response.json()
+        if data['results']:
+            latitude = data['results'][0]['geometry']['location']['lat']
+            longitude = data['results'][0]['geometry']['location']['lng']
+            return latitude, longitude
+    return None, None
