@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Medicamentos</title>
+    <link rel="stylesheet" href="css/busca.css">
+</head>
+
+<body>
+
+    <!-- Cabeçalho -->
+    <header>
+        <div class="logo">
+            <a href="index.html">
+                <img src="img/Logo_pequena.png" alt="BuscaPharma">
+            </a>
+        </div>
+        <nav>
+            <a class="linksExternos" href="index.html">Home</a>
+            <a class="linksExternos" href="#">About</a>
+            <a class="linksExternos" href="#">Agendamentos</a>
+            <a class="linksExternos" href="#">Contact</a>
+            <a class="botoes" href="user_register.html"><button class="btnRegister">Cadastre-se</button></a>
+            <a class="botoes" href="user_login.html"><button class="btnLogin">Logar</button></a>
+        </nav>
+    </header>
+
+    <!-- Barra de Pesquisa -->
+    <div class="search-container">
+        <input type="text" placeholder="Insira o nome do medicamento" class="search-input" id="search-bar">
+    </div>
+
+    <div class="container">
+        <table class="responsive-table">
+            <thead>
+                <tr>
+                    <th>Nome</th>
+                    <th>Princípio Ativo</th>
+                </tr>
+            </thead>
+            <tbody id="table-body">
+                <!-- Linhas serão geradas dinamicamente aqui -->
+            </tbody>
+        </table>
+    </div>
+
+    <script src="javaScript/busca.js"></script>
+</body>
+
+</html>
