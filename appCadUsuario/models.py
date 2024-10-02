@@ -2,16 +2,19 @@ from django.contrib.auth.models import AbstractUser, BaseUserManager
 from django.db import models
 from appBusca.models import Unidade
 class Usuario(AbstractUser):
+    # Definindo o related_name para evitar conflitos
+    groups = models.ManyToManyField(
+        'auth.Group',
+        related_name='admin_groups',  # Nome único
+        blank=True
+    )
+    user_permissions = models.ManyToManyField(
+        'auth.Permission',
+        related_name='admin_permissions',  # Nome único
+        blank=True
+    )
+    id_usuario = models.AutoField(primary_key=True,db_column='id_usuario')
     telefone = models.CharField(max_length=15, blank=True, null=True)
-    id_protocolo = models.AutoField(primary_key=True)
     cpf = models.CharField(max_length=14, unique=True)
-    id_unidade = models.ForeignKey(Unidade, on_delete=models.SET_NULL, blank=True, null=True, db_column='id_unidade')
     class Meta:
         db_table = 'usuario'
-    class criarUsuario(BaseUserManager):
-        def create_user(self, id_unidade, password=None, **extra_fields):
-            if not id_unidade:
-                raise ValueError('Id')
-            user = self.model(id_unidade = id_unidade, **extra_fields)
-            user.set_password(password)
-            user.save()

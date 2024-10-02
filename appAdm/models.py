@@ -1,4 +1,20 @@
 from django.db import models
-
+from django.contrib.auth.models import AbstractUser, BaseUserManager
 from appBusca.models import Unidade
-from appCadUsuario.models import Usuario
+
+class Admin(AbstractUser):
+    # Definindo o related_name para evitar conflitos
+    groups = models.ManyToManyField(
+        'auth.Group',
+        related_name='usuario_groups',  # Nome único
+        blank=True
+    )
+    user_permissions = models.ManyToManyField(
+        'auth.Permission',
+        related_name='usuario_permissions',  # Nome único
+        blank=True
+    )
+    id_unidade  = models.ForeignKey(Unidade, on_delete=models.CASCADE)
+    class Meta:
+        db_table = 'admin'
+

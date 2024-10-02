@@ -7,7 +7,7 @@ from django.contrib.auth.hashers import make_password, check_password
 from django.shortcuts import get_object_or_404
 
 from appBusca.models import Unidade
-from appCadUsuario.models import Usuario
+from appAdm.models import Admin
 
 
 
@@ -17,55 +17,49 @@ def cadastro_adm(request):
         senha = request.POST['password']
         id_unidade = request.POST['token']
 
-        # Buscando a instância de Unidade com base no ID
-        unidade = get_object_or_404(Unidade, pk=id_unidade)
+        if nome and senha and id_unidade:
+            unidade = get_object_or_404(Unidade, pk=id_unidade)
 
-        # Criando o usuário com a instância da Unidade
-        user = Usuario(username=nome, id_unidade=unidade, is_staff=1)
-        user.set_password(senha)
-        user.save()
+            # Criando o usuário com a instância da Unidade
+            user = Admin(username=nome, id_unidade=unidade, is_staff=1)
+            user.set_password(senha)
+            user.save()
 
-        return redirect('login')
+            return redirect('login_adm')
 
     return render(request, 'admin_register.html')
 
 def login_adm(request):
     if request.method == 'POST':
-        email = request.POST.get('email')
+        username = request.POST.get('username')
+        token = request.POST.get('token')
         senha = request.POST.get('senha')
-        resposta = {'success': False, 'email_existe': False, 'senha': False, 'mensagem': ''}
+        resposta = {'success': False, 'username_existe': False, 'senha': False,'token_existe' : False, 'mensagem': ''}
 
-        if email:
-            usuarios = Usuario.objects.filter(email=email)
+        if username and token and senha:
+            admins = Admin.objects.filter(username= 'username')
 
-            if usuarios.exists():
-                if usuarios.count() == 1:
-                    usuario = usuarios.first()
-                    if check_password(senha, usuario.password):
-                        auth_login(request,usuario)
+            if admins.exists():
+                if admins.count() == 1:
+                    admin = admins.first()
+                    if check_password(senha, admin.password):
+                        auth_login(request,admin)
                         resposta['success'] = True
                         resposta['mensagem'] = 'Login bem-sucedido.'
                         return JsonResponse(resposta)  # Retorna JSON indicando sucesso
                     else:
                         resposta['senha'] = True
-                        resposta['mensagem'] = 'Email ou senha incorretos.'
+                        resposta['mensagem'] = 'Username ou senha incorretos.'
                 else:
-                    resposta['email_existe'] = True
-                    resposta['mensagem'] = 'Múltiplos usuários encontrados com o mesmo email.'
+                    resposta['username_existe'] = True
+                    resposta['mensagem'] = 'Múltiplos usuários encontrados com o mesmo username.'
             else:
-                resposta['email_existe'] = True
-                resposta['mensagem'] = 'Email não encontrado.'
+                resposta['token_existe'] = True
+                resposta['mensagem'] = 'token não encontrado.'
         else:
-            resposta['email_existe'] = True
-            resposta['mensagem'] = 'O email é obrigatório.'
+            resposta['token_existe'] = True
+            resposta['mensagem'] = 'O token é obrigatório.'
 
         return JsonResponse(resposta)
-    return
+    return render(request, 'login_admin.html')
 
-
-# View de home
-def home(request):
-    if request.user.is_authenticated:
-        return render(request, 'home.html')
-    else:
-        return render(request,'login.html')
