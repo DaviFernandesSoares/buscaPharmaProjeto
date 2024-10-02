@@ -9,7 +9,7 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('app_cad_usuario', '0001_initial'),
+        ('appCadUsuario', '0001_initial'),
         ('auth', '0012_alter_user_first_name_max_length'),
     ]
 

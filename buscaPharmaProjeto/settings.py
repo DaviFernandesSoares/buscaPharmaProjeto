@@ -37,7 +37,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'app_cad_usuario',
+    'appCadUsuario',
     'appBusca',
 ]
 
@@ -132,4 +132,4 @@ STATICFILES_DIRS = [
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
-AUTH_USER_MODEL = 'app_cad_usuario.Usuario'
+AUTH_USER_MODEL = 'appCadUsuario.Usuario'

@@ -6,7 +6,7 @@ from django.contrib.auth import login as auth_login
 from django.contrib.auth.hashers import make_password, check_password
 
 
-from app_cad_usuario.models import Usuario
+from appCadUsuario.models import Usuario
 
 
 def verificar_existencia(request):

@@ -1,14 +1,71 @@
+{% load static %}
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-br">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login Admin</title>
-    <link rel="stylesheet" href="css/login_admin.css">
+    <title>Login</title>
+    <link rel="stylesheet" href="{% static 'css/login.css' %}">
 </head>
-<body>
-    <div class="background_color">
 
+<body>
+
+    <div class="logoFundo">
+        <img src="{% static 'img/Logo_Login.png' %}" alt="Logo">
     </div>
+
+    <div class="wrapper">
+        <div class="form-box login">
+            <h2>Login</h2>
+            <form action="{% url 'login' %}" method="POST" id="form">
+                {% csrf_token %}
+                
+                <!-- Campo Username -->
+                <div class="input-box">
+                    <span class="icon"><ion-icon name="person-circle-outline"></ion-icon></span>
+                    <input type="text" id="username" name="username" required>
+                    <label>Username</label>
+                    <div id="username-erro" class="error-tooltip"></div>
+                </div>
+
+                <!-- Campo Token da Unidade -->
+                <div class="input-box">
+                    <span class="icon"><ion-icon name="checkmark-circle-outline"></ion-icon></span>
+                    <input type="text" id="token" name="token" required>
+                    <label>Token da Unidade</label>
+                    <div id="token-erro" class="error-tooltip"></div>
+                </div>
+
+                <!-- Campo Senha -->
+                <div class="input-box">
+                    <span class="icon"><ion-icon name="lock-closed-outline"></ion-icon></span>
+                    <input type="password" id="password" name="senha" required>
+                    <label>Senha</label>
+                    <div id="senha-erro" class="error-tooltip"></div>
+                </div>
+
+                <!-- Campo Confirmar Senha -->
+
+                <!-- Mostrar Senha -->
+                <div class="show-password-container">
+                    <input type="checkbox" id="show-password">
+                    <label for="show-password">Mostrar Senha</label>
+                </div>
+
+                <button type="submit" class="btn">Login</button>
+
+                <div id="login-erro" class="error-message"></div>
+                <div class="login-register">
+                    <p>Não possui uma conta?<a href="{% url 'cadastro' %}" class="register-link">Registre-se</a></p>
+                </div>
+
+            </form>
+        </div>
+    </div>
+    <script src="{% static 'js/login.js' %}"></script>
+    <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
 </body>
+
 </html>
