@@ -14,7 +14,8 @@ class Admin(AbstractUser):
         related_name='usuario_permissions',  # Nome único
         blank=True
     )
-    id_unidade  = models.ForeignKey(Unidade, on_delete=models.CASCADE)
+    username = models.CharField(max_length=150, unique=True)
+    id_unidade  = models.ForeignKey(Unidade, on_delete=models.CASCADE, db_column='id_unidade')
     class Meta:
         db_table = 'admin'
 

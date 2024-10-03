@@ -15,5 +15,5 @@ urlpatterns = [
     path('busca/medicamento/<int:id_item>/', views2.medicamento, name='medicamento'),
     path('localizar_remedio/<int:id_item>/', views2.localizarMedicamento, name='localizar_remedio'),
     path('cadastro_admin/', views3.cadastro_adm, name='cadastro_admin'),
-    path('login_admin/', views3.login_adm, name='cadastro_admin'),
+    path('login_admin/', views3.login_adm, name='login_admin'),
 ]

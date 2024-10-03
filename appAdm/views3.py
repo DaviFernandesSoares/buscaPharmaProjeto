@@ -25,41 +25,52 @@ def cadastro_adm(request):
             user.set_password(senha)
             user.save()
 
-            return redirect('login_adm')
+            return redirect('login_admin')
 
     return render(request, 'admin_register.html')
+
 
 def login_adm(request):
     if request.method == 'POST':
         username = request.POST.get('username')
         token = request.POST.get('token')
         senha = request.POST.get('senha')
-        resposta = {'success': False, 'username_existe': False, 'senha': False,'token_existe' : False, 'mensagem': ''}
+
+        resposta = {
+            'success': False,
+            'username_existe': False,
+            'senha_incorreta': False,
+            'token_existe': False,
+            'mensagem': ''
+        }
 
         if username and token and senha:
-            admins = Admin.objects.filter(username= 'username')
+            try:
+                # Verifica se o usuário existe pelo username
+                admin = Admin.objects.get(username=username)
 
-            if admins.exists():
-                if admins.count() == 1:
-                    admin = admins.first()
+                # Verifica se o token é válido
+                if admin.id_unidade:  # Se o token está associado ao admin
                     if check_password(senha, admin.password):
-                        auth_login(request,admin)
+                        auth_login(request, admin)
                         resposta['success'] = True
                         resposta['mensagem'] = 'Login bem-sucedido.'
                         return JsonResponse(resposta)  # Retorna JSON indicando sucesso
                     else:
-                        resposta['senha'] = True
-                        resposta['mensagem'] = 'Username ou senha incorretos.'
+                        resposta['senha_incorreta'] = True
+                        resposta['mensagem'] = 'Senha incorreta.'
                 else:
-                    resposta['username_existe'] = True
-                    resposta['mensagem'] = 'Múltiplos usuários encontrados com o mesmo username.'
-            else:
-                resposta['token_existe'] = True
-                resposta['mensagem'] = 'token não encontrado.'
+                    resposta['token_existe'] = True
+                    resposta['mensagem'] = 'Token não encontrado.'
+
+            except Admin.DoesNotExist:
+                resposta['username_existe'] = True
+                resposta['mensagem'] = 'Usuário não encontrado.'
         else:
-            resposta['token_existe'] = True
-            resposta['mensagem'] = 'O token é obrigatório.'
+            resposta['mensagem'] = 'Todos os campos são obrigatórios.'
 
         return JsonResponse(resposta)
+
     return render(request, 'login_admin.html')
+
 

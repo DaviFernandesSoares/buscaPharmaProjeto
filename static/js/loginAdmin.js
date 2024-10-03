@@ -1,7 +1,8 @@
 document.addEventListener('DOMContentLoaded', function() {
+    console.log('JavaScript carregado.');
     const form = document.getElementById('form');
     const usernameErroDiv = document.getElementById('username-erro');
-    const tokenErroDiv = document.getElementById('username-erro');
+    const tokenErroDiv = document.getElementById('token-erro');
     const senhaErroDiv = document.getElementById('senha-erro');
     const loginErroDiv = document.getElementById('login-erro');
 
@@ -10,28 +11,22 @@ document.addEventListener('DOMContentLoaded', function() {
 
         let isValid = true;
 
-        // Validação do email
+        // Validação do username
         const username = document.getElementById('username').value;
         usernameErroDiv.textContent = '';
         usernameErroDiv.style.display = 'none';
         if (!username) {
-            usernameErroDiv.textContent = 'O email é obrigatório.';
+            usernameErroDiv.textContent = 'O nome de usuário é obrigatório.';
             usernameErroDiv.style.display = 'block';
             isValid = false;
-        } else {
-            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-            if (!emailRegex.test(username)) {
-                usernameErroDiv.textContent = 'Formato de Email Inválido.';
-                usernameErroDiv.style.display = 'block'; // Exibir mensagem de erro
-                isValid = false;
-            }
         }
 
+        // Validação do token
         const token = document.getElementById('token').value;
         tokenErroDiv.textContent = '';
         tokenErroDiv.style.display = 'none';
         if (!token) {
-            tokenErroDiv.textContent = 'O email é obrigatório.';
+            tokenErroDiv.textContent = 'O token é obrigatório.';
             tokenErroDiv.style.display = 'block';
             isValid = false;
         }
@@ -49,28 +44,31 @@ document.addEventListener('DOMContentLoaded', function() {
         // Se o formulário for válido, faz o fetch
         if (isValid) {
             const formData = new FormData(form);
+            const csrftoken = document.querySelector('[name=csrfmiddlewaretoken]').value;  // Obtém o token CSRF
 
             fetch(form.action, {
                 method: 'POST',
                 body: formData,
                 headers: {
-                    'X-Requested-With': 'XMLHttpRequest',  // Indica que é uma requisição AJAX
-                    'Accept': 'application/json',  // Espera resposta em JSON
+                    'X-Requested-With': 'XMLHttpRequest',
+                    'Accept': 'application/json',
+                    'X-CSRFToken': csrftoken,  // Adiciona o token CSRF ao cabeçalho
                 }
             })
             .then(response => {
                 if (response.ok) {
-                    return response.json();  // Tenta transformar a resposta em JSON
+                    return response.json();
                 } else {
                     throw new Error('Erro na resposta do servidor.');
                 }
             })
             .then(data => {
-                if (!data.success) {
+                if (data.success) {
+                    console.log("Redirecionando");
+                    window.location.href = '/cadastro_admin/';  // URL corrigida para o caminho correto
+                } else {
                     loginErroDiv.textContent = data.mensagem;
                     loginErroDiv.style.display = 'block';
-                } else {
-                    window.location.href = '/home/';  // Redirecionar para a página home
                 }
             })
             .catch(error => {
