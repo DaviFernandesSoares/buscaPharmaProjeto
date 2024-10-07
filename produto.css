@@ -1,0 +1,119 @@
+/* Reseta estilos básicos e define background */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+    text-align: center;
+    vertical-align: auto;
+}
+nav ul li a.active, /* Estilo para o item ativo */
+nav ul li a:hover {  /* Também aplicamos o hover para consistência */
+    color: #ff8800;  /* Destaque laranja */
+    font-weight: bold; /* Opcional: torna o item em negrito */
+}
+
+body {
+    margin-top: 10%;
+    background-color: #0A4973;
+}
+
+header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    padding: 10px;
+    background-color: #0A4973;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+header .logo img {
+    background: white;
+    border-radius: 3%;
+    height: 60px;
+    width: 180px;
+    padding: 0 1rem 0 1rem;
+}
+header nav ul {
+    list-style: none;
+    display: flex;
+    margin: 0;
+    padding: 0;
+}
+
+header nav ul li {
+    margin-right: 20px;
+}
+
+header nav ul li a {
+    color: #fff;
+    text-decoration: none;
+}
+
+header .auth-buttons {
+    display: flex;
+    align-items: center;
+}
+
+header .auth-buttons button {
+    margin-left: 10px;
+    padding: 5px 15px;
+    background-color: #ffcc00;
+    border-radius: 10px;
+    border: none;
+    color: black;
+    cursor: pointer;
+    
+}
+
+p {
+    margin-top: 50px;
+    width: max-content;
+    height: max-content;
+    margin: auto;
+    text-align: justify;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 5px;
+    font-size: 1.5em;
+}
+.paragraph{
+
+    align-items: center;
+}
+
+h1 {
+    font-size: 3.5em;
+    color: #fff;
+    padding: 10px;
+}
+
+/* Estilos para a seção dos botões abaixo de prodDesc */
+.button-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 40px;
+    margin-top: 20px;
+    /* Espaço entre a descrição do produto e os botões */
+}
+
+.button-container button {
+    margin-right: 20px;
+    padding: 10px 20px;
+    font-size: 1.5em;
+    cursor: pointer;
+    border: 2px solid #ff8800;
+    border-radius: 5px;        
+    background-color: #ff8800;
+    color: #fff;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+.button-container button:hover {
+    background-color: #0A4973; /* Cor de fundo ao passar o mouse */
+    transition: background-color 0.3s ease; /* Transição suave */
+}
