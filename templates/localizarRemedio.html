@@ -1,12 +1,13 @@
-{% load static %}
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-br">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Localizar {{ item.nome_item }}</title>
+    {% load static %}
     <link rel="stylesheet" href="{% static 'css/localizarRemedio.css' %}">
+    <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY_HERE" async defer></script>
 </head>
 
 <body>
@@ -29,20 +30,17 @@
 </header>
 
 <!-- Mapa embutido -->
-<div class="Mapa">
-    <iframe id="map-frame" src="https://www.google.com/maps/embed/v1/place?key=YOUR_API_KEY&q=default_location" 
-            frameborder="2" allowfullscreen></iframe>
-</div>
+<div id="map" style="height: 500px; width: 40%;"></div>
 
 <!-- Seção de farmácias -->
 <section class="farmacias">
     <h2>Disponibilidade de {{ item.nome_item }}</h2>
-    <ul>
+    <ul id="farmacias-list">
         {% for unidade_info in unidades_com_quantidade %}
             <li>
-                <a href="javascript:void(0);" onclick="updateMap('{{ unidade_info.cep }}')">
+                <a href="javascript:void(0);" onclick="focusOnMarker({{ unidade_info.latitude }}, {{ unidade_info.longitude }}, '{{ unidade_info.unidade.nome }}')">
                     <span class="{% if unidade_info.status == 'Aberto' %}status-aberto{% elif unidade_info.status == 'Fechado' %}status-fechado{% endif %}">
-                        {{ unidade_info.unidade.nome }} - Quantidade: {{ unidade_info.quantidade_atual }} - CEP: {{ unidade_info.cep }} - Status: {{ unidade_info.status }}
+                        {{ unidade_info.unidade.nome }} - Quantidade: {{ unidade_info.quantidade_atual }} - Endereço: {{ unidade_info.logradouro_e_numero }} - Status: {{ unidade_info.status }}
                     </span>
                 </a>
             </li>
@@ -53,11 +51,22 @@
 </section>
 
 <script>
-    function updateMap(cep) {
-        const iframe = document.getElementById('map-frame');
-        iframe.src = `https://www.google.com/maps/embed/v1/place?key=YOUR_API_KEY&q=${cep}`;
+    let map;
+    let markers = [];
+
+    // Função para inicializar o mapa
+    function initMap() {
+        map = new google.maps.Map(document.getElementById('map'), {
+            center: { lat: -23.0816, lng: -47.2101 }, // Coordenadas de Indaiatuba
+            zoom: 12,
+        });
+
+        // Adiciona os marcadores no mapa para as farmácias disponíveis
+        {% for unidade_info in unidades_com_quantidade %}
+            addMarker({{ unidade_info.latitude }}, {{ unidade_info.longitude }}, '{{ unidade_info.unidade.nome }}', {{ unidade_info.quantidade_atual }},'{{ unidade_info.status }}');
+        {% endfor %}
     }
-    
+
     // Função para adicionar um marcador
     function addMarker(lat, lng, nome, quantidade,status) {
         const marker = new google.maps.Marker({
@@ -91,6 +100,6 @@
     // Chama a função de inicialização quando a página carrega
     window.onload = initMap;
 </script>
-</body>
 
+</body>
 </html>

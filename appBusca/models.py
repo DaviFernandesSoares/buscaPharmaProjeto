@@ -18,7 +18,7 @@ class Unidade(models.Model):
 
     nome = models.CharField(max_length=130)
     status = models.CharField(max_length=15, choices=STATUS_CHOICES, default='Aberto')
-    cep = models.CharField(max_length=9)
+    endereco = models.CharField(max_length=255)
     id_unidade = models.AutoField(unique=True, primary_key=True)
     class Meta:
         db_table = 'unidade'

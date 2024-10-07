@@ -3,6 +3,7 @@ from django.shortcuts import render, get_object_or_404
 from .forms import BuscaForm
 from .models import Item, Unidade, Estoque, Indicacao, Protocolo
 import json
+from urllib.parse import quote
 from django.http import HttpResponse, JsonResponse
 def busca(request):
     form = BuscaForm(request.GET or None)
@@ -41,27 +42,28 @@ def medicamento(request, id_item):
 
 def localizarMedicamento(request, id_item):
     item = get_object_or_404(Item, id_item=id_item)
-    unidades = Unidade.objects.all()  # Obtém todas as unidades
+    unidades = Unidade.objects.all()
     unidades_com_quantidade = []
 
     for unidade in unidades:
         estoque_item = Estoque.objects.filter(id_item=item, id_unidade=unidade).first()
         quantidade_atual = estoque_item.qtde_atual if estoque_item else 0
-        cep = unidade.cep
-        latitude, longitude = pegar_coordenadas_pelo_cep(cep)
+        endereco = unidade.endereco
+        latitude, longitude = pegar_coordenadas_pelo_endereco(endereco)
 
         if quantidade_atual > 0:
+            partes_endereco = endereco.split(", ")
+            logradouro_e_numero = partes_endereco[0] + ", " + partes_endereco[1].strip() if len(partes_endereco) > 1 else endereco
+
             unidades_com_quantidade.append({
                 'unidade': unidade,
                 'quantidade_atual': quantidade_atual,
-                'cep': unidade.cep,
+                'endereco': endereco,
+                'logradouro_e_numero': logradouro_e_numero,
                 'status': unidade.status,
                 'latitude': latitude,
                 'longitude': longitude,
             })
-
-    # Adicione o print aqui para verificar
-    print(unidades_com_quantidade)  # Verifique o que está sendo retornado
 
     context = {
         'item': item,
@@ -69,15 +71,28 @@ def localizarMedicamento(request, id_item):
     }
     return render(request, 'localizarRemedio.html', context)
 
-def pegar_coordenadas_pelo_cep(cep):
-    api_key = 'SUA_CHAVE_DE_API_AQUI'  # Substitua pela sua chave de API
-    url = f'https://maps.googleapis.com/maps/api/geocode/json?address={cep}&key={api_key}'
-    response = requests.get(url)
 
-    if response.status_code == 200:
+def pegar_coordenadas_pelo_endereco(endereco):
+    api_key = 'YOUR_API_KEY_HERE'  # Substitua pela sua chave de API
+    url = f'https://maps.googleapis.com/maps/api/geocode/json?address={quote(endereco)}&key={api_key}'
+
+    try:
+        response = requests.get(url)
+        response.raise_for_status()  # Levanta um erro se a requisição falhar
+
         data = response.json()
-        if data['results']:
+        if data['status'] == 'OK' and data['results']:
             latitude = data['results'][0]['geometry']['location']['lat']
             longitude = data['results'][0]['geometry']['location']['lng']
+            print(data)
             return latitude, longitude
+        else:
+            print(f"Erro na resposta da API: {data['status']}")
+    except requests.exceptions.RequestException as e:
+        print(f"Erro na requisição: {e}")
+
     return None, None
+
+
+
+
