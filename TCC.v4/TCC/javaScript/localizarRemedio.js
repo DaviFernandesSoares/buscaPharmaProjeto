@@ -12,3 +12,14 @@ document.addEventListener('DOMContentLoaded', () => {
         })
         .catch(error => console.error('Erro ao carregar dados:', error));
 });
+
+    // Função para mudar o src do iframe
+    const listItems = document.querySelectorAll('.farmacias li');
+    const map = document.getElementById('map');
+
+    listItems.forEach(item => {
+        item.addEventListener('click', function() {
+            const newSrc = this.getAttribute('data-map');
+            map.src = newSrc;
+        });
+    });

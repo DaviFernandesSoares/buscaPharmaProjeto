@@ -3,13 +3,18 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+    text-align: center;
+    vertical-align: auto;
+}
+nav ul li a.active, /* Estilo para o item ativo */
+nav ul li a:hover {  /* Também aplicamos o hover para consistência */
+    color: #ff8800;  /* Destaque laranja */
+    font-weight: bold; /* Opcional: torna o item em negrito */
 }
 
 body {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
+    margin-top: 10%;
     background-color: #0A4973;
 }
 
@@ -18,182 +23,97 @@ header {
     top: 0;
     left: 0;
     width: 100%;
-    padding: 10px 20px;
-    background: #0A4973;
+    padding: 10px;
+    background-color: #0A4973;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    z-index: 99;
 }
 
-.logo a img {
-    height: 80px;
-    width: auto;
-    max-width: 100%;
-    margin-left: 20%;
+header .logo img {
+    background: white;
+    border-radius: 3%;
+    height: 60px;
+    width: 180px;
+    padding: 0 1rem 0 1rem;
+}
+header nav ul {
+    list-style: none;
+    display: flex;
+    margin: 0;
+    padding: 0;
 }
 
-.search-input {
-    position: absolute;
-    width: 35%;
-    font-size: 1.3em; 
-    border-radius: 10px;
-    outline: none;
-    border: 3px solid #fff;
-    text-indent: 5px;
-    left: 22%;
-    top: 39%;
-    background: transparent;
+header nav ul li {
+    margin-right: 20px;
+}
+
+header nav ul li a {
     color: #fff;
-}
-
-/* Define a cor do placeholder */
-.search-input::placeholder {
-    color: #fff;
-    opacity: 1;
-}
-
-/* Estilos apenas para links, excluindo aqueles que contêm botões */
-nav a:not(.botoes) {
-    position: relative;
-    font-size: 1.3em;
     text-decoration: none;
-    color: white;
-    font-weight: 500;
-    margin-right: 20px;
 }
 
-nav a:not(.botoes)::after {
-    content: '';
-    position: absolute;
-    left: 0;
-    bottom: -6px;
-    width: 100%;
-    height: 3px;
-    background: #fff;
-    border-radius: 5px;
-    transform-origin: right;
-    transform: scaleX(0);
-    transition: transform .5s;
-}
-
-nav a:not(.botoes):hover::after {
-    transform-origin: left;
-    transform: scaleX(1);
-}
-
-/* Estilos específicos para botões dentro de links */
-nav button {
-    width: 140px;
-    height: 50px;
-    background: transparent;
-    border: 2px solid #fff;
-    outline: none;
-    border-radius: 6px;
-    cursor: pointer;
-    font-size: 1.5em;
-    color: #fff;
-    font-weight: 500;
-    margin-right: 20px;
-    transition: .5s;
-}
-
-nav button:hover {
-    border-color: #ff8800;
-    background: #ff8800;
-    color: black;
-}
-
-.wrapper {
-    margin-top: 5%;
-    width: 50%;
-    height: 80%;
+header .auth-buttons {
+    display: flex;
     align-items: center;
 }
 
-.imagemMapaIndaiatuba img {
-    height: 80%;
-    width: 80%;
-    margin: 10px;
-    margin-left: 5%;
+header .auth-buttons button {
+    margin-left: 10px;
+    padding: 5px 15px;
+    background-color: #ffcc00;
+    border-radius: 10px;
+    border: none;
+    color: black;
+    cursor: pointer;
+    
+}
+
+p {
+    margin-top: 50px;
+    width: max-content;
+    height: max-content;
+    margin: auto;
+    text-align: justify;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 5px;
+    font-size: 1.5em;
+}
+.paragraph{
+
+    align-items: center;
+}
+
+h1 {
+    font-size: 3.5em;
+    color: #fff;
+    padding: 10px;
 }
 
 /* Estilos para a seção dos botões abaixo de prodDesc */
 .button-container {
     display: flex;
-    gap: 20px;
+    justify-content: center;
+    align-items: center;
+    gap: 40px;
     margin-top: 20px;
     /* Espaço entre a descrição do produto e os botões */
 }
 
 .button-container button {
-    margin-left: 10%;
+    margin-right: 20px;
     padding: 10px 20px;
-    font-size: 1.1em;
+    font-size: 1.5em;
     cursor: pointer;
     border: 2px solid #ff8800;
-    border-radius: 5px;
+    border-radius: 5px;        
     background-color: #ff8800;
     color: #fff;
     transition: background-color 0.3s, color 0.3s;
 }
 
 .button-container button:hover {
-    border: 2px solid #ffffff;
-    background-color: #ffffff;
-    color: #000000;
+    background-color: #0A4973; /* Cor de fundo ao passar o mouse */
+    transition: background-color 0.3s ease; /* Transição suave */
 }
-
-.wrapper .prod_desc {
-    background-color: #f9f9f9;
-    border: 1px solid #ddd;
-    max-width: 80%;
-    border-radius: 8px;
-    padding: 20px;
-    margin: 20px auto;
-}
-
-.wrapper .prod_desc h1 {
-    font-size: 2.5em;
-    color: #000000;
-    
-}
-
-.wrapper .prod_desc p {
-    font-size: 1.1em; 
-}
-
-/* Estiliza a seção das farmácias */
-.wrapper .farmacias {
-    padding: 20px;
-    background-color: #f9f9f9;
-    border: 1px solid #ddd;
-    border-radius: 8px;
-    margin: 20px auto;
-    max-width: 80%;
-}
-
-.wrapper .farmacias h2 {
-    font-size: 24px;
-    color: #333;
-    margin-bottom: 15px;
-    text-align: center;
-}
-
-.wrapper .farmacias ul {
-    list-style-type: none;
-    padding: 0;
-}
-
-.wrapper .farmacias ul li {
-    font-size: 18px;
-    color: #555;
-    margin-bottom: 10px;
-    padding: 5px;
-    border-bottom: 1px solid #ddd;
-}
-
-.wrapper .farmacias ul li:last-child {
-    border-bottom: none;
-}
-

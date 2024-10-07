@@ -1,64 +1,34 @@
 <!DOCTYPE html>
-<html lang="en">
-
+<html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <link rel="stylesheet" href="css/produto.css">
-</head>
-
+    <title>Busca Pharma</title>
+    <link rel="stylesheet" href="../css/produto.css">
+</head> 
 <body>
-    <header>
-        <div class="logo">
-            <a href="index.html">
-                <img src="img/Logo_pequena.png" alt="BuscaPharma">
-            </a>
-        </div>
-
-        <div class="search-container">
-            <input type="text" placeholder="Insira o nome do medicamento" class="search-input" id="search-bar">
-        </div>
-
-        <nav>
-            <a class="linksExternos" href="index.html">Home</a>
-            <a class="linksExternos" href="#">Agendamentos</a>
-            <a class="botoes" href="user_register.html"><button>Cadastre-se</button></a>
-            <a class="botoes" href="user_login.html"><button>Logar</button></a>
-        </nav>
+ <header>
+    <div class="logo">
+      <a href="home.html"><img src="../img/Logo_pequena.png" alt="Busca Pharma"/></a> 
+    </div>
+    <nav>
+        <ul>
+            <li><a href="home.html">Home</a></li>
+            <li><a href="Medicamentos.html" class="active">Medicamentos</a></li>
+            <li><a href="Agendamentos.html">Agendamentos</a></li>            
+        </ul>
+    </nav>
+       <div class="auth-buttons">
+            <button class="register-btn"><a href="user_register.html">Cadastrar-se</a></button>
+            <button class="login-btn"><a href="user_login.html">Entrar</a></button>
+          </div>
     </header>
 
-    <div class="wrapper">
-        <div class="imagemMapaIndaiatuba">
-            <img src="img/mapaIndaiatuba.png" alt="imagemMapaIndaiatuba">
-        </div>
-        <div class="button-container">
-            <a href="localizarRemedio.html"><button>Localizar Medicamento</button></a>
-            <a href="agendarHorario.html"><button>Agendar horário</button></a>
-        </div>
-    </div>
-    <div class="wrapper">
-        <section class="prod_desc">
-            <h1>Medicamento Generico Teudos</h1>
-            <br>
-            <p>Rhythm Heaven: Uma Sinfonia de Diversão e Precisão Rhythm Heaven, desenvolvido pela Nintendo SPD e lançado para o Nintendo DS em 2008,é um título que transcende o simples conceito de jogos de ritmo. Com sua jogabilidade inovadora e apresentação encantadora, o jogo se destaca como uma joia única dentro do gênero.
-            </p>
-        </section>
+    <div class="prodDesc">
         
-        <section class="farmacias">
-            <h2>Farmácias Populares em Indaiatuba</h2>
-            <ul>
-                <li>Farmácia Popular Indaiatuba - Rua do Comércio, 123</li>
-                <li>Farmácia Central - Avenida dos Trabalhadores, 456</li>
-                <li>Farmácia São João - Rua das Flores, 789</li>
-                <li>Farmácia da Cidade - Rua Principal, 101</li>
-                <li>Farmácia Vida - Rua das Palmeiras, 202</li>
-            </ul>
-        </section>
     </div>
-    
-
-    <script src="javaScript/produto.js"></script>
+    <script src="../javaScript/listas.js"></script>
+    <script src="../javaScript/produto.js"></script>
+    <script src="../javaScript/busca.js"></script>
 </body>
-
 </html>
