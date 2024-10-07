@@ -1,5 +1,3 @@
-
-
 /* Reseta estilos básicos e define background */
 * {
     margin: 0;
@@ -7,21 +5,15 @@
     box-sizing: border-box;
     font-family: 'Poppins', sans-serif;
     text-align: center;
-    vertical-align: auto;
-}
-nav ul li a.active, /* Estilo para o item ativo */
-nav ul li a:hover {  /* Também aplicamos o hover para consistência */
-    color: #ff8800;  /* Destaque laranja */
-    font-weight: bold; /* Opcional: torna o item em negrito */
 }
 
 body {
-    margin-top: 15%;
+    margin-top: 10%; /* Diminui a margem superior para não ficar muito afastado */
     background-color: #0A4973;
     display: flex;
-    align-items: center;
-    height: fit-content;
-
+    flex-direction: column; /* Altera para coluna para melhor alinhamento */
+    align-items: center; /* Centraliza itens horizontalmente */
+    height: 100vh; /* Usa toda a altura da viewport */
 }
 
 header {
@@ -34,6 +26,7 @@ header {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    z-index: 1000; /* Para garantir que o cabeçalho fique sobre outros elementos */
 }
 
 header .logo img {
@@ -41,8 +34,9 @@ header .logo img {
     border-radius: 3%;
     height: 60px;
     width: 180px;
-    padding: 0 1rem 0 1rem;
+    padding: 0 1rem;
 }
+
 header nav ul {
     list-style: none;
     display: flex;
@@ -63,14 +57,6 @@ header .auth-buttons {
     display: flex;
     align-items: center;
 }
-.Mapa{
-    width: 50%;
-    height: fit-content;
-}
-iframe{
-    width: 80%;
-    height: 35rem;
-}
 
 header .auth-buttons button {
     margin-left: 10px;
@@ -80,33 +66,42 @@ header .auth-buttons button {
     border: none;
     color: black;
     cursor: pointer;
+}
 
-}/* Estiliza a seção das farmácias */
+/* Ajustes no mapa */
+#map {
+    width: 100%; /* Ocupa toda a largura disponível */
+    height: 500px; /* Altura fixa para o mapa */
+    margin-top: 20px; /* Margem superior para separar do cabeçalho */
+}
+
+/* Estiliza a seção das farmácias */
 .farmacias {
     padding: 20px;
     background-color: #f9f9f9;
     border: 1px solid #ddd;
     border-radius: 8px;
     margin: 20px auto;
-    max-width: 1000px;
+    max-width: 1500px; /* Limita a largura da lista de farmácias */
 }
 
 .farmacias h2 {
-    font-size: 24px;
+    font-size: 20px;
     color: #333;
     margin-bottom: 20px;
-    text-align: center;
+}
+
+.farmacias ul {
+    padding: 0; /* Remove padding da lista */
+    list-style-type: none; /* Remove marcadores da lista */
 }
 
 .farmacias ul li {
     font-size: 18px;
-    text-align: justify;
-    margin: 20px 20px;
+    text-align: left; /* Alinha texto à esquerda para melhor legibilidade */
+    margin: 10px 0; /* Reduz a margem entre os itens da lista */
 }
 
-.farmacias ul li:last-child {
-    border-bottom: none;
-}
 /* Estilo para o status "Aberto" */
 .status-aberto {
     color: green;
@@ -116,12 +111,12 @@ header .auth-buttons button {
 .status-fechado {
     color: red;
 }
+
 a {
     text-decoration: none; /* Remove o sublinhado */
     color: #000; /* Ajuste a cor do link, se necessário */
 }
 
 a:hover {
-    text-decoration: underline; /* Adiciona o sublinhado apenas ao passar o mouse, se desejar */
+    text-decoration: underline; /* Adiciona o sublinhado apenas ao passar o mouse */
 }
-
