@@ -57,6 +57,39 @@
         const iframe = document.getElementById('map-frame');
         iframe.src = `https://www.google.com/maps/embed/v1/place?key=YOUR_API_KEY&q=${cep}`;
     }
+    
+    // Função para adicionar um marcador
+    function addMarker(lat, lng, nome, quantidade,status) {
+        const marker = new google.maps.Marker({
+            position: { lat: lat, lng: lng },
+            map: map,
+            title: nome, // Nome da farmácia
+        });
+
+        // Cria uma info window para exibir o nome e a quantidade
+        const infoWindow = new google.maps.InfoWindow({
+            content: `<h2>${nome}</h2><h3>Quantidade disponível: ${quantidade}</h3><h3>Status: ${status}</h3><a>Agendar</a>`,
+        });
+
+        // Adiciona o evento de clique ao marcador para centralizar o mapa e abrir a info window
+        marker.addListener('click', function() {
+            map.setCenter(marker.getPosition());
+            map.setZoom(16);
+            infoWindow.open(map, marker);
+        });
+
+        markers.push(marker);
+    }
+
+    // Função para centralizar o mapa em um marcador específico
+    function focusOnMarker(lat, lng, nome) {
+        const position = new google.maps.LatLng(lat, lng);
+        map.setCenter(position);
+        map.setZoom(16);
+    }
+
+    // Chama a função de inicialização quando a página carrega
+    window.onload = initMap;
 </script>
 </body>
 
