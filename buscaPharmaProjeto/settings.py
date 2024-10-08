@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'appCadUsuario',
     'appBusca',
     'appAdm',
+    'appAgendamento',
 ]
 
 MIDDLEWARE = [

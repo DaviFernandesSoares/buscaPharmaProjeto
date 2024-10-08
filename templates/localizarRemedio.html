@@ -43,6 +43,7 @@
                         {{ unidade_info.unidade.nome }} - Quantidade: {{ unidade_info.quantidade_atual }} - Endereço: {{ unidade_info.logradouro_e_numero }} - Status: {{ unidade_info.status }}
                     </span>
                 </a>
+            <a href="{% url 'agendar_medicamento' item.id_item unidade_info.unidade.id_unidade %}" class="agendar-btn">Agendar</a>
             </li>
         {% empty %}
             <li>Nenhuma unidade disponível para este item no momento.</li>
@@ -63,12 +64,12 @@
 
         // Adiciona os marcadores no mapa para as farmácias disponíveis
         {% for unidade_info in unidades_com_quantidade %}
-            addMarker({{ unidade_info.latitude }}, {{ unidade_info.longitude }}, '{{ unidade_info.unidade.nome }}', {{ unidade_info.quantidade_atual }},'{{ unidade_info.status }}');
+            addMarker({{ unidade_info.latitude }}, {{ unidade_info.longitude }}, '{{ unidade_info.unidade.nome }}', {{ unidade_info.quantidade_atual }},'{{ unidade_info.status }}',{{ item.id_item }},{{ unidade_info.id_unidade }});
         {% endfor %}
     }
 
     // Função para adicionar um marcador
-    function addMarker(lat, lng, nome, quantidade,status) {
+    function addMarker(lat, lng, nome, quantidade,status,id_item, id_unidade) {
         const marker = new google.maps.Marker({
             position: { lat: lat, lng: lng },
             map: map,
@@ -77,7 +78,10 @@
 
         // Cria uma info window para exibir o nome e a quantidade
         const infoWindow = new google.maps.InfoWindow({
-            content: `<h2>${nome}</h2><h3>Quantidade disponível: ${quantidade}</h3><h3>Status: ${status}</h3><a>Agendar</a>`,
+            content: `<h2>${nome}</h2>
+                  <h3>Quantidade disponível: ${quantidade}</h3>
+                  <h3>Status: ${status}</h3>
+                  <a href="/agendarMedicamento/${id_item}/${id_unidade}/">Agendar</a>`,
         });
 
         // Adiciona o evento de clique ao marcador para centralizar o mapa e abrir a info window

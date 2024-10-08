@@ -1,0 +1,64 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Agendamento</title>
+    <link rel="stylesheet" href="{% static 'css/janelaAgendar.css' %}">
+</head>
+<body>
+    <header>
+        <div class="logo">
+            <a href="{% url 'home' %}">
+                <img src="{% static 'img/Logo_pequena.png' %}" alt="Busca Pharma"/>
+            </a>
+        </div>
+    </header>
+    
+    <h1>Agendamento de Horário</h1>
+    
+    <section>        
+        <div class="modal">           
+            <form action="{% url 'agendar_medicamento' item.id_item unidade.id_unidade %}" method="POST">
+                {% csrf_token %}
+                <div class="input-box">
+                    <label for="data">Data:</label>
+                    <input type="date" id="data" name="data" required><br><br>
+
+                    <label for="hora">Hora:</label>
+                    <input type="time" id="hora" name="hora" required
+                           min="{{ abertura }}"
+                           max="{{ fechamento }}"><br><br>
+                </div>                
+                <div class="btn">
+                    <button type="submit" class="Agendar-link">Agendar</button>
+                </div>
+            </form>
+        </div>
+    </section>
+    <script src="{% static 'javaScript/janelaAgendar.js' %}"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const abertura = "{{ abertura }}";
+            const fechamento = "{{ fechamento }}";
+            const horaInput = document.getElementById('hora');
+
+            // Converte as horas em minutos para facilitar a comparação
+            const aberturaMin = parseInt(abertura.split(':')[0]) * 60 + parseInt(abertura.split(':')[1]);
+            const fechamentoMin = parseInt(fechamento.split(':')[0]) * 60 + parseInt(fechamento.split(':')[1]);
+            
+            // Define as opções de tempo
+            for (let i = 0; i < 24 * 60; i += 30) { // Para cada 30 minutos
+                const horaFormatada = String(i / 60).padStart(2, '0') + ':' + String(i % 60).padStart(2, '0');
+                const horaMin = i;
+
+                // Verifica se está dentro do intervalo permitido
+                if (horaMin < aberturaMin || horaMin > fechamentoMin) {
+                    horaInput.remove(horaInput.options[i / 30]);
+                }
+            }
+        });
+    </script>
+</body>
+</html>

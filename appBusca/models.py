@@ -20,6 +20,8 @@ class Unidade(models.Model):
     status = models.CharField(max_length=15, choices=STATUS_CHOICES, default='Aberto')
     endereco = models.CharField(max_length=255)
     id_unidade = models.AutoField(unique=True, primary_key=True)
+    hora_abertura = models.TimeField()
+    hora_encerramento = models.TimeField()
     class Meta:
         db_table = 'unidade'
     def __str__(self):
