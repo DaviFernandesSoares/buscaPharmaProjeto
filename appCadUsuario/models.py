@@ -16,5 +16,6 @@ class Usuario(AbstractUser):
     id_usuario = models.AutoField(primary_key=True,db_column='id_usuario')
     telefone = models.CharField(max_length=15, blank=True, null=True)
     cpf = models.CharField(max_length=14, unique=True)
+    username = models.EmailField(max_length=150, unique=True)
     class Meta:
         db_table = 'usuario'

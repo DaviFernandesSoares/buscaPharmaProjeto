@@ -43,7 +43,7 @@
                         {{ unidade_info.unidade.nome }} - Quantidade: {{ unidade_info.quantidade_atual }} - Endereço: {{ unidade_info.logradouro_e_numero }} - Status: {{ unidade_info.status }}
                     </span>
                 </a>
-            <a href="{% url 'agendar_medicamento' item.id_item unidade_info.unidade.id_unidade %}" class="agendar-btn">Agendar</a>
+            <a href="{% url 'agendar' item.id_item unidade_info.unidade.id_unidade %}" class="agendar-btn">Agendar</a>
             </li>
         {% empty %}
             <li>Nenhuma unidade disponível para este item no momento.</li>
@@ -81,7 +81,7 @@
             content: `<h2>${nome}</h2>
                   <h3>Quantidade disponível: ${quantidade}</h3>
                   <h3>Status: ${status}</h3>
-                  <a href="/agendarMedicamento/${id_item}/${id_unidade}/">Agendar</a>`,
+                  <a href="/agendar/${id_item}/${id_unidade}/">Agendar</a>`,
         });
 
         // Adiciona o evento de clique ao marcador para centralizar o mapa e abrir a info window

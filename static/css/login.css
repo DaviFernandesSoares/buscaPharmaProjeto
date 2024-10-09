@@ -199,7 +199,7 @@ body {
     font-weight: bold;
     max-width: 250px; /* Ajuste conforme necessário */
     z-index: 1000; /* Garante que o tooltip fique acima dos outros elementos */
-    top: 120%; /* Ajuste para posicionar o tooltip logo abaixo do campo */
+    top: 90%; /* Ajuste para posicionar o tooltip logo abaixo do campo */
     left: 40%; /* Ajuste para centralizar horizontalmente */
     box-shadow: 5px 4px 6px rgb(208, 208, 208); /* Sombra opcional */
 }

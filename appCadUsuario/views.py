@@ -31,10 +31,11 @@ def cadastro(request):
         senha = request.POST['password']
         ddd = request.POST['ddd']
         telefone = ddd + request.POST['telefone']
-        user = Usuario(username=nome, cpf=cpf, email=email, telefone=telefone)
-        user.set_password(senha)
-        user.save()
-        return redirect('login')
+        if not Usuario.objects.filter(email=email).exists() and not Usuario.objects.filter(cpf=cpf).exists():
+            user = Usuario(username=email, cpf=cpf, email=email, telefone=telefone)
+            user.set_password(senha)
+            user.save()
+            return redirect('login')
     return render(request, 'cadastro.html')
 
 def login(request):
