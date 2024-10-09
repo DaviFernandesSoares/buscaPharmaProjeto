@@ -148,6 +148,10 @@ document.querySelector('form').addEventListener('submit', async function(event) 
         passwordError.textContent = 'A senha deve conter pelo menos um caractere especial.';
         passwordError.style.display = 'block';
         isValid = false;
+    } else if(password.length < 8){
+        passwordError.textContent = 'A senha deve conter pelo menos 8 dígitos.';
+        passwordError.style.display = 'block';
+        isValid = false;
     }
 
     // Validar senha e confirmação de senha

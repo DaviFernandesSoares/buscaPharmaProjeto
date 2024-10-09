@@ -20,6 +20,13 @@ def cadastro_adm(request):
         if nome and senha and id_unidade:
             unidade = get_object_or_404(Unidade, pk=id_unidade)
 
+            # Verifica se já existe um admin associado a essa unidade
+            if Admin.objects.filter(id_unidade=unidade).exists():
+                # Retorna mensagem de erro se já existir um admin
+                return render(request, 'admin_register.html', {
+                    'error': 'Já existe um administrador com esse username associado a esta unidade.'
+                })
+
             # Criando o usuário com a instância da Unidade
             user = Admin(username=nome, id_unidade=unidade, is_staff=1)
             user.set_password(senha)

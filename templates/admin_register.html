@@ -17,13 +17,17 @@
 <div class="wrapper">
   <div class="form-box Register">
     <h2>Cadastro Admin</h2>
+
+       {% if error %}
+        <div class="error-container">{{ error }}</div>
+        {% endif %}
     <form action="{% url 'cadastro_admin' %}" method="POST" id="form">
         {% csrf_token %}
 
       <!-- Campo Username -->
       <div class="input-box">
         <span class="icon"><ion-icon name="person-circle-outline"></ion-icon></span>
-        <input id="username" type="text" name="username" required>
+        <input id="username" type="text" name="username">
         <label>Username</label>
         <div id="username-error" class="error-tooltip"></div>
       </div>
@@ -31,7 +35,7 @@
       <!-- Campo Token da Unidade -->
       <div class="input-box">
         <span class="icon"><ion-icon name="checkmark-circle-outline"></ion-icon></span>
-        <input id="token" type="text" name="token" required>
+        <input id="token" type="text" name="token">
         <label>Token da Unidade</label>
         <div id="token-error" class="error-tooltip"></div>
       </div>
@@ -39,7 +43,7 @@
       <!-- Campo Senha -->
       <div class="input-box">
         <span class="icon"><ion-icon name="lock-closed-outline"></ion-icon></span>
-        <input type="password" id="password" name="password" required>
+        <input type="password" id="password" name="password">
         <label>Senha</label>
         <div id="password-error" class="error-tooltip"></div>
       </div>
@@ -47,7 +51,7 @@
       <!-- Campo Confirmar Senha -->
       <div class="input-box">
         <span class="icon"><ion-icon name="lock-closed-outline"></ion-icon></span>
-        <input type="password" id="confirm-password" name="password2" required>
+        <input type="password" id="confirm-password" name="password2">
         <label>Confirmar Senha</label>
         <div id="confirm-password-error" class="error-tooltip"></div>
       </div>

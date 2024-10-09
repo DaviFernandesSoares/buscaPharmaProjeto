@@ -17,5 +17,6 @@ urlpatterns = [
     path('localizar_remedio/<int:id_item>/', views2.localizarMedicamento, name='localizar_remedio'),
     path('cadastro_admin/', views3.cadastro_adm, name='cadastro_admin'),
     path('login_admin/', views3.login_adm, name='login_admin'),
-    path('agendar_medicamento/<int:id_item>/<int:id_unidade>', views4.agendar , name='agendar_medicamento'),
+    path('agendar/<int:id_item>/<int:id_unidade>', views4.agendar , name='agendar'),
+    path('horarios_disponiveis',views4.horarios_disponiveis, name='horarios_disponiveis'),
 ]

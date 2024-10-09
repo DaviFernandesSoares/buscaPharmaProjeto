@@ -11,7 +11,6 @@ body {
     justify-content: center;
     align-items: center;
     min-height: 100vh;
-    background: url() no-repeat center/cover;
     background-color: #0A4973;
 }
 
@@ -169,4 +168,43 @@ body {
     .btn {
         height: 55px;
     }
+}
+.error-tooltip {
+    display: none;
+    position: absolute;
+    background: #ffffff; /* Cor de fundo do tooltip */
+    color: #000000; /* Cor do texto */
+    border: 1px solid #162938; /* Cor da borda */
+    border-radius: 4px;
+    padding: 8px; /* Ajuste conforme necessário */
+    font-size: 12px; /* Ajuste conforme necessário */
+    font-family: sans-serif, serif;
+    font-weight: bold;
+    max-width: 250px; /* Ajuste conforme necessário */
+    z-index: 1000; /* Garante que o tooltip fique acima dos outros elementos */
+    top: 120%; /* Ajuste para posicionar o tooltip logo abaixo do campo */
+    left: 40%; /* Ajuste para centralizar horizontalmente */
+    box-shadow: 5px 4px 6px rgb(208, 208, 208); /* Sombra opcional */
+}
+
+
+/* Estilo do triângulo */
+.error-tooltip::after {
+    content: "";
+    position: absolute;
+    bottom: 100%; /* Posiciona o triângulo acima do tooltip */
+    left: 50%;
+    margin-left: -5px; /* Centraliza o triângulo em relação ao tooltip */
+    border-width: 5px;
+    border-style: solid;
+    border-color: transparent transparent #162938 transparent; /* Triângulo com a mesma cor de fundo do tooltip */
+}
+.error-container {
+    display: block; /* Mantido em block para ocupar espaço */
+    background-color: #f8d7da; /* Cor de fundo para destacar o erro */
+    color: #721c24; /* Cor do texto */
+    border: 1px solid #f5c6cb; /* Borda vermelha */
+    padding: 10px; /* Espaçamento interno */
+    margin: 10px 0; /* Margem em torno da div */
+    border-radius: 5px; /* Arredondar os cantos */
 }
