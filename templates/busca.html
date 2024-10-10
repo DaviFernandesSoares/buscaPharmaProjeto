@@ -1,37 +1,56 @@
 {% load static %}
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Medicamentos</title>
     <link rel="stylesheet" href="{% static 'css/busca.css' %}">
+    <style>
+        .pagination {
+            margin-top: 10px;
+        }
+        .page-btn {
+            margin: 0 5px;
+            padding: 5px 10px;
+            cursor: pointer;
+        }
+        .active {
+            background-color: #007bff;
+            color: white;
+        }
+    </style>
 </head>
+
 <body>
+
     <!-- Cabeçalho -->
     <header>
         <div class="logo">
-            <img src="{% static 'img/Logo_pequena.png' %}" alt="Busca Pharma">
+            <a href="../TCC.v4/TCC/index.html">
+                <img src="../TCC.v4/TCC/img/Logo_pequena.png" alt="BuscaPharma">
+            </a>
         </div>
         <nav>
-            <ul>
-                <li><a href="{% url 'home' %}">Home</a></li>
-                <li><a href="#">Medicamentos</a></li>
-                <li><a href="#">Agendamentos</a></li>
-            </ul>
+            <a class="linksExternos" href="../TCC.v4/TCC/index.html">Home</a>
+            <a class="linksExternos" href="#">About</a>
+            <a class="linksExternos" href="#">Agendamentos</a>
+            <a class="linksExternos" href="#">Contact</a>
+            <a class="botoes" href="../TCC.v4/TCC/user_register.html"><button class="btnRegister">Cadastre-se</button></a>
+            <a class="botoes" href="../TCC.v4/TCC/user_login.html"><button class="btnLogin">Logar</button></a>
         </nav>
-        <div class="auth-buttons">
-            <button class="register-btn"><a href="{% url 'cadastro' %}">Cadastrar-se</a></button>
-            <button class="login-btn"><a href="{% url 'login' %}">Entrar</a></button>
-        </div>
     </header>
+
     <!-- Barra de Pesquisa -->
-    <form action="{% url 'busca' %}" method="POST" id="form">{% csrf_token %}
     <div class="search-container">
-        <input type="text" placeholder="Insira o nome do medicamento" class="search-input" id="search-bar" name="busca">
-         <button type="submit" class="btn">Registrar</button>
-         </div>
+        <form method="POST" action="{% url 'busca' %}">
+            {% csrf_token %}
+            <input type="text" name="busca" placeholder="Insira o nome do medicamento" class="search-input" id="search-bar">
+            <button type="submit" class="btnSearch">Buscar</button>
         </form>
+    </div>
+
     <div class="container">
         <table class="responsive-table">
             <thead>
@@ -41,39 +60,138 @@
                 </tr>
             </thead>
             <tbody id="table-body">
-                <!-- Linhas serão geradas dinamicamente aqui -->
+                {% for item in itens %}
+                <tr>
+                    <td>
+                        <a href="{% url 'detalhes_item' item.id_item %}">{{ item.nome_item }}</a>
+                    </td>
+                    <td>{{ item.comp_ativ_itm }}</td>
+                </tr>
+                {% empty %}
+                <tr>
+                    <td colspan="2">Nenhum item encontrado.</td>
+                </tr>
+                {% endfor %}
             </tbody>
         </table>
     </div>
+
+    <div id="pagination-container" class="pagination"></div>
+
     <script>
-        const tableData = {{ itens_json|safe }};
-        const tableBody = document.getElementById('table-body');
+        const tableData = {{ itens_json|safe }}; // Usa a variável do contexto
+        const itemsPerPage = 30; // Quantidade de itens por página
+        let currentPage = 1;
+        let totalPages = Math.ceil(tableData.length / itemsPerPage); // Inicializa totalPages
 
         function createRow(rowData) {
-            return `
-                <tr>
-                    <td><a href="medicamento/${rowData.id_item}">${rowData.nome_item}</a></td>
-                    <td>${rowData.comp_ativ_itm}</td>
-                </tr>
-            `;
+            return `<tr>
+                        <td>
+                            <a href="/detalhes/${rowData.id_item}">${rowData.nome_item}</a>
+                        </td>
+                        <td>${rowData.comp_ativ_itm}</td>
+                    </tr>`;
         }
 
-        function renderTable(data) {
-            tableBody.innerHTML = data.length > 0 ? data.map(row => createRow(row)).join('') : '<tr><td colspan="2">Nenhum medicamento encontrado.</td></tr>';
+        function renderTable(data, page = 1) {
+            const startIndex = (page - 1) * itemsPerPage;
+            const endIndex = startIndex + itemsPerPage;
+            const pageData = data.slice(startIndex, endIndex);
+            const tableBody = document.getElementById('table-body');
+            tableBody.innerHTML = pageData.map(createRow).join('');
+            renderPagination(data.length); // Atualiza a paginação
         }
 
-        // Inicializa a tabela com todos os dados
-        renderTable(tableData);
+        function renderPagination(dataLength) {
+            const paginationContainer = document.getElementById('pagination-container');
+            totalPages = Math.ceil(dataLength / itemsPerPage); // Atualiza totalPages
+            paginationContainer.innerHTML = ''; // Limpa a paginação anterior
 
-        searchInput.addEventListener('keyup', function () {
+            // Adiciona o botão "1" (sempre aparece)
+            const firstButton = document.createElement('button');
+            firstButton.innerText = '1';
+            firstButton.classList.add('page-btn');
+            if (currentPage === 1) {
+                firstButton.classList.add('active');
+            }
+            firstButton.addEventListener('click', function () {
+                currentPage = 1;
+                renderTable(tableData, currentPage);
+            });
+            paginationContainer.appendChild(firstButton);
+
+            // Adiciona reticências se necessário
+            if (currentPage >= 4) {
+                const ellipsis = document.createElement('span');
+                ellipsis.innerText = '...';
+                paginationContainer.appendChild(ellipsis);
+            }
+
+            let startPage, endPage;
+
+            if (totalPages <= 5) {
+                startPage = 2;
+                endPage = totalPages;
+            } else {
+                startPage = Math.max(2, currentPage - 2);
+                endPage = Math.min(totalPages, currentPage + 2);
+                if (endPage - startPage < 4) {
+                    startPage = Math.max(2, endPage - 4);
+                }
+            }
+
+            // Adiciona botões de página
+            for (let i = startPage; i <= endPage; i++) {
+                const pageButton = document.createElement('button');
+                pageButton.innerText = i;
+                pageButton.classList.add('page-btn');
+                if (i === currentPage) {
+                    pageButton.classList.add('active');
+                }
+                pageButton.addEventListener('click', function () {
+                    currentPage = i;
+                    renderTable(tableData, currentPage);
+                });
+                paginationContainer.appendChild(pageButton);
+            }
+
+            // Adiciona reticências se necessário
+            if (endPage < totalPages - 1) {
+                const ellipsis = document.createElement('span');
+                ellipsis.innerText = '...';
+                paginationContainer.appendChild(ellipsis);
+            }
+
+            // Adiciona o botão da última página
+            if (endPage < totalPages) {
+                const lastButton = document.createElement('button');
+                lastButton.innerText = totalPages;
+                lastButton.classList.add('page-btn');
+                if (currentPage === totalPages) {
+                    lastButton.classList.add('active');
+                }
+                lastButton.addEventListener('click', function () {
+                    currentPage = totalPages;
+                    renderTable(tableData, currentPage);
+                });
+                paginationContainer.appendChild(lastButton);
+            }
+        }
+
+        // Inicializa a tabela com os dados da view
+        renderTable(tableData, currentPage);
+
+        // Filtro de busca de medicamentos
+        document.getElementById('search-bar').addEventListener('keyup', function () {
             const filter = this.value.toLowerCase();
             const filteredData = tableData.filter(item =>
-                item.nome_item.toLowerCase().startsWith(filter) ||
-                item.comp_ativ_itm.toLowerCase().startsWith(filter)
+                item.nome_item.toLowerCase().includes(filter) ||
+                item.comp_ativ_itm.toLowerCase().includes(filter)
             );
-            renderTable(filteredData);
+            currentPage = 1; // Reseta para a primeira página
+            renderTable(filteredData, currentPage); // Renderiza com dados filtrados
         });
     </script>
-    <script src="{% static 'js/busca.js' %}"></script>
 </body>
+
 </html>

@@ -25,6 +25,7 @@ header .logo img {
     height: 60px;
     width: 180px;
     padding: 0 1rem;
+    margin-left: 30px;
 }
 
 header nav ul {
@@ -43,20 +44,6 @@ header nav ul li a {
     text-decoration: none;
 }
 
-header .auth-buttons {
-    display: flex;
-    align-items: center;
-}
-
-header .auth-buttons button {
-    margin-left: 10px;
-    padding: 5px 15px;
-    background-color: #ffcc00;
-    border: none;
-    color: black;
-    cursor: pointer;
-}
-
 .search-container {
     display: flex;
     justify-content: center;
@@ -72,41 +59,6 @@ header .auth-buttons button {
     text-indent: 30px;
     background: url('search-icon.png') no-repeat 10px center;
     background-size: 20px 20px;
-}
-
-.product-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-    gap: 20px;
-    padding: 20px;
-}
-
-.product-card {
-    background-color: white;
-    border: 1px solid #ddd;
-    border-radius: 10px;
-    text-align: center;
-    padding: 20px;
-}
-
-.product-card img {
-    max-width: 100%;
-    height: auto;
-    border-radius: 5px;
-}
-
-.product-name {
-    margin: 10px 0;
-    font-weight: bold;
-}
-
-.product-btn {
-    padding: 10px 20px;
-    background-color: #ffcc00;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    color: black;
 }
 
 .container {
@@ -154,4 +106,77 @@ tbody tr:nth-child(even) {
 
 .tarja.verde {
     background-color: green;
+}
+
+/* Estilos apenas para links, excluindo aqueles que contêm botões */
+nav a:not(.botoes) {
+    position: relative;
+    font-size: 1.2em;
+    text-decoration: none;
+    color: white;
+    font-weight: 500;
+    margin-left: 40px;
+}
+
+nav a:not(.botoes)::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: -6px;
+    width: 100%;
+    height: 3px;
+    background: #fff;
+    border-radius: 5px;
+    transform-origin: right;
+    transform: scaleX(0);
+    transition: transform .5s;
+}
+
+nav a:not(.botoes):hover::after {
+    transform-origin: left;
+    transform: scaleX(1);
+}
+
+/* Estilos específicos para botões dentro de links */
+nav a.botoes button.btnRegister {
+    width: 150px;
+    height: 70px;
+    background: transparent;
+    border: 2px solid #fff;
+    outline: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 1.5em;
+    color: #fff;
+    font-weight: 500;
+    margin-left: 40px;
+    transition: .5s;
+}
+
+nav a.botoes button.btnRegister:hover {
+    border-color: #ff8800;
+    background: #ff8800;
+    color: black;
+}
+
+nav a.botoes button.btnLogin {
+    width: 150px;
+    height: 70px;
+    background: transparent;
+    border: 2px solid #fff;
+    outline: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 1.3em;
+    color: #fff;
+    font-weight: 500;
+    margin-left: 40px;
+    margin-right: 50px;
+    transition: .5s;
+}
+
+nav a.botoes button.btnLogin:hover {
+    border-color: #ff8800;
+    background: #ff8800;
+    color: black;
 }
