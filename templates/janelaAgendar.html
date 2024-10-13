@@ -24,7 +24,7 @@
                 {% csrf_token %}
                 <div class="input-box">
                     <label for="data">Data:</label>
-                    <input type="date" id="data" name="data" required><br><br>
+                    <input type="date" id="data" name="data" required min="{{ today|date:'y-m-d' }}"><br><br>
 
                     <label for="hora">Hora:</label>
                     <select id="hora" name="hora" required>
@@ -127,16 +127,19 @@ document.getElementById('agendar-form').addEventListener('submit', function (eve
     .then(response => {
         if (response.ok) {
             return response.json(); // Processar a resposta como JSON
+        } else {
+            return response.json().then(errorData => {
+                throw new Error(errorData.message || 'Erro desconhecido');
+            });
         }
-        throw new Error('Erro ao agendar');
     })
     .then(data => {
         // Aqui você pode adicionar código para lidar com a resposta
-        alert('Agendamento realizado com sucesso!'); // Exemplo de notificação
+        alert(data.message); // Exibir a mensagem de sucesso
     })
     .catch(error => {
         console.error('Erro:', error);
-        alert('Erro ao realizar o agendamento.');
+        alert(error.message); // Exibir a mensagem de erro
     });
 });
     </script>

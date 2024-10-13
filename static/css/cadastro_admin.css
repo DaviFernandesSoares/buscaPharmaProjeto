@@ -1,3 +1,4 @@
+/* Reset and Global Styles */
 * {
     margin: 0;
     padding: 0;
@@ -10,36 +11,18 @@ body {
     justify-content: center;
     align-items: center;
     min-height: 100vh;
-    background:  no-repeat;
-    background-size: cover;
-    background-position: center;
+    background-color: #0A4973;
 }
 
-.logoFundo {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 50%;
-    height: 100%;
-    background: #0A4973;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    z-index: 1;
-    overflow: hidden;
-}
-
-.logoFundo img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-}
-
+/* Wrapper */
 .wrapper {
     position: absolute;
+    top: 50%;
+    right: 30%;
     width: 540px;
-    height: 640px;
-    background: transparent;
+    max-width: 70%;
+    height: 80%;
+    background: #fff;
     border: 2px solid rgba(255, 255, 255, 0.5);
     border-radius: 20px;
     backdrop-filter: blur(20px);
@@ -48,25 +31,28 @@ body {
     justify-content: center;
     align-items: center;
     z-index: 2;
-    top: 50%;
-    right: 6.5%;
     transform: translateY(-50%);
+    padding: 20px;
 }
 
+/* Form Header */
 .form-box h2 {
     font-size: 3.5em;
     color: #162938;
     text-align: center;
+    margin-bottom: 20px;
 }
 
+/* Input Box */
 .input-box {
     position: relative;
-    width: 100%;
-    height: 60px;
-    border-bottom: 2px solid #162938;
-    margin: 30px auto;
+    height: 40px;
+    margin: 30px 0;
+    /* Ajustado para uma margem mais uniforme */
     display: flex;
-    align-items: center;
+    flex-direction: column;
+    align-items: flex-start;
+    border-bottom: 2px solid #162938;
 }
 
 .input-box label {
@@ -81,11 +67,6 @@ body {
     transition: 0.5s;
 }
 
-.input-box input:focus~label,
-.input-box input:valid~label {
-    top: -5px;
-}
-
 .input-box input {
     width: 100%;
     height: 100%;
@@ -95,37 +76,42 @@ body {
     font-size: 1.2em;
     color: #162938;
     font-weight: 600;
-    padding: 0 35px 0 5px;
+    padding: 0 5px;
+    box-sizing: border-box;
 }
 
+.input-box input:focus~label,
+.input-box input:valid~label {
+    top: -5px;
+    font-size: 0.8em;
+}
+
+/* Icon */
 .input-box .icon {
     position: absolute;
     right: 8px;
     font-size: 1.2em;
     color: #162938;
-    line-height: 57px;
+    line-height: 40px;
+    /* Ajustado para corresponder ao tamanho dos campos */
 }
 
 /* Show Password Checkbox */
 .show-password-container {
-    font-size: 0.9em;
-    color: #162938;
-    font-weight: 500;
-    margin-bottom: 15px;
-    /* Ajuste para espaçamento */
     display: flex;
+    align-items: center;
+    margin-top: 20px;
+    /* Ajuste conforme necessário */
 }
 
 .show-password-container input {
-    accent-color: #162938;
     margin-right: 10px;
 }
 
-
-
+/* Button */
 .btn {
     width: 100%;
-    height: 55px;
+    height: 45px;
     background: #ff8800;
     border: none;
     outline: none;
@@ -134,15 +120,23 @@ body {
     font-size: 1em;
     color: #162938;
     font-weight: 500;
+    margin-top: 20px;
 }
 
+/* Login and Register */
 .login-register {
-    font-size: 1em;
+    font-size: 0.9em;
     color: #162938;
     text-align: center;
     font-weight: 500;
     margin: 25px 0 10px;
-    justify-content: space-between;
+    display: flex;
+    justify-content: center;
+    /* Ajustado para centralizar */
+}
+
+.login-register p {
+    margin: 0;
 }
 
 .login-register p a {
@@ -155,6 +149,26 @@ body {
     text-decoration: underline;
 }
 
+/* Responsividade */
+@media (max-width: 768px) {
+    .wrapper {
+        width: 90%;
+        right: 0;
+        padding: 20px;
+    }
+
+    .form-box h2 {
+        font-size: 2.5em;
+    }
+
+    .input-box {
+        height: 50px;
+    }
+
+    .btn {
+        height: 55px;
+    }
+}
 .error-tooltip {
     display: none;
     position: absolute;
@@ -185,21 +199,12 @@ body {
     border-style: solid;
     border-color: transparent transparent #162938 transparent; /* Triângulo com a mesma cor de fundo do tooltip */
 }
-
-.error-message {
-    display: none;
-    position: absolute;
-    background: #ffffff; /* Cor de fundo do tooltip */
-    color: #000000; /* Cor do texto */
-    border: 1px solid #162938; /* Cor da borda */
-    border-radius: 4px;
-    padding: 8px; /* Ajuste conforme necessário */
-    font-size: 12px; /* Ajuste conforme necessário */
-    font-family: sans-serif, serif;
-    font-weight: bold;
-    width: 300px;
-    text-align: center;/* Ajuste conforme necessário */
-    z-index: 1000; /* Garante que o tooltip fique acima dos outros elementos */
-    top: 85%; /* Ajuste para posicionar o tooltip logo abaixo do campo *//
-    box-shadow: 5px 4px 6px rgb(208, 208, 208); /* Sombra opcional */
+.error-container {
+    display: block; /* Mantido em block para ocupar espaço */
+    background-color: #f8d7da; /* Cor de fundo para destacar o erro */
+    color: #721c24; /* Cor do texto */
+    border: 1px solid #f5c6cb; /* Borda vermelha */
+    padding: 10px; /* Espaçamento interno */
+    margin: 10px 0; /* Margem em torno da div */
+    border-radius: 5px; /* Arredondar os cantos */
 }

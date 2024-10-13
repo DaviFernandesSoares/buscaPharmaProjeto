@@ -13,9 +13,10 @@ class Usuario(AbstractUser):
         related_name='admin_permissions',  # Nome único
         blank=True
     )
-    id_usuario = models.AutoField(primary_key=True,db_column='id_usuario')
+    first_name = models.CharField(max_length=100, blank=True, null=True)
+    last_name = models.CharField(max_length=100, blank=True, null=True)
     telefone = models.CharField(max_length=15, blank=True, null=True)
-    cpf = models.CharField(max_length=14, unique=True)
+    cpf = models.CharField(max_length=14, unique=True,primary_key=True,db_column='cpf')
     username = models.EmailField(max_length=150, unique=True)
     class Meta:
         db_table = 'usuario'

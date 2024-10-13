@@ -23,7 +23,7 @@ def cadastro_adm(request):
             # Verifica se já existe um admin associado a essa unidade
             if Admin.objects.filter(id_unidade=unidade).exists():
                 # Retorna mensagem de erro se já existir um admin
-                return render(request, 'admin_register.html', {
+                return render(request, 'cadastro_admin.html', {
                     'error': 'Já existe um administrador com esse username associado a esta unidade.'
                 })
 
@@ -34,7 +34,7 @@ def cadastro_adm(request):
 
             return redirect('login_admin')
 
-    return render(request, 'admin_register.html')
+    return render(request, 'cadastro_admin.html')
 
 
 def login_adm(request):

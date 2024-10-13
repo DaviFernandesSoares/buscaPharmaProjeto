@@ -1,4 +1,4 @@
-
+import requests
 from django.shortcuts import render, get_object_or_404
 from .forms import BuscaForm
 from .models import Item, Unidade, Estoque, Indicacao, Protocolo

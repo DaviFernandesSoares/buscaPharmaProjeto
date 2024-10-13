@@ -14,7 +14,7 @@ class Agendamento(models.Model):
     id_agendamento = models.AutoField(primary_key=True)
     id_unidade = models.ForeignKey(Unidade, on_delete=models.CASCADE, db_column='id_unidade')
     id_item = models.ForeignKey(Item, on_delete=models.CASCADE,db_column='id_item')
-    id_usuario = models.ForeignKey(Usuario, on_delete=models.CASCADE, db_column='id_usuario')
+    cpf = models.ForeignKey(Usuario, on_delete=models.CASCADE, db_column='cpf_usuario')
     status = models.CharField(max_length=10, choices=STATUS_CHOICES, default='Agendado')
     data = models.DateField()
     hora = models.TimeField()

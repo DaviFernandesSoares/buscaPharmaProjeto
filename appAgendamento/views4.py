@@ -1,3 +1,4 @@
+from django.utils import timezone
 from django.contrib.auth.decorators import login_required
 import json
 from django.http import JsonResponse
@@ -19,6 +20,14 @@ def agendar(request, id_item, id_unidade):
         data_json = json.loads(request.body)  # Decodifica o JSON
         data = data_json.get('data')  # Acessa o campo 'data'
         hora = data_json.get('hora')
+
+        # Verifica se a data é menor que a data atual
+        today = timezone.now().date()
+        if data < today.strftime('%Y-%m-%d'):
+            return JsonResponse(
+                {'status': 'error', 'message': 'Data inválida. Não é possível agendar para datas passadas.'},
+                status=400)
+
         # Verifica se já existe um agendamento para a mesma data e hora
         agendamento_existente = Agendamento.objects.filter(data=data, hora=hora, id_item=id_item,
                                                            id_unidade=id_unidade).exists()
@@ -28,7 +37,7 @@ def agendar(request, id_item, id_unidade):
                                 status=400)
 
         if abertura <= hora <= fechamento:
-            user = Agendamento(id_item=item, id_unidade=unidade_info, id_usuario=request.user, data=data, hora=hora)
+            user = Agendamento(id_item=item, id_unidade=unidade_info, cpf=request.user, data=data, hora=hora)
             user.save()
 
             # Retornar uma resposta JSON para requisição AJAX
@@ -38,12 +47,15 @@ def agendar(request, id_item, id_unidade):
         return JsonResponse({'status': 'error', 'message': 'O horário selecionado está fora do intervalo permitido.'},
                             status=400)
 
+    today = timezone.now().date()
     return render(request, 'janelaAgendar.html', {
         'unidade': unidade_info,
         'item': item,
         'abertura': abertura,
-        'fechamento': fechamento
+        'fechamento': fechamento,
+        'today': today,
     })
+
 
 def horarios_disponiveis(request):
     data = request.GET.get('data')  # Pega a data da requisição GET

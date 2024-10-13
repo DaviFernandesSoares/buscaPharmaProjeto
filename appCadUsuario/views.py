@@ -4,7 +4,7 @@ from django.shortcuts import render, redirect
 from django.http import HttpResponse, JsonResponse
 from django.contrib.auth import login as auth_login
 from django.contrib.auth.hashers import make_password, check_password
-
+from django.template.defaultfilters import length
 
 from appCadUsuario.models import Usuario
 
@@ -31,8 +31,11 @@ def cadastro(request):
         senha = request.POST['password']
         ddd = request.POST['ddd']
         telefone = ddd + request.POST['telefone']
+        partes_nome = nome.split(' ')
+        primeiro_nome = partes_nome[0]
+        ultimo_nome = partes_nome[-1]
         if not Usuario.objects.filter(email=email).exists() and not Usuario.objects.filter(cpf=cpf).exists():
-            user = Usuario(username=email, cpf=cpf, email=email, telefone=telefone)
+            user = Usuario(username=email, cpf=cpf, email=email, telefone=telefone,first_name=primeiro_nome, last_name=ultimo_nome)
             user.set_password(senha)
             user.save()
             return redirect('login')
