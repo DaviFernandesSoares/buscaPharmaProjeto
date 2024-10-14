@@ -1,50 +1,118 @@
-{% load static %}
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Página Inicial</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-            background-color: #f4f4f4;
-            text-align: center;
-            color: #333;
-        }
-        header {
-            background-color: #333;
-            color: #fff;
-            padding: 20px;
-        }
-        h1 {
-            margin: 0;
-        }
-        main {
-            padding: 20px;
-        }
-        footer {
-            background-color: #333;
-            color: #fff;
-            padding: 10px;
-            position: fixed;
-            bottom: 0;
-            width: 100%;
-        }
-    </style>
+    <title>Busca Pharma</title>
+    <link rel="stylesheet" href="../static/css/home.css">
 </head>
+ <header>
+    <div class="logo">
+      <a href="home.html"><img src="../TCC.v4/TCC/img/Logo_pequena.png" alt="Busca Pharma"/></a>
+    </div>
+    <nav>
+        <ul>
+            <li><a href="home.html" class="active">Home</a></li>
+            <li><a href="../TCC.v4/TCC/Medicamentos.html">Medicamentos</a></li>
+        </ul>
+    </nav>
+    <div class="auth-buttons">
+        <button class="register-btn"><a href="../TCC.v4/TCC/user_register.html">Cadastrar-se</a></button>
+        <button class="login-btn"><a href="../TCC.v4/TCC/user_login.html">Entrar</a></button>
+    </div>
+</header>
 <body>
-    <header>
-        <h1>Bem-vindo à Página Inicial</h1>
-    </header>
-    <main>
-        <h2>Placeholder de Home Page</h2>
-        <p>Esta é uma página inicial de exemplo. Adicione seu conteúdo aqui.</p>
-    </main>
-    <footer>
-        <p>&copy; 2024 Seu Nome ou Empresa. Todos os direitos reservados.</p>
-    </footer>
+    <div class="search-container">
+        <input type="text" placeholder="Insira o nome do medicamento:" class="search-input" id="search-bar">
+        <a href="../TCC.v4/TCC/localizarRemedio.html"><button>Buscar Remedio</button></a>
+    </div>
+    <section class="notice">
+        <div class="title">
+            <h1>Saúde ao alcance de todos!</h1>
+            <div>
+                <p class="paragrafh">
+                    Agende medicamentos e acompanhe suas solicitações diretamente pelo site da Prefeitura.
+                    Aqui, você também fica por dentro dos eventos de doação de remédios na sua região.
+                </p>
+            </div>
+    </div>
+    <img src="img/Enfermeiro1-.png" alt="imagem" id="img">
+    </section>
+        <section>
+            <div class="proced">
+            <div>
+            <h2>Doação Dipirona</h2>
+          <div class="coluna1">
+            <h3>Dipirona</h3>
+            <h3>31/08/2024</h3>
+            <h3>08:00/17:00</h3>
+        </div>
+        </div>
+        <p>
+            Lorem ipsum dolor sit amet consectetur adipisicing elit.
+            Cum distinctio velit dolore maiores est magni, voluptas
+            fugit illum aspernatur aliquam quod veritatis, mollitia
+            natus accusamus deserunt pariatur quasi voluptates harum
+            sed. Eligendi esse accusantium, natus aliquam iure earum
+            necessitatibus ea, possimus quia error, enim ullam.
+        </p>
+            <div>
+            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3670.532671896077!2d-47.20314232377357!3d-23.07758864399944!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x94c8b4bbea7d0ead%3A0xc89ced741211c386!2sCentro%20Esportivo%20do%20Trabalhador%20(CET)!5e0!3m2!1spt-BR!2sbr!4v1727016367042!5m2!1spt-BR!2sbr" frameborder="0"></iframe>
+        </div>
+        <div class="button-container">
+            <a href="janelaAgendar.html"><button>Participar do evento</button></a>
+        </div>
+        </div>
+        <div class="proced">
+            <div>
+            <h2>Vacina Covid</h2>
+          <div class="coluna2">
+            <h3>Vacina</h3>
+            <h3>01/10/2024</h3>
+            <h3>08:00/17:00</h3>
+        </div>
+        </div>
+            <p>
+                Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                Cum distinctio velit dolore maiores est magni, voluptas
+                fugit illum aspernatur aliquam quod veritatis, mollitia
+                natus accusamus deserunt pariatur quasi voluptates harum
+                sed. Eligendi esse accusantium, natus aliquam iure earum
+                necessitatibus ea, possimus quia error, enim ullam.
+            </p>
+            <div>
+            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3670.532671896077!2d-47.20314232377357!3d-23.07758864399944!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x94c8b4bbea7d0ead%3A0xc89ced741211c386!2sCentro%20Esportivo%20do%20Trabalhador%20(CET)!5e0!3m2!1spt-BR!2sbr!4v1727016367042!5m2!1spt-BR!2sbr" frameborder="0"></iframe>
+        </div>
+        <div class="button-container">
+            <a href="janelaAgendar.html"><button>Participar do evento</button></a>
+        </div>
+        </div>
+        </div>
+        <div class="proced">
+            <div>
+            <h2>Doação Dipirona</h2>
+          <div class="coluna3">
+            <h3>Doação</h3>
+            <h3>15/09/2024</h3>
+            <h3>08:00/17:00</h3>
+        </div>
+        </div>
+        <p>
+            Lorem ipsum dolor sit amet consectetur adipisicing elit.
+            Cum distinctio velit dolore maiores est magni, voluptas
+            fugit illum aspernatur aliquam quod veritatis, mollitia
+            natus accusamus deserunt pariatur quasi voluptates harum
+            sed. Eligendi esse accusantium, natus aliquam iure earum
+            necessitatibus ea, possimus quia error, enim ullam.
+        </p>
+            <div>
+            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3670.532671896077!2d-47.20314232377357!3d-23.07758864399944!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x94c8b4bbea7d0ead%3A0xc89ced741211c386!2sCentro%20Esportivo%20do%20Trabalhador%20(CET)!5e0!3m2!1spt-BR!2sbr!4v1727016367042!5m2!1spt-BR!2sbr" frameborder="0"></iframe>
+        </div>
+            <div class="button-container">
+                <a href="janelaAgendar.html"><button>Participar do evento</button></a>
+            </div>
+        </div>
+        </section>
+   <script src="javaScript/busca.js"></script>
 </body>
 </html>

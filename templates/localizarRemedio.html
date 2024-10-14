@@ -7,7 +7,7 @@
     <title>Localizar {{ item.nome_item }}</title>
     {% load static %}
     <link rel="stylesheet" href="{% static 'css/localizarRemedio.css' %}">
-    <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY_HERE" async defer></script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=chave_api" async defer></script>
 </head>
 
 <body>
@@ -64,7 +64,7 @@
 
         // Adiciona os marcadores no mapa para as farmácias disponíveis
         {% for unidade_info in unidades_com_quantidade %}
-            addMarker({{ unidade_info.latitude }}, {{ unidade_info.longitude }}, '{{ unidade_info.unidade.nome }}', {{ unidade_info.quantidade_atual }},'{{ unidade_info.status }}',{{ item.id_item }},{{ unidade_info.id_unidade }});
+            addMarker({{ unidade_info.latitude }}, {{ unidade_info.longitude }}, '{{ unidade_info.unidade.nome }}', {{ unidade_info.quantidade_atual }},'{{ unidade_info.status }}',{{ item.id_item }},{{ unidade_info.unidade.id_unidade }});
         {% endfor %}
     }
 
@@ -81,7 +81,7 @@
             content: `<h2>${nome}</h2>
                   <h3>Quantidade disponível: ${quantidade}</h3>
                   <h3>Status: ${status}</h3>
-                  <a href="/agendar/${id_item}/${id_unidade}/">Agendar</a>`,
+                  <a href="/agendar/${id_item}/${id_unidade}">Agendar</a>`,
         });
 
         // Adiciona o evento de clique ao marcador para centralizar o mapa e abrir a info window

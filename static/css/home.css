@@ -3,131 +3,183 @@
     padding: 0;
     box-sizing: border-box;
     font-family: 'Poppins', sans-serif;
+    text-align: center;
+    vertical-align: auto;    
 }
-body {
-    font-family: Arial, sans-serif;
-    background-color: #f9f9f9;
+nav ul li a.active, /* Estilo para o item ativo */
+nav ul li a:hover {  /* Também aplicamos o hover para consistência */
+    color: #ff8800;  /* Destaque laranja */
+    font-weight: bold; /* Opcional: torna o item em negrito */
 }
-header {
-    background-color: #003366;
+
+header, .coluna1, .coluna2, .coluna3 {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 10px 20px;
+    padding: 10px;
     color: white;
 }
+
 header .logo img {
     background: white;
     border-radius: 3%;
     height: 60px;
     width: 180px;
-    padding: 0 1rem;
+    padding: 0 1rem 0 1rem;
 }
+
 header nav ul {
     list-style: none;
     display: flex;
     margin: 0;
     padding: 0;
 }
+
 header nav ul li {
     margin-right: 20px;
 }
+
 header nav ul li a {
     color: white;
     text-decoration: none;
 }
+
 header .auth-buttons {
     display: flex;
     align-items: center;
 }
+
 header .auth-buttons button {
     margin-left: 10px;
     padding: 5px 15px;
+    border-radius: 10px;
     background-color: #ffcc00;
     border: none;
     color: black;
     cursor: pointer;
 }
-.search-container {
+
+.search-container{
+    display: flex;
+    flex-wrap: wrap;
+    padding: 2px;
+    justify-content: center;
+    background-color: #fff;
+    position: static;
+}
+.search-container button{
+    margin: 0px 20px;
+    padding: 10px 20px;
+    font-size: 1.1em;
+    cursor: pointer;
+    border: 2px solid #ff8800;
+    border-radius: 5px;        
+    background-color: #ff8800;
+    color: #fff;
+    transition: background-color 0.3s, color 0.3s;
+}
+.search-container button:hover {
+    background-color: #0A4973;
+    transition: background-color 0.3s ease; 
+}
+
+.search-input {
+    width: 80%;
+    padding: 5px;
+    font-size: 24px; 
+    border-radius: 10px;
+    border: 3px solid #d4d9df;
+    text-indent: 5px;
+    background-size: 20px 80px;
+}
+
+body{    
+    background-color: #0A4973;    
+}
+
+.title {
+    font-size: 2rem;
+    color: black;
+    margin-top: 5rem;
+    width: 60%;
+    height: 120px;
+    text-align: left;
+    
+}
+.title h1 {
+    margin-bottom: 20px; /* Adiciona espaço abaixo do título */
+    text-align: center;
+
+}
+
+.title .paragrafh {
+    margin-top: 0; /* Remover margem padrão se necessário */
+    text-align: justify;
+    width: 80%;
+}
+
+.proced {
+    margin-top: 10px;
+    padding: 20px;
+    font-size: 1.1em;
+    align-items: center;
+    text-align: center;
+    text-decoration: none;
+}
+section{
+    color: #fff;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); /* Cria 3 colunas de tamanhos iguais */
+    gap: 20px; /* Espaço entre as colunas */
+}
+
+.notice, img{
+    border-image: space;
+    background-color: white;
+    display: flex;
+    justify-content: space-between; /* Isso coloca uma div em cada extremidade */
+    align-items: center; /* Opcional: alinha verticalmente se houver diferença de altura */
+}
+.paragrafh{
+    text-align: justify;
+    font-size: large;
+    width: 60%;
+    margin-left: 10%;
+    
+}
+
+.grid-item {
+    padding: 10px;
+    background-color: #f0f0f0;
+    text-align: center;
+}
+iframe{
+    width: 100%;
+    height: 20em;
+    position: relative;
+}
+.button-container {
     display: flex;
     justify-content: center;
-    margin: 20px;
-}
-.search-input {
-    width: 60%;
-    padding: 10px;
-    font-size: 16px;
-    border-radius: 20px;
-    border: 1px solid #ccc;
-    text-indent: 30px;
-    background: url('search-icon.png') no-repeat 10px center;
-    background-size: 20px 20px;
-}
-.product-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    align-items: center;
     gap: 20px;
-    padding: 20px;
+    margin-top: 20px;
+    /* Espaço entre a descrição do produto e os botões */
 }
-.product-card {
-    background-color: white;
-    border: 1px solid #ddd;
-    border-radius: 10px;
-    text-align: center;
-    padding: 20px;
-}
-.product-card img {
-    max-width: 100%;
-    height: auto;
-    border-radius: 5px;
-}
-.product-name {
-    margin: 10px 0;
-    font-weight: bold;
-}
-.product-btn {
+
+.button-container button {
+    margin: 0px;
     padding: 10px 20px;
-    background-color: #ffcc00;
-    border: none;
-    border-radius: 5px;
+    font-size: 1.1em;
     cursor: pointer;
-    color: black;
-}
-.container {
-    width: 100%;
-    padding: 20px;
-}
-.responsive-table {
-    width: 60%;
-    margin: 0 auto;
-    border-collapse: collapse;
-    background-color: #fff;
-}
-th,
-td {
-    padding: 10px;
-    text-align: left;
-    border: 1px solid #ddd;
-}
-th {
-    background-color: #f1f1f1;
-}
-tbody tr:nth-child(even) {
-    background-color: #f9f9f9;
-}
-.tarja {
+    border: 2px solid #ff8800;
+    border-radius: 5px;        
+    background-color: #ff8800;
     color: #fff;
-    padding: 5px;
-    text-align: center;
-    border-radius: 5px;
+    transition: background-color 0.3s, color 0.3s;
 }
-.tarja.vermelha {
-    background-color: red;
-}
-.tarja.amarela {
-    background-color: yellow;
-    color: black;
-}
-.tarja.verde {
-    background-color: green;
+
+.button-container button:hover {
+    background-color: #0A4973;
+    transition: background-color 0.3s ease;
 }

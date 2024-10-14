@@ -6,7 +6,7 @@
     font-family: 'Poppins', sans-serif;
 }
 body {
-    background-color: #0A4973;
+    background: linear-gradient(135deg, #0A4973, #365e8b);
     justify-content: center;
     align-items: center;
     height: 100vh;
@@ -25,7 +25,10 @@ section {
     padding: 20px;
     margin-top: 40px;
     border-radius: 5px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+    border: 1px solid #e0e0e0;
+    width: 700px; /* Define largura fixa */
+    max-width: 100%; /* Para ser responsivo em telas menores */
 }
 header {
     display: flex;
@@ -40,6 +43,7 @@ header .logo img {
     height: 60px;
     width: 180px;
     padding: 0 1rem 0 1rem;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 2.0);
 }
 h1 {
     color: white;
@@ -61,8 +65,8 @@ form {
 /* Estilo dos inputs e selects */
 .input-box input, .input-box select {
     width: 100%;
-    height: 2rem;
-    padding: 5px;
+    height: 35px;
+    padding: 12px;
     margin-bottom: 15px;
     border: 2px solid #ccc;
     border-radius: 5px;
@@ -79,8 +83,8 @@ form {
 
 /* Estilo do select específico */
 .input-box select {
-    appearance: none; /* Remove a seta padrão */
-    -webkit-appearance: none; /* Compatibilidade com Safari */
+    appearance: none;
+    -webkit-appearance: none;
     background-image: url("data:image/svg+xml;charset=US-ASCII,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 4 5'%3E%3Cpath fill='%23ff8800' d='M2 0L0 2h4z'/%3E%3C/svg%3E");
     background-repeat: no-repeat;
     background-position: right 10px top 50%;
@@ -90,6 +94,7 @@ form {
 
 .input-box {
     position: relative;
+    width: 600px;
 }
 
 .input-box:after {
@@ -101,11 +106,13 @@ form {
 }
 
 /* Estilo do botão */
+/* Ajuste do botão */
 .btn {
     margin: 0px 20px;
-    padding: 10px;
+    padding: 5px 15px; /* Reduzir o padding */
+    height: 40px; /* Definir a altura exata */
     text-align: center;
-    font-size: 1.1em;
+    font-size: 1em; /* Ajuste para adequar o texto */
     cursor: pointer;
     border: 2px solid #ff8800;
     border-radius: 5px;
@@ -113,14 +120,41 @@ form {
     color: #fff;
     transition: background-color 0.3s, color 0.3s;
 }
-.btn:hover {
-    background-color: #0A4973;
-    transition: background-color 0.3s ease;
-}
+
 .btn .Agendar-link {
     color: #fff;
     width: 100%;
     text-decoration: none;
     background: none;
     border: none;
+}
+.btn:hover {
+    background-color: #0A4973;
+    transition: background-color 0.3s ease;
+}
+
+/* Estilo da mensagem de erro */
+.error-message {
+    display: none;
+    position: relative;
+    background: #ffffff; /* Cor de fundo branca para destaque */
+    color: #000000; /* Cor do texto */
+    border: 1px solid #162938; /* Cor da borda */
+    border-radius: 4px;
+    padding: 15px; /* Aumenta o padding para destacar mais */
+    font-size: 14px; /* Ajuste conforme necessário */
+    font-family: sans-serif, serif;
+    font-weight: bold;
+    width: 600px; /* Define largura fixa para a mensagem */
+    text-align: center;
+    z-index: 1000;
+    box-shadow: 5px 4px 6px rgb(208, 208, 208); /* Sombra para destaque */
+    margin-top: 20px; /* Espaçamento adicional */
+}
+label {
+    display: block;
+    font-size: 15px;
+    font-weight: 600;
+    margin-bottom: 8px;
+    color: #ffffff;
 }

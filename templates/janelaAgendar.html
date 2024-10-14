@@ -32,13 +32,13 @@
                     </select><br><br>
                 </div>
                 <div class="btn">
-                    <button type="submit" class="Agendar-link">Agendar</button>
+                    <button type="submit" class="Agendar-link">Agendar</button><br><br>
                 </div>
+                 <!-- Div para mostrar mensagens de erro/sucesso -->
+                <div id="agendar-erro" class="error-message"></div>
             </form>
         </div>
     </section>
-
-    <script src="{% static 'javaScript/janelaAgendar.js' %}"></script>
     <script>
         // Função para obter o valor do cookie CSRF
         function getCookie(name) {
@@ -110,7 +110,9 @@ document.getElementById('agendar-form').addEventListener('submit', function (eve
     const data = document.getElementById('data').value;
     const hora = document.getElementById('hora').value;
     const csrfToken = getCookie('csrftoken'); // Obter o token CSRF
-
+    const mensagemErro = document.getElementById('agendar-erro');
+    mensagemErro.style.display = 'none';
+    mensagemErro.textContent = '';
     // Substitua os 'id_item' e 'id_unidade' pelos valores reais que você tem
     const id_item = '{{ item.id_item }}';  // Ou como você obtém o ID do item
     const id_unidade = '{{ unidade.id_unidade }}';  // Ou como você obtém o ID da unidade
@@ -133,13 +135,15 @@ document.getElementById('agendar-form').addEventListener('submit', function (eve
             });
         }
     })
-    .then(data => {
-        // Aqui você pode adicionar código para lidar com a resposta
-        alert(data.message); // Exibir a mensagem de sucesso
+     .then(data => {
+        // Exibir mensagem de sucesso
+        mensagemErro.style.display = 'block';
+        mensagemErro.textContent = data.message;
     })
     .catch(error => {
-        console.error('Erro:', error);
-        alert(error.message); // Exibir a mensagem de erro
+        // Exibir mensagem de erro
+        mensagemErro.style.display = 'block';
+        mensagemErro.textContent = error.message;
     });
 });
     </script>
