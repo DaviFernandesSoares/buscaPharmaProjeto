@@ -62,7 +62,7 @@
             selectHora.innerHTML = ''; // Limpar as opções de horário
 
             // Faz uma requisição ao backend para pegar os horários ocupados
-            fetch(`/horarios_disponiveis?data=${dataSelecionada}`)
+            fetch(`/horarios_disponiveis/\?data=${dataSelecionada}`)
                 .then(response => response.json())
                 .then(data => {
                     const abertura = "{{ abertura }}"; // "08:00"

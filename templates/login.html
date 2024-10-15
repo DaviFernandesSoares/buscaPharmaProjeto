@@ -44,7 +44,8 @@
 
                  <div id="login-erro" class="error-message"></div>
                 <div class="login-register">
-                    <p>Não possui uma conta?<a href={% url 'cadastro' %}> Registre-se</a></p>
+                    <p>Não possui uma conta?<a href="{% url 'cadastro' %}"> Registre-se</a></p><br>
+                    <p><a href="{% url 'redefinir_senha' %}">Esqueceu a senha?</a></p>
                 </div>
         
             </form>

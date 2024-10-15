@@ -5,6 +5,7 @@ from appCadUsuario import views
 from appBusca import views2
 from appAdm import views3
 from appAgendamento import views4
+from appRedefinirSenhaUsuario import views5
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -18,5 +19,8 @@ urlpatterns = [
     path('cadastro_admin/', views3.cadastro_adm, name='cadastro_admin'),
     path('login_admin/', views3.login_adm, name='login_admin'),
     path('agendar/<int:id_item>/<int:id_unidade>', views4.agendar , name='agendar'),
-    path('horarios_disponiveis',views4.horarios_disponiveis, name='horarios_disponiveis'),
+    path('horarios_disponiveis/',views4.horarios_disponiveis, name='horarios_disponiveis'),
+    path('redefinir_senha/',views5.redefinir_senha, name='redefinir_senha'),
+    path('verificar_codigo/<str:email>/',views5.verificar_codigo, name = 'verificar_codigo'),
+    path('nova_senha/<str:email>/',views5.nova_senha, name='nova_senha'),
 ]

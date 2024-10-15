@@ -185,8 +185,3 @@ body {
         height: 55px;
     }
 }
-
-/* Remove o sublinhado de todos os links */
-a {
-    text-decoration: none; /* Remove o sublinhado de todos os links */
-}

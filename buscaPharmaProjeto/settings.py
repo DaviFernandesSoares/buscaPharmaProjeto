@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'appBusca',
     'appAdm',
     'appAgendamento',
+    'appRedefinirSenhaUsuario',
 ]
 
 MIDDLEWARE = [
@@ -135,3 +136,19 @@ STATICFILES_DIRS = [
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 AUTH_USER_MODEL = 'appCadUsuario.Usuario'
+
+# Configuração do backend de email
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+
+# Servidor SMTP do Gmail
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True  # Define o uso de TLS
+EMAIL_USE_SSL = False  # Defina False se usar TLS
+
+# Credenciais de email
+EMAIL_HOST_USER = 'buscapharmatcc@gmail.com'  # Seu email do Gmail
+EMAIL_HOST_PASSWORD = 'mdzj hkwp mvle xzqv'  # Sua senha de app do Gmail
+
+# Endereço padrão de envio de emails (opcional)
+DEFAULT_FROM_EMAIL = 'buscapharmatcc@gmail.com'

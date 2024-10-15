@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Redefinir Senha</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/nova_senha.css' %}">
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            document.getElementById('show-password').addEventListener('change', function () {
+                const passwordField = document.getElementById('nova_senha');
+                if (this.checked) {
+                    passwordField.type = 'text'; // Mostra a senha
+                } else {
+                    passwordField.type = 'password'; // Oculta a senha
+                }
+            });
+        });
+    </script>
+</head>
+<body>
+    <div class="wrapper">
+        <div class="form-box">
+            <h2>Nova Senha</h2>
+            {% if messages %}
+                <div id="login-erro" class="error-message">
+                    {% for message in messages %}
+                        <div>{{ message }}</div>
+                    {% endfor %}
+                </div>
+            {% endif %}
+            <form method="POST">
+                {% csrf_token %}
+                <div class="input-box">
+                    <span class="icon"><ion-icon name="lock-closed-outline"></ion-icon></span>
+                    <input type="password" id="nova_senha" name="nova_senha" required placeholder="Digite sua nova senha">
+                </div>
+                <div class="input-box">
+                    <input type="checkbox" id="show-password"> Mostrar Senha
+                </div>
+                <button type="submit" class="btn"><b>Redefinir Senha</b></button>
+            </form>
+        </div>
+    </div>
+ <script>
+        // Exibe a mensagem de erro se houver
+        document.addEventListener('DOMContentLoaded', function () {
+            const errorMessage = document.getElementById('login-erro');
+            if (errorMessage.innerText.trim() !== "") {
+                errorMessage.style.display = 'block'; // Exibe a mensagem
+            }
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Verificar Código</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/verificar_codigo.css' %}">
+</head>
+<body>
+    <div class="wrapper">
+        <div class="form-box">
+            <h2>Verificar Código</h2>
+            <form method="POST">
+                {% csrf_token %}
+                <div class="input-box">
+                    <span class="icon"><ion-icon name="lock-closed-outline"></ion-icon></span>
+                    <input type="text" name="codigo" required placeholder="Digite o código recebido">
+                </div>
+                <button type="submit" class="btn"><b>Verificar</b></button>
+            </form>
+            <div class="form-footer"> <!-- Footer para links adicionais -->
+                <p><a href="{% url 'login' %}">Voltar para Login</a></p>
+                <p><a href="{% url 'redefinir_senha' %}">Não recebeu o código?</a></p>
+                <a href="{% url 'redefinir_senha' %}" class="btn voltar-btn"><b>Voltar</b></a> <!-- Botão "Voltar" -->
+            </div>
+        </div>
+    </div>
+</body>
+</html>
