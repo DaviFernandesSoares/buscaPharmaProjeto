@@ -26,16 +26,7 @@
             <a class="botoes" href="{% url 'cadastro' %}"><button class="btnLogin">Logar</button></a>
         </nav>
     </header>
-
-    <div class="product-gallery">
-        <div class="thumbnails">
-            <!-- Exemplo: Carregar dinamicamente as imagens -->
-        </div>
-        <div class="main-image">
-            <img src="{% static 'img/capa-medicamentos-genericos.jpg' %}" alt="Imagem Principal" id="mainImage">
-        </div>
-    </div>
-
+        
     <div class="prodDesc">
         <h1 class="titulo">{{ item.0.nome_item }}</h1>
         <br>
@@ -45,7 +36,6 @@
         <p>Contra Indicação: {{ indicacao.contra_indicacao }}</p>
         <div class="button-container">
             <a href="{% url 'localizar_remedio' item.0.id_item %}"><button>Localizar Medicamento</button></a>
-            <a href="#"><button>Agendar horário</button></a>
         </div>
     </div>
 
