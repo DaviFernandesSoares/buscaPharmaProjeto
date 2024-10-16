@@ -159,19 +159,17 @@ body {
     }
 }
 .error-message {
-    display: none; /* Alterado para 'block' para que a mensagem apareça */
-    position: relative; /* Mudei para 'relative' para ajustar a posição se necessário */
-    background: #f8d7da; /* Cor de fundo do erro */
-    color: #721c24; /* Cor do texto do erro */
-    border: 1px solid #f5c6cb; /* Borda do erro */
+    display: none;
+    background: #ffffff; /* Cor de fundo do tooltip */
+    color: #000000; /* Cor do texto */
+    border: 1px solid #162938; /* Cor da borda */
     border-radius: 4px;
-    padding: 8px; /* Ajuste conforme necessário */
-    font-size: 12px; /* Ajuste conforme necessário */
+    font-size: 16px; /* Ajuste conforme necessário */
     font-family: sans-serif, serif;
     font-weight: bold;
-    width: 100%; /* Ocupa a largura total */
-    text-align: center; /* Alinha o texto ao centro */
-    z-index: 1000; /* Garante que a mensagem fique acima dos outros elementos */
-    margin-bottom: 10px; /* Espaço abaixo da mensagem */
+    width: 100%;
+    height: 25px;
+    text-align: center;/* Ajuste conforme necessário */
+    box-shadow: 0.7px 0.7px 1.5px rgb(237, 5, 5); /* Sombra opcional */
 }
 

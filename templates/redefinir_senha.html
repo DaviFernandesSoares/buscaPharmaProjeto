@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Esqueci a Senha</title>
     {% load static %}
-    <link rel="stylesheet" href="{% static 'css/esqueci_senha.css' %}" />
+    <link rel="stylesheet" href="{% static 'css/redefinir_senha.css' %}" />
   </head>
 
   <body>
@@ -16,6 +16,13 @@
     <div class="wrapper">
       <div class="form-box">
         <h2>Recuperar Senha</h2>
+          {% if messages %}
+            <div id="login-erro" class="error-message">
+                {% for message in messages %}
+                    <div>{{message}}</div>
+                {% endfor %}
+            </div>
+            {% endif %}
         <form method="POST" action="{% url 'redefinir_senha' %}">
           {% csrf_token %}
           <div class="input-box">
@@ -29,7 +36,15 @@
         </form>
       </div>
     </div>
-
+ <script>
+        // Exibe a mensagem de erro se houver
+        document.addEventListener('DOMContentLoaded', function () {
+            const errorMessage = document.getElementById('login-erro');
+            if (errorMessage.innerText.trim() !== "") {
+                errorMessage.style.display = 'block'; // Exibe a mensagem
+            }
+        });
+    </script>
     <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
     <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
   </body>

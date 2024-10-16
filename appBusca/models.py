@@ -18,7 +18,8 @@ class Unidade(models.Model):
 
     nome = models.CharField(max_length=130)
     status = models.CharField(max_length=15, choices=STATUS_CHOICES, default='Aberto')
-    endereco = models.CharField(max_length=255)
+    cep = models.CharField(max_length=9)
+    numero = models.CharField(max_length=9)
     id_unidade = models.AutoField(unique=True, primary_key=True)
     hora_abertura = models.TimeField()
     hora_encerramento = models.TimeField()

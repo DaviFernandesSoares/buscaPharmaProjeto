@@ -41,18 +41,19 @@ body {
     right: 7%;
     width: 540px;
     max-width: 70%;
-    height: 380px;
+    height: 420px;
     background: transparent;
     border: 2px solid rgba(255, 255, 255, 0.5);
     border-radius: 20px;
     backdrop-filter: blur(20px);
     box-shadow: 0 0 30px rgba(0, 0, 0, 0.5);
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
     z-index: 2;
     transform: translateY(-50%);
-    padding: 20px;
+    padding: 30px 20px;
 }
 
 /* Form Header */
@@ -60,7 +61,7 @@ body {
     font-size: 3.5em;
     color: #162938;
     text-align: center;
-    margin-bottom: 50px;
+    margin-bottom: 40px;
 }
 
 /* Input Box */
@@ -71,9 +72,6 @@ body {
     display: flex;
     flex-direction: column;
     align-items: flex-start;
-}
-
-.input-box {
     border-bottom: 2px solid #162938;
 }
 
@@ -132,37 +130,38 @@ body {
     margin-top: 20px;
 }
 
-/* Voltar */
-.voltar {
-    font-size: 0.9em;
+/* Voltar - agora como seta */
+.voltar-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 45px; /* Ajusta a largura para a seta */
+    height: 45px; /* Ajusta a altura para a seta */
+    background: transparent;
+    border: 2px solid #162938;
+    border-radius: 50%;
     color: #162938;
-    text-align: center;
-    font-weight: 500;
-    margin: 15px 0; /* Ajustado para melhor espaçamento */
-}
-
-.voltar a {
-    color: #ff8800; /* Cor do link */
-    text-decoration: none; /* Remove o sublinhado */
-    font-weight: 600;
-}
-
-.voltar a:hover {
-    text-decoration: underline; /* Adiciona sublinhado ao passar o mouse */
-}
-
-/* Botão Voltar Estilizado */
-.voltar .btn-voltar {
-    width: 100%;
-    height: 45px;
-    background: #162938; /* Cor do fundo do botão */
-    border: none;
-    border-radius: 6px;
+    font-size: 1.5em; /* Tamanho da seta */
     cursor: pointer;
-    font-size: 1em;
-    color: #ff8800; /* Cor do texto do botão */
-    font-weight: 500;
-    margin-top: 10px; /* Espaço entre o link e o botão */
+    transition: background 0.3s ease, color 0.3s ease;
+    margin-top: 25px;
+}
+
+.voltar-btn:hover {
+    background-color: #162938;
+    color: #ff8800;
+}
+
+.voltar-btn ion-icon {
+    font-size: 1.8em;
+}
+
+.form-footer a {
+    color: #0A4973; /* Altera a cor do texto dos links */
+}
+
+.form-footer a:hover {
+    color: #ff8800; /* Cor ao passar o mouse */
 }
 
 /* Responsividade */
@@ -181,7 +180,27 @@ body {
         height: 50px;
     }
 
-    .btn {
-        height: 55px;
+    .btn, .voltar-btn {
+        height: 50px;
+        width: 50px;
     }
+}
+
+/* Remove o sublinhado de todos os links */
+a {
+    text-decoration: none;
+}
+.error-message {
+    display: none;
+    background: #ffffff; /* Cor de fundo do tooltip */
+    color: #000000; /* Cor do texto */
+    border: 1px solid #162938; /* Cor da borda */
+    border-radius: 4px;
+    font-size: 16px; /* Ajuste conforme necessário */
+    font-family: sans-serif, serif;
+    font-weight: bold;
+    width: 100%;
+    height: 25px;
+    text-align: center;/* Ajuste conforme necessário */
+    box-shadow: 0.7px 0.7px 1.5px rgb(237, 5, 5); /* Sombra opcional */
 }

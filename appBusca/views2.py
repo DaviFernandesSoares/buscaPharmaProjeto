@@ -54,9 +54,8 @@ def localizarMedicamento(request, id_item):
     for unidade in unidades:
         estoque_item = Estoque.objects.filter(id_item=item, id_unidade=unidade).first()
         quantidade_atual = estoque_item.qtde_atual if estoque_item else 0
-        endereco = unidade.endereco
-        latitude, longitude = pegar_coordenadas_pelo_endereco(endereco)
-
+        endereco_api = pegar_endereco_por_cep_e_numero(unidade.cep,unidade_numero)
+        longitude,altitude = pegar_coordenadas_pelo_endereco(endereco)
         if quantidade_atual > 0:
             partes_endereco = endereco.split(", ")
             logradouro_e_numero = partes_endereco[0] + ", " + partes_endereco[1].strip() if len(partes_endereco) > 1 else endereco
@@ -79,7 +78,7 @@ def localizarMedicamento(request, id_item):
 
 
 def pegar_coordenadas_pelo_endereco(endereco):
-    api_key = 'chave_api'  # Substitua pela sua chave de API
+    api_key = 'chave_aqui'  # Substitua pela sua chave de API
     url = f'https://maps.googleapis.com/maps/api/geocode/json?address={quote(endereco)}&key={api_key}'
 
     try:
@@ -99,6 +98,20 @@ def pegar_coordenadas_pelo_endereco(endereco):
 
     return None, None
 
+def pegar_endereco_por_cep_e_numero(cep, numero):
+        # Substitua pela URL da API que você está utilizando
+    api_url = f'https://viacep.com.br/ws/{cep}/json/'
+    try:
+        response = requests.get(api_url)
+        response.raise_for_status()  # Levanta um erro se a requisição falhar
 
+        data = response.json()
+        if 'erro' in data:
+            endereco_completo = f"{data['logradouro']}, {numero}, {data['bairro']}, {data['localidade']}-{data['uf']}"
+            return endereco_completo  # Retorna o endereço completo
+        else:
+            print(f"Erro na resposta da API: {data['status']}")
+    except requests.exceptions.RequestException as e:
+        print(f"Erro na requisição: {e}")
 
-
+    return None  # Retorna None em caso de erro

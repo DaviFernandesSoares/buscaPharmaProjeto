@@ -67,3 +67,6 @@ def horarios_disponiveis(request):
     return JsonResponse({
         'horarios_ocupados': list(agendamentos)
     })
+
+def horarios_agendados(request):
+    return render(request, 'Agendamentos.html/')

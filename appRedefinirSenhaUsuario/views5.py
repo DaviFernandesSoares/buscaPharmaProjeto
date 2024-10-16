@@ -6,7 +6,7 @@ from django.urls.base import reverse
 
 from appCadUsuario.models import Usuario
 from django.contrib import messages
-
+from django.contrib.auth.hashers import make_password
 # Variável para armazenar os códigos temporariamente
 codes = {}
 
@@ -15,7 +15,6 @@ def redefinir_senha(request):
     if request.method == 'POST':
         email = request.POST.get('email')
         user = Usuario.objects.filter(email=email).first()
-        print(user)
         if user:
             # Gerar código aleatório
             codigo_verificacao = random.randint(100000, 999999)
@@ -48,12 +47,12 @@ def verificar_codigo(request, email):
             # Código correto, redirecionar para redefinir senha
             return redirect(reverse('nova_senha', kwargs={'email':email}))
         else:
-            messages.error(request, 'Código inválido.')
+            messages.error(request, 'Código inválido. Tente novamente')
 
     return render(request, 'verificar_codigo.html',{'email': email})
 
 
-from django.contrib.auth.hashers import make_password
+
 
 
 def nova_senha(request, email):

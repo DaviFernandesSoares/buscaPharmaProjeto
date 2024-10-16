@@ -9,6 +9,7 @@ class Agendamento(models.Model):
     STATUS_CHOICES = (
         ('Agendado','agendado'),
         ('Cancelado','cancelado'),
+        ('Realizado','realizado'),
 
     )
     id_agendamento = models.AutoField(primary_key=True)
