@@ -24,6 +24,7 @@ header .logo img {
     height: 60px;
     width: 180px;
     padding: 0 1rem 0 1rem;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 2.0);
 }
 header nav ul {
     list-style: none;
@@ -98,7 +99,6 @@ p{
     color: #fff;
     margin-top: 3rem;
     padding: 30px;
-    font: bold;
     width: 100%;
     height: auto;
 }
@@ -134,7 +134,7 @@ iframe {
     width: 100%;
     height: max-content;
     position: relative;
-    border: 10;
+    border: 10px;
     border-radius: 20px;
 }
 .button-container {
@@ -176,4 +176,38 @@ iframe {
     section {
         grid-template-columns: 1fr; 
     }
+}
+.cancel-btn {
+    background-color: #ff4c4c;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    border-radius: 5px;
+    font-size: 1em;
+}
+
+.cancel-btn:hover {
+    background-color: #ff1a1a;
+}
+.messages {
+    margin: 20px 0;
+    padding: 10px;
+    width: 100px;
+}
+
+.message {
+    padding: 10px;
+    border-radius: 5px;
+    margin-bottom: 15px;
+}
+
+.message.success {
+    background-color: #4caf50;
+    color: white;
+}
+
+.message.error {
+    background-color: #f44336;
+    color: white;
 }

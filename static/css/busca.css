@@ -26,6 +26,7 @@ header .logo img {
     width: 180px;
     padding: 0 1rem;
     margin-left: 30px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 2.0);
 }
 
 header nav ul {
@@ -51,13 +52,13 @@ header nav ul li a {
 }
 
 .search-input {
-    width: 60%;
+    width: 300px;
     padding: 10px;
     font-size: 16px;
     border-radius: 20px;
     border: 1px solid #ccc;
     text-indent: 30px;
-    background: url('search-icon.png') no-repeat 10px center;
+    background: url('static/img/ferramenta-de-busca.png') no-repeat 10px center;
     background-size: 20px 20px;
 }
 

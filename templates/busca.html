@@ -28,17 +28,15 @@
     <!-- Cabeçalho -->
     <header>
         <div class="logo">
-            <a href="../TCC.v4/TCC/index.html">
-                <img src="../TCC.v4/TCC/img/Logo_pequena.png" alt="BuscaPharma">
+            <a href={% url 'home' %}>
+                <img src="{% static 'img/Logo_pequena.png' %}" alt="BuscaPharma">
             </a>
         </div>
         <nav>
-            <a class="linksExternos" href="../TCC.v4/TCC/index.html">Home</a>
-            <a class="linksExternos" href="#">About</a>
+            <a class="linksExternos" href="{% url 'home' %}">Home</a>
             <a class="linksExternos" href="#">Agendamentos</a>
-            <a class="linksExternos" href="#">Contact</a>
-            <a class="botoes" href="../TCC.v4/TCC/user_register.html"><button class="btnRegister">Cadastre-se</button></a>
-            <a class="botoes" href="../TCC.v4/TCC/user_login.html"><button class="btnLogin">Logar</button></a>
+            <a class="botoes" href="{% url 'cadastro' %}"><button class="btnRegister">Cadastre-se</button></a>
+            <a class="botoes" href="{% url 'login' %}"><button class="btnLogin">Logar</button></a>
         </nav>
     </header>
 

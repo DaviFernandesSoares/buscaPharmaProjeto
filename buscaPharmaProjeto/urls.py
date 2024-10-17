@@ -24,4 +24,5 @@ urlpatterns = [
     path('verificar_codigo/<str:email>/',views5.verificar_codigo, name = 'verificar_codigo'),
     path('nova_senha/<str:email>/',views5.nova_senha, name='nova_senha'),
     path('horarios_agendados/',views4.horarios_agendados,name='horarios_agendados'),
+    path('cancelar_agendamento/<int:id_agend>/',views4.cancelar_agendamento,name='cancelar_agendamento'),
 ]

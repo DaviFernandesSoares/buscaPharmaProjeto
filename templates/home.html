@@ -9,17 +9,17 @@
 </head>
  <header>
     <div class="logo">
-      <a href="home.html"><img src="../TCC.v4/TCC/img/Logo_pequena.png" alt="Busca Pharma"/></a>
+      <a><img src="{% static 'img/Logo_pequena.png' %}" alt="Busca Pharma"/></a>
     </div>
     <nav>
         <ul>
-            <li><a href="home.html" class="active">Home</a></li>
-            <li><a href="../TCC.v4/TCC/Medicamentos.html">Medicamentos</a></li>
+            <li><a class="active">Home</a></li>
+            <li><a href="{% url 'busca' %}">Medicamentos</a></li>
         </ul>
     </nav>
     <div class="auth-buttons">
-        <button class="register-btn"><a href="../TCC.v4/TCC/user_register.html">Cadastrar-se</a></button>
-        <button class="login-btn"><a href="../TCC.v4/TCC/user_login.html">Entrar</a></button>
+        <button class="register-btn"><a href="{% url 'cadastro' %}">Cadastrar-se</a></button>
+        <button class="login-btn"><a href="{% url 'login' %}">Entrar</a></button>
     </div>
 </header>
 <body>
@@ -37,7 +37,7 @@
                 </p>
             </div>
     </div>
-    <img src="img/Enfermeiro1-.png" alt="imagem" id="img">
+    <img src="{% static 'img/Enfermeiro1-.png' %}" alt="imagem" id="img">
     </section>
         <section>
             <div class="proced">

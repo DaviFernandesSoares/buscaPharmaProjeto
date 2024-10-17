@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      {% load static %}
+    <link rel="stylesheet" href={% static '/css/agendamentos.css' %} />
+    <title>Agendamentos</title>
+  </head>
+  <body>
+    <header>
+      <div class="logo">
+        <a href="{% url 'home' %}"
+          ><img src="{% static 'img/Logo_pequena.png' %}" alt="Busca Pharma"
+        /></a>
+      </div>
+      <nav>
+        <ul>
+          <li><a href={% url 'home' %}>Home</a></li>
+          <li><a href={% url 'busca' %}>Medicamentos</a></li>
+          <li><a href="agendamentos.html" class="active">Agendamentos</a></li>
+        </ul>
+      </nav>
+      <div class="auth-buttons" style="font-size: large">
+        <button class="register-btn"><a href = {% url 'cadastro' %} } >Cadastrar-se</a></button>
+        <button class="login-btn"><a href={% url 'login' %}>Entrar</a></button>
+      </div>
+    </header>
+    <div class="title">
+      <h1>Meus Agendamentos</h1>
+    </div>
+    <section id="cards">
+        {% if agendamentos_e_endereco %}
+          {% for item in agendamentos_e_endereco %}
+              <div class="grid-item proced" id="agendamento-{{ item.agendamento.id_agendamento }}">
+                  <h2>Interesse no medicamento {{ item.agendamento.id_item.nome_item }}</h2>
+                  <p>Data: {{ item.agendamento.data|date:"d/m/Y" }}</p>
+                    <p> Horário: {{ item.agendamento.hora | time:"H:i" }}</p>
+              <p>Endereço da Unidade: {{ item.endereco }}</p>
+              <!-- Formulário para cancelar o agendamento -->
+                <form  class="cancel-form" method="POST" data-id="{{ item.agendamento.id_agendamento }}">
+                    {% csrf_token %}
+                    <button type="submit" class="cancel-btn">Cancelar Agendamento</button>
+                </form>
+              </div>
+          {% endfor %}
+
+      {% else %}
+          <p>Você não tem agendamentos no momento.</p>
+      {% endif %}
+    </section>
+  <div id="message-box"></div>
+  <script>
+    document.querySelectorAll('.cancel-form').forEach(form => {
+        form.addEventListener('submit', function(e) {
+            e.preventDefault();  // Evitar o redirecionamento padrão
+
+            const agendamentoId = this.dataset.id;
+            const csrfToken = this.querySelector('[name=csrfmiddlewaretoken]').value;
+
+            fetch(`/cancelar_agendamento/${agendamentoId}/`, {
+                method: 'POST',
+                headers: {
+                    'X-CSRFToken': csrfToken,
+                    'Content-Type': 'application/json'
+                }
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.status === 'success') {
+                    // Remover o agendamento da tela
+                    document.getElementById(`agendamento-${agendamentoId}`).remove();
+                    
+                      const messageBox = document.getElementById('message-box');
+                     messageBox.innerHTML = `<div class="message success">${data.message}</div>`;
+                    // Exibir mensagem de sucesso
+                        setTimeout(() => {messageBox.innerHTML = '';}, 3000);
+                        
+                         // Verificar se ainda há agendamentos na tela
+        const remainingAgendamentos = document.querySelectorAll('.grid-item.proced');
+        if (remainingAgendamentos.length === 0) {
+            // Se não houver mais agendamentos, exibir uma mensagem alternativa
+            document.getElementById('cards').innerHTML = '<p>Você não tem agendamentos no momento.</p>';
+        }
+                        
+                } else {
+                    // Exibir mensagem de erro
+                    document.getElementById('message-box').innerHTML = `<div class="message error">${data.message}</div>`;
+                }
+            });
+        });
+    });
+</script>
+  </body>
+</html>

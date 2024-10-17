@@ -16,10 +16,10 @@ class Unidade(models.Model):
         ('Fechado', 'fechado'),
     )
 
-    nome = models.CharField(max_length=130)
+    nome = models.CharField(max_length=130,db_column= 'nome_unidade')
     status = models.CharField(max_length=15, choices=STATUS_CHOICES, default='Aberto')
     cep = models.CharField(max_length=9)
-    numero = models.CharField(max_length=9)
+    numero = models.CharField(max_length=9, db_column='numero')
     id_unidade = models.AutoField(unique=True, primary_key=True)
     hora_abertura = models.TimeField()
     hora_encerramento = models.TimeField()

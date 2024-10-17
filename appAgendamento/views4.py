@@ -3,8 +3,11 @@ from django.contrib.auth.decorators import login_required
 import json
 from django.http import JsonResponse
 from django.shortcuts import render, get_object_or_404, redirect
+from pyexpat.errors import messages
+
 from appAgendamento.models import Agendamento
 from appBusca.models import Unidade, Item
+from appBusca.views2 import pegar_endereco_por_cep_e_numero
 
 
 # Create your views here.
@@ -67,6 +70,27 @@ def horarios_disponiveis(request):
     return JsonResponse({
         'horarios_ocupados': list(agendamentos)
     })
-
+@login_required(login_url='login')
 def horarios_agendados(request):
-    return render(request, 'Agendamentos.html/')
+    agendamentos = Agendamento.objects.filter(cpf=request.user).select_related('id_item','id_unidade')
+    agendamentos_e_endereco = []
+    for agendamento in agendamentos:
+        cep = agendamento.id_unidade.cep
+        numero = agendamento.id_unidade.numero
+
+        endereco_unidade = pegar_endereco_por_cep_e_numero(cep, numero)
+
+        agendamentos_e_endereco.append({'agendamento':agendamento, 'endereco':endereco_unidade})
+
+    return render(request, 'agendamentos.html/',{'agendamentos_e_endereco':agendamentos_e_endereco})
+
+
+
+@login_required(login_url='login')
+def cancelar_agendamento(request, id_agend):
+    agendamento = get_object_or_404(Agendamento, id_agendamento=id_agend, cpf=request.user)
+    if request.method == 'POST':
+        agendamento.delete()
+        return JsonResponse({'status': 'success', 'message': 'Agendamento cancelado com sucesso!'})
+
+    return JsonResponse({'status': 'error', 'message': 'Erro ao tentar cancelar o agendamento.'}, status=400)
