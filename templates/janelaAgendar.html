@@ -80,7 +80,7 @@
                     const [fechamentoHoras, fechamentoMinutos] = fechamento.split(':').map(Number);
 
                     const aberturaTotalMin = aberturaHoras * 60 + aberturaMinutos;
-                    const fechamentoTotalMin = fechamentoHoras * 60 + fechamentoMinutos;
+                    const fechamentoTotalMin = fechamentoHoras * 60 + (fechamentoMinutos - 0.50);
 
                       let horariosDisponiveis = false;
 

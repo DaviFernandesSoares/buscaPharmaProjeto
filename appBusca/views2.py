@@ -114,4 +114,4 @@ def pegar_endereco_por_cep_e_numero(cep, numero):
     except requests.exceptions.RequestException as e:
         print(f"Erro na requisição: {e}")
 
-    return None  # Retorna None em caso de erro
+    return None
