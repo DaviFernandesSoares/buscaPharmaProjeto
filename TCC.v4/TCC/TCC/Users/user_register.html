@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registro</title>
+    <link rel="stylesheet" href="../css/register.css">
+</head>
+
+<body>
+    <div class="logoFundo">
+        <img src="../img/Logo_Login_cadastro.png" alt="Logo">
+    </div>
+    <div class="wrapper">
+        <div class="form-box Register">
+            <h2>Cadastre-se</h2>
+            <form action="#">
+                <div class="input-box">
+                    <span class="icon"><ion-icon name="mail-outline"></ion-icon></span>
+                    <input type="text" required placeholder="Email">
+                </div>
+                <div class="input-box">
+                    <span class="icon"><ion-icon name="person-outline"></ion-icon></span>
+                    <input type="text" required placeholder="Nome Completo">
+                </div>
+                <div class="input-box">
+                    <span class="icon"><ion-icon name="id-card-outline"></ion-icon></span>
+                    <input type="text" id="cpf-input" required placeholder="CPF">
+                </div>                
+                <div class="ddd-phone-container">
+                    <div class="input-box-tiny">
+                        <label for="ddd-select">DDD</label>
+                        <select id="ddd-select" class="ddd-select">
+                        </select>
+                    </div>
+                    <div class="input-box">
+                        <span class="icon"><ion-icon name="call-outline"></ion-icon></span>
+                        <input type="text" id="phone-input" required placeholder="Telefone">
+                    </div>                    
+                </div>
+                <div class="input-box">
+                    <span class="icon"><ion-icon name="lock-closed-outline"></ion-icon></span>
+                    <input type="password" id="password" required placeholder="Senha">
+                </div>                
+                <div class="input-box">
+                    <span class="icon"><ion-icon name="lock-closed-outline"></ion-icon></span>
+                    <input type="password" id="confirm-password" required placeholder="Confirmar Senha">
+                </div>
+                <div class="show-password-container">
+                    <input type="checkbox" id="show-password">
+                    <label for="show-password">Mostrar Senha</label>
+                </div>
+                <div class="login" style="font-size: medium;">
+                    <button type="submit" class="btn"><b>Registrar</b></button>
+                </div>
+                <div class="login-register">
+                    <p>Já possui uma conta? <a href="user_login.html" class="register-link">Login</a></p>
+                </div>
+            </form>
+        </div>
+    </div>
+    <script src="../javaScript/register.js"></script>
+    <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+</body>
+</html>
