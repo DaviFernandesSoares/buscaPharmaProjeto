@@ -1,0 +1,97 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+    text-align: center;
+    vertical-align: auto;
+}
+
+nav {
+    background-color: #ff8800; /* Cor de fundo da navbar */
+    padding: 10px; /* Espaçamento interno */
+}
+
+nav ul {
+    list-style: none;
+    display: flex;
+    justify-content: center; /* Centraliza os itens na navbar */
+    gap: 20px; /* Espaçamento entre os itens */
+}
+
+nav ul li {
+    margin: 0; /* Remove a margem lateral entre os itens */
+}
+
+nav ul li a {
+    color: white; /* Cor do texto */
+    text-decoration: none;
+    font-weight: bold; /* Texto em negrito */
+    padding: 10px 15px; /* Espaçamento interno nos links */
+    border-radius: 5px; /* Arredondar cantos dos links */
+    transition: background-color 0.3s; /* Transição suave para a cor de fundo */
+}
+
+nav ul li a:hover,
+nav ul li a.active {
+    background-color: #0A4973; /* Cor ao passar o mouse ou quando ativo */
+}
+
+/* Estilo do cabeçalho */
+header, .coluna1, .coluna2, .coluna3 {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+    color: white;
+}
+
+header .logo img {
+    background: white;
+    border-radius: 3%;
+    height: 60px;
+    width: 180px;
+    padding: 0 1rem 0 1rem;
+}
+
+body {
+    background-color: #0A4973; /* Cor de fundo da página */
+}
+
+.title {
+    font-size: 2rem;
+    color: white;
+    margin-top: 2rem;
+}
+
+section {
+    margin-top: 20px;
+    padding: 20px;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+    background-color: #fff; /* Fundo da tabela */
+    border: 2px solid #0A4973; /* Borda da tabela */
+}
+
+th, td {
+    padding: 10px;
+    text-align: left;
+    border: 1px solid #ddd; /* Borda das células */
+}
+
+th {
+    background-color: #0A4973; /* Cor do cabeçalho */
+    color: white; /* Cor do texto do cabeçalho */
+}
+
+tr:hover {
+    background-color: #f2f2f2; /* Cor ao passar o mouse */
+}
+
+a {
+    text-decoration: none; /* Remove sublinhado dos links */
+}

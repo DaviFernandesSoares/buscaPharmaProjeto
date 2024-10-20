@@ -21,6 +21,12 @@
             <form action="{% url 'login_admin' %}" method="POST" id="form">
                 {% csrf_token %}
                 
+                <div id="login-erro" class="error-message">
+    {% if mensagem %}
+        <p>{{ mensagem }}</p>
+    {% endif %}
+</div>
+                
                 <!-- Campo Username -->
                 <div class="input-box">
                     <span class="icon"><ion-icon name="person-circle-outline"></ion-icon></span>
@@ -56,9 +62,6 @@
                 <button type="submit" class="btn">Login</button>
 
                 <div id="login-erro" class="error-message"></div>
-                <div class="login-register">
-                    <p>Não possui uma conta?<a href="{% url 'cadastro' %}" class="register-link">Registre-se</a></p>
-                </div>
 
             </form>
         </div>

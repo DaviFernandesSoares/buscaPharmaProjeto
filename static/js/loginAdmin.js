@@ -4,12 +4,14 @@ document.addEventListener('DOMContentLoaded', function() {
     const usernameErroDiv = document.getElementById('username-erro');
     const tokenErroDiv = document.getElementById('token-erro');
     const senhaErroDiv = document.getElementById('senha-erro');
-    const loginErroDiv = document.getElementById('login-erro');
+    const backendErroDiv = document.getElementById('login-erro'); // Para mostrar erros do backend
 
     form.addEventListener('submit', function(event) {
-        event.preventDefault();  // Impede o comportamento padrão de envio do formulário
-
         let isValid = true;
+
+        // Limpar mensagem de erro do backend ao submeter
+        backendErroDiv.textContent = '';
+        backendErroDiv.style.display = 'none';
 
         // Validação do username
         const username = document.getElementById('username').value;
@@ -41,41 +43,9 @@ document.addEventListener('DOMContentLoaded', function() {
             isValid = false;
         }
 
-        // Se o formulário for válido, faz o fetch
-        if (isValid) {
-            const formData = new FormData(form);
-            const csrftoken = document.querySelector('[name=csrfmiddlewaretoken]').value;  // Obtém o token CSRF
-
-            fetch(form.action, {
-                method: 'POST',
-                body: formData,
-                headers: {
-                    'X-Requested-With': 'XMLHttpRequest',
-                    'Accept': 'application/json',
-                    'X-CSRFToken': csrftoken,  // Adiciona o token CSRF ao cabeçalho
-                }
-            })
-            .then(response => {
-                if (response.ok) {
-                    return response.json();
-                } else {
-                    throw new Error('Erro na resposta do servidor.');
-                }
-            })
-            .then(data => {
-                if (data.success) {
-                    console.log("Redirecionando");
-                    window.location.href = '/cadastro_admin/';  // URL corrigida para o caminho correto
-                } else {
-                    loginErroDiv.textContent = data.mensagem;
-                    loginErroDiv.style.display = 'block';
-                }
-            })
-            .catch(error => {
-                console.error('Erro ao realizar o login:', error);
-                loginErroDiv.textContent = 'Erro ao realizar o login. Tente novamente.';
-                loginErroDiv.style.display = 'block';
-            });
+        // Se o formulário não for válido, impede o envio
+        if (!isValid) {
+            event.preventDefault();  // Impede o comportamento padrão de envio do formulário
         }
     });
 
@@ -90,4 +60,11 @@ document.addEventListener('DOMContentLoaded', function() {
             passwordField.type = 'password';
         }
     });
+
+    // Mostrar erro do backend, se houver
+    if (backendErroDiv.textContent.trim() !== '') {
+        backendErroDiv.style.display = 'block';
+    } else {
+        backendErroDiv.style.display = 'none';
+    }
 });

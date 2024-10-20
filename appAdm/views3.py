@@ -1,11 +1,13 @@
 import json
 from urllib import request
+from django.contrib.auth.decorators import login_required, user_passes_test
 from django.shortcuts import render, redirect
 from django.http import HttpResponse, JsonResponse
-from django.contrib.auth import login as auth_login
+from django.contrib.auth import login as auth_login,authenticate
 from django.contrib.auth.hashers import make_password, check_password
 from django.shortcuts import get_object_or_404
-
+from django.db.models import Count
+from appAgendamento.models import Agendamento
 from appBusca.models import Unidade
 from appAdm.models import Admin
 
@@ -37,47 +39,70 @@ def cadastro_adm(request):
     return render(request, 'cadastro_admin.html')
 
 
+
 def login_adm(request):
     if request.method == 'POST':
         username = request.POST.get('username')
         token = request.POST.get('token')
         senha = request.POST.get('senha')
 
-        resposta = {
-            'success': False,
-            'username_existe': False,
-            'senha_incorreta': False,
-            'token_existe': False,
-            'mensagem': ''
-        }
-
         if username and token and senha:
             try:
-                # Verifica se o usuário existe pelo username
                 admin = Admin.objects.get(username=username)
 
-                # Verifica se o token é válido
-                if admin.id_unidade:  # Se o token está associado ao admin
+                # Verifica se o token (unidade) é válido
+                if str(admin.id_unidade.pk) == token:  # Verifica se o token corresponde ao admin
                     if check_password(senha, admin.password):
                         auth_login(request, admin)
-                        resposta['success'] = True
-                        resposta['mensagem'] = 'Login bem-sucedido.'
-                        return JsonResponse(resposta)  # Retorna JSON indicando sucesso
+                        # Verifique se o usuário está logado após o auth_login
+                        if request.user.is_authenticated:
+                            return redirect('home_admin',id_admin =admin.id)  # Redireciona para a home_admin diretamente
+                        else:
+                            return render(request, 'login_admin.html', {'mensagem': 'Falha ao autenticar o usuário.'})
                     else:
-                        resposta['senha_incorreta'] = True
-                        resposta['mensagem'] = 'Senha incorreta.'
+                        return render(request, 'login_admin.html', {'mensagem': 'Senha incorreta.'})
                 else:
-                    resposta['token_existe'] = True
-                    resposta['mensagem'] = 'Token não encontrado.'
+                    return render(request, 'login_admin.html', {'mensagem': 'Token não corresponde à unidade.'})
 
             except Admin.DoesNotExist:
-                resposta['username_existe'] = True
-                resposta['mensagem'] = 'Usuário não encontrado.'
-        else:
-            resposta['mensagem'] = 'Todos os campos são obrigatórios.'
+                return render(request, 'login_admin.html', {'mensagem': 'Usuário não encontrado.'})
 
-        return JsonResponse(resposta)
+        return render(request, 'login_admin.html', {'mensagem': 'Todos os campos são obrigatórios.'})
 
     return render(request, 'login_admin.html')
 
+def home_admin(request,id_admin):
+        admin = Admin.objects.get(pk=id_admin)
+        id_unidade = admin.id_unidade
+        agendamentos = Agendamento.objects.filter(id_unidade=id_unidade,status='Agendado')
+        return render(request, 'homeAdmin.html', {'agendamentos': agendamentos,'unidade':id_unidade,'id_admin':admin.id})
 
+
+
+def relatorio_produtos_interesse(request, id_unidade, id_admin):
+    # Filtra os agendamentos pela unidade
+    agendamentos = Agendamento.objects.filter(id_unidade=id_unidade)
+
+    # Agrupa os agendamentos por produto e conta o total de interesses
+    produtos_interesse = agendamentos.values('id_item__nome_item') \
+        .annotate(total=Count('id_item')) \
+        .order_by('-total')  # Ordena pelo total, do maior para o menor
+
+    # Renderiza o template com os produtos e seus totais
+    return render(request, 'relatorio_produtos_interesse.html', {'produtos_interesse': produtos_interesse, 'id_admin':id_admin,'id_unidade':id_unidade})
+
+ # Importe seu modelo
+
+def marcar_realizado(request, id_agendamento,id_admin):
+    if request.method == 'POST':
+        agendamento = get_object_or_404(Agendamento, id_agendamento=id_agendamento)
+        # Atualize o status do agendamento para "realizado"
+        agendamento.status = 'Realizado'  # Ou qualquer lógica que você tenha
+        agendamento.save()
+        return redirect('home_admin', id_admin=id_admin)  # Redireciona para a página de agendamentos
+
+def relatorio_agendamentos_realizados(request,id_unidade,id_admin):
+    # Filtro para agendamentos realizados (ajuste conforme sua lógica de status)
+    agendamentos_realizados = Agendamento.objects.filter(status='Realizado', id_unidade=id_unidade)
+
+    return render(request, 'relatorio_agendamentos_realizados.html', {'agendamentos': agendamentos_realizados, 'id_admin':id_admin,'id_unidade':id_unidade})

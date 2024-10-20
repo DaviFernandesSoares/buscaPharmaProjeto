@@ -25,4 +25,8 @@ urlpatterns = [
     path('nova_senha/<str:email>/',views5.nova_senha, name='nova_senha'),
     path('horarios_agendados/',views4.horarios_agendados,name='horarios_agendados'),
     path('cancelar_agendamento/<int:id_agend>/',views4.cancelar_agendamento,name='cancelar_agendamento'),
+    path('home_admin/<int:id_admin>/',views3.home_admin, name='home_admin'),
+    path('relatorio/<int:id_unidade>/<int:id_admin>/',views3.relatorio_produtos_interesse,name='relatorio_produtos_interesse'),
+    path('marcar_realizado/<int:id_agendamento>/<int:id_admin>/',views3.marcar_realizado,name='marcar_realizado'),
+    path('relatorio_agendamentos_realizados/<int:id_unidade>/<int:id_admin>/',views3.relatorio_agendamentos_realizados, name='relatorio_agendamentos_realizados'),
 ]

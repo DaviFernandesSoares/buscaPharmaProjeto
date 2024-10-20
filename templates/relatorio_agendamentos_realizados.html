@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    {% load static %}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Relatório de Agendamentos Realizados</title>
+    <link rel="stylesheet" href="{% static 'css/relatorioRealizados.css' %}"> <!-- Adicione seu arquivo CSS aqui -->
+</head>
+<body>
+    <!-- Navbar -->
+    <nav>
+        <ul>
+            <li><a href="{% url 'home_admin' id_admin %}" >Agendamentos</a></li>
+            <li><a href="{% url 'relatorio_produtos_interesse' id_unidade id_admin %} " class="active">Relatórios</a></li>
+        </ul>
+    </nav>
+
+    <h1>Agendamentos Realizados</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>Nome do Cliente</th>
+                <th>Data</th>
+                <th>Hora</th>
+                <th>Produto/Serviço</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for agendamento in agendamentos %}
+            <tr class="agendamento"> <!-- Adicione a classe 'agendamento' aqui -->
+                <td>{{ agendamento.cpf.first_name }} {{ agendamento.cpf.last_name }}</td>
+                <td>{{ agendamento.data|date:"d/m/Y" }}</td>
+                <td>{{ agendamento.hora|time:"H:i" }}</td>
+                <td>{{ agendamento.id_item.nome_item }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</body>
+</html>
