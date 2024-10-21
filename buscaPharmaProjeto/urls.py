@@ -12,6 +12,7 @@ urlpatterns = [
     path('cadastro/', views.cadastro, name='cadastro'),
     path('login/', views.login, name='login'),
     path('home/', views.home, name='home'),
+    path('', views.home, name='home'),
     path('busca/', views2.busca, name='busca'),
     path('verificar_existencia/', views.verificar_existencia, name='verificar_existencia'),
     path('busca/medicamento/<int:id_item>/', views2.medicamento, name='medicamento'),

@@ -82,7 +82,7 @@ WSGI_APPLICATION = 'buscaPharmaProjeto.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'buscaPharma',  # Database name as a string
+        'NAME': 'buscaPharma',
         'USER': 'root',
         'PASSWORD': '1234',
         'HOST': 'localhost',

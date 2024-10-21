@@ -45,7 +45,7 @@
         <form method="POST" action="{% url 'busca' %}">
             {% csrf_token %}
             <input type="text" name="busca" placeholder="Insira o nome do medicamento" class="search-input" id="search-bar">
-            <button type="submit" class="btnSearch">Buscar</button>
+            <button type="submit" class="btnSearch" id="search-btn">Buscar</button>
         </form>
     </div>
 
@@ -189,6 +189,21 @@
             currentPage = 1; // Reseta para a primeira página
             renderTable(filteredData, currentPage); // Renderiza com dados filtrados
         });
+        
+          // Quando a página de busca carregar
+    window.onload = function () {
+        const searchQuery = localStorage.getItem('medicamentoBusca'); // Obtém o valor armazenado
+
+        if (searchQuery) {
+            document.getElementById('search-bar').value = searchQuery; // Insere o valor no campo de busca
+
+            // Simula o clique do botão de buscar
+            document.getElementById('search-btn').click(); 
+            
+            // Limpa o localStorage após a busca ser realizada
+            localStorage.removeItem('medicamentoBusca');
+        }
+    };
     </script>
 </body>
 

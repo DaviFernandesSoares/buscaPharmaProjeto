@@ -25,7 +25,7 @@
 <body>
     <div class="search-container">
         <input type="text" placeholder="Insira o nome do medicamento:" class="search-input" id="search-bar">
-        <a href="../TCC.v4/TCC/localizarRemedio.html"><button>Buscar Remedio</button></a>
+        <button id="search-btn">Buscar Remédio</button>
     </div>
     <section class="notice">
         <div class="title">
@@ -114,6 +114,17 @@
             </div>
         </div>
         </section>
-   <script src="javaScript/busca.js"></script>
+   <script>
+  document.getElementById('search-btn').addEventListener('click', function (event) {
+    event.preventDefault(); // Evita o comportamento padrão do botão
+
+    const searchQuery = document.getElementById('search-bar').value;
+
+    if (searchQuery) {
+      localStorage.setItem('medicamentoBusca', searchQuery); // Armazena o valor no localStorage
+      window.location.href = "{% url 'busca' %}"; // Redireciona para a página de busca
+    }
+  });
+</script>
 </body>
 </html>

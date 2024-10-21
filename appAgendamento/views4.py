@@ -64,7 +64,7 @@ def horarios_disponiveis(request):
     data = request.GET.get('data')  # Pega a data da requisição GET
 
     # Consulta no banco para pegar os horários já agendados para aquela data
-    agendamentos = Agendamento.objects.filter(data=data).values_list('hora', flat=True)
+    agendamentos = Agendamento.objects.filter(data=data,status__in=['Agendado', 'Realizado']).values_list('hora', flat=True)
 
     # Retorna os horários ocupados
     return JsonResponse({
@@ -72,7 +72,7 @@ def horarios_disponiveis(request):
     })
 @login_required(login_url='login')
 def horarios_agendados(request):
-    agendamentos = Agendamento.objects.filter(cpf=request.user).select_related('id_item','id_unidade')
+    agendamentos = Agendamento.objects.filter(cpf=request.user,status='Agendado').select_related('id_item','id_unidade')
     agendamentos_e_endereco = []
     for agendamento in agendamentos:
         cep = agendamento.id_unidade.cep
@@ -90,7 +90,8 @@ def horarios_agendados(request):
 def cancelar_agendamento(request, id_agend):
     agendamento = get_object_or_404(Agendamento, id_agendamento=id_agend, cpf=request.user)
     if request.method == 'POST':
-        agendamento.delete()
+        agendamento.status = 'Cancelado'
+        agendamento.save()
         return JsonResponse({'status': 'success', 'message': 'Agendamento cancelado com sucesso!'})
 
     return JsonResponse({'status': 'error', 'message': 'Erro ao tentar cancelar o agendamento.'}, status=400)
