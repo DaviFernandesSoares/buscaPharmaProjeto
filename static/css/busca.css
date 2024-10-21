@@ -58,7 +58,7 @@ header nav ul li a {
     border-radius: 20px;
     border: 1px solid #ccc;
     text-indent: 30px;
-    background: url('static/img/ferramenta-de-busca.png') no-repeat 10px center;
+    background: url('static/img/pesquisa.png') no-repeat 10px center;
     background-size: 20px 20px;
 }
 

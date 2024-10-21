@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'appAdm',
     'appAgendamento',
     'appRedefinirSenhaUsuario',
+    'appAdminGeral',
 ]
 
 MIDDLEWARE = [

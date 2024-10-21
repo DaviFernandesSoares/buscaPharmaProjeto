@@ -6,12 +6,12 @@ class Admin(AbstractUser):
     # Definindo o related_name para evitar conflitos
     groups = models.ManyToManyField(
         'auth.Group',
-        related_name='usuario_groups',  # Nome único
+        related_name='admin_geral_groups',  # Nome único
         blank=True
     )
     user_permissions = models.ManyToManyField(
         'auth.Permission',
-        related_name='usuario_permissions',  # Nome único
+        related_name='admin_geral_permissions',  # Nome único
         blank=True
     )
     username = models.CharField(max_length=150, unique=True)

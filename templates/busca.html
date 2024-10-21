@@ -73,7 +73,6 @@
             </tbody>
         </table>
     </div>
-
     <div id="pagination-container" class="pagination"></div>
 
     <script>
@@ -179,31 +178,30 @@
         // Inicializa a tabela com os dados da view
         renderTable(tableData, currentPage);
 
-        // Filtro de busca de medicamentos
-        document.getElementById('search-bar').addEventListener('keyup', function () {
-            const filter = this.value.toLowerCase();
+        function pesquisar(pesquisa) {
+            const filter = pesquisa.toLowerCase();
             const filteredData = tableData.filter(item =>
                 item.nome_item.toLowerCase().includes(filter) ||
                 item.comp_ativ_itm.toLowerCase().includes(filter)
             );
             currentPage = 1; // Reseta para a primeira página
             renderTable(filteredData, currentPage); // Renderiza com dados filtrados
+        }
+
+        // Filtro de busca de medicamentos
+        document.getElementById('search-bar').addEventListener('keyup', function () {
+            pesquisar(this.value)
         });
         
           // Quando a página de busca carregar
-    window.onload = function () {
-        const searchQuery = localStorage.getItem('medicamentoBusca'); // Obtém o valor armazenado
-
-        if (searchQuery) {
-            document.getElementById('search-bar').value = searchQuery; // Insere o valor no campo de busca
-
-            // Simula o clique do botão de buscar
-            document.getElementById('search-btn').click(); 
-            
-            // Limpa o localStorage após a busca ser realizada
-            localStorage.removeItem('medicamentoBusca');
-        }
-    };
+        document.addEventListener("DOMContentLoaded", () => {
+            const searchQuery = localStorage.getItem('medicamentoBusca'); // Obtém o valor armazenado
+            if (searchQuery) {
+                document.getElementById('search-bar').value = searchQuery;
+                pesquisar(searchQuery)
+                localStorage.removeItem('medicamentoBusca');
+            }
+        })
     </script>
 </body>
 

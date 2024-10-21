@@ -5,12 +5,12 @@ class Usuario(AbstractUser):
     # Definindo o related_name para evitar conflitos
     groups = models.ManyToManyField(
         'auth.Group',
-        related_name='admin_groups',  # Nome único
+        related_name='usuario_groups',  # Nome único
         blank=True
     )
     user_permissions = models.ManyToManyField(
         'auth.Permission',
-        related_name='admin_permissions',  # Nome único
+        related_name='usuario_permissions',  # Nome único
         blank=True
     )
     first_name = models.CharField(max_length=100, blank=True, null=True)

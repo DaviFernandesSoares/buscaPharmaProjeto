@@ -6,7 +6,7 @@ from appBusca import views2
 from appAdm import views3
 from appAgendamento import views4
 from appRedefinirSenhaUsuario import views5
-
+from appAdminGeral import views6
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('cadastro/', views.cadastro, name='cadastro'),
@@ -30,4 +30,7 @@ urlpatterns = [
     path('relatorio/<int:id_unidade>/<int:id_admin>/',views3.relatorio_produtos_interesse,name='relatorio_produtos_interesse'),
     path('marcar_realizado/<int:id_agendamento>/<int:id_admin>/',views3.marcar_realizado,name='marcar_realizado'),
     path('relatorio_agendamentos_realizados/<int:id_unidade>/<int:id_admin>/',views3.relatorio_agendamentos_realizados, name='relatorio_agendamentos_realizados'),
+    path('login_admin_geral/', views6.login_adm_geral, name='login_admin_geral'),
+    path('criar_admin/<str:senha>',views6.criar_admin, name='criar_admin'),
+    path('home_admin_geral/',views6.home_admin_geral, name='home_admin_geral'),
 ]
