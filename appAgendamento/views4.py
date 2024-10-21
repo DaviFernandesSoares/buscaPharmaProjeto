@@ -4,10 +4,11 @@ import json
 from django.http import JsonResponse
 from django.shortcuts import render, get_object_or_404, redirect
 from pyexpat.errors import messages
-
+from django.core.mail import send_mail
 from appAgendamento.models import Agendamento
 from appBusca.models import Unidade, Item
 from appBusca.views2 import pegar_endereco_por_cep_e_numero
+from appCadUsuario.models import Usuario
 
 
 # Create your views here.
@@ -42,7 +43,14 @@ def agendar(request, id_item, id_unidade):
         if abertura <= hora <= fechamento:
             user = Agendamento(id_item=item, id_unidade=unidade_info, cpf=request.user, data=data, hora=hora)
             user.save()
-
+            email = request.user.email
+            send_mail(
+                'Agendamento realizado com sucesso!',
+                f'Agendamento referente ao dia - {data}, hora - {hora} do medicamento {item.nome_item} realizado com sucesso!\n Unidade:{unidade_info.nome}',
+                'buscapharmatcc@gmail.com',  # Remetente
+                [email],  # Destinatário
+                fail_silently=False,
+            )
             # Retornar uma resposta JSON para requisição AJAX
             return JsonResponse({'status': 'success', 'message': 'Agendamento realizado com sucesso!'})
 

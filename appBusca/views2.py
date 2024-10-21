@@ -48,7 +48,7 @@ def medicamento(request, id_item):
 
 def localizarMedicamento(request, id_item):
     item = get_object_or_404(Item, id_item=id_item)
-    unidades = Unidade.objects.all()
+    unidades = Unidade.objects.filter(status='Aberto')
     unidades_com_quantidade = []
 
     for unidade in unidades:
@@ -58,7 +58,7 @@ def localizarMedicamento(request, id_item):
         latitude,longitude = pegar_coordenadas_pelo_endereco(endereco_api)
         if quantidade_atual > 0:
             partes_endereco = endereco_api.split(", ")
-            logradouro_e_numero = partes_endereco[0] + ", " + partes_endereco[1].strip() if len(partes_endereco) > 1 else endereco
+            logradouro_e_numero = partes_endereco[0] + ", " + partes_endereco[1].strip() if len(partes_endereco) > 1 else None
 
             unidades_com_quantidade.append({
                 'unidade': unidade,

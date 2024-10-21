@@ -5,7 +5,7 @@ from django.http import HttpResponse, JsonResponse
 from django.contrib.auth import login as auth_login
 from django.contrib.auth.hashers import make_password, check_password
 from django.template.defaultfilters import length
-
+from django.core.mail import send_mail
 from appCadUsuario.models import Usuario
 
 
@@ -38,6 +38,13 @@ def cadastro(request):
             user = Usuario(username=email, cpf=cpf, email=email, telefone=telefone,first_name=primeiro_nome, last_name=ultimo_nome)
             user.set_password(senha)
             user.save()
+            send_mail(
+                'Cadastrado com Sucesso',
+                f'Bem vindo(a) ao BuscaPharma, {nome}!\n Faça já seus Agendamentos de Medicamentos.\n Att.Equipe Busca',
+                'buscapharmatcc@gmail.com',  # Remetente
+                [email],  # Destinatário
+                fail_silently=False,
+            )
             return redirect('login')
     return render(request, 'cadastro.html')
 
