@@ -17,11 +17,10 @@
 <div class="wrapper">
   <div class="form-box Register">
     <h2>Cadastro Admin</h2>
-
        {% if error %}
         <div class="error-container">{{ error }}</div>
         {% endif %}
-    <form action="{% url 'cadastro_admin' %}" method="POST" id="form">
+    <form action="{% url 'cadastro_admin' id_unidade %}" method="POST" id="form">
         {% csrf_token %}
 
       <!-- Campo Username -->
@@ -31,14 +30,7 @@
         <label>Username</label>
         <div id="username-error" class="error-tooltip"></div>
       </div>
-
-      <!-- Campo Token da Unidade -->
-      <div class="input-box">
-        <span class="icon"><ion-icon name="checkmark-circle-outline"></ion-icon></span>
-        <input id="token" type="text" name="token">
-        <label>Token da Unidade</label>
-        <div id="token-error" class="error-tooltip"></div>
-      </div>
+        
 
       <!-- Campo Senha -->
       <div class="input-box">
