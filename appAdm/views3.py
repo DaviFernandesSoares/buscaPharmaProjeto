@@ -13,17 +13,16 @@ from appAdm.models import Admin
 
 
 
-def cadastro_adm(request):
+def cadastro_adm(request,id_unidade):
     if request.method == 'POST':
         nome = request.POST['username']
         senha = request.POST['password']
-        id_unidade = request.POST['token']
 
         if nome and senha and id_unidade:
             unidade = get_object_or_404(Unidade, pk=id_unidade)
 
             # Verifica se já existe um admin associado a essa unidade
-            if Admin.objects.filter(id_unidade=unidade).exists():
+            if Admin.objects.filter(username=nome).exists():
                 # Retorna mensagem de erro se já existir um admin
                 return render(request, 'cadastro_admin.html', {
                     'error': 'Já existe um administrador com esse username associado a esta unidade.'
@@ -31,12 +30,13 @@ def cadastro_adm(request):
 
             # Criando o usuário com a instância da Unidade
             user = Admin(username=nome, id_unidade=unidade, is_staff=1)
+            print(user)
             user.set_password(senha)
             user.save()
 
             return redirect('login_admin')
 
-    return render(request, 'cadastro_admin.html')
+    return render(request, 'cadastro_admin.html',{'id_unidade':id_unidade})
 
 
 
@@ -49,14 +49,13 @@ def login_adm(request):
         if username and token and senha:
             try:
                 admin = Admin.objects.get(username=username)
-
                 # Verifica se o token (unidade) é válido
                 if str(admin.id_unidade.pk) == token:  # Verifica se o token corresponde ao admin
                     if check_password(senha, admin.password):
                         auth_login(request, admin)
                         # Verifique se o usuário está logado após o auth_login
                         if request.user.is_authenticated:
-                            return redirect('home_admin',id_admin =admin.id)  # Redireciona para a home_admin diretamente
+                            return redirect('home_admin',id_admin =admin.id_admin)  # Redireciona para a home_admin diretamente
                         else:
                             return render(request, 'login_admin.html', {'mensagem': 'Falha ao autenticar o usuário.'})
                     else:
@@ -75,7 +74,7 @@ def home_admin(request,id_admin):
         admin = Admin.objects.get(pk=id_admin)
         id_unidade = admin.id_unidade
         agendamentos = Agendamento.objects.filter(id_unidade=id_unidade,status='Agendado')
-        return render(request, 'homeAdmin.html', {'agendamentos': agendamentos,'unidade':id_unidade,'id_admin':admin.id})
+        return render(request, 'homeAdmin.html', {'agendamentos': agendamentos,'unidade':id_unidade,'id_admin':admin.id_admin})
 
 
 

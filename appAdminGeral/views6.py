@@ -3,7 +3,9 @@ from django.http import JsonResponse
 from django.contrib.auth import login as auth_login
 from django.shortcuts import render, redirect
 from .forms import AdminGeralForm
-from .models import AdminGeral
+from .models import Admin
+from appAdm.views3 import cadastro_adm
+from django.db.models import Value, CharField, Case, When
 
 
 def is_superuser(user):
@@ -22,7 +24,7 @@ def login_adm_geral(request):
         if username and password:
             try:
                 # Busca o admin com o username fornecido
-                admin = AdminGeral.objects.get(username=username)
+                admin = Admin.objects.get(username=username)
 
                 # Verifica se o admin é um superuser
                 if admin.is_superuser:
@@ -30,12 +32,12 @@ def login_adm_geral(request):
                     if admin.check_password(password):
                         auth_login(request, admin)
                         resposta['success'] = True
-                        resposta['url'] = '/home_admin_geral/'  # URL para onde redirecionar
+                        resposta['url'] = f'/home_admin_geral/{username}'  # URL para onde redirecionar
                     else:
                         resposta['mensagem'] = 'Senha incorreta. Tente novamente.'
                 else:
                     resposta['mensagem'] = "Privilégio de Admin Geral não encontrado!"
-            except AdminGeral.DoesNotExist:
+            except Admin.DoesNotExist:
                 resposta['mensagem'] = 'Admin não encontrado.'
 
         else:
@@ -59,8 +61,8 @@ def criar_admin(request,senha):
         if form.is_valid():
             admin = form.save(commit=False)
             admin.set_password(form.cleaned_data['password'])
-            admin.is_superuser()
-            admin.is_staff()
+            admin.is_superuser = True
+            admin.is_staff = True
             admin.save()
             return JsonResponse({'success': True, 'mensagem': 'Admin criado com sucesso!'})
         else:
@@ -70,7 +72,28 @@ def criar_admin(request,senha):
     form = AdminGeralForm()
     return render(request, 'criar_admin.html', {'form': form})
 
-@login_required(login_url='login_admin_geral')
-@user_passes_test(is_superuser)
-def home_admin_geral(request):
-    return render(request,'homeAdminGeral.html')
+
+def home_admin_geral(request,username):
+    try:
+        admin = Admin.objects.get(username=username)
+        id_unidade = admin.id_unidade.id_unidade
+
+        # Filtrando admins que são staff
+        admins_da_unidade = Admin.objects.filter(id_unidade=id_unidade, is_staff=True,is_superuser=False)
+
+        # Crie uma lista de usuários autenticados
+        authenticated_admins = [user.username for user in admins_da_unidade if user.is_authenticated]
+
+        # Adiciona o status manualmente
+        for admin in admins_da_unidade:
+            admin.status = 'online' if admin.username in authenticated_admins else 'offline'
+        context = {
+            'admins': admins_da_unidade,
+            'id_unidade': id_unidade,
+        }
+        return render(request, 'home_admin_geral.html', context)
+    except Admin.DoesNotExist:
+        return render(request, '404.html')
+
+def criar_admin_unidade(request,id_unidade):
+    return cadastro_adm(request,id_unidade=id_unidade)

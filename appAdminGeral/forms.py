@@ -1,8 +1,8 @@
 from django import forms
-from .models import AdminGeral
+from .models import Admin
 
 class AdminGeralForm(forms.ModelForm):
     class Meta:
-        model = AdminGeral
+        model = Admin
         fields = ['username', 'email', 'password', 'id_unidade', 'first_name', 'last_name']
 
