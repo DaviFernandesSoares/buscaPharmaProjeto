@@ -1,12 +1,10 @@
 document.addEventListener('DOMContentLoaded', function () {
-    // Seu código de validação e eventos
     const passwordInput = document.getElementById('password');
     const confirmPasswordInput = document.getElementById('confirm-password');
     const unitCodeInput = document.getElementById('unit-code');
     const usernameInput = document.getElementById('username');
-    const registerButton = document.querySelector('.btn'); // Botão de registro
+    const registerButton = document.querySelector('.btn'); 
 
-    // Limita o Código da Unidade a 6 caracteres
     unitCodeInput.addEventListener('input', function () {
         if (this.value.length > 6) {
             this.value = this.value.slice(0, 6);
@@ -14,7 +12,6 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     });
 
-    // Habilita o campo de confirmação de senha após 8 dígitos na senha
     passwordInput.addEventListener('input', function () {
         if (this.value.length > 12) {
             this.value = this.value.slice(0, 12);
@@ -27,7 +24,6 @@ document.addEventListener('DOMContentLoaded', function () {
             confirmPasswordInput.disabled = true;
             confirmPasswordInput.value = '';
         }
-
         checkPasswordMatch();
     });
 

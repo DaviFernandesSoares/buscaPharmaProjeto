@@ -18,3 +18,16 @@ document.getElementById("agendamentoForm").addEventListener("submit", function(e
 
     modal.style.display = "none";
 });
+
+function confirmarAgendamento() {
+    const mensagem = 
+    `
+        Confirmação de Agendamento para Retirada de Medicamento:
+
+        Confirmamos seu agendamento para a retirada do medicamento 
+        por favor acompanhe seus agendamentos pelo site
+        ou pelo email, se tiver alguma alteração, nos lhe informamos.
+        Agradecemos a sua confiança e esperamos vê-lo(a) em breve.
+    `;
+    alert(mensagem);
+}
