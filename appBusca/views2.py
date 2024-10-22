@@ -1,14 +1,14 @@
 import requests
 from django.shortcuts import render, get_object_or_404
 from .forms import BuscaForm
-from .models import Item, Unidade, Estoque, Indicacao, Protocolo, Aux_indicacao
+from .models import Item, Unidade, Estoque, Indicacao, Protocolo, Aux_item_indicacao
 import json
 from urllib.parse import quote
 from django.http import HttpResponse, JsonResponse
 import json
 from django.shortcuts import render
 from .forms import BuscaForm
-from .models import Item
+
 
 def busca(request):
     form = BuscaForm(request.GET or None)
@@ -29,30 +29,34 @@ def busca(request):
 def medicamento(request, id_item):
     id_item = int(id_item)
     item = Item.objects.filter(id_item=id_item)
-    aux_indicacao = Aux_indicacao.objects.get(id_item=id_item)
-    id_indicacao = aux_indicacao.id_indicacao
-    indicacao = Indicacao.objects.get(id_indicacao=id_indicacao )
+    id_tipo_a = item.values('id_tipo')
+    id_tipo_b = id_tipo_a[0]['id_tipo']
+    if id_tipo_b == 1:
+        aux_indicacao = Aux_item_indicacao.objects.get(id_item=id_item)
+        id_indicacao = aux_indicacao.id_indicacao.id_indicacao
+        indicacao = Indicacao.objects.get(id_indicacao=id_indicacao )
 
-    context = {
-        'item': item,
-        'itens_json': json.dumps(list(item.values('id_item', 'nome_item', 'comp_ativ_itm'))),
+        context = {
+            'item': item,
+            'itens_json': json.dumps(list(item.values('id_item', 'nome_item', 'comp_ativ_itm'))),
 
-        'indicacao': indicacao,
-        'indicacao_json': json.dumps({
-            'categoria_remedio': indicacao.categoria_remedio,
-            'precaucao': indicacao.precaucao,
-            'contra_indicacao': indicacao.contra_indicacao
+            'indicacao': indicacao,
+             'indicacao_json': json.dumps({
+                'categoria_remedio': indicacao.categoria_remedio,
+                'precaucao': indicacao.precaucao,
+                'contra_indicacao': indicacao.contra_indicacao
 
-        }),
-        'aux_indicacao': aux_indicacao,
-        'aux_indicacao_json': json.dumps({
-            'dosagem_max_adulto': aux_indicacao.dsgm_max_adlt,
-            'dosagem_max_criança': aux_indicacao.dsgm_max_crn,
+            }),
+            'aux_indicacao': aux_indicacao,
+            'aux_indicacao_json': json.dumps({
+                'dsgm_max_adlt': aux_indicacao.dsgm_max_adlt,
+                'dsgm_max_crn': aux_indicacao.dsgm_max_crn
 
 
         }),
     }
-
+    else:
+        context = {}
     return render(request, 'produto.html', context)
 
 

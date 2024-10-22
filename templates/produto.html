@@ -32,8 +32,8 @@
         <p>Categoria: {{ indicacao.categoria_remedio }}</p>
         <p>Precaução: {{ indicacao.precaucao }}</p>
         <p>Contra Indicação: {{ indicacao.contra_indicacao }}</p>
-        <p>Dosagem maxima adulto: {{ aux_indicacao.dosagem_max_adulto }}</p>
-        <p>Dosagem maxima Criança: {{ aux_indicacao.dosagem_max_criança }}</p>
+        <p>Dosagem maxima adulto: {{ aux_indicacao.dsgm_max_adlt }}</p>
+        <p>Dosagem maxima Criança: {{ aux_indicacao.dsgm_max_crn }}</p>
         <div class="button-container">
             <a href="{% url 'localizar_remedio' item.0.id_item %}"><button>Localizar Medicamento</button></a>
         </div>
