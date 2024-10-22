@@ -17,7 +17,7 @@ urlpatterns = [
     path('verificar_existencia/', views.verificar_existencia, name='verificar_existencia'),
     path('busca/medicamento/<int:id_item>/', views2.medicamento, name='medicamento'),
     path('localizar_remedio/<int:id_item>/', views2.localizarMedicamento, name='localizar_remedio'),
-    path('cadastro_admin/', views3.cadastro_adm, name='cadastro_admin'),
+    path('cadastro_admin/<int:id_unidade>/', views3.cadastro_adm, name='cadastro_admin'),
     path('login_admin/', views3.login_adm, name='login_admin'),
     path('agendar/<int:id_item>/<int:id_unidade>', views4.agendar , name='agendar'),
     path('horarios_disponiveis/',views4.horarios_disponiveis, name='horarios_disponiveis'),
@@ -32,5 +32,6 @@ urlpatterns = [
     path('relatorio_agendamentos_realizados/<int:id_unidade>/<int:id_admin>/',views3.relatorio_agendamentos_realizados, name='relatorio_agendamentos_realizados'),
     path('login_admin_geral/', views6.login_adm_geral, name='login_admin_geral'),
     path('criar_admin/<str:senha>',views6.criar_admin, name='criar_admin'),
-    path('home_admin_geral/',views6.home_admin_geral, name='home_admin_geral'),
+    path('home_admin_geral/<str:username>/',views6.home_admin_geral, name='home_admin_geral'),
+    path('criar_admin_unidade/<int:id_unidade>/',views6.criar_admin_unidade, name='criar_admin_unidade')
 ]
