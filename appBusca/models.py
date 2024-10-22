@@ -45,9 +45,19 @@ class Protocolo(models.Model):
     class Meta:
         db_table = 'protocolo'
 class Indicacao(models.Model):
-    id_indicacao = models.AutoField(primary_key=True)
+    id_indicacao = models.AutoField(primary_key=True,  db_column='id_indicacao')
     categoria_remedio = models.CharField(max_length=255)
     precaucao = models.CharField(max_length=255)
     contra_indicacao = models.CharField(max_length=255)
     class Meta:
         db_table = 'indicacao'
+
+class Aux_indicacao(models.Model):
+    id_indicacao = models.ForeignKey(Indicacao, on_delete=models.CASCADE, db_column='id_indicacao')
+    id_item = models.ForeignKey(Item, on_delete=models.CASCADE, db_column='id_item')
+    id_Aux_indicacao = models.AutoField(primary_key=True, db_column='id_aux_itm_ind')
+    dsgm_max_adlt = models.CharField(max_length=255)
+    dsgm_max_crn = models.CharField(max_length=255)
+
+    class Meta:
+        db_table = 'aux_item_indicacao'

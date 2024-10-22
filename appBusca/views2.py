@@ -1,7 +1,7 @@
 import requests
 from django.shortcuts import render, get_object_or_404
 from .forms import BuscaForm
-from .models import Item, Unidade, Estoque, Indicacao, Protocolo
+from .models import Item, Unidade, Estoque, Indicacao, Protocolo, Aux_indicacao
 import json
 from urllib.parse import quote
 from django.http import HttpResponse, JsonResponse
@@ -29,7 +29,9 @@ def busca(request):
 def medicamento(request, id_item):
     id_item = int(id_item)
     item = Item.objects.filter(id_item=id_item)
-    indicacao = Indicacao.objects.get(id_indicacao=id_item)
+    aux_indicacao = Aux_indicacao.objects.get(id_item=id_item)
+    id_indicacao = aux_indicacao.id_indicacao
+    indicacao = Indicacao.objects.get(id_indicacao=id_indicacao )
 
     context = {
         'item': item,
@@ -40,6 +42,14 @@ def medicamento(request, id_item):
             'categoria_remedio': indicacao.categoria_remedio,
             'precaucao': indicacao.precaucao,
             'contra_indicacao': indicacao.contra_indicacao
+
+        }),
+        'aux_indicacao': aux_indicacao,
+        'aux_indicacao_json': json.dumps({
+            'dosagem_max_adulto': aux_indicacao.dsgm_max_adlt,
+            'dosagem_max_criança': aux_indicacao.dsgm_max_crn,
+
+
         }),
     }
 
