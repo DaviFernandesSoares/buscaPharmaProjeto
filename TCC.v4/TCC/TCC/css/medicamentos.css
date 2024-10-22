@@ -1,24 +1,25 @@
 .table-container {
     position: absolute;
-    margin-left: 20%;
+    margin: 2% 20%;
     width: 100%;
-    color: white;
 }
-table {
+table{
     width: 60%;
     border-collapse: collapse;
     text-align: justify;
+    color: black;
+    background-color: white;
 }
 th{
-    border: 2px solid #ff8800;
+    border: 2px solid #0A4973;
     padding: 10px 40px;
     text-align: justify;
 }
 td {
-    border: 2px solid #ff8800;
+    border: 2px solid #0A4973;
     padding: 10px 40px;
     text-align: justify;
 }
 td a {
-    color: white;
+    color: black;
 }

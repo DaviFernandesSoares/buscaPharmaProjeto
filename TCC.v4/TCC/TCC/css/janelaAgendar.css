@@ -4,6 +4,7 @@ section {
     align-items: center; 
 }
 .modal {
+    background-color: #0A4973;
     display: flex;
     flex-direction: column; 
     justify-content: center; 
@@ -14,12 +15,13 @@ section {
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 h1{
-    color: white;
+    color: #0A4973;
     font-size: 4.5em;
     margin-top: 20px;
     text-align: center;
 }
 form{
+    color: #fff;
     font-size: larger;
     font-weight: bolder;
     display: flex;

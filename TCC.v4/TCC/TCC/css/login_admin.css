@@ -1,8 +1,7 @@
 .wrapper {
-    position: absolute;
+    position: fixed;
     width: 500px;
     height: 550px;
-    background: #fff ;
     border: 3px solid rgba(255, 255, 255, 0.5);
     border-radius: 40px;
     backdrop-filter: blur(20px);
@@ -12,8 +11,8 @@
     align-items: center;
     top: 50%;
     transform: translateY(-50%);
+    margin: 10px 35%;
 }
-
 .form-box h2 {
     font-size: 3.5em;
     color: #162938;
