@@ -27,7 +27,8 @@ def agendar(request, id_item, id_unidade):
 
         # Verifica se a data é menor que a data atual
         today = timezone.now().date()
-        if data < today.strftime('%Y-%m-%d'):
+        horario_atual = timezone.now().time()
+        if data < today.strftime('%Y-%m-%d') or hora < horario_atual.strftime('%H:%M') :
             return JsonResponse(
                 {'status': 'error', 'message': 'Data inválida. Não é possível agendar para datas passadas.'},
                 status=400)
@@ -68,15 +69,22 @@ def agendar(request, id_item, id_unidade):
     })
 
 
-def horarios_disponiveis(request):
+def horarios_disponiveis(request,id_unidade):
     data = request.GET.get('data')  # Pega a data da requisição GET
-
+    horario_atual = timezone.now().time()
     # Consulta no banco para pegar os horários já agendados para aquela data
-    agendamentos = Agendamento.objects.filter(data=data,status__in=['Agendado', 'Realizado']).values_list('hora', flat=True)
-
+    agendamentos = Agendamento.objects.filter(data=data,status__in=['Agendado', 'Realizado'],id_unidade=id_unidade).values_list('hora', flat=True)
     # Retorna os horários ocupados
+    lista_agendamentos = list(agendamentos)
+    unidade_abertura = Unidade.objects.get(id_unidade=id_unidade).hora_abertura
+    hora_atual_str = horario_atual.strftime('%H')
+    print(unidade_abertura)
+    print(hora_atual_str)
+
+
+
     return JsonResponse({
-        'horarios_ocupados': list(agendamentos)
+        'horarios_ocupados': lista_agendamentos
     })
 @login_required(login_url='login')
 def horarios_agendados(request):
