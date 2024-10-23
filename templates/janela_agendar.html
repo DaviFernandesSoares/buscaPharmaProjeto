@@ -38,8 +38,11 @@
                     </select><br><br>
                 </div>
                 <div class="btn">
-                    <button type="submit" class="Agendar-link">Agendar</button><br><br>
+                    <button type="submit" class="Agendar-link" id="btAgendar">Agendar</button><br><br>
                 </div>
+                <center>
+                <span id="spinner" style="display: none;" class="spinner"></span>
+                    </center>
                  <!-- Div para mostrar mensagens de erro/sucesso -->
                 <div id="agendar-erro" class="error-message"></div>
             </form>
@@ -74,7 +77,6 @@
                     const abertura = "{{ abertura }}"; // "08:00"
                     const fechamento = "{{ fechamento }}"; // "18:00"
                     const horariosOcupados = data.horarios_ocupados;
-                    console.log(data.horarios_ocupados)// Lista de horários ocupados
 
                     const [aberturaHoras, aberturaMinutos] = abertura.split(':').map(Number);
                     const [fechamentoHoras, fechamentoMinutos] = fechamento.split(':').map(Number);
@@ -119,6 +121,8 @@ document.getElementById('agendar-form').addEventListener('submit', function (eve
     const mensagemErro = document.getElementById('agendar-erro');
     mensagemErro.style.display = 'none';
     mensagemErro.textContent = '';
+    document.getElementById('spinner').style.display = 'inline-block';
+    document.getElementById('btAgendar').disabled = true;
     // Substitua os 'id_item' e 'id_unidade' pelos valores reais que você tem
     const id_item = '{{ item.id_item }}';  // Ou como você obtém o ID do item
     const id_unidade = '{{ unidade.id_unidade }}';  // Ou como você obtém o ID da unidade
@@ -133,6 +137,8 @@ document.getElementById('agendar-form').addEventListener('submit', function (eve
         body: JSON.stringify({ data: data, hora: hora }), // Enviar dados como JSON
     })
     .then(response => {
+          document.getElementById('spinner').style.display = 'none';
+          document.getElementById('btAgendar').disabled = false;
         if (response.ok) {
             return response.json(); // Processar a resposta como JSON
         } else {

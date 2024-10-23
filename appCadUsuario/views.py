@@ -40,7 +40,7 @@ def cadastro(request):
             user.save()
             send_mail(
                 'Cadastrado com Sucesso',
-                f'Bem vindo(a) ao BuscaPharma, {nome}!\n Faça já seus Agendamentos de Medicamentos.\n Att.Equipe Busca',
+                f'Bem vindo(a) ao BuscaPharma, {nome}!\n\nFaça já seus Agendamentos de Medicamentos.\n\nAtt.Equipe Busca',
                 'buscapharmatcc@gmail.com',  # Remetente
                 [email],  # Destinatário
                 fail_silently=False,

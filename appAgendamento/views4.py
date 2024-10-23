@@ -2,8 +2,7 @@ from django.utils import timezone
 from django.contrib.auth.decorators import login_required
 import json
 from django.http import JsonResponse
-from django.shortcuts import render, get_object_or_404, redirect
-from pyexpat.errors import messages
+from django.shortcuts import render, get_object_or_404
 from django.core.mail import send_mail
 from appAgendamento.models import Agendamento
 from appBusca.models import Unidade, Item
@@ -27,27 +26,44 @@ def agendar(request, id_item, id_unidade):
 
         # Verifica se a data é menor que a data atual
         today = timezone.now().date()
-        horario_atual = timezone.now().time()
-        if data < today.strftime('%Y-%m-%d') or hora < horario_atual.strftime('%H:%M') :
+        horario_atual = timezone.localtime().time()
+        if data < today.strftime('%Y-%m-%d') or (
+                hora < horario_atual.strftime('%H:%M') and data < today.strftime('%Y-%m-%d')):
             return JsonResponse(
                 {'status': 'error', 'message': 'Data inválida. Não é possível agendar para datas passadas.'},
-                status=400)
+                status=400
+            )
 
         # Verifica se já existe um agendamento para a mesma data e hora
         agendamento_existente = Agendamento.objects.filter(data=data, hora=hora, id_item=id_item,
-                                                           id_unidade=id_unidade).exists()
+                                                           id_unidade=id_unidade, status='Agendado').exists()
 
         if agendamento_existente:
             return JsonResponse({'status': 'error', 'message': 'Já existe um agendamento para este horário.'},
                                 status=400)
 
+        # Verifica se existe um agendamento cancelado para o mesmo item e unidade
+        agendamento_cancelado = Agendamento.objects.filter(data=data, hora=hora, id_item=id_item,
+                                                           id_unidade=id_unidade, status='Cancelado').first()
+
+        # Verifica se o horário está dentro do intervalo permitido
         if abertura <= hora <= fechamento:
-            user = Agendamento(id_item=item, id_unidade=unidade_info, cpf=request.user, data=data, hora=hora)
-            user.save()
+            if agendamento_cancelado:
+                # Atualiza o agendamento cancelado
+                agendamento_cancelado.status = 'Agendado'  # Altera o status
+                agendamento_cancelado.cpf = request.user  # Atualiza o usuário se necessário
+                agendamento_cancelado.save()
+            else:
+                # Cria um novo agendamento
+                novo_agendamento = Agendamento(id_item=item, id_unidade=unidade_info, cpf=request.user, data=data,
+                                               hora=hora)
+                novo_agendamento.save()
+
+            # Envio de email após salvar um novo agendamento
             email = request.user.email
             send_mail(
                 'Agendamento realizado com sucesso!',
-                f'Agendamento referente ao dia - {data}, hora - {hora} do medicamento {item.nome_item} realizado com sucesso!\n Unidade:{unidade_info.nome}',
+                f'Agendamento referente ao dia - {data}, hora - {hora}\nMedicamento: {item.nome_item}\n\nRealizado com sucesso!\n\nUnidade: {unidade_info.nome}\n\nCompareça ao local e informe seu nome para uma possível retirada.\nSe acaso não for comparecer, pedimos que cancele seu agendamento!',
                 'buscapharmatcc@gmail.com',  # Remetente
                 [email],  # Destinatário
                 fail_silently=False,
@@ -60,7 +76,7 @@ def agendar(request, id_item, id_unidade):
                             status=400)
 
     today = timezone.now().date()
-    return render(request, 'janelaAgendar.html', {
+    return render(request, 'janela_agendar.html', {
         'unidade': unidade_info,
         'item': item,
         'abertura': abertura,
@@ -71,18 +87,25 @@ def agendar(request, id_item, id_unidade):
 
 def horarios_disponiveis(request,id_unidade):
     data = request.GET.get('data')  # Pega a data da requisição GET
-    horario_atual = timezone.now().time()
+    horario_atual = timezone.localtime().time()
     # Consulta no banco para pegar os horários já agendados para aquela data
     agendamentos = Agendamento.objects.filter(data=data,status__in=['Agendado', 'Realizado'],id_unidade=id_unidade).values_list('hora', flat=True)
     # Retorna os horários ocupados
     lista_agendamentos = list(agendamentos)
     unidade_abertura = Unidade.objects.get(id_unidade=id_unidade).hora_abertura
-    hora_atual_str = horario_atual.strftime('%H')
-    print(unidade_abertura)
-    print(hora_atual_str)
+    hora_atual_int = int(horario_atual.strftime('%H'))
+    hora_abertura_int = int(unidade_abertura.strftime('%H'))
 
+    hoje = timezone.now().date()
+    data_solicitada = timezone.datetime.strptime(data, '%Y-%m-%d').date()
 
-
+    if data_solicitada == hoje:
+        hora_atual_str = f'{hora_atual_int:02}:00:00'
+        lista_agendamentos.append(hora_atual_str)
+        while hora_abertura_int < hora_atual_int:
+            hora_atual_int -= 1
+            hora_atual_str = f'{hora_atual_int:02}:00:00'
+            lista_agendamentos.append(hora_atual_str)
     return JsonResponse({
         'horarios_ocupados': lista_agendamentos
     })

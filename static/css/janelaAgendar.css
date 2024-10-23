@@ -158,3 +158,19 @@ label {
     margin-bottom: 8px;
     color: #ffffff;
 }
+.spinner {
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    border-top: 2px solid white; /* Cor do topo do spinner */
+    border-radius: 50%;
+    width: 50px; /* Tamanho do spinner */
+    height: 50px; /* Tamanho do spinner */
+    animation: spin 1s linear infinite; /* Animação do spinner */
+    margin-top: 3px; /* Espaço entre o spinner e o texto */
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+
