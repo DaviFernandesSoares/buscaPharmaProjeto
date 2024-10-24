@@ -37,7 +37,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'appCadUsuario',
+    'appUsuario',
     'appBusca',
     'appAdm',
     'appAgendamento',
@@ -136,7 +136,7 @@ STATICFILES_DIRS = [
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
-AUTH_USER_MODEL = 'appCadUsuario.Usuario'
+AUTH_USER_MODEL = 'appUsuario.Usuario'
 
 # Configuração do backend de email
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'

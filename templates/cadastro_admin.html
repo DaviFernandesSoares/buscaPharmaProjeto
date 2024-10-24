@@ -31,6 +31,13 @@
         <div id="username-error" class="error-tooltip"></div>
       </div>
         
+         <div class="input-box">
+             <span class="icon"><ion-icon name="person-circle-outline"></ion-icon></span>
+            <input type="text" id="nome_completo">
+            <Label>Nome Completo</Label>
+             <div id="nome-completo-error" class="error-tooltip"></div>
+        </div>
+        
 
       <!-- Campo Senha -->
       <div class="input-box">
@@ -47,6 +54,7 @@
         <label>Confirmar Senha</label>
         <div id="confirm-password-error" class="error-tooltip"></div>
       </div>
+        
 
       <!-- Checkbox para mostrar/ocultar senha -->
       <div class="show-password-container">
@@ -54,16 +62,12 @@
         <label for="show-password">Mostrar Senha</label>
       </div>
 
-      <button type="submit" class="btn">Registrar admin</button>
-
-      <div class="login-register">
-        <p>Já possui uma conta? <a href="{% url 'login_admin' %}" class="register-link">Login</a></p>
-      </div>
+      <button type="submit" class="btn" id="btn-registrar">Registrar admin</button>
     </form>
   </div>
 </div>
 
-<script src="{% static 'js/admin_register.js' %}"></script>
+<script src="{% static 'js/cadastro_admin.js' %}"></script>
 <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
 <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
 </body>

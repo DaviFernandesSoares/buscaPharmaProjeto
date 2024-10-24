@@ -39,7 +39,7 @@ document.addEventListener('DOMContentLoaded', function () {
         if (storedCredentials && storedCredentials.username === username && storedCredentials.password === password) {
             alert('Seja Bem Vindo, Logado com sucesso!');
             // Redirecionar para a página inicial
-            window.location.href = 'homeAdmin.html'; // Mude para a página que deseja redirecionar
+            window.location.href = 'home_admin.html'; // Mude para a página que deseja redirecionar
         } else {
             alert('Nome de usuário ou senha incorretos. Por favor, tente novamente.');
         }

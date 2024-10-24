@@ -1,12 +1,13 @@
 from django.contrib import admin
 from django.template.context_processors import request
 from django.urls import path
-from appCadUsuario import views
+from appUsuario import views
 from appBusca import views2
 from appAdm import views3
 from appAgendamento import views4
 from appRedefinirSenhaUsuario import views5
 from appAdminGeral import views6
+from appEditarPerfil import views7
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('cadastro/', views.cadastro, name='cadastro'),
@@ -33,5 +34,6 @@ urlpatterns = [
     path('login_admin_geral/', views6.login_adm_geral, name='login_admin_geral'),
     path('criar_admin/<str:senha>',views6.criar_admin, name='criar_admin'),
     path('home_admin_geral/<str:username>/',views6.home_admin_geral, name='home_admin_geral'),
-    path('criar_admin_unidade/<int:id_unidade>/',views6.criar_admin_unidade, name='criar_admin_unidade')
+    path('criar_admin_unidade/<int:id_unidade>/',views6.criar_admin_unidade, name='criar_admin_unidade'),
+    path('editar_perfil_usuario/', views7.editar_perfil_usuario,name='editar_perfil_usuario'),
 ]

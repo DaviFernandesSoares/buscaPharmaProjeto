@@ -1,3 +1,12 @@
+function desativarBotao(){
+    const botao = document.getElementById('btn-registrar')
+    botao.disabled = true;
+}
+function ativarBotao(){
+    const botao = document.getElementById('btn-registrar')
+    botao.disabled = false;
+}
+
 document.getElementById('show-password').addEventListener('change', function () {
     const passwordField = document.getElementById('password');
     const confirmPasswordField = document.getElementById('confirm-password');
@@ -54,7 +63,7 @@ document.getElementById('ddd-select').addEventListener('change', function() {
 document.querySelector('form').addEventListener('submit', async function(event) {
     event.preventDefault(); // Evita o envio padrão do formulário
     let isValid = true;
-
+    desativarBotao();
     const emailInput = document.getElementById('email').value;
     const emailErro = document.getElementById('email-error');
     emailErro.textContent = ''; // Limpar mensagem de erro anterior
@@ -64,12 +73,14 @@ document.querySelector('form').addEventListener('submit', async function(event) 
         emailErro.textContent = 'O email é obrigatório.';
         emailErro.style.display = 'block'; // Exibir mensagem de erro
         isValid = false;
+        ativarBotao()
     } else {
         const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
         if (!emailRegex.test(emailInput)) {
             emailErro.textContent = 'Formato de Email Inválido.';
             emailErro.style.display = 'block'; // Exibir mensagem de erro
             isValid = false;
+            ativarBotao()
         }
     }
 
@@ -82,6 +93,7 @@ document.querySelector('form').addEventListener('submit', async function(event) 
         erroNome.textContent = 'O nome é obrigatório.';
         erroNome.style.display = 'block';
         isValid = false;
+        ativarBotao()
     }
 
     const cpf = document.getElementById('cpf').value.replace(/\D/g, '');
@@ -94,10 +106,12 @@ document.querySelector('form').addEventListener('submit', async function(event) 
         cpfErro.textContent = 'O CPF é obrigatório.';
         cpfErro.style.display = 'block';  // Exibe o erro
         isValid = false;
+        ativarBotao()
     } else if (cpf.length !== 11) {
         cpfErro.textContent = 'O campo CPF precisa conter 11 dígitos.';
         cpfErro.style.display = 'block';  // Exibe o erro
         isValid = false;
+        ativarBotao()
     }
 
     const phone = document.getElementById('phone').value;
@@ -109,10 +123,12 @@ document.querySelector('form').addEventListener('submit', async function(event) 
         phoneError.textContent = 'O telefone é obrigatório.';
         phoneError.style.display = 'block';
         isValid = false;
+        ativarBotao()
     } else if (phone.length !== 10) {
         phoneError.textContent = 'O campo telefone deve conter 10 dígitos.';
         phoneError.style.display = 'block';
         isValid = false;
+        ativarBotao()
     }
 
     const password = document.getElementById('password').value;
@@ -136,22 +152,27 @@ document.querySelector('form').addEventListener('submit', async function(event) 
         passwordError.textContent = 'A senha é obrigatória.';
         passwordError.style.display = 'block';
         isValid = false;
+        ativarBotao()
     } else if (!hasLowerCase) {
         passwordError.textContent = 'A senha deve conter pelo menos uma letra minúscula.';
         passwordError.style.display = 'block';
         isValid = false;
+        ativarBotao()
     } else if (!hasUpperCase) {
         passwordError.textContent = 'A senha deve conter pelo menos uma letra maiúscula.';
         passwordError.style.display = 'block';
         isValid = false;
+        ativarBotao()
     } else if (!hasSpecialChar) {
         passwordError.textContent = 'A senha deve conter pelo menos um caractere especial.';
         passwordError.style.display = 'block';
         isValid = false;
+        ativarBotao()
     } else if(password.length < 8){
         passwordError.textContent = 'A senha deve conter pelo menos 8 dígitos.';
         passwordError.style.display = 'block';
         isValid = false;
+        ativarBotao()
     }
 
     // Validar senha e confirmação de senha
@@ -159,6 +180,7 @@ document.querySelector('form').addEventListener('submit', async function(event) 
         confirmPasswordError.textContent = 'As senhas não são iguais.';
         confirmPasswordError.style.display = 'block';
         isValid = false;
+        ativarBotao()
     }
 
     if (isValid) {
@@ -169,6 +191,7 @@ document.querySelector('form').addEventListener('submit', async function(event) 
                 emailErro.textContent = 'Este email já está cadastrado.';
                 emailErro.style.display = 'block';  // Exibe o erro
                 isValid = false;
+                ativarBotao()
             }
         } catch (error) {
             console.error('Erro ao verificar o email:', error);
@@ -183,16 +206,14 @@ document.querySelector('form').addEventListener('submit', async function(event) 
                     cpfErro.textContent = 'Este CPF já está cadastrado.';
                     cpfErro.style.display = 'block';
                     isValid = false;
+                    ativarBotao()
                 }
             } catch (error) {
                 console.error('Erro ao verificar o CPF:', error);
             }
         }
     }
-
-    if (isValid) {
-    // O formulário é válido, agora o envio é permitido
-    event.target.submit();
-}
-
+     if (isValid) {
+        event.target.submit(); // Envia o formulário se todas as validações passarem
+    }
 });

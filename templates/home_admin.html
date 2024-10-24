@@ -14,11 +14,11 @@
             <img src="{% static 'img/Logo_pequena.png' %}" alt="Busca Pharma">
         </div>
         <nav>
-            <ul>
-                <li><a href="{% url 'home_admin' id_admin %}" class="active">Agendamentos</a></li>
-                <li><a href="{% url 'relatorio_produtos_interesse' unidade.id_unidade id_admin %}">Relatórios</a></li>
-            </ul>
-        </nav>
+    <ul>
+        <li><a href="{% url 'home_admin' id_admin %}" class="active">Agendamentos</a></li>
+        <li><a href="{% url 'relatorio_produtos_interesse' unidade.id_unidade id_admin %}">Relatórios</a></li>
+    </ul>
+</nav>
     </header>
 
     <!-- Barra de busca -->

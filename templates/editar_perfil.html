@@ -5,7 +5,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Registro</title>
+  <title>Editar Perfil</title>
   <link rel="stylesheet" href="{% static 'css/cadastro_usuario.css' %}">
 </head>
 
@@ -16,25 +16,25 @@
 
 <div class="wrapper">
   <div class="form-box Register">
-    <h2>Cadastre-se</h2>
-    <form action="{% url 'cadastro' %}" method="POST" id="form">
+    <h2>Editar Perfil</h2>
+    <form action="{% url 'editar_perfil_usuario' %}" method="POST" id="form">
         {% csrf_token %}
       <div class="input-box">
         <span class="icon"><ion-icon name="email-outline"></ion-icon></span>
-        <input id="email" type="text" name="email">
+        <input id="email" type="text" name="email" value="{{ user.email }}">
         <label>Email</label>
-          <div id="email-error" class="error-tooltip"></div>
+        <div id="email-error" class="error-tooltip"></div>
       </div>
       <div class="input-box">
         <span class="icon"><ion-icon name="person-outline"></ion-icon></span>
-        <input id="nome" type="text" name="username">
+        <input id="nome" type="text" name="username" value="{{ user.username }}">
         <label>Nome Completo</label>
-          <div id="nome-error" class="error-tooltip"></div>
+        <div id="nome-error" class="error-tooltip"></div>
       </div>
 
       <div class="input-box">
         <span class="icon"><ion-icon name="id-card-outline"></ion-icon></span>
-        <input id="cpf" type="text" name="cpf">
+        <input id="cpf" type="text" name="cpf" value="{{ user.cpf }}">
         <label>CPF</label>
         <div id="cpf-error" class="error-tooltip"></div>
       </div>
@@ -115,38 +115,20 @@
 
         <div class="input-box">
           <span class="icon"><ion-icon name="call-outline"></ion-icon></span>
-          <input type="text" id="phone" name="telefone">
+          <input type="text" id="phone" name="telefone" value="{{ telefone }}">
           <label>Telefone</label>
           <div id="phone-error" class="error-tooltip"></div>
         </div>
       </div>
 
-      <div class="input-box">
-        <span class="icon"><ion-icon name="lock-closed-outline"></ion-icon></span>
-        <input type="password" id="password" name="password">
-        <label>Senha</label>
-        <div id="password-error" class="error-tooltip"></div> <!-- Div para exibir o erro -->
-      </div>
-      <div class="input-box">
-        <span class="icon"><ion-icon name="lock-closed-outline"></ion-icon></span>
-        <input type="password" id="confirm-password" name="password2">
-        <label>Confirmar Senha</label>
-        <div  id="confirm-password-error" class="error-tooltip"></div> <!-- Div para exibir o erro -->
-      </div>
-
-
-
-      <!-- Checkbox para mostrar/ocultar senha -->
-      <div class="show-password-container">
-        <input type="checkbox" id="show-password">
-        <label for="show-password">Mostrar Senha</label>
-      </div>
-
-      <button type="submit" class="btn" id="btn-registrar">Registrar</button>
+      <button type="submit" class="btn" id="btn-atualizar">Atualizar</button>
 
       <div class="login-register">
-        <p>Já possui uma conta? <a href={% url 'login' %}>Login</a></p>
+        <p>Deseja cancelar? <a href="{% url 'home' %}">Voltar para Home</a></p>
       </div>
+        <div class="login-register">
+            <p>Mudar senha? <a href="{% url 'redefinir_senha' %}">Clique aqui</a></p> <!-- Alterado para estar abaixo -->
+        </div>
     </form>
   </div>
 </div>

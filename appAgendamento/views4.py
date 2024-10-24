@@ -7,7 +7,7 @@ from django.core.mail import send_mail
 from appAgendamento.models import Agendamento
 from appBusca.models import Unidade, Item
 from appBusca.views2 import pegar_endereco_por_cep_e_numero
-from appCadUsuario.models import Usuario
+from appUsuario.models import Usuario
 
 
 # Create your views here.

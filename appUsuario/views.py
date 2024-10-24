@@ -6,7 +6,7 @@ from django.contrib.auth import login as auth_login
 from django.contrib.auth.hashers import make_password, check_password
 from django.template.defaultfilters import length
 from django.core.mail import send_mail
-from appCadUsuario.models import Usuario
+from appUsuario.models import Usuario
 
 
 def verificar_existencia(request):

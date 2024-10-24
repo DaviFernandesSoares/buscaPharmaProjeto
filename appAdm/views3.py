@@ -17,6 +17,7 @@ def cadastro_adm(request,id_unidade):
     if request.method == 'POST':
         nome = request.POST['username']
         senha = request.POST['password']
+        nome_completo = request.POST['nome_completo']
 
         if nome and senha and id_unidade:
             unidade = get_object_or_404(Unidade, pk=id_unidade)
@@ -28,8 +29,10 @@ def cadastro_adm(request,id_unidade):
                     'error': 'Já existe um administrador com esse username associado a esta unidade.'
                 })
 
+            first_name = nome_completo.split()[0]
+            last_name = nome_completo.split()[-1]
             # Criando o usuário com a instância da Unidade
-            user = Admin(username=nome, id_unidade=unidade, is_staff=1)
+            user = Admin(username=nome, id_unidade=unidade, is_staff=1,first_name=first_name, last_name=last_name)
             print(user)
             user.set_password(senha)
             user.save()
@@ -74,7 +77,7 @@ def home_admin(request,id_admin):
         admin = Admin.objects.get(pk=id_admin)
         id_unidade = admin.id_unidade
         agendamentos = Agendamento.objects.filter(id_unidade=id_unidade,status='Agendado')
-        return render(request, 'homeAdmin.html', {'agendamentos': agendamentos,'unidade':id_unidade,'id_admin':admin.id_admin})
+        return render(request, 'home_admin.html', {'agendamentos': agendamentos,'unidade':id_unidade,'id_admin':admin.id_admin})
 
 
 

@@ -2,7 +2,7 @@ from django.contrib.auth.decorators import login_required
 from django.db import models
 
 from appBusca.models import Unidade, Item
-from appCadUsuario.models import Usuario
+from appUsuario.models import Usuario
 
 
 class Agendamento(models.Model):

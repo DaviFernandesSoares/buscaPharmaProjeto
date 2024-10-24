@@ -4,7 +4,7 @@ from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from django.urls.base import reverse
 
-from appCadUsuario.models import Usuario
+from appUsuario.models import Usuario
 from django.contrib import messages
 from django.contrib.auth.hashers import make_password
 # Variável para armazenar os códigos temporariamente
