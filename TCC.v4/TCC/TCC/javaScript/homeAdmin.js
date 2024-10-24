@@ -46,6 +46,7 @@ listaCards.forEach((item) => {
       msg.addEventListener('click', (e)=>{
         e.preventDefault();
         modal.remove();
+
         alert(`
         Confirmação de Agendamento para Retirada de Medicamento:
 
@@ -66,3 +67,5 @@ apaga.addEventListener('click', ()=>{
         }
     });
 });
+
+

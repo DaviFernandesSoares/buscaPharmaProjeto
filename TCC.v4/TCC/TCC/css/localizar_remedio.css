@@ -39,3 +39,39 @@ iframe{
 .farmacias ul li:last-child {
     border-bottom: none;
 }
+.modal{
+    position: absolute;
+    z-index: 5;
+    inset: 0px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: rgba(0, 0, 0, 0.5);
+    cursor: pointer;
+}
+.modal-form{
+    padding: 24px;
+    background-color: #f0f0f0;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    gap: 16px;
+    border: 2px transparent rgba(255, 255, 255, 0.5);
+    border-radius: 20px;
+    z-index: 10;
+    cursor: auto;
+    width: max-content;
+    height: max-content;
+    justify-content: center;
+}
+.modal-form label{
+    display: flex;
+    text-align: start;
+    flex-direction: column;   
+    color: #0A4973;
+}
+h1{
+    font-size: 2.5rem;
+    padding: 20px;  
+    color: #0A4973;
+}

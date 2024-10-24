@@ -1,7 +1,6 @@
 .wrapper {
-    position: fixed;
-    width: 540px;
-    height: 640px;
+    width: 640px;
+    height: 740px;
     background: #fff;
     border: 3px solid rgba(255, 255, 255, 0.5);
     border-radius: 40px;
@@ -11,35 +10,23 @@
     justify-content: center;
     align-items: center;
     z-index: 2;
-    top: 50%;
-    transform: translateY(-50%);
+    margin: 10px 30%;
 }
-.form-box h2 {
+.form-box h1 {
     font-size: 3.5em;
-    color: #162938;
+    color: #0A4973;
     text-align: center;
-    margin-bottom: 0px;
+    margin-bottom: 20px;
 }
 .input-box {
     position: relative;
     width: 100%;
     height: 60px;
-    border-bottom: 2px solid #162938;
-    margin: 4px auto;
+    border-bottom: 2px solid #0A4973;
     display: flex;
     align-items: center;
 }
-.input-box label {
-    position: absolute;
-    top: 30%;
-    left: 5px;
-    transform: translateY(0%);
-    font-size: 1em;
-    color: #162938;
-    font-weight: 1000;
-    pointer-events: none;
-    transition: 0.5s;
-}
+
 .input-box input:focus~label,
 .input-box input:valid~label {
     top: -5px;
@@ -51,26 +38,25 @@
     border: none;
     outline: none;
     font-size: 1.2em;
-    color: #162938;
-    font-weight: 600;
-    padding: 0 35px 0 5px;
+    color: #0A4973;
+    font-weight: 900;
 }
 .input-box .icon {
     position: absolute;
     right: 20px;
     font-size: 1.2em;
-    color: #162938;
+    color: #0A4973;
     line-height: 57px;
 }
 .show-password-container {
     font-size: 0.9em;
-    color: #162938;
+    color: #0A4973;
     font-weight: 500;
     margin-bottom: 15px;
     display: flex;
 }
 .show-password-container input {
-    accent-color: #162938;
+    accent-color: #0A4973;
     margin-right: 10px;
 }
 .btn {
@@ -82,18 +68,17 @@
     border-radius: 6px;
     cursor: pointer;
     font-size: 1.5em;
-    color: #162938;
+    color: #0A4973;
     font-weight: 500;
 }
 .login-register {
     font-size: 1.5em;
-    color: #162938;
-    text-align: center;
+    color: #0A4973;
+    text-align: start;
     font-weight: 500;
-    margin: 25px 0 10px;
 }
 .login-register p a {
-    color: #162938;
+    color: #0A4973;
     text-decoration: none;
     font-weight: 600;
 }
