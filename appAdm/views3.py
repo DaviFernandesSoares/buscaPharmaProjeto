@@ -13,33 +13,34 @@ from appAdm.models import Admin
 
 
 
-def cadastro_adm(request,id_unidade):
+def cadastro_adm(request,id_unidade,username_admin):
     if request.method == 'POST':
-        nome = request.POST['username']
+        username = request.POST.get('username')
         senha = request.POST['password']
-        nome_completo = request.POST['nome_completo']
-
-        if nome and senha and id_unidade:
+        nome_completo = request.POST.get('nome_completo')
+        print(nome_completo)
+        first_name = nome_completo.split()[0]
+        last_name = nome_completo.split()[-1]
+        if nome_completo and senha and id_unidade and username:
             unidade = get_object_or_404(Unidade, pk=id_unidade)
 
             # Verifica se já existe um admin associado a essa unidade
-            if Admin.objects.filter(username=nome).exists():
+            if Admin.objects.filter(username=username,is_superuser=0).exists():
                 # Retorna mensagem de erro se já existir um admin
                 return render(request, 'cadastro_admin.html', {
                     'error': 'Já existe um administrador com esse username associado a esta unidade.'
                 })
 
-            first_name = nome_completo.split()[0]
-            last_name = nome_completo.split()[-1]
+
             # Criando o usuário com a instância da Unidade
-            user = Admin(username=nome, id_unidade=unidade, is_staff=1,first_name=first_name, last_name=last_name)
+            user = Admin(username=username, id_unidade=unidade, is_staff=1,first_name=first_name, last_name=last_name)
             print(user)
             user.set_password(senha)
             user.save()
 
-            return redirect('login_admin')
+            return redirect('home_admin_geral', username_admin)
 
-    return render(request, 'cadastro_admin.html',{'id_unidade':id_unidade})
+    return render(request, 'cadastro_admin.html',{'id_unidade':id_unidade,'username':username_admin})
 
 
 

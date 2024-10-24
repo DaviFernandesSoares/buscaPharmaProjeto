@@ -12,7 +12,10 @@
         <div class="logo">
           <a href="#"><img src="{% static 'img/Logo_pequena.png' %}" alt="Busca Pharma"/></a>
         </div>
-        <a href="{% url 'criar_admin_unidade' id_unidade %}">Cadastrar Admins</a>
+        <nav>
+            <a href="{% url 'criar_admin_unidade' id_unidade username %}">Cadastrar Admins</a>
+            <a href="{% url 'cria_evento' username id_unidade %}">Criar Eventos</a>  <!-- Link para Criar Eventos -->
+        </nav>
     </header>
     <div class="search-container">
         <input type="text" placeholder="Procure pela unidade:" class="search-input" id="search-bar">
@@ -43,5 +46,6 @@
     </section>
     <script src="../TCC.v4/TCC/TCC/javaScript/homeAdminGeral.js"></script>
     <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
-    <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>    
+    <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
 </body>
+</html>

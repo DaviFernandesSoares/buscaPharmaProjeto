@@ -1,3 +1,5 @@
+from datetime import datetime
+
 from django.utils import timezone
 from django.contrib.auth.decorators import login_required
 import json
@@ -59,11 +61,12 @@ def agendar(request, id_item, id_unidade):
                                                hora=hora)
                 novo_agendamento.save()
 
+            data_br = datetime.strptime(data, '%Y-%m-%d').strftime('%d-%m-%Y')
             # Envio de email após salvar um novo agendamento
             email = request.user.email
             send_mail(
                 'Agendamento realizado com sucesso!',
-                f'Agendamento referente ao dia - {data}, hora - {hora}\nMedicamento: {item.nome_item}\n\nRealizado com sucesso!\n\nUnidade: {unidade_info.nome}\n\nCompareça ao local e informe seu nome para uma possível retirada.\nSe acaso não for comparecer, pedimos que cancele seu agendamento!',
+                f'Agendamento referente ao dia: {data_br}, horário; {hora}\n\nRealizado com sucesso!\n\nMedicamento: {item.nome_item}\n\nUnidade: {unidade_info.nome}\n\nCompareça ao local e informe seu nome para uma possível retirada.\nSe acaso não for comparecer, pedimos que cancele seu agendamento!\n\n att.Equipe Busca',
                 'buscapharmatcc@gmail.com',  # Remetente
                 [email],  # Destinatário
                 fail_silently=False,

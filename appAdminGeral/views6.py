@@ -2,10 +2,13 @@ from django.contrib.auth.decorators import user_passes_test, login_required
 from django.http import JsonResponse
 from django.contrib.auth import login as auth_login
 from django.shortcuts import render, redirect
+
+from appBusca.models import Unidade, Item
 from .forms import AdminGeralForm
 from .models import Admin
 from appAdm.views3 import cadastro_adm
 from django.db.models import Value, CharField, Case, When
+from appAdminGeral.models import Evento
 
 
 def is_superuser(user):
@@ -16,11 +19,9 @@ def login_adm_geral(request):
         'success': False,
         'mensagem': ''
     }
-
     if request.method == 'POST':
         username = request.POST.get('username')
         password = request.POST.get('password')
-
         if username and password:
             try:
                 # Busca o admin com o username fornecido
@@ -90,10 +91,64 @@ def home_admin_geral(request,username):
         context = {
             'admins': admins_da_unidade,
             'id_unidade': id_unidade,
+            'username':username,
         }
         return render(request, 'home_admin_geral.html', context)
     except Admin.DoesNotExist:
         return render(request, '404.html')
 
-def criar_admin_unidade(request,id_unidade):
-    return cadastro_adm(request,id_unidade=id_unidade)
+def criar_admin_unidade(request,id_unidade,username_admin):
+    return cadastro_adm(request,id_unidade=id_unidade,username_admin=username_admin)
+
+def criar_evento(request,username,id_unidade):
+    return render(request,'criar_evento.html',{'username':username, 'id_unidade':id_unidade})
+
+
+def salvar_evento(request):
+    resposta = {
+        'success': False,
+        'mensagem': ''
+    }
+
+    if request.method == 'POST':
+        try:
+            # Captura os dados enviados no formulário
+            descricao = request.POST.get('descricao_evento')
+            horario_inicio = request.POST.get('hora_evento')
+            horario_encerramento = request.POST.get('hora_encerramento')
+            id_unidade = request.POST.get('id_unidade')  # Supondo que tenha uma unidade associada
+            id_item = request.POST.get('id_item')  # Supondo que tenha um item associado
+
+            # Verifica se os campos obrigatórios estão preenchidos
+            if not descricao or not horario_inicio or not horario_encerramento or not id_unidade or not id_item:
+                resposta['mensagem'] = 'Todos os campos devem ser preenchidos.'
+                return JsonResponse(resposta)
+
+            # Verifica se a unidade e o item existem
+            unidade = Unidade.objects.get(id_unidade=id_unidade)
+            item = Item.objects.get(id_item=id_item)
+
+            # Cria o evento
+            evento = Evento(
+                descricao=descricao,
+                horario_inicio=horario_inicio,
+                horario_encerramento=horario_encerramento,
+                id_unidade=unidade,
+                id_item=item
+            )
+            evento.save()
+
+            resposta['success'] = True
+            resposta['mensagem'] = 'Evento criado com sucesso!'
+            resposta['url'] = '/home_admin_geral/' + request.user.username  # URL para redirecionar após sucesso
+
+        except Unidade.DoesNotExist:
+            resposta['mensagem'] = 'Unidade não encontrada.'
+        except Item.DoesNotExist:
+            resposta['mensagem'] = 'Item não encontrado.'
+        except Exception as e:
+            resposta['mensagem'] = f'Erro ao salvar o evento: {str(e)}'
+
+        return JsonResponse(resposta)
+
+    return render(request, 'criar_evento.html')
