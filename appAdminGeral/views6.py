@@ -1,9 +1,10 @@
+from django.utils import timezone
 from django.contrib.auth.decorators import user_passes_test, login_required
 from django.http import JsonResponse
 from django.contrib.auth import login as auth_login
 from django.shortcuts import render, redirect
 
-from appBusca.models import Unidade, Item
+from appBusca.models import Unidade, Item, Estoque
 from .forms import AdminGeralForm
 from .models import Admin
 from appAdm.views3 import cadastro_adm
@@ -101,7 +102,9 @@ def criar_admin_unidade(request,id_unidade,username_admin):
     return cadastro_adm(request,id_unidade=id_unidade,username_admin=username_admin)
 
 def criar_evento(request,username,id_unidade):
-    return render(request,'criar_evento.html',{'username':username, 'id_unidade':id_unidade})
+    itens_da_unidade = Estoque.objects.filter(id_unidade=id_unidade).values_list('id_item', flat=True)
+    itens = Item.objects.filter(id_item__in=itens_da_unidade)
+    return render(request,'criar_evento.html',{'username':username, 'id_unidade':id_unidade,'itens':itens})
 
 
 def salvar_evento(request):
@@ -114,13 +117,14 @@ def salvar_evento(request):
         try:
             # Captura os dados enviados no formulário
             descricao = request.POST.get('descricao_evento')
+            data_evento = request.POST.get('data_evento')
             horario_inicio = request.POST.get('hora_evento')
             horario_encerramento = request.POST.get('hora_encerramento')
-            id_unidade = request.POST.get('id_unidade')  # Supondo que tenha uma unidade associada
-            id_item = request.POST.get('id_item')  # Supondo que tenha um item associado
+            id_unidade = request.POST.get('id_unidade')
+            id_item = request.POST.get('id_item')
 
             # Verifica se os campos obrigatórios estão preenchidos
-            if not descricao or not horario_inicio or not horario_encerramento or not id_unidade or not id_item:
+            if not descricao or not horario_inicio or not horario_encerramento or not data_evento or not id_unidade or not id_item:
                 resposta['mensagem'] = 'Todos os campos devem ser preenchidos.'
                 return JsonResponse(resposta)
 
@@ -128,11 +132,18 @@ def salvar_evento(request):
             unidade = Unidade.objects.get(id_unidade=id_unidade)
             item = Item.objects.get(id_item=id_item)
 
-            # Cria o evento
+            data_atual = timezone.localtime().date
+            data_evento_formatada = data_evento.strftime('%d/%m/%Y')
+            if data_evento_formatada < data_atual.strftime('%Y-%m-%d'):
+                resposta['mensagem'] = 'Não é possível fazer agendamentos em dias anteriores.'
+                return JsonResponse(resposta)
+
+            # Cria o evento com a data
             evento = Evento(
                 descricao=descricao,
                 horario_inicio=horario_inicio,
                 horario_encerramento=horario_encerramento,
+                data_evento=data_evento,  # Salvando a data do evento
                 id_unidade=unidade,
                 id_item=item
             )
@@ -152,3 +163,4 @@ def salvar_evento(request):
         return JsonResponse(resposta)
 
     return render(request, 'criar_evento.html')
+

@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="{% static 'css/homeAdminGeral.css' %}">
     <style>
         /* Estilo para aumentar o tamanho dos campos de seleção e área de texto */
-        select, textarea, input[type="time"] {
+        select, textarea, input[type="time"], input[type="date"] {
             width: 100%;
             font-size: 1.2em;
             padding: 10px;
@@ -41,6 +41,20 @@
             background-color: #f2f2f2;
             border-radius: 10px;
         }
+
+        .date-input {
+            font-size: 1.2em;
+            padding: 10px 10px 10px 45px; /* Espaço para o ícone */
+        }
+
+        .calendar-icon {
+            position: absolute;
+            top: 50%;
+            left: 10px;
+            transform: translateY(-50%);
+            font-size: 1.5em;
+            color: #888;
+        }
     </style>
 </head>
 <body>
@@ -49,17 +63,24 @@
             <a href="#"><img src="{% static 'img/Logo_pequena.png' %}" alt="Busca Pharma"/></a>
         </div>
         <nav>
-            <a href="{% url 'home_admin_geral' username %}">Voltar para Home</a>  <!-- Link para voltar à home -->
+            <a href="{% url 'home_admin_geral' username %}">Voltar para Home</a>
         </nav>
     </header>
     
     <section class="form-container">
         <h1>Criar Evento</h1>
-        <form method="POST" action="{% url 'salvar_evento' %}">  <!-- URL correta para salvar o evento -->
+        <form method="POST" action="{% url 'salvar_evento' %}">
             {% csrf_token %}
             <div class="form-group">
                 <label for="descricao_evento">Descrição do Evento:</label>
                 <textarea id="descricao_evento" name="descricao_evento" rows="6" required></textarea>
+            </div>
+            <div class="form-group">
+                <label for="data_evento">Data do Evento:</label>
+                <div style="position: relative;">
+                    <input type="date" id="data_evento" name="data_evento" required class="date-input">
+                    <ion-icon name="calendar-outline" class="calendar-icon"></ion-icon>
+                </div>
             </div>
             <div class="form-group">
                 <label for="hora_evento">Hora de Início:</label>
@@ -72,7 +93,6 @@
             <div class="form-group">
                 <label for="id_item">Selecione o Item:</label>
                 <select id="id_item" name="id_item" required>
-                    <!-- Lista de itens carregados dinamicamente -->
                     {% for item in itens %}
                         <option value="{{ item.id_item }}">{{ item.nome_item }}</option>
                     {% endfor %}
@@ -81,7 +101,7 @@
             <div class="form-group">
                 <label for="id_unidade">Unidade:</label>
                 <input type="hidden" id="id_unidade" name="id_unidade" value="{{ id_unidade }}" readonly>
-                <p>{{ id_unidade }}</p> <!-- Mostra a unidade associada -->
+                <p>{{ id_unidade }}</p>
             </div>
             <div class="form-group">
                 <button type="submit">Criar Evento</button>
@@ -91,6 +111,6 @@
 
     <script src="{% static 'js/homeAdminGeral.js' %}"></script>
     <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
-    <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>    
+    <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
 </body>
 </html>
