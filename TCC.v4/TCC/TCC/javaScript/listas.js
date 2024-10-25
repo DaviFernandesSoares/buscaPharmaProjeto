@@ -1,4 +1,5 @@
 listaCards = [
+ 
   {
     events: "Vacina Covid",
     locality: "UBS-III",
@@ -6,125 +7,8 @@ listaCards = [
     hours: "08:00/17:00",
     maps: "https://www.google.com/maps/embed?...",
   },
-  {
-    events: "Doação Dipirona",
-    locality: "UBS-II",
-    date: "31/08/2024",
-    hours: "08:00/17:00",
-    maps: "https://www.google.com/maps/embed?...",
-  },
-  {
-    events: "Vacina Sarampo",
-    locality: "UBS-IV",
-    date: "31/08/2024",
-    hours: "08:00/17:00",
-    maps: "https://www.google.com/maps/embed?...",
-  },
-  {
-    events: "Vacina da Gripe",
-    locality: "UBS-III",
-    date: "31/08/2024",
-    hours: "08:00/17:00",
-    maps: "https://www.google.com/maps/embed?...",
-  },
-  {
-    events: "Vacina Covid",
-    locality: "UBS-III",
-    date: "31/08/2024",
-    hours: "08:00/17:00",
-    maps: "https://www.google.com/maps/embed?...",
-  },
-  {
-    events: "Doação Dipirona",
-    locality: "UBS-II",
-    date: "31/08/2024",
-    hours: "08:00/17:00",
-    maps: "https://www.google.com/maps/embed?...",
-  },
-  {
-    events: "Vacina Sarampo",
-    locality: "UBS-IV",
-    date: "31/08/2024",
-    hours: "08:00/17:00",
-    maps: "https://www.google.com/maps/embed?...",
-  },
-  {
-    events: "Vacina da Gripe",
-    locality: "UBS-III",
-    date: "31/08/2024",
-    hours: "08:00/17:00",
-    maps: "https://www.google.com/maps/embed?...",
-  },
-  {
-    events: "Vacina Covid",
-    locality: "UBS-III",
-    date: "31/08/2024",
-    hours: "08:00/17:00",
-    maps: "https://www.google.com/maps/embed?...",
-  },
-  {
-    events: "Doação Dipirona",
-    locality: "UBS-II",
-    date: "31/08/2024",
-    hours: "08:00/17:00",
-    maps: "https://www.google.com/maps/embed?...",
-  },
-  {
-    events: "Vacina Sarampo",
-    locality: "UBS-IV",
-    date: "31/08/2024",
-    hours: "08:00/17:00",
-    maps: "https://www.google.com/maps/embed?...",
-  },
-  {
-    events: "Vacina da Gripe",
-    locality: "UBS-III",
-    date: "31/08/2024",
-    hours: "08:00/17:00",
-    maps: "https://www.google.com/maps/embed?...",
-  },
-  {
-    events: "Vacina Covid",
-    locality: "UBS-III",
-    date: "31/08/2024",
-    hours: "08:00/17:00",
-    maps: "https://www.google.com/maps/embed?...",
-  },
-  {
-    events: "Doação Dipirona",
-    locality: "UBS-II",
-    date: "31/08/2024",
-    hours: "08:00/17:00",
-    maps: "https://www.google.com/maps/embed?...",
-  },
-  {
-    events: "Vacina Sarampo",
-    locality: "UBS-IV",
-    date: "31/08/2024",
-    hours: "08:00/17:00",
-    maps: "https://www.google.com/maps/embed?...",
-  },
-  {
-    events: "Vacina da Gripe",
-    locality: "UBS-III",
-    date: "31/08/2024",
-    hours: "08:00/17:00",
-    maps: "https://www.google.com/maps/embed?...",
-  },
-  {
-    events: "Doação Dipirona",
-    locality: "UBS-II",
-    date: "31/08/2024",
-    hours: "08:00/17:00",
-    maps: "https://www.google.com/maps/embed?...",
-  },
-  {
-    events: "Doação Dipirona",
-    locality: "UBS-II",
-    date: "31/08/2024",
-    hours: "08:00/17:00",
-    maps: "https://www.google.com/maps/embed?...",
-  },
+ 
+ 
 ];
 
 const listaRemedios = [

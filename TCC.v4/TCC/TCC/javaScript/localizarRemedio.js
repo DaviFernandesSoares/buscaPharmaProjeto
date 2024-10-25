@@ -23,3 +23,50 @@ document.addEventListener('DOMContentLoaded', () => {
             map.src = newSrc;
         });
     });
+
+    
+  const agendar = document.querySelectorAll(".agendar-btn");
+    agendar.forEach((e) => {
+    e.addEventListener("click", () => {
+        const deleteModal = document.querySelector(".modal");
+        if(deleteModal){
+            deleteModal.remove();
+        }
+      const modal = document.createElement("div");
+      modal.classList.add("modal");
+
+      modal.addEventListener("click", (e) => {
+        if (e.target === modal) {
+          modal.remove();
+        }
+      });
+      modal.innerHTML = `<form class="modal-form">
+                    <h1>Agendar Horário</h1>
+                    <label for="data">Data:</label>
+                    <input type="date" id="data" name="data" required>
+                    <label for="hora">Hora:</label>
+                    <input type="time" id="hora" name="hora" required>
+                    <div class="button-container">
+                     <button type="submit" class="confirmar">Agendar Horário</button>
+                      </div>
+                        </form>`;
+
+      document.body.appendChild(modal);
+
+      const msg = modal.querySelector(".confirmar");
+      msg.addEventListener('click', (e)=>{
+        e.preventDefault();
+        modal.remove();
+        alert(`
+        Confirmação de Agendamento para Retirada de Medicamento:
+
+        Confirmamos seu agendamento para a retirada do medicamento 
+        por favor acompanhe seus agendamentos pelo site
+        ou pelo email, se tiver alguma alteração, nos lhe informamos.
+        Agradecemos a sua confiança e esperamos vê-lo(a) em breve.
+    `);
+    
+    window.location.href = "../Users/Agendamentos.html";
+      })
+    });
+});
