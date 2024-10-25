@@ -27,7 +27,7 @@ def agendar(request, id_item, id_unidade):
         hora = data_json.get('hora')
 
         # Verifica se a data é menor que a data atual
-        today = timezone.now().date()
+        today = timezone.now().date
         horario_atual = timezone.localtime().time()
         if data < today.strftime('%Y-%m-%d') or (
                 hora < horario_atual.strftime('%H:%M') and data < today.strftime('%Y-%m-%d')):

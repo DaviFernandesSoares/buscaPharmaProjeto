@@ -37,5 +37,5 @@ urlpatterns = [
     path('criar_admin_unidade/<int:id_unidade>/<str:username_admin>/',views6.criar_admin_unidade, name='criar_admin_unidade'),
     path('editar_perfil_usuario/', views7.editar_perfil_usuario,name='editar_perfil_usuario'),
     path('cria_evento/<str:username>/<int:id_unidade>/',views6.criar_evento,name='cria_evento'),
-    path('salvar_evento/',views6.salvar_evento,name='salvar_evento'),
+    path('salvar_evento/<str:username>/',views6.salvar_evento,name='salvar_evento'),
 ]

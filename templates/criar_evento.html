@@ -42,6 +42,11 @@
             border-radius: 10px;
         }
 
+        .error-message {
+            color: red;
+            margin-bottom: 20px;
+        }
+
         .date-input {
             font-size: 1.2em;
             padding: 10px 10px 10px 45px; /* Espaço para o ícone */
@@ -69,7 +74,8 @@
     
     <section class="form-container">
         <h1>Criar Evento</h1>
-        <form method="POST" action="{% url 'salvar_evento' %}">
+        <div id="error-message" class="error-message" style="display:none;"></div> <!-- Error message div -->
+        <form method="POST" action="{% url 'salvar_evento' username %}">
             {% csrf_token %}
             <div class="form-group">
                 <label for="descricao_evento">Descrição do Evento:</label>
@@ -112,5 +118,33 @@
     <script src="{% static 'js/homeAdminGeral.js' %}"></script>
     <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
     <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+    
+    <script>
+        const form = document.querySelector('form');
+        const errorMessageDiv = document.getElementById('error-message');
+
+        form.addEventListener('submit', async function(event) {
+            event.preventDefault();
+            errorMessageDiv.style.display = 'none'; // Reset error message
+            const formData = new FormData(form);
+            
+            const response = await fetch(form.action, {
+                method: 'POST',
+                body: formData,
+                headers: {
+                    'X-CSRFToken': formData.get('csrfmiddlewaretoken')
+                }
+            });
+
+            const result = await response.json();
+
+            if (result.success) {
+                window.location.href = result.url; // Redirecionar em caso de sucesso
+            } else {
+                errorMessageDiv.textContent = result.mensagem; // Mostrar mensagem de erro
+                errorMessageDiv.style.display = 'block'; // Exibir o div de erro
+            }
+        });
+    </script>
 </body>
 </html>

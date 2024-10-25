@@ -1,8 +1,10 @@
+from datetime import datetime
+
 from django.utils import timezone
 from django.contrib.auth.decorators import user_passes_test, login_required
 from django.http import JsonResponse
 from django.contrib.auth import login as auth_login
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 
 from appBusca.models import Unidade, Item, Estoque
 from .forms import AdminGeralForm
@@ -107,7 +109,7 @@ def criar_evento(request,username,id_unidade):
     return render(request,'criar_evento.html',{'username':username, 'id_unidade':id_unidade,'itens':itens})
 
 
-def salvar_evento(request):
+def salvar_evento(request,username):
     resposta = {
         'success': False,
         'mensagem': ''
@@ -117,41 +119,44 @@ def salvar_evento(request):
         try:
             # Captura os dados enviados no formulário
             descricao = request.POST.get('descricao_evento')
-            data_evento = request.POST.get('data_evento')
+            data_evento = request.POST.get('data_evento')  # Espera-se que seja uma string no formato YYYY-MM-DD
             horario_inicio = request.POST.get('hora_evento')
             horario_encerramento = request.POST.get('hora_encerramento')
             id_unidade = request.POST.get('id_unidade')
             id_item = request.POST.get('id_item')
 
             # Verifica se os campos obrigatórios estão preenchidos
-            if not descricao or not horario_inicio or not horario_encerramento or not data_evento or not id_unidade or not id_item:
+            if not all([descricao, horario_inicio, horario_encerramento, data_evento, id_unidade, id_item]):
                 resposta['mensagem'] = 'Todos os campos devem ser preenchidos.'
-                return JsonResponse(resposta)
+                return JsonResponse(resposta, status=400)
 
             # Verifica se a unidade e o item existem
-            unidade = Unidade.objects.get(id_unidade=id_unidade)
-            item = Item.objects.get(id_item=id_item)
+            unidade = get_object_or_404(Unidade, id_unidade=id_unidade)
+            item = get_object_or_404(Item, id_item=id_item)
 
-            data_atual = timezone.localtime().date
-            data_evento_formatada = data_evento.strftime('%d/%m/%Y')
-            if data_evento_formatada < data_atual.strftime('%Y-%m-%d'):
-                resposta['mensagem'] = 'Não é possível fazer agendamentos em dias anteriores.'
-                return JsonResponse(resposta)
+            # Converte a string de data para um objeto date
+            data_evento_obj = datetime.strptime(data_evento, '%Y-%m-%d').date()
+            data_atual = timezone.localtime().date()  # Correção com parênteses
+
+            # Verifica se a data do evento é válida
+            if data_evento_obj < data_atual:
+                resposta['mensagem'] = 'Não é possível fazer agendamentos em dias anteriores ou não antecipado.'
+                return JsonResponse(resposta, status=400)
 
             # Cria o evento com a data
             evento = Evento(
                 descricao=descricao,
                 horario_inicio=horario_inicio,
                 horario_encerramento=horario_encerramento,
-                data_evento=data_evento,  # Salvando a data do evento
+                data_evento=data_evento_obj,  # Salvando a data do evento
                 id_unidade=unidade,
                 id_item=item
             )
             evento.save()
-
+            print('Teste'+request.user.username)
             resposta['success'] = True
             resposta['mensagem'] = 'Evento criado com sucesso!'
-            resposta['url'] = '/home_admin_geral/' + request.user.username  # URL para redirecionar após sucesso
+            resposta['url'] = '/home_admin_geral/' + username  # URL para redirecionar após sucesso
 
         except Unidade.DoesNotExist:
             resposta['mensagem'] = 'Unidade não encontrada.'
