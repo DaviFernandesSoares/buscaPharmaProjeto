@@ -29,9 +29,9 @@ def busca(request):
 def medicamento(request, id_item):
     id_item = int(id_item)
     item = Item.objects.filter(id_item=id_item)
-    id_tipo_a = item.values('id_tipo')
-    id_tipo_b = id_tipo_a[0]['id_tipo']
-    if id_tipo_b == 1:
+    array_id_tipo = item.values('id_tipo')
+    id_tipo = array_id_tipo[0]['id_tipo']
+    if id_tipo == 1:
         aux_indicacao = Aux_item_indicacao.objects.get(id_item=id_item)
         id_indicacao = aux_indicacao.id_indicacao.id_indicacao
         indicacao = Indicacao.objects.get(id_indicacao=id_indicacao )
@@ -56,7 +56,8 @@ def medicamento(request, id_item):
         }),
     }
     else:
-        context = {}
+        context = {'item': item,
+                    'itens_json': json.dumps(list(item.values('id_item', 'nome_item', 'comp_ativ_itm')))}
     return render(request, 'produto.html', context)
 
 
