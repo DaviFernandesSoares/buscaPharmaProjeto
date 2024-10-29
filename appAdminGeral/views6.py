@@ -55,26 +55,30 @@ def login_adm_geral(request):
 
 
 
-senha_admin = 'Jorge1234'
 
 
-def criar_admin(request,senha):
-    if request.method == 'POST':
-        form = AdminGeralForm(request.POST)
+def criar_admin(request, senha):
+    senha_admin = 'Jorge1234'
+    if senha != senha_admin:
+        return JsonResponse({'success': False, 'mensagem': 'Senha incorreta. Acesso negado.'}, status=403)
+    else:
+        if request.method == 'POST':
 
-        if form.is_valid():
-            admin = form.save(commit=False)
-            admin.set_password(form.cleaned_data['password'])
-            admin.is_superuser = True
-            admin.is_staff = True
-            admin.save()
-            return JsonResponse({'success': True, 'mensagem': 'Admin criado com sucesso!'})
-        else:
-            return JsonResponse({'success': False, 'mensagem': 'Erro ao criar Admin. Verifique os dados.'})
+            form = AdminGeralForm(request.POST)
 
-    # Se não for um POST, cria um formulário vazio
-    form = AdminGeralForm()
-    return render(request, 'criar_admin.html', {'form': form})
+            if form.is_valid():
+                admin = form.save(commit=False)
+                admin.set_password(form.cleaned_data['password'])  # Certifique-se de usar a senha do formulário
+                admin.is_superuser = True
+                admin.is_staff = True
+                admin.save()
+                return JsonResponse({'success': True, 'mensagem': 'Admin criado com sucesso!'})
+            else:
+                return JsonResponse({'success': False, 'mensagem': 'Erro ao criar Admin. Verifique os dados.'})
+
+        # Se não for um POST, cria um formulário vazio
+        form = AdminGeralForm()
+        return render(request, 'criar_admin.html', {'form': form})
 
 
 def home_admin_geral(request,username):

@@ -1,183 +1,121 @@
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: 'Poppins', sans-serif;
-}
-
-body {
-    font-family: Arial, sans-serif;
-    background-color: #f9f9f9;
-}
-
-header {
-    background-color: #003366;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 10px 20px;
-    color: white;
-}
-
-header .logo img {
-    background: white;
-    border-radius: 3%;
-    height: 60px;
-    width: 180px;
-    padding: 0 1rem;
-    margin-left: 30px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 2.0);
-}
-
-header nav ul {
-    list-style: none;
-    display: flex;
-    margin: 0;
-    padding: 0;
-}
-
-header nav ul li {
-    margin-right: 20px;
-}
-
-header nav ul li a {
-    color: white;
-    text-decoration: none;
-}
-
-.search-container {
-    display: flex;
-    justify-content: center;
-    margin: 20px;
-}
-
-.search-input {
-    width: 300px;
-    padding: 10px;
-    font-size: 16px;
-    border-radius: 20px;
-    border: 1px solid #ccc;
-    text-indent: 30px;
-    background: url('static/img/pesquisa.png') no-repeat 10px center;
-    background-size: 20px 20px;
-}
-
-.container {
+.table-container {
+    position: absolute;
+    margin: 2% 20%;
     width: 100%;
-    padding: 20px;
+}
+table{
+    width: 60%;
+    border-collapse: collapse;
+    text-align: justify;
+    color: black;
+    background-color: white;
+}
+th{
+    border: 2px solid #0A4973;
+    padding: 10px 40px;
+    text-align: justify;
+}
+td {
+    border: 2px solid #0A4973;
+    padding: 10px 40px;
+    text-align: justify;
+}
+td a {
+    color: #0a4070;
+}
+td a:hover {
+    color: #FFA800; /* Cor laranja quando o mouse passa sobre o link */
+}
+.container {
+    display: flex;
+    justify-content: center; /* Centraliza horizontalmente */
+    align-items: center; /* Centraliza verticalmente, se necessário */
+    flex-direction: column; /* Alinha os filhos em coluna, se houver mais de um */
+    margin: 20px auto; /* Margem para espaçamento */
 }
 
 .responsive-table {
-    width: 60%;
-    margin: 0 auto;
-    border-collapse: collapse;
-    background-color: #fff;
+    width: 100%; /* Ajusta a tabela para ocupar 100% do espaço do contêiner */
+    max-width: 800px; /* Define uma largura máxima */
+    border-collapse: collapse; /* Remove espaços entre as bordas */
+    margin: 0 auto; /* Centraliza a tabela */
+}
+.pagination {
+    display: flex; /* Usa flexbox para alinhar os botões em linha */
+    justify-content: center; /* Centraliza os botões */
+    margin-top: 20px;
+    margin-bottom: 20px;
 }
 
-th,
-td {
-    padding: 10px;
-    text-align: left;
-    border: 1px solid #ddd;
+.page-btn {
+    margin: 0 5px;
+    padding: 10px 15px; /* Aumenta o padding dos botões */
+    cursor: pointer;
+    border: 2px solid #0A4973; /* Borda dos botões */
+    border-radius: 5px; /* Bordas arredondadas */
+    background-color: white; /* Fundo branco */
+    color: #0A4973; /* Cor do texto */
+    transition: background-color 0.3s; /* Efeito de transição */
 }
 
-th {
-    background-color: #f1f1f1;
+.page-btn:hover {
+    background-color: #0A4973; /* Fundo ao passar o mouse */
+    color: white; /* Cor do texto ao passar o mouse */
 }
-
-tbody tr:nth-child(even) {
-    background-color: #f9f9f9;
-}
-
-.tarja {
-    color: #fff;
-    padding: 5px;
-    text-align: center;
-    border-radius: 5px;
-}
-
-.tarja.vermelha {
-    background-color: red;
-}
-
-.tarja.amarela {
-    background-color: yellow;
-    color: black;
-}
-
-.tarja.verde {
-    background-color: green;
-}
-
-/* Estilos apenas para links, excluindo aqueles que contêm botões */
-nav a:not(.botoes) {
-    position: relative;
-    font-size: 1.2em;
-    text-decoration: none;
+.active {
+    background-color: #0a4070;
     color: white;
-    font-weight: 500;
-    margin-left: 40px;
 }
-
-nav a:not(.botoes)::after {
-    content: '';
+.dropdown {
+    display: none; /* Inicialmente escondido */
     position: absolute;
-    left: 0;
-    bottom: -6px;
-    width: 100%;
-    height: 3px;
-    background: #fff;
+    background-color: white;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+}
+.dropdown a {
+    display: block;
+    padding: 8px 12px;
+    color: #333;
+    text-decoration: none;
+}
+.dropdown a:hover {
+    background-color: #f0f0f0;
+}
+.logo-icon {
+    width: 40px; /* Tamanho do ícone */
+    height: auto; /* Mantém a proporção */
+    cursor: pointer; /* Muda o cursor ao passar sobre o ícone */
+}
+
+a{
+    text-decoration: none;
+    color: #ffffff;
+}
+.search-container {
+    display: flex;
+    justify-content: center; /* Centraliza o conteúdo */
+    align-items: center; /* Alinha verticalmente */
+    padding: 10px; /* Adiciona um pouco de padding */
+}
+
+.search-input {
+    width: 100%; /* Pode ser 100% para preencher o espaço disponível */
+    max-width: 600px; /* Define uma largura máxima */
+    padding: 15px; /* Aumenta o padding para melhor usabilidade */
+    font-size: 1.2em; /* Aumenta o tamanho da fonte */
     border-radius: 5px;
-    transform-origin: right;
-    transform: scaleX(0);
-    transition: transform .5s;
+    border: 2px solid #d4d9df;
+    margin-right: 10px; /* Espaço entre o input e o botão */
+}
+.instruction-text {
+    text-align: center; /* Centraliza o texto */
+    margin: 20px 0; /* Espaçamento acima e abaixo */
+    font-size: 1em; /* Aumenta o tamanho da fonte */
+    color: #0a4070; /* Cor do texto */
 }
 
-nav a:not(.botoes):hover::after {
-    transform-origin: left;
-    transform: scaleX(1);
-}
 
-/* Estilos específicos para botões dentro de links */
-nav a.botoes button.btnRegister {
-    width: 150px;
-    height: 70px;
-    background: transparent;
-    border: 2px solid #fff;
-    outline: none;
-    border-radius: 6px;
-    cursor: pointer;
-    font-size: 1.5em;
-    color: #fff;
-    font-weight: 500;
-    margin-left: 40px;
-    transition: .5s;
-}
 
-nav a.botoes button.btnRegister:hover {
-    border-color: #ff8800;
-    background: #ff8800;
-    color: black;
-}
-
-nav a.botoes button.btnLogin {
-    width: 150px;
-    height: 70px;
-    background: transparent;
-    border: 2px solid #fff;
-    outline: none;
-    border-radius: 6px;
-    cursor: pointer;
-    font-size: 1.3em;
-    color: #fff;
-    font-weight: 500;
-    margin-left: 40px;
-    margin-right: 50px;
-    transition: .5s;
-}
-
-nav a.botoes button.btnLogin:hover {
-    border-color: #ff8800;
-    background: #ff8800;
-    color: black;
-}

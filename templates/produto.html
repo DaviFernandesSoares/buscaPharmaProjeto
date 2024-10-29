@@ -1,29 +1,31 @@
 {% load static %}
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-br">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{{ item.0.nome_item }}</title>
     <link rel="stylesheet" href="{% static 'css/produto.css' %}">
+    <link rel="stylesheet" href="{% static 'css/universal.css' %}">
 </head>
 
 <body>
-    <header>
-        <div class="logo">
-            <a href="{% url 'home' %}">
-                <img src="{% static 'img/Logo_pequena.png' %}" alt="BuscaPharma">
-            </a>
-        </div>
-
-        <nav>
-            <a class="linksExternos" href="{% url 'home' %}">Home</a>
-            <a class="linksExternos" href="#">Agendamentos</a>
-            <a class="botoes" href="{% url 'login' %}"><button class="btnRegister">Cadastre-se</button></a>
-            <a class="botoes" href="{% url 'cadastro' %}"><button class="btnLogin">Logar</button></a>
-        </nav>
-    </header>
+     <header>
+    <div class="logo">
+      <a href="{% url 'home' %}"><img src="{% static 'img/Logo_pequena.png' %}" alt="Busca Pharma"/></a>
+    </div>
+    <nav>
+        <ul>
+            <li><a href="{% url 'home' %}">Home</a></li>
+            <li><a href="{% url 'busca' %}" class="active">Medicamentos</a></li>
+        </ul>
+    </nav>
+    <div class="auth-buttons">
+        <button class="register-btn"><a href="{% url 'cadastro' %}">Cadastrar-se</a></button>
+        <button class="login-btn"><a href="{% url 'login' %}">Entrar</a></button>
+    </div>
+</header>
         
     <div class="prodDesc">
         <h1 class="titulo">{{ item.0.nome_item }}</h1>
@@ -38,10 +40,6 @@
             <a href="{% url 'localizar_remedio' item.0.id_item %}"><button>Localizar Medicamento</button></a>
         </div>
     </div>
-
-
-
-
 </body>
 
 </html>

@@ -24,8 +24,8 @@
     </div>
 </header>
 <body>
-    <div class="search-container">
-        <input type="text" placeholder="Insira o nome do medicamento:" class="search-input" id="search-bar">
+    <div class="search-container" style="background-color: #ffffff">
+        <input type="text" placeholder="Insira o nome do medicamento" class="search-input" id="search-bar">
         <button id="search-btn">Buscar Remédio</button>
     </div>
     <section class="notice">
@@ -45,70 +45,32 @@
     <img src="{% static 'img/Enfermeiro1-.png' %}" alt="imagem" id="img">
     </section>
         <section>
-            <div class="proced">
-            <div>
-            <h2>Doação Dipirona</h2>
-          <div class="coluna1">
-            <h3>Dipirona</h3>
-            <h3>31/08/2024</h3>
-            <h3>08:00/17:00</h3>
-        </div>
-        </div>
-        <p>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit.
-            Cum distinctio velit dolore maiores est magni, voluptas
-            fugit illum aspernatur aliquam quod veritatis, mollitia
-            natus accusamus deserunt pariatur quasi voluptates harum
-            sed. Eligendi esse accusantium, natus aliquam iure earum
-            necessitatibus ea, possimus quia error, enim ullam.
-        </p>
-            <div>
-            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3670.532671896077!2d-47.20314232377357!3d-23.07758864399944!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x94c8b4bbea7d0ead%3A0xc89ced741211c386!2sCentro%20Esportivo%20do%20Trabalhador%20(CET)!5e0!3m2!1spt-BR!2sbr!4v1727016367042!5m2!1spt-BR!2sbr" frameborder="0"></iframe>
-        </div>
-        </div>
-        <div class="proced">
-            <div>
-            <h2>Vacina Covid</h2>
-          <div class="coluna2">
-            <h3>Vacina</h3>
-            <h3>01/10/2024</h3>
-            <h3>08:00/17:00</h3>
-        </div>
-        </div>
-            <p>
-                Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                Cum distinctio velit dolore maiores est magni, voluptas
-                fugit illum aspernatur aliquam quod veritatis, mollitia
-                natus accusamus deserunt pariatur quasi voluptates harum
-                sed. Eligendi esse accusantium, natus aliquam iure earum
-                necessitatibus ea, possimus quia error, enim ullam.
-            </p>
-            <div>
-            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3670.532671896077!2d-47.20314232377357!3d-23.07758864399944!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x94c8b4bbea7d0ead%3A0xc89ced741211c386!2sCentro%20Esportivo%20do%20Trabalhador%20(CET)!5e0!3m2!1spt-BR!2sbr!4v1727016367042!5m2!1spt-BR!2sbr" frameborder="0"></iframe>
-        </div>
-        </div>
-        <div class="proced">
-            <div>
-            <h2>Doação Dipirona</h2>
-          <div class="coluna3">
-            <h3>Doação</h3>
-            <h3>15/09/2024</h3>
-            <h3>08:00/17:00</h3>
-        </div>
+    {% for evento in eventos %}
+    <div class="proced">
+        <div>
+            <h2>{{ evento.titulo }}</h2>
+            <div class="coluna">
+                <h3>{{ evento.nome_medicamento }}</h3>
+                <h3>{{ evento.data|date:"d/m/Y" }}</h3>
+                <h3>{{ evento.horario_inicio|time:"H:i" }}/{{ evento.horario_encerramento|time:"H:i" }}</h3>
+            </div>
         </div>
         <p>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit.
-            Cum distinctio velit dolore maiores est magni, voluptas
-            fugit illum aspernatur aliquam quod veritatis, mollitia
-            natus accusamus deserunt pariatur quasi voluptates harum
-            sed. Eligendi esse accusantium, natus aliquam iure earum
-            necessitatibus ea, possimus quia error, enim ullam.
+            {{ evento.descricao }}
         </p>
-            <div>
-            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3670.532671896077!2d-47.20314232377357!3d-23.07758864399944!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x94c8b4bbea7d0ead%3A0xc89ced741211c386!2sCentro%20Esportivo%20do%20Trabalhador%20(CET)!5e0!3m2!1spt-BR!2sbr!4v1727016367042!5m2!1spt-BR!2sbr" frameborder="0"></iframe>
+             <div id="map-{{ forloop.counter }}" style="width: 100%; height: 400px;"></div> <!-- Div para o mapa -->
         </div>
-        </div>
-        </section>
+        <script>
+            const pegarEndereco = fetch(`pegar_endereco_por_cep_e_numero/{{ evento.id_unidade.cep }}/${{ evento.id_unidade.numero }}`).then(response => response.json()).then(data => {
+                endereco = data.endereco_completo;
+            })
+            const latitude_e_longitude = fetch(`pegar_coordenadas_pelo_endereco/${ endereco }}`).then(response => response.json()).then(data => {
+                latitude = data.latitude;
+                longitude = data.longitude;
+            })
+        </script>
+    {% endfor %}
+</section>
    <script>
   document.getElementById('search-btn').addEventListener('click', function (event) {
     event.preventDefault(); // Evita o comportamento padrão do botão

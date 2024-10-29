@@ -7,6 +7,7 @@
     <title>Localizar {{ item.nome_item }}</title>
     {% load static %}
     <link rel="stylesheet" href="{% static 'css/localizarRemedio.css' %}">
+    <link rel="stylesheet" href="{% static 'css/universal.css' %}">
     <script src="https://maps.googleapis.com/maps/api/js?key=chave" async defer></script>
 </head>
 
@@ -14,13 +15,12 @@
 
 <header>
     <div class="logo">
-        <a href="{% url 'home' %}">
-            <img src="{% static 'img/Logo_pequena.png' %}" alt="Busca Pharma"/>
-        </a>
+      <a href="{% url 'home' %}"><img src="{% static 'img/Logo_pequena.png' %}" alt="Busca Pharma"/></a>
     </div>
     <nav>
         <ul>
             <li><a href="{% url 'home' %}">Home</a></li>
+            <li><a href="{% url 'busca' %}" class="active">Medicamentos</a></li>
         </ul>
     </nav>
     <div class="auth-buttons">
@@ -30,7 +30,7 @@
 </header>
 
 <!-- Mapa embutido -->
-<div id="map" style="height: 500px; width: 40%;"></div>
+<div id="map"></div>
 
 <!-- Seção de farmácias -->
 <section class="farmacias">
@@ -40,10 +40,10 @@
             <li>
                 <a href="javascript:void(0);" onclick="focusOnMarker({{ unidade_info.latitude }}, {{ unidade_info.longitude }}, '{{ unidade_info.unidade.nome }}')">
                     <span class="{% if unidade_info.status == 'Aberto' %}status-aberto{% elif unidade_info.status == 'Fechado' %}status-fechado{% endif %}">
-                        {{ unidade_info.unidade.nome }} - Quantidade: {{ unidade_info.quantidade_atual }} - Endereço: {{ unidade_info.logradouro_e_numero }} - Status: {{ unidade_info.status }}
+                        {{ unidade_info.unidade.nome }} - Quantidade do Produto Disnponível: {{ unidade_info.quantidade_atual }} - Endereço: {{ unidade_info.logradouro_e_numero }} - Status: {{ unidade_info.status }}
                     </span>
                 </a>
-            <a href="{% url 'agendar' item.id_item unidade_info.unidade.id_unidade %}" class="agendar-btn">Agendar</a>
+                <a href="{% url 'agendar' item.id_item unidade_info.unidade.id_unidade %}" class="agendar-btn" style="color: black">Agendar</a>
             </li>
         {% empty %}
             <li>Nenhuma unidade disponível para este item no momento.</li>

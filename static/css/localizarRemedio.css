@@ -9,7 +9,7 @@
 
 body {
     margin-top: 10%; /* Diminui a margem superior para não ficar muito afastado */
-    background-color: #0A4973;
+    background-color: #0a4072;
     display: flex;
     flex-direction: column; /* Altera para coluna para melhor alinhamento */
     align-items: center; /* Centraliza itens horizontalmente */
@@ -22,10 +22,12 @@ header {
     left: 0;
     width: 100%;
     padding: 10px;
-    background-color: #0A4973;
+    background-color: #0a4873;
     display: flex;
     justify-content: space-between;
     align-items: center;
+    border-bottom: 0.1px white solid;
+    border-radius: 5px;
     z-index: 1000; /* Para garantir que o cabeçalho fique sobre outros elementos */
 }
 
@@ -70,53 +72,106 @@ header .auth-buttons button {
 
 /* Ajustes no mapa */
 #map {
-    width: 100%; /* Ocupa toda a largura disponível */
+    width: 97%; /* Ocupa toda a largura disponível */
     height: 500px; /* Altura fixa para o mapa */
-    margin-top: 20px; /* Margem superior para separar do cabeçalho */
+    margin-top: 20px;
+    border-radius: 10px/* Margem superior para separar do cabeçalho */
 }
 
 /* Estiliza a seção das farmácias */
+/* Estilo para a seção de farmácias */
 .farmacias {
+    background-color: #f9f9f9; /* Cor de fundo suave */
     padding: 20px;
-    background-color: #f9f9f9;
-    border: 1px solid #ddd;
-    border-radius: 8px;
+    border-radius: 10px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1); /* Sombra leve para destaque */
     margin: 20px auto;
-    max-width: 1500px; /* Limita a largura da lista de farmácias */
+    max-width: 90%;
 }
 
+/* Título da seção */
 .farmacias h2 {
-    font-size: 20px;
-    color: #333;
-    margin-bottom: 20px;
+    color: #0a4072; /* Cor de destaque para o título */
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 15px;
+    text-align: center;
 }
 
+/* Estilo para cada item da lista de farmácias */
 .farmacias ul {
-    padding: 0; /* Remove padding da lista */
-    list-style-type: none; /* Remove marcadores da lista */
+    list-style-type: none;
+    padding: 0;
 }
 
+/* Estilo para cada item da lista de farmácias */
 .farmacias ul li {
-    font-size: 18px;
-    text-align: left; /* Alinha texto à esquerda para melhor legibilidade */
-    margin: 10px 0; /* Reduz a margem entre os itens da lista */
+    font-size: 16px;
+    color: #333333;
+    margin: 10px 0;
+    padding: 10px 15px;
+    background-color: #ffffff;
+    border: 1px solid #dddddd;
+    border-radius: 8px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.05);
+    transition: transform 0.2s ease, box-shadow 0.2s ease; /* Adiciona transição para o efeito de hover */
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
 }
+
+.farmacias ul li:hover {
+    transform: scale(1.02); /* Aumenta o tamanho da div ao passar o mouse */
+    box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.15); /* Aumenta a sombra no hover */
+}
+
+/* Estilo para o link e as informações da farmácia */
+.farmacias ul li a {
+    text-decoration: none;
+    color: inherit;
+    flex-grow: 1; /* Expande o link para ocupar mais espaço */
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 10px;
+}
+
+/* Reduz o tamanho do botão "Agendar" */
+.agendar-btn {
+    padding: 6px 10px; /* Ajuste de tamanho */
+    font-size: 14px; /* Tamanho menor para o texto */
+    background-color: #ff9900;
+    color: #ffffff;
+    font-weight: bold;
+    border-radius: 5px;
+    text-align: center;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    white-space: nowrap; /* Evita quebra de linha no botão */
+}
+
+.agendar-btn:hover {
+    background-color: #cc7a00;
+    transform: scale(1.05);
+    box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.3);
+}
+
 
 /* Estilo para o status "Aberto" */
 .status-aberto {
-    color: green;
-}
-
-/* Estilo para o status "Fechado" */
-.status-fechado {
-    color: red;
-}
-
-a {
-    text-decoration: none; /* Remove o sublinhado */
-    color: #000; /* Ajuste a cor do link, se necessário */
+    color: #0a4070;
 }
 
 a:hover {
     text-decoration: underline; /* Adiciona o sublinhado apenas ao passar o mouse */
+
 }
+a{
+    text-decoration: none;
+    color: #ffffff;
+}
+/* Estilo para o botão de agendamento */
+
+
+

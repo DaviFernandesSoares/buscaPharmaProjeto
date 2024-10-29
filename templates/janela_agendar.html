@@ -6,21 +6,24 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Agendamento</title>
     <link rel="stylesheet" href="{% static 'css/janelaAgendar.css' %}">
+    <link rel="stylesheet" href="{% static 'css/universal.css' %}">
 </head>
 <body>
     <header>
-        <div class="logo">
-            <a href="{% url 'home' %}">
-                <img src="{% static 'img/Logo_pequena.png' %}" alt="Busca Pharma"/>
-            </a>
-        </div>
-         <nav>
-            <ul>
-                <li><a href="{% url 'home' %}">Home</a></li>
-                <li><a href="{% url 'horarios_agendados' %}">Meus Agendamentos</a></li>
-            </ul>
-        </nav>
-    </header>
+    <div class="logo">
+      <a href="{% url 'home' %}"><img src="{% static 'img/Logo_pequena.png' %}" alt="Busca Pharma"/></a>
+    </div>
+    <nav>
+        <ul>
+            <li><a href="{% url 'home' %}">Home</a></li>
+            <li><a href="{% url 'busca' %}" class="active">Medicamentos</a></li>
+        </ul>
+    </nav>
+    <div class="auth-buttons">
+        <button class="register-btn"><a href="{% url 'horarios_agendados' %}">Meus Agendamentos</a></button>
+        <button class="login-btn"><a href="{% url 'login' %}">Entrar</a></button>
+    </div>
+</header>
 
     <h1>Agendamento de Horário</h1>
 
@@ -29,10 +32,10 @@
             <form id="agendar-form">
                 {% csrf_token %}
                 <div class="input-box">
-                    <label for="data">Data:</label>
+                    <label for="data">Selecione sua Data Desejada</label>
                     <input type="date" id="data" name="data" required min="{{ today|date:'y-m-d' }}"><br><br>
 
-                    <label for="hora">Hora:</label>
+                    <label for="hora">Selecione seu Horário Desejado ( Selecione a data antes )</label>
                     <select id="hora" name="hora" required>
                         <!-- As opções serão preenchidas pelo JavaScript -->
                     </select><br><br>
@@ -151,6 +154,14 @@ document.getElementById('agendar-form').addEventListener('submit', function (eve
         // Exibir mensagem de sucesso
         mensagemErro.style.display = 'block';
         mensagemErro.textContent = data.message;
+        document.getElementById('btAgendar').disabled = true;
+        setTimeout(() => {
+        // Oculta a mensagem
+        mensagemErro.style.display = "none";
+
+        // Redireciona para a página de agendamentos
+        window.location.href = "/horarios_agendados";  // Substitua "/agendamentos" pela URL correta
+    }, 3000);
     })
     .catch(error => {
         // Exibir mensagem de erro

@@ -27,7 +27,7 @@ def agendar(request, id_item, id_unidade):
         hora = data_json.get('hora')
 
         # Verifica se a data é menor que a data atual
-        today = timezone.now().date
+        today = timezone.now().date()
         horario_atual = timezone.localtime().time()
         if data < today.strftime('%Y-%m-%d') or (
                 hora < horario_atual.strftime('%H:%M') and data < today.strftime('%Y-%m-%d')):
@@ -66,7 +66,7 @@ def agendar(request, id_item, id_unidade):
             email = request.user.email
             send_mail(
                 'Agendamento realizado com sucesso!',
-                f'Agendamento referente ao dia: {data_br}, horário; {hora}\n\nRealizado com sucesso!\n\nMedicamento: {item.nome_item}\n\nUnidade: {unidade_info.nome}\n\nCompareça ao local e informe seu nome para uma possível retirada.\nSe acaso não for comparecer, pedimos que cancele seu agendamento!\n\n att.Equipe Busca',
+                f'Agendamento referente ao Dia: {data_br}, Horário: {hora}\n\nRealizado com sucesso!\n\nMedicamento: {item.nome_item}\n\nUnidade: {unidade_info.nome}\n\nCompareça ao local e informe seu nome para uma possível retirada.\n\nSe caso não for comparecer, pedimos que cancele seu agendamento!\n\n att.Equipe Busca',
                 'buscapharmatcc@gmail.com',  # Remetente
                 [email],  # Destinatário
                 fail_silently=False,

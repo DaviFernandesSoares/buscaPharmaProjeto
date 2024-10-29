@@ -6,6 +6,7 @@ from django.contrib.auth import login as auth_login
 from django.contrib.auth.hashers import make_password, check_password
 from django.template.defaultfilters import length
 from django.core.mail import send_mail
+from appAdminGeral.models import Evento
 from appUsuario.models import Usuario
 
 
@@ -84,4 +85,5 @@ def login(request):
 
 # View de home
 def home(request):
-        return render(request, 'home.html')
+    eventos = Evento.objects.all()[:3]
+    return render(request, 'home.html', {'eventos': eventos})

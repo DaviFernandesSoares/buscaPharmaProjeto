@@ -6,7 +6,7 @@
     font-family: 'Poppins', sans-serif;
 }
 body {
-    background: linear-gradient(135deg, #0A4973, #365e8b);
+    background-color: #0a4072;
     justify-content: center;
     align-items: center;
     height: 100vh;
@@ -27,7 +27,7 @@ section {
     border-radius: 5px;
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
     border: 1px solid #e0e0e0;
-    width: 700px; /* Define largura fixa */
+    width: 900px; /* Define largura fixa */
     max-width: 100%; /* Para ser responsivo em telas menores */
 }
 header {
@@ -36,6 +36,8 @@ header {
     align-items: center;
     padding: 10px;
     color: white;
+    border-bottom: 0.1px white solid;
+    border-radius: 5px;
 }
 header .logo img {
     background: white;
@@ -43,7 +45,7 @@ header .logo img {
     height: 60px;
     width: 180px;
     padding: 0 1rem 0 1rem;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 2.0);
+    box-shadow: 0 4px 8px rgba(208, 200, 200, 0.2);
 }
 h1 {
     color: white;
@@ -148,29 +150,32 @@ form {
     width: 600px; /* Define largura fixa para a mensagem */
     text-align: center;
     z-index: 1000;
-    box-shadow: 5px 4px 6px rgb(208, 208, 208); /* Sombra para destaque */
+    box-shadow: 3px 4px 5px rgb(208, 208, 208); /* Sombra para destaque */
     margin-top: 20px; /* Espaçamento adicional */
 }
 label {
     display: block;
-    font-size: 15px;
+    font-size: 18px;
     font-weight: 600;
     margin-bottom: 8px;
     color: #ffffff;
 }
 .spinner {
-    border: 2px solid rgba(255, 255, 255, 0.3);
-    border-top: 2px solid white; /* Cor do topo do spinner */
+    border: 2px solid rgb(253, 135, 0);
+    border-top: 2px solid #ffffff; /* Cor do topo do spinner */
     border-radius: 50%;
-    width: 50px; /* Tamanho do spinner */
-    height: 50px; /* Tamanho do spinner */
+    width: 70px; /* Tamanho do spinner */
+    height: 70px; /* Tamanho do spinner */
     animation: spin 1s linear infinite; /* Animação do spinner */
-    margin-top: 3px; /* Espaço entre o spinner e o texto */
+    margin-top: 4px; /* Espaço entre o spinner e o texto */
 }
 
 @keyframes spin {
     0% { transform: rotate(0deg); }
     100% { transform: rotate(360deg); }
 }
-
+a{
+    text-decoration: none;
+    color: #ffffff;
+}
 
