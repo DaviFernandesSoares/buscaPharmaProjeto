@@ -1,4 +1,4 @@
-from datetime import datetime
+from datetime import datetime,timedelta
 
 from django.utils import timezone
 from django.contrib.auth.decorators import user_passes_test, login_required
@@ -146,8 +146,20 @@ def salvar_evento(request,username):
             if data_evento_obj < data_atual:
                 resposta['mensagem'] = 'Não é possível fazer agendamentos em dias anteriores ou não antecipado.'
                 return JsonResponse(resposta, status=400)
-
-            # Cria o evento com a data
+            if horario_inicio >= horario_encerramento:
+                resposta['mensagem']='Erro ao criar evento. Verifique o horário que vai ser iniciado e encerrado.'
+                return JsonResponse(resposta, status=400)
+            inicio_time = datetime.strptime(horario_inicio, '%H:%M').time()
+            encerramento_time = datetime.strptime(horario_encerramento, '%H:%M').time()
+            delta = timedelta(hours=1)
+            datetime_objeto = datetime.combine(data_evento_obj, inicio_time)
+            encerramento_minimo_time = datetime_objeto + delta
+            print(f'Teste:{encerramento_minimo_time.time()}')
+            horario_encerramento_objeto = datetime.combine(data_evento_obj, encerramento_time)
+            print(horario_encerramento_objeto)
+            if horario_inicio < horario_encerramento and horario_encerramento_objeto < encerramento_minimo_time:
+                resposta['mensagem']=f'Um evento só pode ser criado com mais de uma hora de antecedência. No caso após {encerramento_minimo_time.time()}'
+                return JsonResponse(resposta, status=400)
             evento = Evento(
                 titulo=item.nome_item,
                 descricao=descricao,
@@ -158,7 +170,6 @@ def salvar_evento(request,username):
                 id_item=item
             )
             evento.save()
-            print('Teste'+request.user.username)
             resposta['success'] = True
             resposta['mensagem'] = 'Evento criado com sucesso!'
             resposta['url'] = '/home_admin_geral/' + username  # URL para redirecionar após sucesso

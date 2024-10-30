@@ -172,6 +172,28 @@ a{
     color: #ffffff;
 }
 /* Estilo para o botão de agendamento */
+/* Estilo para a mensagem informativa */
+/* Estilo aprimorado para a mensagem informativa */
+.aviso-agendamento {
+    background-color: #eaf4fc; /* Azul claro para destaque */
+    padding: 15px 20px; /* Mais espaçamento para um visual mais "arejado" */
+    margin: 20px auto; /* Margem superior e inferior maiores */
+    border-left: 5px solid #0a4072; /* Borda esquerda colorida para destaque */
+    border-radius: 8px;
+    max-width: 97%;
+    text-align: center;
+    font-size: 15px;
+    color: #0a4072; /* Cor de texto para combinar com o tema */
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1); /* Sombra leve */
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
 
-
+/* Ícone informativo */
+.aviso-agendamento::before {
+    content: 'ℹ️'; /* Símbolo informativo */
+    font-size: 30px;
+    color: #ff9900;
+}
 

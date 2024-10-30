@@ -5,62 +5,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Criar Evento</title>
-    <link rel="stylesheet" href="{% static 'css/homeAdminGeral.css' %}">
-    <style>
-        /* Estilo para aumentar o tamanho dos campos de seleção e área de texto */
-        select, textarea, input[type="time"], input[type="date"] {
-            width: 100%;
-            font-size: 1.2em;
-            padding: 10px;
-            margin-top: 10px;
-            margin-bottom: 20px;
-        }
-
-        .form-group label {
-            font-size: 1.2em;
-        }
-
-        button[type="submit"] {
-            width: 100%;
-            padding: 15px;
-            font-size: 1.2em;
-            background-color: #0a4070;
-            color: white;
-            border: none;
-            cursor: pointer;
-        }
-
-        button[type="submit"]:hover {
-            background-color: #0a4070;
-        }
-
-        .form-container {
-            max-width: 600px;
-            margin: 0 auto;
-            padding: 20px;
-            background-color: #f2f2f2;
-            border-radius: 10px;
-        }
-
-        .error-message {
-            color: red;
-            margin-bottom: 20px;
-        }
-
-        .date-input {
-            font-size: 1.2em;
-            padding: 10px 10px 10px 45px; /* Espaço para o ícone */
-        }
-
-        .calendar-icon {
-            position: absolute;
-            top: 50%;
-            left: 10px;
-            transform: translateY(-50%);
-            font-size: 1.5em;
-            color: #888;
-        }
-    </style>
+    <link rel="stylesheet" href="{% static 'css/home_admin_geral.css' %}">
+    <link rel="stylesheet" href="{% static 'css/criar_evento.css' %}"> <!-- CSS separado -->
 </head>
 <body>
     <header>
@@ -71,20 +17,19 @@
             <a href="{% url 'home_admin_geral' username %}">Voltar para Home</a>
         </nav>
     </header>
-    
+ <h1 id="criar">Preencha os Dados do Evento</h1>
     <section class="form-container">
-        <h1>Criar Evento</h1>
-        <div id="error-message" class="error-message" style="display:none;"></div> <!-- Error message div -->
+        <div id="error-message" class="error-message" style="display:none;"></div> <!-- Div para mensagem de erro -->
         <form method="POST" action="{% url 'salvar_evento' username %}">
             {% csrf_token %}
             <div class="form-group">
                 <label for="descricao_evento">Descrição do Evento:</label>
-                <textarea id="descricao_evento" name="descricao_evento" rows="6" required></textarea>
+               <textarea id="descricao_evento" name="descricao_evento" rows="6" class="no-resize"></textarea>
             </div>
             <div class="form-group">
                 <label for="data_evento">Data do Evento:</label>
                 <div style="position: relative;">
-                    <input type="date" id="data_evento" name="data_evento" required class="date-input">
+                    <input type="date" id="data_evento" name="data_evento" class="date-input" required>
                     <ion-icon name="calendar-outline" class="calendar-icon"></ion-icon>
                 </div>
             </div>
@@ -118,16 +63,16 @@
     <script src="{% static 'js/homeAdminGeral.js' %}"></script>
     <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
     <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
-    
+
     <script>
         const form = document.querySelector('form');
         const errorMessageDiv = document.getElementById('error-message');
 
         form.addEventListener('submit', async function(event) {
             event.preventDefault();
-            errorMessageDiv.style.display = 'none'; // Reset error message
+            errorMessageDiv.style.display = 'none'; // Resetar mensagem de erro
             const formData = new FormData(form);
-            
+
             const response = await fetch(form.action, {
                 method: 'POST',
                 body: formData,

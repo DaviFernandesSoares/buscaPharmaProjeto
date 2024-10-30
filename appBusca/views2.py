@@ -89,7 +89,7 @@ def localizarMedicamento(request, id_item):
         'item': item,
         'unidades_com_quantidade': unidades_com_quantidade
     }
-    return render(request, 'localizarRemedio.html', context)
+    return render(request, 'localizar_remedio.html', context)
 
 
 def pegar_coordenadas_pelo_endereco(endereco):

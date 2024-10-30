@@ -46,9 +46,7 @@ header {
 
 
 .prodDesc p {
-    margin-top: 20px;
-    margin-right: 10px;
-    margin-left: 10px;
+    margin: 20px;
     padding: 20px 5px;
     background-color: #fefeff;
     border-radius: 20px;
@@ -57,11 +55,13 @@ header {
 .prodDesc h1 {
     font-size: 2.5em;
     padding: 5px;
+    margin-top: 10px;
     color: #fff;
 }
 
 .prodDesc p {
     font-size: 1.1em;
+    font-weight: bold;
 }
 
 /* Estilos para a seção dos botões abaixo de prodDesc */
@@ -92,9 +92,9 @@ header {
     color: #ffffff;
 }
 .prodDesc{
-    margin-top: 50px;
+    margin-top: 100px;
     border-radius: 20px;
-    width: 50%;
+    width: 60%;
     background-color: #0a4072;
     box-shadow: 7px 9px 11px rgb(7, 42, 76);
 }

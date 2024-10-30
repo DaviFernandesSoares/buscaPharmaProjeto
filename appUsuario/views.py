@@ -6,6 +6,8 @@ from django.contrib.auth import login as auth_login
 from django.contrib.auth.hashers import make_password, check_password
 from django.template.defaultfilters import length
 from django.core.mail import send_mail
+from django.utils import timezone
+
 from appAdminGeral.models import Evento
 from appUsuario.models import Usuario
 from appBusca.views2 import pegar_endereco_por_cep_e_numero,pegar_coordenadas_pelo_endereco
@@ -85,7 +87,8 @@ def login(request):
 
 # View de home
 def home(request):
-    eventos = Evento.objects.all()
+    data_atual = timezone.now().date()
+    eventos = Evento.objects.filter(data_evento__gte=data_atual)
     for evento in eventos:
         endereco_evento = pegar_endereco_por_cep_e_numero(evento.id_unidade.cep,evento.id_unidade.numero)
         coordernadas = pegar_coordenadas_pelo_endereco(endereco_evento)
