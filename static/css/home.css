@@ -4,7 +4,7 @@
     box-sizing: border-box;
     font-family: 'Poppins', sans-serif;
     text-align: center;
-    vertical-align: auto;    
+    vertical-align: auto;
 }
 nav ul li a.active, /* Estilo para o item ativo */
 nav ul li a:hover {  /* Também aplicamos o hover para consistência */
@@ -185,4 +185,37 @@ iframe{
 a{
     text-decoration: none;
     color: #ffffff;
+}
+.proced {
+    margin-top: 20px;
+    margin-bottom: 10px;
+    margin-left: 5px;/* Espaço entre os eventos */
+    margin-right: 5px;
+    padding: 20px;
+    font-size: 1.1em;
+    align-items: center;
+    text-align: center;
+    background-color: #f8f8f8; /* Cor de fundo */
+    border-radius: 8px; /* Bordas arredondadas */
+    color: #0A4973; /* Cor do texto */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Sombra sutil para destaque */
+    transition: transform 0.2s; /* Efeito ao passar o mouse */
+}
+
+.proced:hover {
+    transform: translateY(-5px); /* Eleva a caixa ao passar o mouse */
+}
+
+#map-{{ forloop.counter }} {
+    margin-top: 15px; /* Espaço acima do mapa */
+    border: 1px solid #ccc; /* Borda opcional */
+    border-radius: 4px; /* Bordas arredondadas */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); /* Sombra leve */
+    height: 300px; /* Altura do mapa */
+    width: 100%; /* Largura total */
+}
+h1#eventos{
+    color: #fff;
+    padding: 5px;
+    margin: 5px;
 }

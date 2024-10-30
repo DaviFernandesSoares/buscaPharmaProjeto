@@ -149,6 +149,7 @@ def salvar_evento(request,username):
 
             # Cria o evento com a data
             evento = Evento(
+                titulo=item.nome_item,
                 descricao=descricao,
                 horario_inicio=horario_inicio,
                 horario_encerramento=horario_encerramento,

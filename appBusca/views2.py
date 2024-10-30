@@ -114,7 +114,6 @@ def pegar_coordenadas_pelo_endereco(endereco):
     return None, None
 
 def pegar_endereco_por_cep_e_numero(cep, numero):
-        # Substitua pela URL da API que você está utilizando
     api_url = f'https://viacep.com.br/ws/{cep}/json/'
     try:
         response = requests.get(api_url)

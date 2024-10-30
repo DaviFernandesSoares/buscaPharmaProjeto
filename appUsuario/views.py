@@ -8,7 +8,7 @@ from django.template.defaultfilters import length
 from django.core.mail import send_mail
 from appAdminGeral.models import Evento
 from appUsuario.models import Usuario
-
+from appBusca.views2 import pegar_endereco_por_cep_e_numero,pegar_coordenadas_pelo_endereco
 
 def verificar_existencia(request):
     email = request.GET.get('email', None)
@@ -85,5 +85,10 @@ def login(request):
 
 # View de home
 def home(request):
-    eventos = Evento.objects.all()[:3]
+    eventos = Evento.objects.all()
+    for evento in eventos:
+        endereco_evento = pegar_endereco_por_cep_e_numero(evento.id_unidade.cep,evento.id_unidade.numero)
+        coordernadas = pegar_coordenadas_pelo_endereco(endereco_evento)
+        evento.latitude = coordernadas[0]
+        evento.longitude = coordernadas[1]
     return render(request, 'home.html', {'eventos': eventos})

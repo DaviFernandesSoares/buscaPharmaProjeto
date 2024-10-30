@@ -8,9 +8,9 @@
     <link rel="stylesheet" href="{% static 'css/home.css' %}">
     <link rel="stylesheet" href="{% static 'css/universal.css' %}">
 </head>
- <header>
+<header>
     <div class="logo">
-      <a><img src="{% static 'img/Logo_pequena.png' %}" alt="Busca Pharma"/></a>
+        <a><img src="{% static 'img/Logo_pequena.png' %}" alt="Busca Pharma"/></a>
     </div>
     <nav>
         <ul>
@@ -34,17 +34,18 @@
             <div>
                 <p class="paragrafh">
                      Lorem ipsum dolor sit amet consectetur adipisicing elit.
-            Cum distinctio velit dolore maiores est magni, voluptas
-            fugit illum aspernatur aliquam quod veritatis, mollitia
-            natus accusamus deserunt pariatur quasi voluptates harum
-            sed. Eligendi esse accusantium, natus aliquam iure earum
-            necessitatibus ea, possimus quia error, enim ullam.
+                     Cum distinctio velit dolore maiores est magni, voluptas
+                     fugit illum aspernatur aliquam quod veritatis, mollitia
+                     natus accusamus deserunt pariatur quasi voluptates harum
+                     sed. Eligendi esse accusantium, natus aliquam iure earum
+                     necessitatibus ea, possimus quia error, enim ullam.
                 </p>
             </div>
-    </div>
-    <img src="{% static 'img/Enfermeiro1-.png' %}" alt="imagem" id="img">
+        </div>
+        <img src="{% static 'img/Enfermeiro1-.png' %}" alt="imagem" id="img">
     </section>
-        <section>
+    <h1 id="eventos">Eventos em Unidades</h1>
+    <section>
     {% for evento in eventos %}
     <div class="proced">
         <div>
@@ -58,30 +59,22 @@
         <p>
             {{ evento.descricao }}
         </p>
-             <div id="map-{{ forloop.counter }}" style="width: 100%; height: 400px;"></div> <!-- Div para o mapa -->
-        </div>
-        <script>
-            const pegarEndereco = fetch(`pegar_endereco_por_cep_e_numero/{{ evento.id_unidade.cep }}/${{ evento.id_unidade.numero }}`).then(response => response.json()).then(data => {
-                endereco = data.endereco_completo;
-            })
-            const latitude_e_longitude = fetch(`pegar_coordenadas_pelo_endereco/${ endereco }}`).then(response => response.json()).then(data => {
-                latitude = data.latitude;
-                longitude = data.longitude;
-            })
-        </script>
+        <iframe src="https://www.google.com/maps/embed/v1/place?key=cahve={{ evento.latitude }},{{ evento.longitude }}&zoom=18"
+        width="100%" height="400" frameborder="0" style="border:0;" allowfullscreen></iframe>
+
+    </div>
     {% endfor %}
-</section>
-   <script>
-  document.getElementById('search-btn').addEventListener('click', function (event) {
-    event.preventDefault(); // Evita o comportamento padrão do botão
+    </section>
 
-    const searchQuery = document.getElementById('search-bar').value;
-
-    if (searchQuery) {
-      localStorage.setItem('medicamentoBusca', searchQuery); // Armazena o valor no localStorage
-      window.location.href = "{% url 'busca' %}"; // Redireciona para a página de busca
-    }
-  });
-</script>
+    <script>
+        document.getElementById('search-btn').addEventListener('click', function (event) {
+            event.preventDefault(); // Evita o comportamento padrão do botão
+            const searchQuery = document.getElementById('search-bar').value;
+            if (searchQuery) {
+                localStorage.setItem('medicamentoBusca', searchQuery); // Armazena o valor no localStorage
+                window.location.href = "{% url 'busca' %}"; // Redireciona para a página de busca
+            }
+        });
+    </script>
 </body>
 </html>
