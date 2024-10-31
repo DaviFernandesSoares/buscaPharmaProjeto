@@ -66,7 +66,7 @@ def agendar(request, id_item, id_unidade):
             email = request.user.email
             send_mail(
                 'Agendamento realizado com sucesso!',
-                f'Agendamento referente ao Dia: {data_br}, Horário: {hora}\n\nRealizado com sucesso!\n\nMedicamento: {item.nome_item}\n\nUnidade: {unidade_info.nome}\n\nCompareça ao local e informe seu nome para uma possível retirada.\n\nSe caso não for comparecer, pedimos que cancele seu agendamento!\n\n att.Equipe Busca',
+                f'Agendamento referente ao Dia: {data_br}, Horário: {hora}\n\nRealizado com sucesso!\n\nMedicamento: {item.nome_item}\n\nUnidade: {unidade_info.nome}\n\nCompareça ao local e informe seu nome para uma possível retirada.\n\nSe caso não for comparecer, pedimos que cancele seu agendamento!\n\n att.Equipe Busca.',
                 'buscapharmatcc@gmail.com',  # Remetente
                 [email],  # Destinatário
                 fail_silently=False,

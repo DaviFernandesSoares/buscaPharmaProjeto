@@ -35,7 +35,7 @@ def cadastro(request):
         ddd = request.POST['ddd']
         telefone = ddd + request.POST['telefone']
         partes_nome = nome.split(' ')
-        primeiro_nome = partes_nome[0]
+        primeiro_nome = " ".join(partes_nome[0:len(partes_nome)-1])
         ultimo_nome = partes_nome[-1]
         if not Usuario.objects.filter(email=email).exists() and not Usuario.objects.filter(cpf=cpf).exists():
             user = Usuario(username=email, cpf=cpf, email=email, telefone=telefone,first_name=primeiro_nome, last_name=ultimo_nome)
@@ -43,7 +43,7 @@ def cadastro(request):
             user.save()
             send_mail(
                 'Cadastrado com Sucesso',
-                f'Bem vindo(a) ao BuscaPharma, {nome}!\n\nFaça já seus Agendamentos de Medicamentos.\n\nAtt.Equipe Busca',
+                f'Bem vindo(a) ao BuscaPharma, {nome}!\n\nFaça já seus Agendamentos de Medicamentos.\n\nAtt.Equipe Busca.',
                 'buscapharmatcc@gmail.com',  # Remetente
                 [email],  # Destinatário
                 fail_silently=False,

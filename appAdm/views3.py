@@ -3,7 +3,7 @@ from urllib import request
 from django.contrib.auth.decorators import login_required, user_passes_test
 from django.shortcuts import render, redirect
 from django.http import HttpResponse, JsonResponse
-from django.contrib.auth import login as auth_login,authenticate
+from django.contrib.auth import login as auth_login, authenticate, logout
 from django.contrib.auth.hashers import make_password, check_password
 from django.shortcuts import get_object_or_404
 from django.db.models import Count
@@ -109,3 +109,10 @@ def relatorio_agendamentos_realizados(request,id_unidade,id_admin):
     agendamentos_realizados = Agendamento.objects.filter(status='Realizado', id_unidade=id_unidade)
 
     return render(request, 'relatorio_agendamentos_realizados.html', {'agendamentos': agendamentos_realizados, 'id_admin':id_admin,'id_unidade':id_unidade})
+
+def editar_perfil():
+    return render(request, 'editar_perfil.html')
+
+def logout_usuario(request):
+    logout(request)
+    return render(request, 'home.html')

@@ -22,6 +22,20 @@
         </ul>
     </nav>
     <div class="auth-buttons">
+        {% if request.user.is_authenticated %}
+            <!-- Ícone de usuário com opções de perfil e logout -->
+            <div class="user-icon">
+                <img src="{% static 'img/userIcon.png' %}" alt="Usuário" class="icon"> <!-- Adicione a imagem do ícone de usuário -->
+                <div class="user-menu">
+                    <a href="{% url 'editar_perfil_usuario' %}" class="pop">Editar Perfil</a><br>
+                    <a href="{% url 'logout_usuario' %}" class="pop">Sair</a>
+                </div>
+            </div>
+        {% else %}
+            <!-- Botões de cadastro e login -->
+            <button class="register-btn"><a href="{% url 'cadastro' %}">Cadastrar-se</a></button>
+            <button class="login-btn"><a href="{% url 'login' %}">Entrar</a></button>
+        {% endif %}
         <button class="register-btn"><a href="{% url 'cadastro' %}">Cadastrar-se</a></button>
         <button class="login-btn"><a href="{% url 'login' %}">Entrar</a></button>
     </div>

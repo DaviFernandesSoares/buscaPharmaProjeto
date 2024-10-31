@@ -41,8 +41,8 @@ class Estoque(models.Model):
 class Protocolo(models.Model):
     id_protocolo = models.AutoField(primary_key=True)
     id_item = models.ForeignKey(Item, on_delete=models.CASCADE, db_column='id_item')
-    documento_necessarios = models.CharField(max_length=255)
-    exames = models.CharField(max_length=255)
+    documentos_necessarios = models.CharField(max_length=255,db_column='documentos_necessarios')
+    exames_necessarios = models.CharField(max_length=255,db_column='exames_necessarios')
     class Meta:
         db_table = 'protocolo'
 class Indicacao(models.Model):

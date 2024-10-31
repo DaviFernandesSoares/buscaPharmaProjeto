@@ -28,36 +28,53 @@ def busca(request):
 
 def medicamento(request, id_item):
     id_item = int(id_item)
-    item = Item.objects.filter(id_item=id_item)
-    array_id_tipo = item.values('id_tipo')
-    id_tipo = array_id_tipo[0]['id_tipo']
-    if id_tipo == 1:
-        aux_indicacao = Aux_item_indicacao.objects.get(id_item=id_item)
+    item = Item.objects.filter(id_item=id_item).first()
+
+    # Verifica se o item existe
+    if not item:
+        return render(request, 'produto.html', {'error': 'Item não encontrado.'})
+
+    array_id_tipo = item.id_tipo  # Presumindo que `id_tipo` é um campo direto em `Item`
+
+    if array_id_tipo == 1:
+        aux_indicacao = get_object_or_404(Aux_item_indicacao, id_item=id_item)
         id_indicacao = aux_indicacao.id_indicacao.id_indicacao
-        indicacao = Indicacao.objects.get(id_indicacao=id_indicacao )
+        indicacao = get_object_or_404(Indicacao, id_indicacao=id_indicacao)
+        protocolo = Protocolo.objects.filter(id_item=id_item)
 
         context = {
             'item': item,
-            'itens_json': json.dumps(list(item.values('id_item', 'nome_item', 'comp_ativ_itm'))),
-
+            'itens_json': json.dumps(
+                list(Item.objects.filter(id_item=id_item).values('id_item', 'nome_item', 'comp_ativ_itm'))),
             'indicacao': indicacao,
-             'indicacao_json': json.dumps({
+            'indicacao_json': json.dumps({
                 'categoria_remedio': indicacao.categoria_remedio,
                 'precaucao': indicacao.precaucao,
                 'contra_indicacao': indicacao.contra_indicacao
-
             }),
             'aux_indicacao': aux_indicacao,
             'aux_indicacao_json': json.dumps({
                 'dsgm_max_adlt': aux_indicacao.dsgm_max_adlt,
                 'dsgm_max_crn': aux_indicacao.dsgm_max_crn
+            }),
+        }
 
+        if protocolo.exists():
+            # Presumindo que `documentos_necessarios` é um campo de texto e `exames_necessarios` também
+            contexto_protocolo = protocolo.first()  # Obtenha o primeiro protocolo, se existir
+            context['protocolo'] = contexto_protocolo
+            context['protocolo_json'] = json.dumps({
+                'documentos_necessarios': contexto_protocolo.documentos_necessarios,
+                'exames_necessarios': contexto_protocolo.exames_necessarios  # Aqui assumindo que é um texto
+            })
 
-        }),
-    }
     else:
-        context = {'item': item,
-                    'itens_json': json.dumps(list(item.values('id_item', 'nome_item', 'comp_ativ_itm')))}
+        context = {
+            'item': item,
+            'itens_json': json.dumps(
+                list(Item.objects.filter(id_item=id_item).values('id_item', 'nome_item', 'comp_ativ_itm')))
+        }
+
     return render(request, 'produto.html', context)
 
 

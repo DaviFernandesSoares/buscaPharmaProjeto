@@ -94,7 +94,7 @@ header .auth-buttons button {
 }
 
 body{
-    background-color: #0a4072;
+    background-color: #0a4073;
 }
 
 .title {
@@ -218,4 +218,8 @@ h1#eventos{
     color: #fff;
     padding: 5px;
     margin: 5px;
+}
+h4#semEvento{
+    color: #ff8800;
+    margin: 10px;
 }

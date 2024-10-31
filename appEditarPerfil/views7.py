@@ -1,3 +1,4 @@
+from django.core.mail import send_mail
 from django.http import JsonResponse
 from django.shortcuts import render,get_object_or_404
 from appUsuario.models import Usuario
@@ -24,6 +25,13 @@ def editar_perfil_usuario(request):
             usuario.first_name = primeiro_nome
             usuario.last_name = ultimo_nome
             usuario.save()
+            send_mail(
+                'Seu perfil foi editado com sucesso!',
+                f'Perfil Editado com sucesso, {nome}!\n\nFaça já seus Agendamentos de Medicamentos.\n\nEntre em contato se não foi você mesmo.\n\nAtt.Equipe Busca.',
+                'buscapharmatcc@gmail.com',  # Remetente
+                [email],  # Destinatário
+                fail_silently=False,
+            )
             return JsonResponse({'status': 'success', 'message': 'Alteração Realizada!'}, status=200)
         except Exception as e:
             return JsonResponse({'status': 'error', 'message': str(e)}, status=400)

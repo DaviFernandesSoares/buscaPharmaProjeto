@@ -202,5 +202,5 @@ a {
     width: 100%;
     height: 25px;
     text-align: center;/* Ajuste conforme necessário */
-    box-shadow: 0.7px 0.7px 1.5px rgb(237, 5, 5); /* Sombra opcional */
+    box-shadow: 0.7px 0.7px 1.5px rgb(255, 255, 255); /* Sombra opcional */
 }

@@ -10,17 +10,29 @@
 </head>
 <header>
     <div class="logo">
-        <a><img src="{% static 'img/Logo_pequena.png' %}" alt="Busca Pharma"/></a>
+        <a href="{% url 'home' %}"><img src="{% static 'img/Logo_pequena.png' %}" alt="Busca Pharma"/></a>
     </div>
     <nav>
         <ul>
-            <li><a class="active">Home</a></li>
+            <li><a href="{% url 'home' %}" class="active">Home</a></li>
             <li><a href="{% url 'busca' %}">Medicamentos</a></li>
         </ul>
     </nav>
     <div class="auth-buttons">
-        <button class="register-btn"><a href="{% url 'cadastro' %}">Cadastrar-se</a></button>
-        <button class="login-btn"><a href="{% url 'login' %}">Entrar</a></button>
+        {% if request.user.is_authenticated %}
+            <!-- Ícone de usuário com opções de perfil e logout -->
+            <div class="user-icon">
+                <img src="{% static 'img/userIcon.png' %}" alt="Usuário" class="icon"> <!-- Adicione a imagem do ícone de usuário -->
+                <div class="user-menu">
+                    <a href="{% url 'editar_perfil_usuario' %}" class="pop">Editar Perfil</a><br>
+                    <a href="{% url 'logout_usuario' %}" class="pop">Sair</a>
+                </div>
+            </div>
+        {% else %}
+            <!-- Botões de cadastro e login -->
+            <button class="register-btn"><a href="{% url 'cadastro' %}">Cadastrar-se</a></button>
+            <button class="login-btn"><a href="{% url 'login' %}">Entrar</a></button>
+        {% endif %}
     </div>
 </header>
 <body>
@@ -45,6 +57,7 @@
         <img src="{% static 'img/Enfermeiro1-.png' %}" alt="imagem" id="img">
     </section>
     <h1 id="eventos">Eventos em Unidades</h1>
+    {% if eventos %}
     <section>
     {% for evento in eventos %}
     <div class="proced">
@@ -61,11 +74,12 @@
         </p>
         <iframe src="https://www.google.com/maps/embed/v1/place?key=cahve={{ evento.latitude }},{{ evento.longitude }}&zoom=18"
         width="100%" height="400" frameborder="0" style="border:0;" allowfullscreen></iframe>
-
     </div>
     {% endfor %}
     </section>
-
+    {% else %}
+        <h4 id="semEvento">Nenhum evento sendo realizado.</h4>
+    {% endif %}
     <script>
         document.getElementById('search-btn').addEventListener('click', function (event) {
             event.preventDefault(); // Evita o comportamento padrão do botão

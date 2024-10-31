@@ -115,3 +115,36 @@ header .auth-buttons button {
 .a{
     text-decoration: none;
 }
+.user-icon {
+    position: relative;
+    display: inline-block;
+}
+
+.icon {
+    width: 55px;
+    cursor: pointer;
+    border-radius: 50%;
+    border: #ffffff 1px solid;
+}
+
+.user-menu {
+    display: none;
+    position: absolute;
+    top: 100%;
+    right: 0;
+    background-color: #fff;
+    border: 1px solid #0A4973;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 10px;
+    border-radius: 5px;
+    width: 200px; /* Ajuste a largura conforme necessário */
+    font-size: 1.1em; /* Aumente o tamanho da fonte para melhor legibilidade */
+}
+
+
+.user-icon:hover .user-menu {
+    display: block;
+}
+.pop{
+    color: #0a3070;
+}

@@ -8,8 +8,8 @@
 body {
     display: flex;
     justify-content: center;
-    align-items: center;
-    height: 100vh;
+    align-items: flex-start; /* Ajustado para flex-start para manter o header visível */
+    height: auto; /* Permitir que o corpo cresça conforme o conteúdo */
     background-color: #ffffff;
 }
 
@@ -32,17 +32,16 @@ header {
     max-width: 100%;
 }
 
-
-.product-gallery {
-    display: flex;
-    gap: 10px;
-    margin-right: 150px;
-    border-radius: 5px;
-    /* Ajuste este valor para aumentar ou diminuir o espaço */
+.prodDesc {
+    margin-top: 100px; /* Espaço entre o header e a descrição */
+    border-radius: 20px;
+    width: 60%; /* Largura padrão */
+    max-width: 800px; /* Largura máxima */
+    background-color: #0a4072;
+    box-shadow: 7px 9px 11px rgb(7, 42, 76);
+    overflow: auto; /* Permite rolagem se o conteúdo for muito grande */
+    padding: 20px; /* Adiciona espaçamento interno */
 }
-
-
-
 
 .prodDesc p {
     margin: 20px;
@@ -90,17 +89,20 @@ header {
     background-color: #ffffff;
     color: #ffffff;
 }
-.prodDesc{
-    margin-top: 100px;
-    border-radius: 20px;
-    width: 60%;
-    background-color: #0a4072;
-    box-shadow: 7px 9px 11px rgb(7, 42, 76);
-}
-a{
+
+a {
     text-decoration: none;
     color: #ffffff;
 }
-h4#descricao{
+
+h4#descricao {
     color: #fb9815;
+}
+
+/* Adicionando responsividade */
+@media (max-width: 768px) {
+    .prodDesc {
+        width: 90%; /* Largura maior em telas menores */
+        margin: 20px auto; /* Centraliza a div */
+    }
 }
