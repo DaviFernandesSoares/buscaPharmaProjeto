@@ -17,12 +17,8 @@
 <div class="wrapper">
   <div class="form-box Register">
     <h2>Cadastro Admin</h2>
-       {% if error %}
-        <div class="error-container">{{ error }}</div>
-        {% endif %}
-    <form action="{% url 'cadastro_admin' id_unidade username %}" method="POST" id="form">
+    <form action="{% url 'cadastro_admin' id_unidade username_admin %}" method="POST" id="form">
         {% csrf_token %}
-
       <!-- Campo Username -->
       <div class="input-box">
         <span class="icon"><ion-icon name="person-circle-outline"></ion-icon></span>
@@ -61,9 +57,12 @@
         <input type="checkbox" id="show-password">
         <label for="show-password">Mostrar Senha</label>
       </div>
-
+        {% if error %}
+        <div class="error-container">{{ error }}</div>
+        {% endif %}
       <button type="submit" class="btn" id="btn-registrar">Registrar admin</button>
     </form>
+
   </div>
 </div>
 

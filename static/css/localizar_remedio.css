@@ -74,7 +74,7 @@ header .auth-buttons button {
 #map {
     width: 97%; /* Ocupa toda a largura disponível */
     height: 500px; /* Altura fixa para o mapa */
-    margin-top: 20px;
+    margin-top: 5px;
     border-radius: 10px/* Margem superior para separar do cabeçalho */
 }
 

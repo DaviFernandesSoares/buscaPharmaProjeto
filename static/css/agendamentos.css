@@ -21,14 +21,6 @@ header {
     color: white;
 }
 
-header .logo img {
-    background: white;
-    border-radius: 3%;
-    height: 60px;
-    width: 180px;
-    padding: 0 1rem 0 1rem;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 2.0);
-}
 
 header nav ul {
     list-style: none;
@@ -130,10 +122,13 @@ p {
     text-align: center;
     background-color: #0A4973; /* Azul para divs */
     border-radius: 8px;
-    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    box-shadow: 1px 6px 8px #333;
     color: #fff; /* Texto branco */
+     transition: transform 0.3s ease;
 }
-
+.proced:hover {
+    transform: scale(1.05); /* Aumenta 5% ao passar o mouse */
+}
 .proced h2 {
     color: #fff; /* Texto branco para o título */
     margin-bottom: 40px;
@@ -236,7 +231,7 @@ iframe {
 }
 
 .message.success {
-    background-color: #4caf50;
+    background-color: #0A4973;
     color: white;
 }
 
@@ -327,4 +322,8 @@ button#cancel-cancel {
 
 button#cancel-cancel:hover {
     background-color: #bbb; /* Cor ao passar o mouse */
+}
+a{
+    color: #ffffff;
+    text-decoration: none;
 }

@@ -6,7 +6,7 @@
     font-family: 'Poppins', sans-serif;
 }
 body {
-    background-color: #0a4072;
+    background-color: #ffffff;
     justify-content: center;
     align-items: center;
     height: 100vh;
@@ -24,11 +24,12 @@ section {
     align-items: center;
     padding: 20px;
     margin-top: 40px;
-    border-radius: 5px;
+    border-radius: 20px;
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
     border: 1px solid #e0e0e0;
     width: 900px; /* Define largura fixa */
     max-width: 100%; /* Para ser responsivo em telas menores */
+    background-color: #0a4072;
 }
 header {
     display: flex;
@@ -36,17 +37,8 @@ header {
     align-items: center;
     padding: 10px;
     color: white;
-    border-bottom: 0.1px white solid;
-    border-radius: 5px;
 }
-header .logo img {
-    background: white;
-    border-radius: 3%;
-    height: 60px;
-    width: 180px;
-    padding: 0 1rem 0 1rem;
-    box-shadow: 0 4px 8px rgba(208, 200, 200, 0.2);
-}
+
 h1 {
     color: white;
     font-size: 4.5em;
@@ -152,12 +144,11 @@ form {
     width: 600px; /* Define largura fixa para a mensagem */
     text-align: center;
     z-index: 1000;
-    box-shadow: 3px 4px 5px rgb(208, 208, 208); /* Sombra para destaque */
     margin-top: 20px; /* Espaçamento adicional */
 }
 label {
     display: block;
-    font-size: 18px;
+    font-size: 21px;
     font-weight: 600;
     margin-bottom: 8px;
     color: #ffffff;

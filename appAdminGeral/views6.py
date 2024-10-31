@@ -104,9 +104,6 @@ def home_admin_geral(request,username):
     except Admin.DoesNotExist:
         return render(request, '404.html')
 
-def criar_admin_unidade(request,id_unidade,username_admin):
-    return cadastro_adm(request,id_unidade=id_unidade,username_admin=username_admin)
-
 def criar_evento(request,username,id_unidade):
     itens_da_unidade = Estoque.objects.filter(id_unidade=id_unidade).values_list('id_item', flat=True)
     itens = Item.objects.filter(id_item__in=itens_da_unidade)

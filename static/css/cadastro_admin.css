@@ -8,47 +8,54 @@
 
 body {
     display: flex;
-    justify-content: center;
-    align-items: center;
     min-height: 100vh;
-    background-color: #0A4973;
 }
 
-/* Wrapper */
-.wrapper {
-    position: absolute;
-    top: 50%;
-    right: 30%;
-    width: 540px;
-    max-width: 70%;
-    height: 80%;
-    background: #fff;
-    border: 2px solid rgba(255, 255, 255, 0.5);
-    border-radius: 20px;
-    backdrop-filter: blur(20px);
-    box-shadow: 0 0 30px rgba(0, 0, 0, 0.5);
+/* Container principal */
+.logoFundo {
+    width: 50%;/* Metade da tela */
     display: flex;
     justify-content: center;
     align-items: center;
-    z-index: 2;
-    transform: translateY(-50%);
-    padding: 20px;
+    background-color: #0A4973; /* Fundo azul */
+}
+
+.logoFundo img { /* Ajuste a largura conforme necessário */
+    height: auto;
+}
+
+/* Wrapper do formulário */
+.wrapper {
+    width: 50%; /* Outra metade da tela */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #fff; /* Fundo branco */
+}
+
+.form-box {
+    width: 100%;
+    max-width: 600px;
+    background: #fff;
+    border: 2px solid rgba(255, 255, 255, 0.5);
+    border-radius: 20px;
+    padding: 30px;
+    box-shadow: 0 0 30px rgba(0, 0, 0, 0.2);
 }
 
 /* Form Header */
 .form-box h2 {
-    font-size: 3.5em;
-    color: #162938;
+    font-size: 3em;
+    color:  #0A4973;
     text-align: center;
-    margin-bottom: 20px;
+    margin-bottom: 25px;
 }
 
 /* Input Box */
 .input-box {
     position: relative;
     height: 40px;
-    margin: 30px 0;
-    /* Ajustado para uma margem mais uniforme */
+    margin: 20px 0;
     display: flex;
     flex-direction: column;
     align-items: flex-start;
@@ -92,8 +99,6 @@ body {
     right: 8px;
     font-size: 1.2em;
     color: #162938;
-    line-height: 40px;
-    /* Ajustado para corresponder ao tamanho dos campos */
 }
 
 /* Show Password Checkbox */
@@ -101,7 +106,6 @@ body {
     display: flex;
     align-items: center;
     margin-top: 20px;
-    /* Ajuste conforme necessário */
 }
 
 .show-password-container input {
@@ -118,93 +122,63 @@ body {
     border-radius: 6px;
     cursor: pointer;
     font-size: 1em;
-    color: #162938;
+    color: #ffffff;
     font-weight: 500;
     margin-top: 20px;
 }
 
-/* Login and Register */
-.login-register {
-    font-size: 0.9em;
-    color: #162938;
-    text-align: center;
-    font-weight: 500;
-    margin: 25px 0 10px;
-    display: flex;
-    justify-content: center;
-    /* Ajustado para centralizar */
+/* Error Tooltip */
+.error-tooltip {
+    display: none;
+    position: absolute;
+    background: #ffffff;
+    color: #000000;
+    border: 1px solid #162938;
+    border-radius: 4px;
+    padding: 8px;
+    font-size: 12px;
+    font-family: sans-serif, serif;
+    font-weight: bold;
+    max-width: 250px;
+    z-index: 1000;
+    top: 120%;
+    left: 40%;
+    box-shadow: 5px 4px 6px rgb(208, 208, 208);
 }
 
-.login-register p {
-    margin: 0;
+.error-tooltip::after {
+    content: "";
+    position: absolute;
+    bottom: 100%;
+    left: 50%;
+    margin-left: -5px;
+    border-width: 5px;
+    border-style: solid;
+    border-color: transparent transparent #162938 transparent;
 }
 
-.login-register p a {
-    color: #162938;
-    text-decoration: none;
-    font-weight: 600;
-}
-
-.login-register p a:hover {
-    text-decoration: underline;
+.error-container {
+    display: block;
+    background-color: #0A4973;
+    color: #ffffff;
+    border: 1px solid #083d5e;
+    padding: 10px;
+    margin-top: 15px;
+    border-radius: 5px;
 }
 
 /* Responsividade */
 @media (max-width: 768px) {
+    body {
+        flex-direction: column;
+    }
+
+    .logoFundo,
     .wrapper {
-        width: 90%;
-        right: 0;
-        padding: 20px;
+        width: 100%;
     }
 
     .form-box h2 {
         font-size: 2.5em;
     }
-
-    .input-box {
-        height: 50px;
-    }
-
-    .btn {
-        height: 55px;
-    }
-}
-.error-tooltip {
-    display: none;
-    position: absolute;
-    background: #ffffff; /* Cor de fundo do tooltip */
-    color: #000000; /* Cor do texto */
-    border: 1px solid #162938; /* Cor da borda */
-    border-radius: 4px;
-    padding: 8px; /* Ajuste conforme necessário */
-    font-size: 12px; /* Ajuste conforme necessário */
-    font-family: sans-serif, serif;
-    font-weight: bold;
-    max-width: 250px; /* Ajuste conforme necessário */
-    z-index: 1000; /* Garante que o tooltip fique acima dos outros elementos */
-    top: 120%; /* Ajuste para posicionar o tooltip logo abaixo do campo */
-    left: 40%; /* Ajuste para centralizar horizontalmente */
-    box-shadow: 5px 4px 6px rgb(208, 208, 208); /* Sombra opcional */
-}
-
-
-/* Estilo do triângulo */
-.error-tooltip::after {
-    content: "";
-    position: absolute;
-    bottom: 100%; /* Posiciona o triângulo acima do tooltip */
-    left: 50%;
-    margin-left: -5px; /* Centraliza o triângulo em relação ao tooltip */
-    border-width: 5px;
-    border-style: solid;
-    border-color: transparent transparent #162938 transparent; /* Triângulo com a mesma cor de fundo do tooltip */
-}
-.error-container {
-    display: block; /* Mantido em block para ocupar espaço */
-    background-color: #f8d7da; /* Cor de fundo para destacar o erro */
-    color: #721c24; /* Cor do texto */
-    border: 1px solid #f5c6cb; /* Borda vermelha */
-    padding: 10px; /* Espaçamento interno */
-    margin: 10px 0; /* Margem em torno da div */
-    border-radius: 5px; /* Arredondar os cantos */
 }

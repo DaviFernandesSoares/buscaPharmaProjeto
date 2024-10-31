@@ -34,7 +34,6 @@ urlpatterns = [
     path('login_admin_geral/', views6.login_adm_geral, name='login_admin_geral'),
     path('criar_admin/<str:senha>',views6.criar_admin, name='criar_admin'),
     path('home_admin_geral/<str:username>/',views6.home_admin_geral, name='home_admin_geral'),
-    path('criar_admin_unidade/<int:id_unidade>/<str:username_admin>/',views6.criar_admin_unidade, name='criar_admin_unidade'),
     path('editar_perfil_usuario/', views7.editar_perfil_usuario,name='editar_perfil_usuario'),
     path('cria_evento/<str:username>/<int:id_unidade>/',views6.criar_evento,name='cria_evento'),
     path('salvar_evento/<str:username>/',views6.salvar_evento,name='salvar_evento'),

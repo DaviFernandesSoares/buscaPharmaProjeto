@@ -58,27 +58,6 @@ document.getElementById('form').addEventListener('submit', async function(event)
         isValid = false;
         ativarBotao()
     }
-
-    // Se não houver erro, enviar o formulário
-    if (isValid) {
-        try {
-            // Exemplo de verificação adicional, se necessário
-            const response = await fetch(`/verificar_existencia/?username=${usernameInput}`);
-            const data = await response.json();
-            if (data.username_existe) {
-                usernameError.textContent = 'Este username já está cadastrado.';
-                usernameError.style.display = 'block'; // Exibir mensagem de erro
-                isValid = false;
-                ativarBotao()
-            }
-        } catch (error) {
-            console.error('Erro ao verificar o username:', error);
-        }
-
-        if (isValid) {
-            event.target.submit(); // Enviar o formulário se tudo estiver válido
-        }
-    }
 });
 
 // Mostrar senha e confirmar senha

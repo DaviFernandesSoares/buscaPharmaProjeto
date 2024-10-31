@@ -12,35 +12,35 @@ from appBusca.models import Unidade
 from appAdm.models import Admin
 
 
-
-def cadastro_adm(request,id_unidade,username_admin):
+def cadastro_adm(request, id_unidade, username_admin):
     if request.method == 'POST':
         username = request.POST.get('username')
         senha = request.POST['password']
         nome_completo = request.POST.get('nome_completo')
-        print(nome_completo)
+
         first_name = nome_completo.split()[0]
         last_name = nome_completo.split()[-1]
+
+        # Verifica se todos os campos necessários estão preenchidos
         if nome_completo and senha and id_unidade and username:
             unidade = get_object_or_404(Unidade, pk=id_unidade)
 
             # Verifica se já existe um admin associado a essa unidade
-            if Admin.objects.filter(username=username,is_superuser=0).exists():
-                # Retorna mensagem de erro se já existir um admin
+            if Admin.objects.filter(username=username).exists():
                 return render(request, 'cadastro_admin.html', {
-                    'error': 'Já existe um administrador com esse username associado a esta unidade.'
+                    'error': 'Já existe um administrador com esse username associado a esta unidade.',
+                    'id_unidade': id_unidade,
+                    'username_admin': username_admin
                 })
 
-
             # Criando o usuário com a instância da Unidade
-            user = Admin(username=username, id_unidade=unidade, is_staff=1,first_name=first_name, last_name=last_name)
-            print(user)
+            user = Admin(username=username, id_unidade=unidade, is_staff=True, first_name=first_name,
+                         last_name=last_name)
             user.set_password(senha)
             user.save()
-
             return redirect('home_admin_geral', username_admin)
 
-    return render(request, 'cadastro_admin.html',{'id_unidade':id_unidade,'username':username_admin})
+    return render(request, 'cadastro_admin.html', {'id_unidade': id_unidade, 'username_admin': username_admin})
 
 
 

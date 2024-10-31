@@ -9,17 +9,20 @@
     <title>Agendamentos</title>
   </head>
   <body>
-    <header>
+   <header>
     <div class="logo">
-      <a><img src="{% static 'img/Logo_pequena.png' %}" alt="Busca Pharma"/></a>
+      <a href="{% url 'home' %}"><img src="{% static 'img/Logo_pequena.png' %}" alt="Busca Pharma"/></a>
     </div>
     <nav>
         <ul>
             <li><a href="{% url 'home' %}">Home</a></li>
-            <li><a href="{% url 'busca' %}">Medicamentos</a></li>
-            <li><a class="active">Meus Agendamentos</a></li>
+            <li><a href="{% url 'busca' %}" >Medicamentos</a></li>
+            <li><a class="active">Agendamentos</a></li>
         </ul>
     </nav>
+    <div class="auth-buttons">
+        <button class="register-btn"><a href="{% url 'horarios_agendados' %}">Meus Agendamentos</a></button>
+    </div>
 </header>
     <div class="title">
       <h1>Meus Agendamentos</h1>
@@ -51,8 +54,8 @@
         <span class="close-button" id="close-modal">&times;</span>
         <h2>Confirmação</h2>
         <p>Tem certeza de que deseja cancelar este agendamento?</p>
-        <button id="confirm-cancel">Sim, cancelar</button>
-        <button id="cancel-cancel">Não, manter</button>
+        <button id="confirm-cancel">Cancelar</button>
+        <button id="cancel-cancel">Manter Agendamento</button>
     </div>
 </div>
   <script>

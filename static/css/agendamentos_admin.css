@@ -27,6 +27,7 @@ header .logo img {
     border-radius: 3%;
     height: 60px;
     width: 180px;
+    padding: 0 1rem 0 1rem;
 }
 
 nav ul {
