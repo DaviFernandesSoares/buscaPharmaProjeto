@@ -1,17 +1,15 @@
-from datetime import datetime,timedelta
-
-from django.utils import timezone
-from django.contrib.auth.decorators import user_passes_test, login_required
-from django.http import JsonResponse
 from django.contrib.auth import login as auth_login
-from django.shortcuts import render, redirect, get_object_or_404
 
-from appBusca.models import Unidade, Item, Estoque
+
+from appBusca.models import Estoque
 from .forms import AdminGeralForm
 from .models import Admin
-from appAdm.views3 import cadastro_adm
-from django.db.models import Value, CharField, Case, When
-from appAdminGeral.models import Evento
+
+from django.utils import timezone
+from django.http import JsonResponse
+from django.shortcuts import get_object_or_404, render
+from datetime import datetime, timedelta
+from .models import Unidade, Item, Evento  # Ajuste conforme seus modelos
 
 
 def is_superuser(user):
@@ -110,11 +108,6 @@ def criar_evento(request,username,id_unidade):
     return render(request,'criar_evento.html',{'username':username, 'id_unidade':id_unidade,'itens':itens})
 
 
-from django.utils import timezone
-from django.http import JsonResponse
-from django.shortcuts import get_object_or_404, render
-from datetime import datetime, timedelta
-from .models import Unidade, Item, Evento  # Ajuste conforme seus modelos
 
 def salvar_evento(request, username):
     resposta = {

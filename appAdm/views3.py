@@ -15,6 +15,7 @@ from appAdm.models import Admin
 def cadastro_adm(request, id_unidade, username_admin):
     if request.method == 'POST':
         username = request.POST.get('username')
+        email = request.POST.get('email')
         senha = request.POST['password']
         nome_completo = request.POST.get('nome_completo')
 
@@ -34,7 +35,7 @@ def cadastro_adm(request, id_unidade, username_admin):
                 })
 
             # Criando o usuário com a instância da Unidade
-            user = Admin(username=username, id_unidade=unidade, is_staff=True, first_name=first_name,
+            user = Admin(username=username, id_unidade=unidade,email=email, is_staff=True, first_name=first_name,
                          last_name=last_name)
             user.set_password(senha)
             user.save()
