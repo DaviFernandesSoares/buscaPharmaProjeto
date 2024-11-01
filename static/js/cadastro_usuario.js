@@ -1,3 +1,19 @@
+function showPopup() {
+    document.getElementById("password-popup").style.display = "block";
+}
+
+function closePopup() {
+    document.getElementById("password-popup").style.display = "none";
+}
+
+// Para fechar o pop-up ao clicar fora dele
+window.onclick = function(event) {
+    const popup = document.getElementById("password-popup");
+    if (event.target === popup) {
+        closePopup();
+    }
+}
+
 function desativarBotao(){
     const botao = document.getElementById('btn-registrar')
     botao.disabled = true;

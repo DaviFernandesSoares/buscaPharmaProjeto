@@ -29,7 +29,7 @@ def verificar_existencia(request):
 def cadastro(request):
     if request.method == 'POST':
         nome = request.POST['username']
-        email = request.POST['email']
+        email = request.POST['email'].lower()
         cpf = request.POST['cpf']
         senha = request.POST['password']
         ddd = request.POST['ddd']

@@ -123,7 +123,7 @@
 
       <div class="input-box">
         <span class="icon"><ion-icon name="lock-closed-outline"></ion-icon></span>
-        <input type="password" id="password" name="password">
+        <input type="password" id="password" name="password" onclick="showPopup()">
         <label>Senha</label>
         <div id="password-error" class="error-tooltip"></div> <!-- Div para exibir o erro -->
       </div>
@@ -134,7 +134,19 @@
         <div  id="confirm-password-error" class="error-tooltip"></div> <!-- Div para exibir o erro -->
       </div>
 
-
+    <div id="password-popup" class="password-popup">
+        <span class="close" onclick="closePopup()">&times;</span>
+        <div class="popup-content">
+        <p>A senha deve conter pelo menos:</p>
+        <ul>
+            <li class="liPop">8 caracteres</li>
+            <li class="liPop">1 letra maiúscula</li>
+            <li class="liPop">1 letra minúscula</li>
+            <li class="liPop">1 caractere especial</li>
+        </ul>
+    </div>
+</div>
+        
 
       <!-- Checkbox para mostrar/ocultar senha -->
       <div class="show-password-container">
@@ -148,8 +160,10 @@
         <p>Já possui uma conta? <a href={% url 'login' %}>Login</a></p>
       </div>
     </form>
+      
   </div>
 </div>
+
 
 <script src="{% static 'js/cadastro_usuario.js' %}"></script>
 <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons/.esm.js"></script>

@@ -33,7 +33,7 @@ header {
 }
 
 .prodDesc {
-    margin-top: 100px; /* Espaço entre o header e a descrição */
+    margin-top: 150px; /* Espaço entre o header e a descrição */
     border-radius: 20px;
     width: 60%; /* Largura padrão */
     max-width: 800px; /* Largura máxima */
