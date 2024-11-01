@@ -61,7 +61,8 @@
             <h2>{{ evento.titulo }}</h2>
             <div class="coluna">
                 <h3>{{ evento.nome_medicamento }}</h3>
-                <h3>{{ evento.data|date:"d/m/Y" }}</h3>
+                <h3>Data de Início:{{ evento.data_inicio|date:"d/m/Y" }}</h3>
+                <h3>Data de Termino:{{ evento.data_termino|date:"d/m/Y" }}</h3>
                 <h3>{{ evento.horario_inicio|time:"H:i" }}/{{ evento.horario_encerramento|time:"H:i" }}</h3>
             </div>
         </div>

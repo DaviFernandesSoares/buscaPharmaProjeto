@@ -110,7 +110,13 @@ def criar_evento(request,username,id_unidade):
     return render(request,'criar_evento.html',{'username':username, 'id_unidade':id_unidade,'itens':itens})
 
 
-def salvar_evento(request,username):
+from django.utils import timezone
+from django.http import JsonResponse
+from django.shortcuts import get_object_or_404, render
+from datetime import datetime, timedelta
+from .models import Unidade, Item, Evento  # Ajuste conforme seus modelos
+
+def salvar_evento(request, username):
     resposta = {
         'success': False,
         'mensagem': ''
@@ -120,14 +126,13 @@ def salvar_evento(request,username):
         try:
             # Captura os dados enviados no formulário
             descricao = request.POST.get('descricao_evento')
-            data_evento = request.POST.get('data_evento')  # Espera-se que seja uma string no formato YYYY-MM-DD
-            horario_inicio = request.POST.get('hora_evento')
-            horario_encerramento = request.POST.get('hora_encerramento')
+            data_inicio = request.POST.get('data_inicio')  # Formato: 'YYYY-MM-DD'
+            data_termino = request.POST.get('data_termino')  # Formato: 'YYYY-MM-DD'
             id_unidade = request.POST.get('id_unidade')
             id_item = request.POST.get('id_item')
 
             # Verifica se os campos obrigatórios estão preenchidos
-            if not all([descricao, horario_inicio, horario_encerramento, data_evento, id_unidade, id_item]):
+            if not all([descricao, data_inicio, data_termino, id_unidade, id_item]):
                 resposta['mensagem'] = 'Todos os campos devem ser preenchidos.'
                 return JsonResponse(resposta, status=400)
 
@@ -135,34 +140,24 @@ def salvar_evento(request,username):
             unidade = get_object_or_404(Unidade, id_unidade=id_unidade)
             item = get_object_or_404(Item, id_item=id_item)
 
-            # Converte a string de data para um objeto date
-            data_evento_obj = datetime.strptime(data_evento, '%Y-%m-%d').date()
-            data_atual = timezone.localtime().date()  # Correção com parênteses
+            # Converte as strings de data para objetos datetime
+            data_inicio_obj = timezone.make_aware(datetime.strptime(data_inicio + ' 00:00:00', '%Y-%m-%d %H:%M:%S'))
+            data_termino_obj = timezone.make_aware(datetime.strptime(data_termino + ' 23:59:59', '%Y-%m-%d %H:%M:%S'))
 
-            # Verifica se a data do evento é válida
-            if data_evento_obj < data_atual:
-                resposta['mensagem'] = 'Não é possível fazer agendamentos em dias anteriores ou não antecipado.'
+            # Verifica se a data de término é válida
+            if data_inicio_obj >= data_termino_obj:
+                resposta['mensagem'] = 'Erro ao criar evento. Verifique o horário que vai ser iniciado e encerrado.'
                 return JsonResponse(resposta, status=400)
-            if horario_inicio >= horario_encerramento:
-                resposta['mensagem']='Erro ao criar evento. Verifique o horário que vai ser iniciado e encerrado.'
-                return JsonResponse(resposta, status=400)
-            inicio_time = datetime.strptime(horario_inicio, '%H:%M').time()
-            encerramento_time = datetime.strptime(horario_encerramento, '%H:%M').time()
-            delta = timedelta(hours=1)
-            datetime_objeto = datetime.combine(data_evento_obj, inicio_time)
-            encerramento_minimo_time = datetime_objeto + delta
-            print(f'Teste:{encerramento_minimo_time.time()}')
-            horario_encerramento_objeto = datetime.combine(data_evento_obj, encerramento_time)
-            print(horario_encerramento_objeto)
-            if horario_inicio < horario_encerramento and horario_encerramento_objeto < encerramento_minimo_time:
-                resposta['mensagem']=f'Um evento só pode ser criado com mais de uma hora de antecedência. No caso após {encerramento_minimo_time.time()}'
-                return JsonResponse(resposta, status=400)
+
+            # Verifica se o evento está sendo criado com mais de uma hora de antecedência
+
+
+            # Criação do evento
             evento = Evento(
                 titulo=item.nome_item,
                 descricao=descricao,
-                horario_inicio=horario_inicio,
-                horario_encerramento=horario_encerramento,
-                data_evento=data_evento_obj,  # Salvando a data do evento
+                data_inicio=data_inicio,
+                data_termino=data_termino,
                 id_unidade=unidade,
                 id_item=item
             )

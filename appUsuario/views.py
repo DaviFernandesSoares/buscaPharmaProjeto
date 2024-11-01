@@ -87,12 +87,13 @@ def login(request):
 
 # View de home
 def home(request):
-    data_atual = timezone.now().date()
-    eventos = Evento.objects.filter(data_evento__gte=data_atual)
+    data_atual = timezone.now()
+    eventos = Evento.objects.filter(data_inicio__lt=data_atual, data_termino__gt=data_atual)
+
     for evento in eventos:
-        endereco_evento = pegar_endereco_por_cep_e_numero(evento.id_unidade.cep,evento.id_unidade.numero)
-        coordernadas = pegar_coordenadas_pelo_endereco(endereco_evento)
-        evento.latitude = coordernadas[0]
-        evento.longitude = coordernadas[1]
-        print(coordernadas)
+        endereco_evento = pegar_endereco_por_cep_e_numero(evento.id_unidade.cep, evento.id_unidade.numero)
+        coordenadas = pegar_coordenadas_pelo_endereco(endereco_evento)
+        evento.latitude = coordenadas[0]
+        evento.longitude = coordenadas[1]
+
     return render(request, 'home.html', {'eventos': eventos})

@@ -9,10 +9,9 @@ class Evento(models.Model):
     titulo = models.TextField(max_length=300,db_column='titulo')
     id_item = models.ForeignKey(Item,on_delete=models.CASCADE, db_column='id_item')
     id_unidade = models.ForeignKey(Unidade,on_delete=models.CASCADE, db_column='id_unidade')
-    data_evento = models.DateField(db_column='data_evento')
     descricao = models.TextField(max_length=255,db_column='descricao')
-    horario_inicio = models.TimeField(db_column='horario_inicio')
-    horario_encerramento = models.TimeField(db_column='horario_encerramento')
+    data_inicio = models.DateTimeField(db_column='data_inicio')
+    data_termino = models.DateTimeField(db_column='data_termino')
     class Meta:
         db_table = 'evento'
 
