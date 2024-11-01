@@ -9,18 +9,32 @@
     <link rel="stylesheet" href="{% static 'css/universal.css' %}">
 </head>
 <body>
-    <header>
+ <header>
     <div class="logo">
-      <a href="{% url 'home' %}"><img src="{% static 'img/Logo_pequena.png' %}" alt="Busca Pharma"/></a>
+        <a href="{% url 'home' %}"><img src="{% static 'img/Logo_pequena.png' %}" alt="Busca Pharma"/></a>
     </div>
     <nav>
         <ul>
-            <li><a href="{% url 'home' %}">Home</a></li>
-            <li><a href="{% url 'busca' %}" class="active">Medicamentos</a></li>
+            <li><a href="{% url 'home' %}" class="active">Home</a></li>
+            <li><a href="{% url 'busca' %}">Medicamentos</a></li>
         </ul>
     </nav>
     <div class="auth-buttons">
-        <button class="register-btn"><a href="{% url 'horarios_agendados' %}">Meus Agendamentos</a></button>
+        {% if request.user.is_authenticated %}
+            <!-- Ícone de usuário com opções de perfil e logout -->
+            <div class="user-icon">
+                <img src="{% static 'img/userIcon.png' %}" alt="Usuário" class="icon"> <!-- Adicione a imagem do ícone de usuário -->
+                <div class="user-menu">
+                    <p class="pop">Olá, {{ request.user.first_name.split.0}}!</p><br>
+                    <a href="{% url 'editar_perfil_usuario' %}" class="pop">Editar Perfil</a><br>
+                    <a href="{% url 'logout_usuario' %}" class="pop">Sair</a>
+                </div>
+            </div>
+        {% else %}
+            <!-- Botões de cadastro e login -->
+            <button class="register-btn"><a href="{% url 'cadastro' %}">Cadastrar-se</a></button>
+            <button class="login-btn"><a href="{% url 'login' %}">Entrar</a></button>
+        {% endif %}
     </div>
 </header>
 
@@ -42,24 +56,20 @@
                         <!-- As opções serão preenchidas pelo JavaScript -->
                     </select><br><br>
                 </div>
-                <div class="btn">
-                    <button type="submit" class="Agendar-link" id="btAgendar">Agendar</button><br><br>
+                <div class="btn-container">
+                    <button type="submit" class="Agendar-link" id="btAgendar">Agendar</button>
+                    <button class="back-button" onclick="window.history.back();">Voltar</button>
                 </div>
-                <center>
                 <span id="spinner" style="display: none;" class="spinner"></span>
-                    </center>
                  <div id="agendar-erro" class="error-message"></div>
                 <div class="info-text">
-    <p>Selecionou a unidade errada? Clique no botão abaixo para voltar e escolher a correta.</p>
-</div>
-
-<!-- Botão Voltar -->
-<div>
-    <button class="back-button" onclick="window.history.back();">Voltar</button>
+    <p class="p">Selecionou a unidade errada? Clique no botão abaixo para voltar e escolher a correta.</p>
 </div>
             </form>
         </div>
     </section>
+ <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
     <script>
         
         

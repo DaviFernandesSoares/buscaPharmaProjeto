@@ -231,8 +231,8 @@ iframe {
 }
 
 .message.success {
-    background-color: #0A4973;
-    color: white;
+    font-size: 1em;
+    color: #0A4973;
 }
 
 .message.error {

@@ -49,7 +49,7 @@ def login_adm_geral(request):
 
         return JsonResponse(resposta)
 
-    return render(request, 'login_Adm_Geral.html')
+    return render(request, 'login_adm_geral.html')
 
 
 

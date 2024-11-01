@@ -107,8 +107,9 @@ body{
 
 }
 .title h1 {
-    margin-bottom: 20px; /* Adiciona espaço abaixo do título */
+    margin-bottom: 16px; /* Adiciona espaço abaixo do título */
     text-align: center;
+    font-size: 2em;
 
 }
 
@@ -136,8 +137,8 @@ section{
     border-image: space;
     background-color: white;
     display: flex;
-    justify-content: space-between; /* Isso coloca uma div em cada extremidade */
-    align-items: center; /* Opcional: alinha verticalmente se houver diferença de altura */
+    align-items: flex-start;
+    justify-content: flex-start; /* Isso coloca uma div em cada extremidade */
 }
 .paragrafh{
     text-align: justify;
@@ -222,4 +223,9 @@ h1#eventos{
 h4#semEvento{
     color: #ff8800;
     margin: 10px;
+}
+.user-menu .greeting {
+    font-size: 1.2em; /* Ajuste o tamanho da fonte */
+    font-weight: bold; /* Torne o texto em negrito */
+    margin-bottom: 10px; /* Espaçamento abaixo do texto */
 }

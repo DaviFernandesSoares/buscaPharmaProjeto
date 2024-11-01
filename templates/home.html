@@ -24,6 +24,7 @@
             <div class="user-icon">
                 <img src="{% static 'img/userIcon.png' %}" alt="Usuário" class="icon"> <!-- Adicione a imagem do ícone de usuário -->
                 <div class="user-menu">
+                    <p class="pop">Olá, {{ request.user.first_name.split.0}}!</p><br>
                     <a href="{% url 'editar_perfil_usuario' %}" class="pop">Editar Perfil</a><br>
                     <a href="{% url 'logout_usuario' %}" class="pop">Sair</a>
                 </div>
@@ -45,12 +46,7 @@
             <h1>Saúde ao alcance de todos!</h1>
             <div>
                 <p class="paragrafh">
-                     Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                     Cum distinctio velit dolore maiores est magni, voluptas
-                     fugit illum aspernatur aliquam quod veritatis, mollitia
-                     natus accusamus deserunt pariatur quasi voluptates harum
-                     sed. Eligendi esse accusantium, natus aliquam iure earum
-                     necessitatibus ea, possimus quia error, enim ullam.
+                    A promoção da saúde deve ser um direito universal, acessível a todas as pessoas, independentemente de sua condição socioeconômica. Isso envolve garantir acesso a serviços de saúde de qualidade, informações claras e ações preventivas que promovam hábitos saudáveis. A educação em saúde é fundamental para empoderar indivíduos a tomarem decisões informadas sobre seu bem-estar. Além disso, a colaboração entre governos, instituições de saúde e a comunidade é essencial para eliminar barreiras e garantir que todos possam desfrutar de uma vida saudável. Assim, trabalhamos para construir uma sociedade mais justa e saudável para todos.
                 </p>
             </div>
         </div>
@@ -72,8 +68,14 @@
         <p>
             {{ evento.descricao }}
         </p>
-        <iframe src="https://www.google.com/maps/embed/v1/place?key=cahve={{ evento.latitude }},{{ evento.longitude }}&zoom=18"
-        width="100%" height="400" frameborder="0" style="border:0;" allowfullscreen></iframe>
+       <iframe
+    src="https://www.google.com/maps/embed/v1/place?key=chaveAPI={{ evento.latitude }},{{ evento.longitude }}&zoom=18"
+    width="100%"
+    height="400"
+    frameborder="0"
+    style="border:0;"
+    allowfullscreen>
+</iframe>
     </div>
     {% endfor %}
     </section>

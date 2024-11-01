@@ -11,25 +11,38 @@
   <body>
    <header>
     <div class="logo">
-      <a href="{% url 'home' %}"><img src="{% static 'img/Logo_pequena.png' %}" alt="Busca Pharma"/></a>
+        <a href="{% url 'home' %}"><img src="{% static 'img/Logo_pequena.png' %}" alt="Busca Pharma"/></a>
     </div>
     <nav>
         <ul>
-            <li><a href="{% url 'home' %}">Home</a></li>
-            <li><a href="{% url 'busca' %}" >Medicamentos</a></li>
-            <li><a class="active">Agendamentos</a></li>
+            <li><a href="{% url 'home' %}" class="active">Home</a></li>
+            <li><a href="{% url 'busca' %}">Medicamentos</a></li>
         </ul>
     </nav>
     <div class="auth-buttons">
-        <button class="register-btn"><a href="{% url 'horarios_agendados' %}">Meus Agendamentos</a></button>
+        {% if request.user.is_authenticated %}
+            <!-- Ícone de usuário com opções de perfil e logout -->
+            <div class="user-icon">
+                <img src="{% static 'img/userIcon.png' %}" alt="Usuário" class="icon"> <!-- Adicione a imagem do ícone de usuário -->
+                <div class="user-menu">
+                    <p class="pop">Olá, {{ request.user.first_name.split.0}}!</p><br>
+                    <a href="{% url 'editar_perfil_usuario' %}" class="pop">Editar Perfil</a><br>
+                    <a href="{% url 'logout_usuario' %}" class="pop">Sair</a>
+                </div>
+            </div>
+        {% else %}
+            <!-- Botões de cadastro e login -->
+            <button class="register-btn"><a href="{% url 'cadastro' %}">Cadastrar-se</a></button>
+            <button class="login-btn"><a href="{% url 'login' %}">Entrar</a></button>
+        {% endif %}
     </div>
 </header>
     <div class="title">
       <h1>Meus Agendamentos</h1>
     </div>
-    <section id="cards">
         {% if agendamentos_e_endereco %}
           {% for item in agendamentos_e_endereco %}
+              <section id="cards">
               <div class="grid-item proced" id="agendamento-{{ item.agendamento.id_agendamento }}">
                   <h2>Interesse no medicamento {{ item.agendamento.id_item.nome_item }}</h2>
                   <p>Data: {{ item.agendamento.data|date:"d/m/Y" }}</p>
@@ -41,12 +54,11 @@
                     <button type="submit" class="cancel-btn">Cancelar Agendamento</button>
                 </form>
               </div>
+              </section>
           {% endfor %}
-
       {% else %}
           <p class="nenhum">Você não tem agendamentos no momento.</p>
       {% endif %}
-    </section>
   <div id="message-box"></div>
     <!-- Modal de Confirmação -->
 <div id="confirm-modal" class="modal">

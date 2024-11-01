@@ -94,4 +94,5 @@ def home(request):
         coordernadas = pegar_coordenadas_pelo_endereco(endereco_evento)
         evento.latitude = coordernadas[0]
         evento.longitude = coordernadas[1]
+        print(coordernadas)
     return render(request, 'home.html', {'eventos': eventos})

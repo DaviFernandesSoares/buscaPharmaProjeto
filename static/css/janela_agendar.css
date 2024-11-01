@@ -5,6 +5,7 @@
     box-sizing: border-box;
     font-family: 'Poppins', sans-serif;
 }
+
 body {
     background-color: #ffffff;
     justify-content: center;
@@ -12,11 +13,13 @@ body {
     height: 100vh;
     margin: 0;
 }
+
 section {
     display: flex;
     justify-content: center;
     align-items: center;
 }
+
 .modal {
     display: flex;
     flex-direction: column;
@@ -28,9 +31,10 @@ section {
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
     border: 1px solid #e0e0e0;
     width: 900px; /* Define largura fixa */
-    max-width: 100%; /* Para ser responsivo em telas menores */
+    max-width: 100%; /* Responsivo em telas menores */
     background-color: #0a4072;
 }
+
 header {
     display: flex;
     justify-content: space-between;
@@ -45,6 +49,7 @@ h1 {
     margin-top: 20px;
     text-align: center;
 }
+
 form {
     font-size: larger;
     font-weight: bolder;
@@ -58,7 +63,8 @@ form {
 }
 
 /* Estilo dos inputs e selects */
-.input-box input, .input-box select {
+.input-box input,
+.input-box select {
     width: 100%;
     height: 45px;
     padding: 12px;
@@ -71,7 +77,8 @@ form {
     transition: border-color 0.3s ease;
 }
 
-.input-box input:focus, .input-box select:focus {
+.input-box input:focus,
+.input-box select:focus {
     border-color: #ff8800;
     outline: none;
 }
@@ -101,11 +108,10 @@ form {
 }
 
 /* Estilo do botão */
-/* Ajuste do botão */
 .btn {
-    margin: 0px 20px;
+    margin: 0 20px;
     padding: 5px 15px; /* Reduzir o padding */
-    height: 40px; /* Definir a altura exata */
+    height: 40px; /* Definir altura exata */
     text-align: center;
     font-size: 1em; /* Ajuste para adequar o texto */
     cursor: pointer;
@@ -124,9 +130,9 @@ form {
     background: none;
     border: none;
 }
+
 .btn:hover {
     background-color: #0A4973;
-    transition: background-color 0.3s ease;
 }
 
 /* Estilo da mensagem de erro */
@@ -146,6 +152,7 @@ form {
     z-index: 1000;
     margin-top: 20px; /* Espaçamento adicional */
 }
+
 label {
     display: block;
     font-size: 21px;
@@ -153,6 +160,8 @@ label {
     margin-bottom: 8px;
     color: #ffffff;
 }
+
+/* Estilo do spinner */
 .spinner {
     border: 2px solid rgb(253, 135, 0);
     border-top: 2px solid #ffffff; /* Cor do topo do spinner */
@@ -167,10 +176,12 @@ label {
     0% { transform: rotate(0deg); }
     100% { transform: rotate(360deg); }
 }
-a{
+
+a {
     text-decoration: none;
     color: #ffffff;
 }
+
 /* Estilo do texto informativo */
 .info-text {
     text-align: center;
@@ -205,6 +216,34 @@ a{
     color: #ffffff;
     border: 1px #ff8800 solid;
 }
-p{
-    font-size: 12px;
+
+.p {
+    color: #ff8800;
+    font-size: 16px;
+}
+
+.voltar-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 45px; /* Ajusta a largura para a seta */
+    height: 45px; /* Ajusta a altura para a seta */
+    background: transparent;
+    border: 2px solid #162938;
+    border-radius: 50%;
+    color: #162938;
+    font-size: 1.5em; /* Tamanho da seta */
+    cursor: pointer;
+    transition: background 0.3s ease, color 0.3s ease;
+    margin-top: 25px;
+    padding: 10px;
+}
+
+.voltar-btn:hover {
+    background-color: #162938;
+    color: #ff8800;
+}
+
+.voltar-btn ion-icon {
+    font-size: 1.8em;
 }
