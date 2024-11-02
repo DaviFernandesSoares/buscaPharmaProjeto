@@ -11,9 +11,11 @@ body {
     justify-content: center;
     align-items: center;
     min-height: 100vh;
+    background: no-repeat;
+    background-size: cover;
+    background-position: center;
 }
 
-/* Logo Background */
 .logoFundo {
     position: fixed;
     top: 0;
@@ -38,17 +40,19 @@ body {
 .wrapper {
     position: absolute;
     top: 50%;
-    right: 7%;
+    right: 6.5%;
     width: 540px;
     max-width: 70%;
-    height: 450px; /* Aumentado para incluir mais espaço para o conteúdo */
-    background: transparent;
+    height: 450px;
+    /* Aumentado para incluir mais espaço para o conteúdo */
+    background: #ffffff;
     border: 2px solid rgba(255, 255, 255, 0.5);
     border-radius: 20px;
     backdrop-filter: blur(20px);
     box-shadow: 0 0 30px rgba(0, 0, 0, 0.5);
     display: flex;
-    flex-direction: column; /* Ajustado para empilhar os elementos verticalmente */
+    flex-direction: column;
+    /* Ajustado para empilhar os elementos verticalmente */
     justify-content: center;
     align-items: center;
     z-index: 2;
@@ -58,10 +62,12 @@ body {
 
 /* Form Header */
 .form-box h2 {
-    font-size: 3em; /* Ajustado para um tamanho um pouco menor */
+    font-size: 3em;
+    /* Ajustado para um tamanho um pouco menor */
     color: #162938;
     text-align: center;
-    margin-bottom: 30px; /* Ajustado para menos espaço */
+    margin-bottom: 30px;
+    /* Ajustado para menos espaço */
 }
 
 /* Input Box */
@@ -158,18 +164,30 @@ body {
         height: 55px;
     }
 }
+
 .error-message {
     display: none;
-    background: #ffffff; /* Cor de fundo do tooltip */
-    color: #000000; /* Cor do texto */
-    border: 1px solid #162938; /* Cor da borda */
+    background: #ffffff;
+    /* Cor de fundo do tooltip */
+    color: #000000;
+    /* Cor do texto */
+    border: 1px solid #162938;
+    /* Cor da borda */
     border-radius: 4px;
-    font-size: 16px; /* Ajuste conforme necessário */
+    font-size: 16px;
+    /* Ajuste conforme necessário */
     font-family: sans-serif, serif;
     font-weight: bold;
     width: 100%;
     height: 25px;
-    text-align: center;/* Ajuste conforme necessário */
-    box-shadow: 0.7px 0.7px 1.5px rgb(237, 5, 5); /* Sombra opcional */
+    text-align: center;
+    /* Ajuste conforme necessário */
+    box-shadow: 0.7px 0.7px 1.5px rgb(237, 5, 5);
+    /* Sombra opcional */
 }
 
+.check-box input[type="checkbox"] {
+    width: 15px;
+    /* Ajuste o tamanho conforme necessário */
+    height: 15px;
+}
