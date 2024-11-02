@@ -6,15 +6,15 @@
 }
 
 body {
-    background-color: #0A4970;
+    background-color: #0A4973;
     display: flex;
     justify-content: center;
     align-items: center;
 }
 
-header { 
+header {
     display: flex;
-    justify-content: space-between;    
+    justify-content: space-between;
     position: fixed;
     top: 0;
     left: 0;
@@ -23,7 +23,7 @@ header {
 }
 
 header .logo img {
-    background: #0A4973;
+    background: white;
     border-radius: 3%;
     height: 60px;
     width: 180px;
@@ -49,7 +49,7 @@ header .auth-buttons button {
     position: absolute;
     width: 500px;
     height: 550px;
-    background: #fff ;
+    background: #fff;
     border: 3px solid rgba(255, 255, 255, 0.5);
     border-radius: 40px;
     backdrop-filter: blur(20px);
