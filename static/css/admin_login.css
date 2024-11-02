@@ -18,14 +18,14 @@ body {
 
 .logo {
     position: absolute;
-    background-color: #ffffff;
+    background-color: transparent;
     border-radius: 8px;
     top: 20px;
     left: 20px;
 }
 
 .logo img {
-    background: white;
+    background: #0a4070;
     border-radius: 3%;
     height: 60px;
     width: 180px;

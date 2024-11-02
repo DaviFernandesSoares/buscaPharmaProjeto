@@ -7,36 +7,6 @@
     vertical-align: auto;
 }
 
-nav {
-    background-color: #ff8800; /* Cor de fundo da navbar */
-    padding: 10px; /* Espaçamento interno */
-}
-
-nav ul {
-    list-style: none;
-    display: flex;
-    justify-content: center; /* Centraliza os itens na navbar */
-    gap: 20px; /* Espaçamento entre os itens */
-}
-
-nav ul li {
-    margin: 0; /* Remove a margem lateral entre os itens */
-}
-
-nav ul li a {
-    color: white; /* Cor do texto */
-    text-decoration: none;
-    font-weight: bold; /* Texto em negrito */
-    padding: 10px 15px; /* Espaçamento interno nos links */
-    border-radius: 5px; /* Arredondar cantos dos links */
-    transition: background-color 0.3s; /* Transição suave para a cor de fundo */
-}
-
-nav ul li a:hover,
-nav ul li a.active {
-    background-color: #0A4973; /* Cor ao passar o mouse ou quando ativo */
-}
-
 /* Estilo do cabeçalho */
 header, .coluna1, .coluna2, .coluna3 {
     display: flex;
@@ -47,7 +17,7 @@ header, .coluna1, .coluna2, .coluna3 {
 }
 
 header .logo img {
-    background: white;
+    background: transparent;
     border-radius: 3%;
     height: 60px;
     width: 180px;
@@ -55,7 +25,7 @@ header .logo img {
 }
 
 body {
-    background-color: #0A4973; /* Cor de fundo da página */
+    background-color: #0A4970; /* Cor de fundo da página */
 }
 
 .title {

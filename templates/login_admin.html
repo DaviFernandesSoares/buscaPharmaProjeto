@@ -1,15 +1,15 @@
 <!DOCTYPE html>
 <html lang="pt-br">
-
+{% load static %}
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login</title>
-    <link rel="stylesheet" href="CSS/admin_login.css">
+    <link rel="stylesheet" href="{% static 'css/admin_login.css' %}">
 </head>
 
 <div class="logo">
-    <img src="img/Logo_pequena.png" alt="Busca Pharma">
+    <img src="{% static 'img/Logo_pequena.png' %}" alt="Busca Pharma">
 </div>
 
 <body>
@@ -18,8 +18,8 @@
     <div class="wrapper">
         <div class="form-box login">
             <h2>Login Admin</h2>
-            <form action="login_admin" method="POST" id="form">
-
+            <form action="{% url 'login_admin' %}" method="POST" id="form">
+            {% csrf_token %}
                 <div id="login-erro" class="error-message"></div>
 
                 <!-- Campo Username -->
@@ -62,7 +62,7 @@
             </form>
         </div>
     </div>
-    <script src="JavaScript/loginAdmin.js"></script>
+    <script src="{% static 'js/loginAdmin.js' %}"></script>
     <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
     <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
 </body>

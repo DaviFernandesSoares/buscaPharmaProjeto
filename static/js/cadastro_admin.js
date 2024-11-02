@@ -7,6 +7,20 @@ function ativarBotao(){
     botao.disabled = false;
 }
 
+document.getElementById('show-password').addEventListener('change', function () {
+    const passwordField = document.getElementById('password');
+    const confirmPasswordField = document.getElementById('confirm-password');
+
+    if (this.checked) {
+        passwordField.type = 'text';
+        confirmPasswordField.type = 'text';
+    } else {
+        passwordField.type = 'password';
+        confirmPasswordField.type = 'password';
+    }
+});
+
+
 document.getElementById('form').addEventListener('submit', async function(event) {
     event.preventDefault(); // Impede o envio do formulário até que as validações sejam feitas
     let isValid = true; // Variável para verificar se houve erro

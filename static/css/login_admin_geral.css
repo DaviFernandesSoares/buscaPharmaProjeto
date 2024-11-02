@@ -23,7 +23,7 @@ header {
 }
 
 header .logo img {
-    background: white;
+    background: transparent;
     border-radius: 3%;
     height: 60px;
     width: 180px;

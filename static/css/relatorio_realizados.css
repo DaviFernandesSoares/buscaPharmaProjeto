@@ -27,15 +27,6 @@ nav ul li a {
     transition: background-color 0.3s;
 }
 
-/* Estilo do link ativo */
-nav ul li a.active {
-    background-color: #ff8800; /* Cor do fundo quando ativo */
-    color: #fff; /* Cor do texto quando ativo */
-}
-
-nav ul li a:hover {
-    background-color: #ff8800; /* Cor ao passar o mouse */
-}
 
 /* Estilo do título */
 h1 {

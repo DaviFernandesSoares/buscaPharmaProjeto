@@ -23,7 +23,7 @@ header {
 }
 
 header .logo img {
-    background: white;
+    background: transparent;
     border-radius: 3%;
     height: 60px;
     width: 180px;
@@ -40,21 +40,6 @@ nav ul li {
     display: inline;
 }
 
-nav ul li a {
-    text-decoration: none;
-    color: #fff; /* Cor do texto padrão da navbar */
-    font-size: 18px;
-    font-weight: 500;
-    padding: 10px 15px;
-    border-radius: 5px;
-    transition: background-color 0.3s, color 0.3s;
-}
-
-nav ul li a:hover,
-nav ul li a.active {
-    background-color: #ff8800; /* Cor ao passar o mouse ou quando ativo */
-    color: #fff;
-}
 
 /* Estilo da área de busca */
 .search-container {
@@ -62,7 +47,7 @@ nav ul li a.active {
     justify-content: center;
     align-items: center;
     padding: 20px;
-    background-color: #fff;
+    background-color: transparent;
 }
 
 .search-input {

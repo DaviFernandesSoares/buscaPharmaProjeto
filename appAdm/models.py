@@ -14,6 +14,7 @@ class Admin(AbstractUser):
         blank=True
     )
     username = models.CharField(max_length=150, unique=True)
+    email = models.EmailField()
     id_unidade  = models.ForeignKey(Unidade, on_delete=models.CASCADE, db_column='id_unidade')
     id_admin = models.IntegerField(primary_key=True, db_column= 'id_adm')
     class Meta:
