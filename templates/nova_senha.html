@@ -1,56 +1,68 @@
 <!DOCTYPE html>
 <html lang="pt-br">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Redefinir Senha</title>
-    {% load static %}
-    <link rel="stylesheet" href="{% static 'css/nova_senha.css' %}">
+    <link rel="stylesheet" href="css/nova_senha.css"> <!-- Remova a parte do Django -->
     <script>
         document.addEventListener('DOMContentLoaded', function () {
             document.getElementById('show-password').addEventListener('change', function () {
-                const passwordField = document.getElementById('nova_senha');
+                const passwordField1 = document.getElementById('nova_senha');
+                const passwordField2 = document.getElementById('confirmar_senha');
                 if (this.checked) {
-                    passwordField.type = 'text'; // Mostra a senha
+                    passwordField1.type = 'text'; // Mostra a nova senha
+                    passwordField2.type = 'text'; // Mostra a confirmação da senha
                 } else {
-                    passwordField.type = 'password'; // Oculta a senha
+                    passwordField1.type = 'password'; // Oculta a nova senha
+                    passwordField2.type = 'password'; // Oculta a confirmação da senha
                 }
             });
         });
     </script>
 </head>
+
 <body>
+
+    <div class="logoFundo">
+        <img src="img/Logo_Login.png" alt="Logo">
+    </div>
+
     <div class="wrapper">
         <div class="form-box">
             <h2>Nova Senha</h2>
-            {% if messages %}
-                <div id="login-erro" class="error-message">
-                    {% for message in messages %}
-                        <div>{{ message }}</div>
-                    {% endfor %}
-                </div>
-            {% endif %}
-            <form method="POST">
-                {% csrf_token %}
+            <div id="login-erro" class="error-message" style="display: none;"></div>
+            <!-- Mensagem de erro inicialmente oculta -->
+            <form method="POST" action="seu-endereco-de-acao"> <!-- Defina o endpoint de ação corretamente -->
                 <div class="input-box">
                     <span class="icon"><ion-icon name="lock-closed-outline"></ion-icon></span>
-                    <input type="password" id="nova_senha" name="nova_senha" required placeholder="Digite sua nova senha">
+                    <input type="password" id="nova_senha" name="nova_senha" required
+                        placeholder="Digite sua nova senha">
                 </div>
                 <div class="input-box">
+                    <span class="icon"><ion-icon name="lock-closed-outline"></ion-icon></span>
+                    <input type="password" id="confirmar_senha" name="confirmar_senha" required
+                        placeholder="Confirme sua senha">
+                </div>
+                <div class="check-box">
                     <input type="checkbox" id="show-password"> Mostrar Senha
                 </div>
                 <button type="submit" class="btn"><b>Redefinir Senha</b></button>
             </form>
         </div>
     </div>
- <script>
-        // Exibe a mensagem de erro se houver
+    <script>
+        // Exibe a mensagem de erro se houver (exemplo)
         document.addEventListener('DOMContentLoaded', function () {
             const errorMessage = document.getElementById('login-erro');
-            if (errorMessage.innerText.trim() !== "") {
+            // Aqui você pode definir a lógica para exibir a mensagem de erro, se necessário
+            if (/* condição para mostrar a mensagem */) {
+                errorMessage.innerText = 'Seu erro aqui'; // Adicione a mensagem de erro
                 errorMessage.style.display = 'block'; // Exibe a mensagem
             }
         });
     </script>
 </body>
+
 </html>
