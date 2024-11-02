@@ -1,30 +1,27 @@
 <!DOCTYPE html>
 <html lang="pt-br">
-{% load static %}
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Criar Evento</title>
-    <link rel="stylesheet" href="{% static 'css/home_admin_geral.css' %}">
-    <link rel="stylesheet" href="{% static 'css/criar_evento.css' %}"> <!-- CSS separado -->
+    <link rel="stylesheet" href="CSS/homeAdminGeral.css">
+    <link rel="stylesheet" href="CSS/criar_evento.css"> <!-- CSS separado -->
 </head>
+
 <body>
     <header>
         <div class="logo">
-            <a href="#"><img src="{% static 'img/Logo_pequena.png' %}" alt="Busca Pharma"/></a>
+            <a href="#"><img src="img/Logo_pequena.png" alt="Busca Pharma" /></a>
         </div>
-        <nav>
-            <a href="{% url 'home_admin_geral' username %}">Voltar para Home</a>
-        </nav>
     </header>
- <h1 id="criar">Preencha os Dados do Evento</h1>
+    <h1 id="criar">Preencha os Dados do Evento</h1>
     <section class="form-container">
         <div id="error-message" class="error-message" style="display:none;"></div> <!-- Div para mensagem de erro -->
-        <form method="POST" action="{% url 'salvar_evento' username %}">
-            {% csrf_token %}
+        <form method="POST" action="salvar_evento.html">
             <div class="form-group">
                 <label for="descricao_evento">Descrição do Evento:</label>
-               <textarea id="descricao_evento" name="descricao_evento" rows="6" class="no-resize"></textarea>
+                <textarea id="descricao_evento" name="descricao_evento" rows="6" class="no-resize"></textarea>
             </div>
             <div class="form-group">
                 <label for="data_inicio">Data de início:</label>
@@ -34,7 +31,7 @@
                 </div>
             </div>
             <div class="form-group">
-                <label for="data_termino">Data de termino:</label>
+                <label for="data_termino">Data de término:</label>
                 <div style="position: relative;">
                     <input type="date" id="data_termino" name="data_termino" class="date-input" required>
                     <ion-icon name="calendar-outline" class="calendar-icon"></ion-icon>
@@ -43,23 +40,25 @@
             <div class="form-group">
                 <label for="id_item">Selecione o Item:</label>
                 <select id="id_item" name="id_item" required>
-                    {% for item in itens %}
-                        <option value="{{ item.id_item }}">{{ item.nome_item }}</option>
-                    {% endfor %}
+                    <option value="1">Item 1</option>
+                    <option value="2">Item 2</option>
+                    <!-- Mais opções podem ser adicionadas aqui -->
                 </select>
             </div>
             <div class="form-group">
                 <label for="id_unidade">Unidade:</label>
-                <input type="hidden" id="id_unidade" name="id_unidade" value="{{ id_unidade }}" readonly>
-                <p>{{ id_unidade }}</p>
+                <input type="hidden" id="id_unidade" name="id_unidade" value="Unidade1" readonly>
+                <p>Unidade1</p>
             </div>
             <div class="form-group">
                 <button type="submit">Criar Evento</button>
             </div>
+            <p>Para retornar à home sem adicionar nenhum evento clique no link abaixo</p>
+            <a href="home_admin_geral.html">Voltar para Home</a>
         </form>
     </section>
 
-    <script src="{% static 'js/homeAdminGeral.js' %}"></script>
+    <script src="js/homeAdminGeral.js"></script>
     <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
     <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
 
@@ -67,17 +66,14 @@
         const form = document.querySelector('form');
         const errorMessageDiv = document.getElementById('error-message');
 
-        form.addEventListener('submit', async function(event) {
+        form.addEventListener('submit', async function (event) {
             event.preventDefault();
             errorMessageDiv.style.display = 'none'; // Resetar mensagem de erro
             const formData = new FormData(form);
 
             const response = await fetch(form.action, {
                 method: 'POST',
-                body: formData,
-                headers: {
-                    'X-CSRFToken': formData.get('csrfmiddlewaretoken')
-                }
+                body: formData
             });
 
             const result = await response.json();
@@ -91,4 +87,5 @@
         });
     </script>
 </body>
+
 </html>
