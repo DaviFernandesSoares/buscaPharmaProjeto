@@ -26,6 +26,7 @@
                 <img src="{% static 'img/userIcon.png' %}" alt="Usuário" class="icon"> <!-- Adicione a imagem do ícone de usuário -->
                 <div class="user-menu">
                     <p class="pop">Olá, {{ request.user.first_name.split.0}}!</p><br>
+                    <a href="{% url 'horarios_agendados' %}" class="pop">Meus Agendamentos</a><br>
                     <a href="{% url 'editar_perfil_usuario' %}" class="pop">Editar Perfil</a><br>
                     <a href="{% url 'logout_usuario' %}" class="pop">Sair</a>
                 </div>
@@ -57,8 +58,8 @@
                     </select><br><br>
                 </div>
                 <div class="btn-container">
-                    <button type="submit" class="Agendar-link" id="btAgendar">Agendar</button>
                     <button class="back-button" onclick="window.history.back();">Voltar</button>
+                    <button type="submit" class="back-button" id="btAgendar">Agendar</button>
                 </div>
                 <span id="spinner" style="display: none;" class="spinner"></span>
                  <div id="agendar-erro" class="error-message"></div>

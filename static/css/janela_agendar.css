@@ -123,14 +123,6 @@ form {
     width: 500px;
 }
 
-.btn .Agendar-link {
-    color: #fff;
-    width: 100%;
-    text-decoration: none;
-    background: none;
-    border: none;
-}
-
 .btn:hover {
     background-color: #0A4973;
 }
@@ -196,7 +188,7 @@ a {
     flex-direction: column; /* Altera para coluna */
     justify-content: center;
     align-items: center; /* Centraliza o botão */
-    margin-top: 15px;
+    margin-top: 10px;
 }
 
 .back-button {
@@ -205,10 +197,10 @@ a {
     border: none;
     padding: 10px 20px;
     border-radius: 5px;
-    width: 150px;
+    width: 200px;
     cursor: pointer;
     transition: background-color 0.3s ease;
-    margin-top: 10px; /* Adiciona margem superior ao botão */
+    margin-top: 5px; /* Adiciona margem superior ao botão */
 }
 
 .back-button:hover {
@@ -222,28 +214,3 @@ a {
     font-size: 16px;
 }
 
-.voltar-btn {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    width: 45px; /* Ajusta a largura para a seta */
-    height: 45px; /* Ajusta a altura para a seta */
-    background: transparent;
-    border: 2px solid #162938;
-    border-radius: 50%;
-    color: #162938;
-    font-size: 1.5em; /* Tamanho da seta */
-    cursor: pointer;
-    transition: background 0.3s ease, color 0.3s ease;
-    margin-top: 25px;
-    padding: 10px;
-}
-
-.voltar-btn:hover {
-    background-color: #162938;
-    color: #ff8800;
-}
-
-.voltar-btn ion-icon {
-    font-size: 1.8em;
-}

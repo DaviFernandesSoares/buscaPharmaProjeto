@@ -27,7 +27,8 @@
             <div class="user-icon">
                 <img src="{% static 'img/userIcon.png' %}" alt="Usuário" class="icon"> <!-- Adicione a imagem do ícone de usuário -->
                 <div class="user-menu">
-                    <p class="pop">Olá, {{ request.user.first_name.split.0}}!</p><br>
+                    <p class="pop">Olá, {{ request.user.first_name.split.0}}!</p><br>                    
+                    <a href="{% url 'horarios_agendados' %}" class="pop">Meus Agendamentos</a><br>
                     <a href="{% url 'editar_perfil_usuario' %}" class="pop">Editar Perfil</a><br>
                     <a href="{% url 'logout_usuario' %}" class="pop">Sair</a>
                 </div>

@@ -13,7 +13,6 @@ body {
     display: flex;
     flex-direction: column; /* Altera para coluna para melhor alinhamento */
     align-items: center; /* Centraliza itens horizontalmente */
-    height: 100vh; /* Usa toda a altura da viewport */
 }
 
 header {
