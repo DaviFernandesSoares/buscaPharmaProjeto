@@ -64,14 +64,13 @@
                 <h3>{{ evento.nome_medicamento }}</h3>
                 <h3>Data de Início:{{ evento.data_inicio|date:"d/m/Y" }}</h3>
                 <h3>Data de Termino:{{ evento.data_termino|date:"d/m/Y" }}</h3>
-                <h3>{{ evento.horario_inicio|time:"H:i" }}/{{ evento.horario_encerramento|time:"H:i" }}</h3>
             </div>
         </div>
         <p>
             {{ evento.descricao }}
         </p>
        <iframe
-    src="https://www.google.com/maps/embed/v1/place?key=chaveAPI={{ evento.latitude }},{{ evento.longitude }}&zoom=18"
+        src="https://www.google.com/maps/embed/v1/place?key=chaveAPI&q={{ evento.latitude }},{{ evento.longitude }}&zoom=18"
     width="100%"
     height="400"
     frameborder="0"

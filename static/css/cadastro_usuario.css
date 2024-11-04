@@ -309,8 +309,8 @@ body {
 .password-popup {
     display: none; /* Oculta o pop-up por padrão */
     position: fixed;
-    left: -13%;
-    top: 70%;
+    left: -10%;
+    top: 67%;
     transform: translate(-50%, -50%);
     background: white;
     border: 1px solid #162938;

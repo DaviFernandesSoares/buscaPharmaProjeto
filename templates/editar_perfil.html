@@ -16,9 +16,30 @@
         </div>
     </header>
 
-<div class="wrapper" style="height: max-content" >
+<div class="wrapper" style="height: max-content">
   <div class="form-box Register">
     <h2>Editar Perfil</h2>
+    {% if messages %}
+        <div id="login-erro" class="error-message">
+            {% for message in messages %}
+                <div class="mensagem">{{ message }}</div>
+            {% endfor %}
+        </div>
+    {% endif %}
+   <script>
+        window.onload = function() {
+            const mensagem = document.querySelector('.mensagem');
+            const mensagemDiv = document.querySelector('.error-message');
+            mensagem.style.width= '';
+            
+            if (mensagem && mensagem.textContent === 'Alteração realizada com sucesso!') {
+                setTimeout(() => {
+                    mensagem.style.display = 'none'; // Oculta a mensagem
+                    window.location.href = "{% url 'home' %}"; // Redireciona para a página inicial
+                }, 2000);
+            }
+        };
+    </script>
     <form action="{% url 'editar_perfil_usuario' %}" method="POST" id="form">
         {% csrf_token %}
       <div class="input-box">
@@ -29,7 +50,7 @@
       </div>
       <div class="input-box">
         <span class="icon"><ion-icon name="person-outline"></ion-icon></span>
-        <input id="nome" type="text" name="username" value="{{ user.first_name }} {{ user.last_name  }}">
+        <input id="nome" type="text" name="username" value="{{ user.first_name }} {{ user.last_name }}">
         <label>Nome Completo</label>
         <div id="nome-error" class="error-tooltip"></div>
       </div>
@@ -64,9 +85,9 @@
       <div class="login-register">
         <p>Deseja cancelar? <a href="{% url 'home' %}">Voltar para Home</a></p>
       </div>
-        <div class="login-register">
-            <p>Mudar senha? <a href="{% url 'redefinir_senha' %}">Clique aqui</a></p> <!-- Alterado para estar abaixo -->
-        </div>
+      <div class="login-register">
+          <p>Mudar senha? <a href="{% url 'redefinir_senha' %}">Clique aqui</a></p>
+      </div>
     </form>
   </div>
 </div>

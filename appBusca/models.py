@@ -5,7 +5,7 @@ class Item(models.Model):
     nome_item = models.CharField(max_length=255)
     comp_ativ_itm = models.CharField(max_length=255)
     id_tipo = models.IntegerField(db_column='id_tipo')
-    id_item = models.IntegerField(unique=True, primary_key=True)
+    id_item = models.IntegerField(unique=True, primary_key=True,db_column='id_item')
     def __str__(self):
         return self.nome_item
 

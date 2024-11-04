@@ -17,8 +17,8 @@
     </div>
     <nav>
         <ul>
-            <li><a href="{% url 'home' %}" class="active">Home</a></li>
-            <li><a href="{% url 'busca' %}">Medicamentos</a></li>
+            <li><a href="{% url 'home' %}">Home</a></li>
+            <li><a href="{% url 'busca' %}" class="active">Medicamentos</a></li>
         </ul>
     </nav>
     <div class="auth-buttons">
@@ -56,8 +56,18 @@
            {% if protocolo %}
             <p>Documentos Necessários:<br><br> {{ protocolo.documentos_necessarios|linebreaksbr}}</p>
             <p>Exames Necessários:<br><br>  {{ protocolo.exames_necessarios|linebreaksbr}}</p>
+                   <h2 style="color: #ff8800">Remédio alto-custo não é possível o agendamento.</h2>
+                    <h3 style="color: #fff">Exibição: Apenas informações para retirada.</h3>
+                <script>
+        window.onload = function() {
+            const botaoDiv = document.getElementById('divBotao');
+            if (botaoDiv) {
+                botaoDiv.remove();
+            }
+        };
+    </script>
         {% endif %}
-        <div class="button-container">
+        <div class="button-container" id="divBotao">
             <a href="{% url 'localizar_remedio' item.id_item %}" id="localizar"><button id="localizar">Localizar Medicamento</button></a>
         </div>
     </div>

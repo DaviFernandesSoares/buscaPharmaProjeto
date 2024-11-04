@@ -121,17 +121,19 @@ def salvar_evento(request, username):
             descricao = request.POST.get('descricao_evento')
             data_inicio = request.POST.get('data_inicio')  # Formato: 'YYYY-MM-DD'
             data_termino = request.POST.get('data_termino')  # Formato: 'YYYY-MM-DD'
-            id_unidade = request.POST.get('id_unidade')
-            id_item = request.POST.get('id_item')
+            nome_item = request.POST.get('id_item')
+            admin = get_object_or_404(Admin, username=username)
+            id_unidade = admin.id_unidade.id_unidade
 
             # Verifica se os campos obrigatórios estão preenchidos
-            if not all([descricao, data_inicio, data_termino, id_unidade, id_item]):
+            if not all([descricao, data_inicio, data_termino, nome_item]):
                 resposta['mensagem'] = 'Todos os campos devem ser preenchidos.'
                 return JsonResponse(resposta, status=400)
 
             # Verifica se a unidade e o item existem
             unidade = get_object_or_404(Unidade, id_unidade=id_unidade)
-            item = get_object_or_404(Item, id_item=id_item)
+            item = get_object_or_404(Item, nome_item=nome_item)
+
 
             # Converte as strings de data para objetos datetime
             data_inicio_obj = timezone.make_aware(datetime.strptime(data_inicio + ' 00:00:00', '%Y-%m-%d %H:%M:%S'))
@@ -152,7 +154,7 @@ def salvar_evento(request, username):
                 data_inicio=data_inicio,
                 data_termino=data_termino,
                 id_unidade=unidade,
-                id_item=item
+                id_item= item
             )
             evento.save()
             resposta['success'] = True
@@ -168,5 +170,5 @@ def salvar_evento(request, username):
 
         return JsonResponse(resposta)
 
-    return render(request, 'criar_evento.html')
+    return render(request, 'criar_evento.html',{'username':username})
 
