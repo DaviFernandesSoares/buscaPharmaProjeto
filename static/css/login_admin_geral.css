@@ -33,7 +33,7 @@ header .logo img {
 
 .wrapper {
     position: absolute;
-    width: 500px;
+    width: 600px;
     height: 550px;
     background: #fff;
     border: 3px solid rgba(255, 255, 255, 0.5);
@@ -100,7 +100,28 @@ header .logo img {
     color: #162938;
     line-height: 57px;
 }
+/* DDD and Phone Number */
+.ddd-phone-container {
+    display: flex;
+    align-items: center; /* Centraliza verticalmente os campos */
+    margin: 0;
+    padding: 0;
+}
+.ddd-phone-container .ddd-select {
+    width: max-content;
+    height: 40px; /* Certifique-se de que a altura seja consistente com o campo de telefone */
+    padding: 0 2px; /* Ajuste o padding conforme necessário */
+    border: 2px solid #162938;
+    border-radius: 5px;
+    font-size: 1.2em;
+    color: #162938;
+    font-weight: 600;
+    box-sizing: border-box;
+}
 
+.ddd-phone-container .input-box-phone {
+    flex: 1; /* O campo de telefone ocupa o restante do espaço disponível */
+}
 /* Show Password Checkbox */
 .show-password-container {
     font-size: 0.9em;
