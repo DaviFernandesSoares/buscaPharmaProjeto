@@ -128,3 +128,7 @@ header .logo img {
     background-color: #0A4973; /* Cor de fundo ao passar o mouse */
     transition: background-color 0.3s ease; /* Transição suave */
 }
+.nenhum{
+    color: white;
+    font-size: 20px;
+}

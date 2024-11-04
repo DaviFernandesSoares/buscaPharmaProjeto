@@ -22,10 +22,10 @@
     </nav>
 </header>
     <div class="search-container">
-        <input type="text" placeholder="Procure pela unidade:" class="search-input" id="search-bar">
-        <a href="#"><button>Buscar admin</button></a>
+        <input type="text" placeholder="Procure pela unidade: (Digite o nome do Administrador)" class="search-input" id="search-bar">
+        <button onclick="procurarAdmin()">Buscar admin</button>
     </div>
-    <section>
+    <section id="secao">
          {% for admin in admins %}
         <div class="card">
             <div class="card-header">
@@ -45,10 +45,16 @@
             </div>
         </div>
         {% empty %}
-            <p>Nenhum administrador encontrado.</p>
+             <script>
+             const secao = document.getElementById('secao')
+             secao.style.alignItems = 'center';
+             secao.style.display = 'block';
+             </script>
+             <br>
+            <p class="nenhum">Nenhum administrador encontrado.</p>
         {% endfor %}
     </section>
-    <script src="../TCC.v4/TCC/TCC/javaScript/homeAdminGeral.js"></script>
+    <script src="{% static 'js/home_admin_geral.js' %}"></script>
     <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
     <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
 </body>
