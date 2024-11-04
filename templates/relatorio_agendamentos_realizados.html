@@ -6,18 +6,26 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Relatório de Agendamentos Realizados</title>
     <link rel="stylesheet" href="{% static 'css/universal.css' %}">
-    <link rel="stylesheet" href="{% static 'css/relatorio_realizados.css' %}"> <!-- Adicione seu arquivo CSS aqui -->
+    <link rel="stylesheet" href="{% static 'css/relatorio.css' %}">
 </head>
 <body>
-    <!-- Navbar -->
+   <header>
+    <div class="logo">
+        <img src="{% static 'img/Logo_pequena.png' %}" alt="Busca Pharma">
+    </div>
     <nav>
         <ul>
-            <li><a href="{% url 'home_admin' id_admin %}" >Agendamentos</a></li>
-            <li><a href="{% url 'relatorio_produtos_interesse' id_unidade id_admin %} " class="active">Relatórios</a></li>
+            <li><a href="{% url 'home_admin' id_admin %}">Agendamentos</a></li>
+            <li><a href="{% url 'relatorio_produtos_interesse' id_unidade id_admin %}">Relatório de Produtos Mais Retirados</a></li>
+            <li><a href="{% url 'relatorio_agendamentos_realizados' id_unidade id_admin %}" class="active">Relatório de Agendamentos Realizados</a></li>
         </ul>
     </nav>
-
-    <h1>Agendamentos Realizados</h1>
+</header>
+ <div class="title">
+        <h1>Agendamentos Realizados</h1>
+    </div>
+    <h1></h1>
+    <section id="tabela">
     <table>
         <thead>
             <tr>
@@ -38,5 +46,6 @@
             {% endfor %}
         </tbody>
     </table>
+     </section>
 </body>
 </html>

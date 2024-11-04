@@ -149,8 +149,13 @@ header .logo img {
     color: #162938;
     font-weight: 500;
 }
+.login-register{
+    text-align: center;
+    font-weight: 500;
+    margin: 25px 0 10px;
+}
 
-.login-register {
+.login-register p {
     font-size: 1.5em;
     color: #162938;
     text-align: center;
@@ -158,8 +163,8 @@ header .logo img {
     margin: 25px 0 10px;
 }
 
-.login-register p a {
-    color: #162938;
+.login-register a{
+    color: #ff8800;
     text-decoration: none;
     font-weight: 600;
 }
