@@ -1,6 +1,9 @@
+from django.contrib.messages.context_processors import messages
 from django.core.mail import send_mail
 from django.http import JsonResponse
-from django.shortcuts import render,get_object_or_404
+from django.shortcuts import render, get_object_or_404, redirect
+from django.contrib import messages
+from appAdm.models import Admin
 from appUsuario.models import Usuario
 
 
@@ -52,6 +55,33 @@ def editar_perfil_usuario(request):
 
 
 
+def editar_perfil_admin(request, username_admin, username_geral):
+    admin = get_object_or_404(Admin, username=username_admin)  # Encontra o admin com o username fornecido
+
+    if request.method == 'POST':
+        nome = request.POST.get('nome')
+        email = request.POST.get('email')
+        username = request.POST.get('username')
+        partes_nome = nome.split(' ')
+        primeiro_nome = partes_nome[0]
+        ultimo_nome = partes_nome[-1]
+
+        if nome and email:  # Verifica que os campos estão preenchidos
+            try:
+                admin.nome = nome
+                admin.email = email
+                admin.username = username
+                admin.first_name = primeiro_nome
+                admin.last_name = ultimo_nome
+                admin.save()
+                messages.success(request, 'Alteração realizada com sucesso!')
+                return redirect('home_admin_geral', username=username_geral)
+            except Exception as e:
+                messages.error(request, f'Erro ao salvar alterações: {e}')
+        else:
+            messages.error(request, 'Verifique os campos. Todos devem ser preenchidos.')
+
+    return render(request, 'editar_perfil_admin.html', {'username_admin': username_admin, 'username_geral': username_geral, 'admin': admin})
 
 
 

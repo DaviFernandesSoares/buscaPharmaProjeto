@@ -1,3 +1,5 @@
+from tkinter.font import names
+
 from django.contrib import admin
 from django.template.context_processors import request
 from django.urls import path
@@ -38,4 +40,5 @@ urlpatterns = [
     path('cria_evento/<str:username>/<int:id_unidade>/',views6.criar_evento,name='cria_evento'),
     path('salvar_evento/<str:username>/',views6.salvar_evento,name='salvar_evento'),
     path('logout/',views3.logout_usuario,name='logout_usuario'),
+    path('editar_perfil_admin/<str:username_admin>/<str:username_geral>/',views7.editar_perfil_admin, name ='editar_perfil_admin'),
 ]

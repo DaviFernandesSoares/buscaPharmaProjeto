@@ -5,18 +5,22 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login</title>
+    <link rel="stylesheet" href="{% static 'css/universal.css' %}">
     <link rel="stylesheet" href="{% static 'css/home_admin_geral.css' %}">
+     
 </head>
 <body> 
-    <header>
-        <div class="logo">
-          <a href="#"><img src="{% static 'img/Logo_pequena.png' %}" alt="Busca Pharma"/></a>
-        </div>
-        <nav>
-            <a href="{% url 'cadastro_admin' id_unidade username %}">Cadastrar Admins</a>
-            <a href="{% url 'cria_evento' username id_unidade %}">Criar Eventos</a>  <!-- Link para Criar Eventos -->
-        </nav>
-    </header>
+   <header>
+    <div class="logo">
+        <a href="{% url 'home' %}"><img src="{% static 'img/Logo_pequena.png' %}" alt="Busca Pharma"/></a>
+    </div>
+    <nav>
+        <ul>
+            <li><a href="{% url 'cria_evento' username id_unidade %}">Criar Evento</a></li>
+            <li><a href="{% url 'cadastro_admin' id_unidade username %}">Cadastrar Admin</a></li>
+        </ul>
+    </nav>
+</header>
     <div class="search-container">
         <input type="text" placeholder="Procure pela unidade:" class="search-input" id="search-bar">
         <a href="#"><button>Buscar admin</button></a>
@@ -29,15 +33,15 @@
                 <h1>Administrador - {{ admin.username }}</h1><br>
             </div>
             <div class="nome">
-                <h3>Nome: {{ admin.first_name }} {{ admin.last_name }}</h3>
-            </div>
-            <div class="li">
-                <ul>
-                    <li>Unidade: {{ admin.id_unidade }}</li>
-                </ul>
+                <h3>Nome Adm: {{ admin.first_name }} {{ admin.last_name }}</h3>
+            </div><br>
+            <div>
+                    <h4 class="info">Unidade: {{ admin.id_unidade }}</h4>
             </div>
             <div class="card-footer">
+                 <a href="{% url 'editar_perfil_admin' admin.username username %}">
                 <button class="edit-button">Editar Admin</button>
+                 </a>
             </div>
         </div>
         {% empty %}

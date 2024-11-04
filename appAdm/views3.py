@@ -111,9 +111,7 @@ def relatorio_agendamentos_realizados(request,id_unidade,id_admin):
 
     return render(request, 'relatorio_agendamentos_realizados.html', {'agendamentos': agendamentos_realizados, 'id_admin':id_admin,'id_unidade':id_unidade})
 
-def editar_perfil():
-    return render(request, 'editar_perfil.html')
-
 def logout_usuario(request):
     logout(request)
     return render(request, 'home.html')
+

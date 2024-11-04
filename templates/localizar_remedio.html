@@ -57,7 +57,7 @@
             <li>
                 <a href="javascript:void(0);" onclick="focusOnMarker({{ unidade_info.latitude }}, {{ unidade_info.longitude }}, '{{ unidade_info.unidade.nome }}')">
                     <span class="{% if unidade_info.status == 'Aberto' %}status-aberto{% elif unidade_info.status == 'Fechado' %}status-fechado{% endif %}">
-                        {{ unidade_info.unidade.nome }} - Quantidade do Produto Disnponível: {{ unidade_info.quantidade_atual }} - Endereço: {{ unidade_info.logradouro_e_numero }} - Status: {{ unidade_info.status }}
+                        {{ unidade_info.unidade.nome }} - Quantidade do Produto Disponível: {{ unidade_info.quantidade_atual }} - Endereço: {{ unidade_info.logradouro_e_numero }} - Status: {{ unidade_info.status }}
                     </span>
                 </a>
                 <a href="{% url 'agendar' item.id_item unidade_info.unidade.id_unidade %}" class="agendar-btn" style="color: black">Agendar</a>

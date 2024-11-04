@@ -1,11 +1,11 @@
 <!DOCTYPE html>
 <html lang="pt-br">
-
+{% load static %}
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Redefinir Senha</title>
-    <link rel="stylesheet" href="css/nova_senha.css"> <!-- Remova a parte do Django -->
+    <link rel="stylesheet" href="{% static 'css/nova_senha.css' %}">
     <script>
         document.addEventListener('DOMContentLoaded', function () {
             document.getElementById('show-password').addEventListener('change', function () {
@@ -26,24 +26,29 @@
 <body>
 
     <div class="logoFundo">
-        <img src="img/Logo_Login.png" alt="Logo">
+        <img src="{% static 'img/Logo_Login.png' %}" alt="Logo">
     </div>
 
     <div class="wrapper">
         <div class="form-box">
             <h2>Nova Senha</h2>
-            <div id="login-erro" class="error-message" style="display: none;"></div>
-            <!-- Mensagem de erro inicialmente oculta -->
-            <form method="POST" action="seu-endereco-de-acao"> <!-- Defina o endpoint de ação corretamente -->
+            {% if messages %}
+                <div class="error-message">
+                    {% for message in messages %}
+                        <div>{{ message }}</div>
+                    {% endfor %}
+                </div>
+            {% endif %}
+
+            <form method="POST" action="{% url 'nova_senha' email %}">
+                {% csrf_token %}
                 <div class="input-box">
                     <span class="icon"><ion-icon name="lock-closed-outline"></ion-icon></span>
-                    <input type="password" id="nova_senha" name="nova_senha" required
-                        placeholder="Digite sua nova senha">
+                    <input type="password" id="nova_senha" name="nova_senha" placeholder="Digite sua nova senha">
                 </div>
                 <div class="input-box">
                     <span class="icon"><ion-icon name="lock-closed-outline"></ion-icon></span>
-                    <input type="password" id="confirmar_senha" name="confirmar_senha" required
-                        placeholder="Confirme sua senha">
+                    <input type="password" id="confirmar_senha" name="confirmar_senha" placeholder="Confirme sua senha">
                 </div>
                 <div class="check-box">
                     <input type="checkbox" id="show-password"> Mostrar Senha
@@ -52,17 +57,5 @@
             </form>
         </div>
     </div>
-    <script>
-        // Exibe a mensagem de erro se houver (exemplo)
-        document.addEventListener('DOMContentLoaded', function () {
-            const errorMessage = document.getElementById('login-erro');
-            // Aqui você pode definir a lógica para exibir a mensagem de erro, se necessário
-            if (/* condição para mostrar a mensagem */) {
-                errorMessage.innerText = 'Seu erro aqui'; // Adicione a mensagem de erro
-                errorMessage.style.display = 'block'; // Exibe a mensagem
-            }
-        });
-    </script>
 </body>
-
 </html>
