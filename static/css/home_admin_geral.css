@@ -22,10 +22,10 @@ header  {
     align-items: center;
     padding: 10px;
     color: white;
-    background-color: transparent;
+    background: #0A4973;
 }
 header .logo img {
-    background: #0A4973;
+    background: transparent;
     border-radius: 3%;
     height: 60px;
     width: 180px;
@@ -68,7 +68,7 @@ header .logo img {
     display: flex;
     padding: 2px;
     justify-content: center;
-    background-color: #0A4973;
+    background-color: #fff;
 }
 .search-container button{
     margin: 0px 20px;
