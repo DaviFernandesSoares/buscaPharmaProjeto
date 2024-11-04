@@ -163,11 +163,7 @@ a:hover {
     text-decoration: underline; /* Adiciona o sublinhado apenas ao passar o mouse */
 
 }
-a{
-    text-decoration: none;
-    color: #0a4070;
-    font-size: 20px;
-}
+
 /* Estilo para o botão de agendamento */
 /* Estilo para a mensagem informativa */
 /* Estilo aprimorado para a mensagem informativa */

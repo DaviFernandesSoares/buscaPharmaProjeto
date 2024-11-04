@@ -16,7 +16,7 @@
     <nav>
         <ul>
             <li><a href="{% url 'home' %}">Home</a></li>
-            <li><a href="{% url 'busca' %}">Medicamentos</a></li>
+            <li><a href="{% url 'busca' %}" class="active">Medicamentos</a></li>
         </ul>
     </nav>
     <div class="auth-buttons">
@@ -58,7 +58,7 @@
                     </select><br><br>
                 </div>
                 <div class="btn-container">
-                    <button class="back-button" onclick="window.history.back();">Voltar</button>
+                    <button type="button" class="back-button" onclick="window.history.back();">Voltar</button>
                     <button type="submit" class="back-button" id="btAgendar">Agendar</button>
                 </div>
                 <span id="spinner" style="display: none;" class="spinner"></span>

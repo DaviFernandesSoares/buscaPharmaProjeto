@@ -14,7 +14,6 @@ def editar_perfil_usuario(request):
         cpf = request.POST.get('cpf')
         ddd = request.POST.get('ddd')
         telefone = ddd + request.POST.get('telefone')
-
         # Verifica se todos os campos estão preenchidos
         if all([nome, email, cpf, ddd, telefone]):
             try:

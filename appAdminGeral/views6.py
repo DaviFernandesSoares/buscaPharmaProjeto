@@ -141,7 +141,7 @@ def salvar_evento(request, username):
 
             # Verifica se a data de término é válida
             if data_inicio_obj >= data_termino_obj:
-                resposta['mensagem'] = 'Erro ao criar evento. Verifique o horário que vai ser iniciado e encerrado.'
+                resposta['mensagem'] = 'Erro ao criar evento. Verifique o dia que vai ser iniciado e encerrado.'
                 return JsonResponse(resposta, status=400)
 
             # Verifica se o evento está sendo criado com mais de uma hora de antecedência
