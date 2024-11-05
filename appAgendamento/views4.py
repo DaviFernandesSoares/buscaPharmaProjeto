@@ -1,4 +1,4 @@
-from datetime import datetime
+from datetime import datetime, timedelta
 
 from django.utils import timezone
 from django.contrib.auth.decorators import login_required
@@ -29,10 +29,16 @@ def agendar(request, id_item, id_unidade):
         # Verifica se a data é menor que a data atual
         today = timezone.now().date()
         horario_atual = timezone.localtime().time()
+        data_max = today + timedelta(days=365)
         if data < today.strftime('%Y-%m-%d') or (
                 hora < horario_atual.strftime('%H:%M') and data < today.strftime('%Y-%m-%d')):
             return JsonResponse(
                 {'status': 'error', 'message': 'Data inválida. Não é possível agendar para datas passadas.'},
+                status=400
+            )
+        if data > data_max.strftime('%Y-%m-%d'):
+            return JsonResponse(
+                {'status': 'error', 'message': 'Data inválida. Não é possível agendar para datas posteriores a um ano'},
                 status=400
             )
 
