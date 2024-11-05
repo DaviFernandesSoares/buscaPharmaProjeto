@@ -19,27 +19,25 @@
 <div class="wrapper" style="height: max-content">
   <div class="form-box Register">
     <h2>Editar Perfil</h2>
+       <div id="telefone-erro" class="error-message" style="display:none; width: auto">
+          <div class="mensagem"></div>
+      </div>
     {% if messages %}
-        <div id="login-erro" class="error-message">
-            {% for message in messages %}
-                <div class="mensagem">{{ message }}</div>
-            {% endfor %}
-        </div>
-    {% endif %}
-   <script>
-        window.onload = function() {
-            const mensagem = document.querySelector('.mensagem');
-            const mensagemDiv = document.querySelector('.error-message');
-            mensagem.style.width= '';
-            
-            if (mensagem && mensagem.textContent === 'Alteração realizada com sucesso!') {
-                setTimeout(() => {
-                    mensagem.style.display = 'none'; // Oculta a mensagem
-                    window.location.href = "{% url 'home' %}"; // Redireciona para a página inicial
-                }, 2000);
-            }
-        };
-    </script>
+    <div id="login-erro" class="error-message" style="width: auto">
+        {% for message in messages %}
+                <div class="mensagem" id="msg">{{ message }}</div>
+        {% endfor %}
+    </div>
+{% endif %}
+  <script>
+  const mensagem = document.getElementById('msg');
+  const divErro = document.getElementById('login-erro');
+  if (mensagem && mensagem.textContent.trim() === 'Alteração realizada com sucesso!') {
+      mensagem.style.display = 'none';
+      divErro.style.display ='none'
+      // Oculta a mensagem
+  }
+</script>
     <form action="{% url 'editar_perfil_usuario' %}" method="POST" id="form">
         {% csrf_token %}
       <div class="input-box">
@@ -58,7 +56,7 @@
       <div class="input-box">
         <span class="icon"><ion-icon name="id-card-outline"></ion-icon></span>
         <input id="cpf" type="text" name="cpf" value="{{ user.cpf }}" readonly>
-        <label>CPF</label>
+        <label style="top: -20%">CPF</label>
         <div id="cpf-error" class="error-tooltip"></div>
       </div>
 
@@ -67,19 +65,18 @@
            <label for="ddd-select">DDD</label>
            <select id="ddd-select" class="ddd-select" name="ddd">
                {% for ddd in ddd_list %}
-                   <option value="{{ ddd }}">{{ ddd }}</option>
+                     <option value="{{ ddd }}" {% if ddd == telefone|slice:":2" %}selected{% endif %}>{{ ddd }}</option>
                {% endfor %}
            </select>
        </div>
 
         <div class="input-box">
           <span class="icon"><ion-icon name="call-outline"></ion-icon></span>
-          <input type="text" id="phone" name="telefone" value="{{ telefone }}">
+          <input type="text" id="phone" name="telefone" value="{{ telefone|slice:"2:" }}">
           <label>Telefone</label>
           <div id="phone-error" class="error-tooltip"></div>
         </div>
       </div>
-
       <button type="submit" class="btn" id="btn-atualizar">Atualizar</button>
 
       <div class="login-register">
@@ -93,6 +90,22 @@
 </div>
 
 <script src="{% static 'js/cadastro_usuario.js' %}"></script>
+   <script>  const form = document.getElementById('form');
+    const phoneInput = document.getElementById('phone');
+    const telefoneErroDiv = document.getElementById('telefone-erro');
+    const telefoneMensagemDiv = telefoneErroDiv.querySelector('.mensagem');
+
+    form.addEventListener('submit', function(event) {
+        const phoneValue = phoneInput.value.replace(/\D/g, ''); // Remove não dígitos
+        telefoneErroDiv.style.display = 'none'; // Esconde a div de erro
+
+        if (phoneValue.length !== 9) {
+            event.preventDefault(); // Impede o envio do formulário
+            telefoneMensagemDiv.textContent = 'O número de telefone deve ter exatamente 9 dígitos.'; // Mensagem de erro
+            telefoneErroDiv.style.display = 'block'; // Mostra a div de erro
+            phoneInput.focus(); // Foca no campo de telefone
+        }
+    });</script>
 <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons/.esm.js"></script>
 <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons/.js"></script>
 </body>

@@ -49,7 +49,7 @@ def editar_perfil_usuario(request):
             messages.error(request, 'Todos os campos devem ser preenchidos.')
     # Para métodos GET, você pode querer renderizar um formulário com dados do usuário
     usuario = get_object_or_404(Usuario, email=request.user.email)  # Obtém o usuário logado
-    telefone = request.user.telefone[2:]  # Assume que o telefone contém o DDD
+    telefone = request.user.telefone # Assume que o telefone contém o DDD
     ddd_list = [
         "11", "12", "13", "14", "15", "16", "17", "18", "19", "21", "22", "24",
         "27", "28", "31", "32", "33", "34", "35", "37", "38", "41", "42", "43",

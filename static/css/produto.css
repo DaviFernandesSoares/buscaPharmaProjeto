@@ -106,3 +106,10 @@ h4#descricao {
         margin: 20px auto; /* Centraliza a div */
     }
 }
+.voltar-btn:hover {
+    color: #ff8800;
+}
+
+.voltar-btn ion-icon {
+    font-size: 2.0em;
+}

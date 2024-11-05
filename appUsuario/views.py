@@ -2,7 +2,7 @@ import json
 from urllib import request
 from django.shortcuts import render, redirect
 from django.http import HttpResponse, JsonResponse
-from django.contrib.auth import login as auth_login
+from django.contrib.auth import login as auth_login, logout
 from django.contrib.auth.hashers import make_password, check_password
 from django.template.defaultfilters import length
 from django.core.mail import send_mail
@@ -96,3 +96,7 @@ def home(request):
         evento.longitude = coordenadas[1]
 
     return render(request, 'home.html', {'eventos': eventos})
+
+def logout_usuario(request):
+    logout(request)
+    return redirect('home')

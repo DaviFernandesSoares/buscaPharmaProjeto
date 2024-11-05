@@ -15,8 +15,8 @@
     </div>
     <nav>
         <ul>
-            <li><a href="{% url 'home' %}" class="active">Home</a></li>
-            <li><a href="{% url 'busca' %}">Medicamentos</a></li>
+            <li><a href="{% url 'home' %}">Home</a></li>
+            <li><a href="{% url 'busca' %}" class="active">Medicamentos</a></li>
         </ul>
     </nav>
     <div class="auth-buttons">
@@ -41,9 +41,9 @@
     <div class="title">
       <h1>Meus Agendamentos</h1>
     </div>
+   <section id="cards">
         {% if agendamentos_e_endereco %}
           {% for item in agendamentos_e_endereco %}
-              <section id="cards">
               <div class="grid-item proced" id="agendamento-{{ item.agendamento.id_agendamento }}">
                   <h2>Interesse no medicamento {{ item.agendamento.id_item.nome_item }}</h2>
                   <p>Data: {{ item.agendamento.data|date:"d/m/Y" }}</p>
@@ -55,11 +55,16 @@
                     <button type="submit" class="cancel-btn">Cancelar Agendamento</button>
                 </form>
               </div>
-              </section>
+
           {% endfor %}
+
       {% else %}
           <p class="nenhum">Você não tem agendamentos no momento.</p>
+            <script>
+            const secao = document.getElementById('cards').style.gridTemplateColumns ='none';
+            </script>
       {% endif %}
+      </section>
   <div id="message-box"></div>
     <!-- Modal de Confirmação -->
 <div id="confirm-modal" class="modal">

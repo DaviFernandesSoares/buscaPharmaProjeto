@@ -39,6 +39,6 @@ urlpatterns = [
     path('editar_perfil_usuario/', views7.editar_perfil_usuario,name='editar_perfil_usuario'),
     path('cria_evento/<str:username>/<int:id_unidade>/',views6.criar_evento,name='cria_evento'),
     path('salvar_evento/<str:username>/',views6.salvar_evento,name='salvar_evento'),
-    path('logout/',views3.logout_usuario,name='logout_usuario'),
+    path('logout/',views.logout_usuario,name='logout_usuario'),
     path('editar_perfil_admin/<str:username_admin>/<str:username_geral>/',views7.editar_perfil_admin, name ='editar_perfil_admin'),
 ]
