@@ -88,24 +88,45 @@
     </form>
   </div>
 </div>
+<script>
+   const form = document.getElementById('form');
+   const phoneInput = document.getElementById('phone');
+   const telefoneErroDiv = document.getElementById('telefone-erro');
+   const telefoneMensagemDiv = telefoneErroDiv.querySelector('.mensagem');
+   const emailInput = document.getElementById('email');
+   const emailErrorDiv = document.getElementById('email-error');
 
-<script src="{% static 'js/cadastro_usuario.js' %}"></script>
-   <script>  const form = document.getElementById('form');
-    const phoneInput = document.getElementById('phone');
-    const telefoneErroDiv = document.getElementById('telefone-erro');
-    const telefoneMensagemDiv = telefoneErroDiv.querySelector('.mensagem');
+   function validatePhone() {
+       const phoneValue = phoneInput.value.replace(/\D/g, ''); // Remove não dígitos
+       telefoneErroDiv.style.display = 'none';
+       if (phoneValue.length !== 9) {
+           telefoneMensagemDiv.textContent = 'O número de telefone deve ter exatamente 9 dígitos.';
+           telefoneErroDiv.style.display = 'block';
+           phoneInput.focus();
+           return false;
+       }
+       return true;
+   }
 
-    form.addEventListener('submit', function(event) {
-        const phoneValue = phoneInput.value.replace(/\D/g, ''); // Remove não dígitos
-        telefoneErroDiv.style.display = 'none'; // Esconde a div de erro
+   function validateEmail() {
+       const emailValue = emailInput.value.trim();
+       emailErrorDiv.style.display = 'none';
+       const emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+       if (!emailPattern.test(emailValue)) {
+           telefoneMensagemDiv.textContent = 'Por favor, insira um endereço de email válido.';
+           telefoneErroDiv.style.display = 'block';
+           emailInput.focus();
+           return false;
+       }
+       return true;
+   }
 
-        if (phoneValue.length !== 9) {
-            event.preventDefault(); // Impede o envio do formulário
-            telefoneMensagemDiv.textContent = 'O número de telefone deve ter exatamente 9 dígitos.'; // Mensagem de erro
-            telefoneErroDiv.style.display = 'block'; // Mostra a div de erro
-            phoneInput.focus(); // Foca no campo de telefone
-        }
-    });</script>
+   form.addEventListener('submit', function(event) {
+       if (!validatePhone() || !validateEmail()) {
+           event.preventDefault(); // Impede o envio do formulário se qualquer validação falhar
+       }
+   });
+</script>
 <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons/.esm.js"></script>
 <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons/.js"></script>
 </body>
