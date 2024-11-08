@@ -110,7 +110,7 @@ def localizarMedicamento(request, id_item):
 
 
 def pegar_coordenadas_pelo_endereco(endereco):
-    api_key = 'CHAVEAPI'  # Substitua pela sua chave de API
+    api_key = 'AIzaSyAywxQkF8LQoBHexVlJxFmrGftseq_T76I'  # Substitua pela sua chave de API
     url = f'https://maps.googleapis.com/maps/api/geocode/json?address={quote(endereco)}&key={api_key}'
 
     try:
