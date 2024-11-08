@@ -134,7 +134,6 @@ def salvar_evento(request, username):
             unidade = get_object_or_404(Unidade, id_unidade=id_unidade)
             item = get_object_or_404(Item, nome_item=nome_item)
 
-
             # Converte as strings de data para objetos datetime
             data_inicio_obj = timezone.make_aware(datetime.strptime(data_inicio + ' 00:00:00', '%Y-%m-%d %H:%M:%S'))
             data_termino_obj = timezone.make_aware(datetime.strptime(data_termino + ' 23:59:59', '%Y-%m-%d %H:%M:%S'))
@@ -144,17 +143,20 @@ def salvar_evento(request, username):
                 resposta['mensagem'] = 'Erro ao criar evento. Verifique o dia que vai ser iniciado e encerrado.'
                 return JsonResponse(resposta, status=400)
 
-            # Verifica se o evento está sendo criado com mais de uma hora de antecedência
-
+            # Verifica se o evento está sendo criado para uma data futura
+            hoje = timezone.now().replace(hour=0, minute=0, second=0, microsecond=0)
+            if data_inicio_obj < hoje + timedelta(days=1):
+                resposta['mensagem'] = 'A data de início do evento deve ser a partir de amanhã.'
+                return JsonResponse(resposta, status=400)
 
             # Criação do evento
             evento = Evento(
                 titulo=item.nome_item,
                 descricao=descricao,
-                data_inicio=data_inicio,
-                data_termino=data_termino,
+                data_inicio=data_inicio_obj,
+                data_termino=data_termino_obj,
                 id_unidade=unidade,
-                id_item= item
+                id_item=item
             )
             evento.save()
             resposta['success'] = True
@@ -170,5 +172,4 @@ def salvar_evento(request, username):
 
         return JsonResponse(resposta)
 
-    return render(request, 'criar_evento.html',{'username':username})
-
+    return render(request, 'criar_evento.html', {'username': username})

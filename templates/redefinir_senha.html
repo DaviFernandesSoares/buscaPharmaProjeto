@@ -45,6 +45,62 @@
             }
         });
     </script>
+     <script>
+        document.querySelector('form').addEventListener('submit', function(event) {
+            event.preventDefault();  // Evita o envio do formulário até validação
+            let isValid = true;
+
+            const password = document.getElementById('password').value;
+            const confirmPassword = document.getElementById('confirm-password').value;
+
+            const passwordError = document.getElementById('password-error');
+            const confirmPasswordError = document.getElementById('confirm-password-error');
+
+            const hasLowerCase = /[a-z]/.test(password);
+            const hasUpperCase = /[A-Z]/.test(password);
+            const hasSpecialChar = /[!@#$%^&*(),.?":{}|<>]/.test(password);
+
+            // Limpar mensagens de erro
+            passwordError.textContent = '';
+            confirmPasswordError.textContent = '';
+            passwordError.style.display = 'none';
+            confirmPasswordError.style.display = 'none';
+
+            // Validações de senha
+            if (!password) {
+                passwordError.textContent = 'A senha é obrigatória.';
+                passwordError.style.display = 'block';
+                isValid = false;
+            } else if (!hasLowerCase) {
+                passwordError.textContent = 'A senha deve conter pelo menos uma letra minúscula.';
+                passwordError.style.display = 'block';
+                isValid = false;
+            } else if (!hasUpperCase) {
+                passwordError.textContent = 'A senha deve conter pelo menos uma letra maiúscula.';
+                passwordError.style.display = 'block';
+                isValid = false;
+            } else if (!hasSpecialChar) {
+                passwordError.textContent = 'A senha deve conter pelo menos um caractere especial.';
+                passwordError.style.display = 'block';
+                isValid = false;
+            } else if (password.length < 8) {
+                passwordError.textContent = 'A senha deve conter pelo menos 8 dígitos.';
+                passwordError.style.display = 'block';
+                isValid = false;
+            }
+
+            // Validar confirmação da senha
+            if (password !== confirmPassword) {
+                confirmPasswordError.textContent = 'As senhas não são iguais.';
+                confirmPasswordError.style.display = 'block';
+                isValid = false;
+            }
+
+            if (isValid) {
+                event.target.submit();  // Envia o formulário se todas as validações passarem
+            }
+        });
+    </script>
     <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
     <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
   </body>

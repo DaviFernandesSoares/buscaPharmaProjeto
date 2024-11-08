@@ -23,9 +23,9 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-4gjo!2*a9!(-+)rt6k^_*=e5h+h^c%#ivyx31ch5p(pcg@yasy'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
-ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = []
 
 
 # Application definition
@@ -85,7 +85,7 @@ DATABASES = {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'buscaPharma',
         'USER': 'root',
-        'PASSWORD': '1234',
+        'PASSWORD': '01092905M',
         'HOST': 'localhost',
         'PORT': '3306',
     }

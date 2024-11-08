@@ -17,7 +17,7 @@ def editar_perfil_usuario(request):
         # Verifica se todos os campos estão preenchidos
         if all([nome, email, cpf, ddd, telefone]):
             try:
-                usuario = get_object_or_404(Usuario, email=email)  # Usa get_object_or_404 para lidar com o caso em que o usuário não é encontrado
+                usuario = get_object_or_404(Usuario, cpf=cpf)  # Usa get_object_or_404 para lidar com o caso em que o usuário não é encontrado
                 partes_nome = nome.split(' ')
                 primeiro_nome = " ".join(partes_nome[:-1])  # Nome sem o último sobrenome
                 ultimo_nome = partes_nome[-1]  # Último sobrenome
