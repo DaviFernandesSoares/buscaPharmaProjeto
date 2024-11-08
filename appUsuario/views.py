@@ -1,5 +1,6 @@
 import json
 from urllib import request
+import requests
 from django.shortcuts import render, redirect
 from django.http import HttpResponse, JsonResponse
 from django.contrib.auth import login as auth_login, logout
@@ -48,10 +49,15 @@ def cadastro(request):
                 [email],  # Destinatário
                 fail_silently=False,
             )
-            return redirect('login')
+            auth_login(request, user)
+            return redirect('home')
     return render(request, 'cadastro.html')
 
 def login(request):
+    if request.user.is_authenticated:
+        target = request.GET.get('next', None)
+        return redirect(target or 'home')
+
     if request.method == 'POST':
         email = request.POST.get('email')
         senha = request.POST.get('senha')

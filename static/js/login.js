@@ -60,7 +60,8 @@ document.addEventListener('DOMContentLoaded', function() {
                     loginErroDiv.textContent = data.mensagem;
                     loginErroDiv.style.display = 'block';
                 } else {
-                    window.location.href = '/home/';  // Redirecionar para a página home
+                    const target = new URLSearchParams(location.search).get("next")
+                    window.location.href = target || '/home/';  // Redirecionar para a página home
                 }
             })
             .catch(error => {

@@ -85,7 +85,7 @@ DATABASES = {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'buscaPharma',
         'USER': 'root',
-        'PASSWORD': '01092905M',
+        'PASSWORD': '1234',
         'HOST': 'localhost',
         'PORT': '3306',
     }
