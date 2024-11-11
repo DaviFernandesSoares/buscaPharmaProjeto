@@ -18,7 +18,7 @@
 
             <!-- Seção para exibir mensagens -->
             {% if messages %}
-                <div id="login-erro" class="error-message">
+                <div id="erro-code" class="error-message">
                     {% for message in messages %}
                         <div>{{ message }}</div>
                     {% endfor %}
@@ -43,11 +43,10 @@
         </div>
     </div>
 <script>
-        // Exibe a mensagem de erro se houver
         document.addEventListener('DOMContentLoaded', function () {
-            const errorMessage = document.getElementById('login-erro');
-            if (errorMessage.innerText.trim() !== "") {
-                errorMessage.style.display = 'block'; // Exibe a mensagem
+            const errorMessage = document.getElementById('erro-code');
+            if (errorMessage && errorMessage.innerText.trim() !== ""){
+                errorMessage.style.display = 'block'
             }
         });
     </script>
